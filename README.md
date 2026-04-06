@@ -52,6 +52,17 @@ Templates are copyable starters for repo-local docs that a downstream repo may c
 
 - `examples/mazeASK/notes.md`: concise mapping note showing how mazeASK fits this structure
 
+## Which File Do I Use?
+
+| If you need to... | Use |
+| --- | --- |
+| define execution rules inside the current repo | `AGENTS.md` |
+| understand this meta repo's own boundary or architecture | `docs/` |
+| adapt the canonical external orchestration artifact for a project | `control-surface.md` |
+| start a ChatGPT-side or Codex-side workflow thread | `prompts/` |
+| create repo-local starter docs for a downstream repo | `templates/` |
+| see how the structure mapped onto a real ASK project | `examples/` |
+
 ## Boundary Summary
 
 The key distinction in this repo is:
@@ -64,3 +75,11 @@ The key distinction in this repo is:
 - `examples/` contains concrete mapping notes
 
 External control-surface artifacts are intentionally outside the repo they govern, even when this repo publishes them as canonical reusable assets.
+
+## Minimal Adaptation Checklist
+
+- Fill `[absolute local repo root]`, `[owner/name]`, and `[branch]` in the external artifact or startup prompt you are adapting.
+- Identify the target repo's entry points, architecture docs, and repo-local operating files.
+- Identify protected paths, constraints, and required verification steps.
+- Decide what planning, implementation, and PR-stage handoff behavior should look like for that repo.
+- Decide which repo-local docs the target repo should actually adopt from `templates/`.

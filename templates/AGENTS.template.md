@@ -6,9 +6,9 @@ Use this as a starter for `AGENTS.md` in a downstream ASK repo.
 
 Describe the repo in 2 to 4 lines:
 
-- what the repo owns
-- what it does not own
-- what kind of work agents should expect here
+- `[what the repo owns]`
+- `[what the repo does not own]`
+- `[what kind of work agents should expect here]`
 
 ## Entry Points
 
@@ -50,7 +50,7 @@ List the files or directories an agent should read first:
 
 Fill in local expectations here:
 
-- testing or verification commands
-- protected paths or high-risk areas
-- terminology to preserve
-- project-specific approval boundaries
+- `[testing or verification commands]`
+- `[protected paths or high-risk areas]`
+- `[terminology to preserve]`
+- `[project-specific approval boundaries]`
