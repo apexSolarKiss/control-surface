@@ -23,6 +23,6 @@ Use this as a starter for a downstream repo's own workflow-boundary doc.
 ## Reading Order
 
 1. Read `README.md`.
-2. Read repo-local execution rules.
-3. Read repo docs that define architecture or boundaries.
-4. Read external artifacts, prompts, templates, or examples only as needed.
+2. Read `[repo-local execution rules]`.
+3. Read `[repo docs that define architecture or boundaries]`.
+4. Read `[external artifacts, prompts, templates, or examples]` only as needed.

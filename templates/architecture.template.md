@@ -25,9 +25,9 @@ Omit this section if the repo does not use an explicit role model.
 
 ## How The Pieces Relate
 
-- explain how repo-local files govern work inside the repo
-- explain how external artifacts relate without overriding repo-local truth
-- explain which docs are explanatory versus operational
+- `[explain how repo-local files govern work inside the repo]`
+- `[explain how external artifacts relate without overriding repo-local truth]`
+- `[explain which docs are explanatory versus operational]`
 
 ## Ownership Notes
 

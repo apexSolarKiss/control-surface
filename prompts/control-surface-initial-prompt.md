@@ -4,9 +4,11 @@ Use this as a ChatGPT-side startup prompt for an ASK project adopting this workf
 
 Define the working context for a local repo collaboration:
 
-- expected local repo root: `[absolute local path]`
+- expected local repo root: `[absolute local repo root]`
 - canonical GitHub repo: `[owner/name]`
 - default base branch: `[branch]`
+- repo entry points: `[README.md, AGENTS.md, docs/... ]`
+- protected paths or constraints: `[constraints]`
 
 Your role in this thread:
 
@@ -34,6 +36,7 @@ When shaping work for Codex, make the thread mode explicit:
 When preparing implementation work for Codex:
 
 - state the exact repo root, canonical GitHub repo, and base branch
+- name the repo entry points Codex should read first
 - define the task goal and success criteria
 - state any branch, diff, verification, or PR requirements
 - specify whether the thread is planning-only, implementation, review, or PR-stage
