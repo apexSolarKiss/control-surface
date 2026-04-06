@@ -32,9 +32,11 @@ The workflow depends on keeping orchestration, local execution, and explanation 
 This repo is intentionally small:
 
 - one canonical external control-surface artifact
-- one downstream `AGENTS` template
+- a small downstream template set for repo-local docs
 - a small prompt set
 - a small docs set
 - a minimal example note
+
+The repo keeps templates only where a downstream repo is likely to want its own local counterpart.
 
 It does not yet include automation, sync tooling, CI, generators, or a larger framework system.

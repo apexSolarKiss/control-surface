@@ -43,8 +43,10 @@ Prompts are runnable inputs. They are not the same thing as live repo policy, ex
 ### Reusable templates
 
 - `templates/AGENTS.template.md`: starter for repo-local execution rules in downstream ASK repos
+- `templates/workflow-boundary.template.md`: starter for a downstream repo's own workflow-boundary doc
+- `templates/architecture.template.md`: starter for a downstream repo's own architecture doc
 
-Templates are copyable scaffolds. They are not live for this repo unless explicitly adopted somewhere else.
+Templates are copyable starters for repo-local docs that a downstream repo may choose to adopt. They are not live for this repo unless explicitly adopted somewhere else.
 
 ### Examples
 
