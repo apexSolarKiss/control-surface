@@ -7,6 +7,8 @@ This file is the live repo-local execution guide for work inside `control-surfac
 This repo owns workflow architecture assets for ASK projects:
 
 - live operating docs for this repo
+- explanatory docs for this meta repo
+- canonical external control-surface artifacts
 - reusable templates for downstream repos
 - bootstrap prompts for attaching ChatGPT or Codex to a repo
 
@@ -18,15 +20,16 @@ Start with these files when working in this repo:
 
 1. `README.md`
 2. `AGENTS.md`
-3. `control-surface.md`
-4. relevant files under `prompts/` or `templates/`
+3. relevant files under `docs/`
+4. `control-surface.md` when working on the published external artifact
+5. relevant files under `prompts/`, `templates/`, or `examples/`
 
-Read the live root files before treating any template as authoritative.
+Read the live repo-local files and repo docs before treating any external artifact or template as authoritative for this repo.
 
 ## Working Style
 
 - Keep scope narrow and intentional. Prefer the smallest coherent scaffold that clarifies the workflow boundary.
-- Preserve the distinction between live repo files, runnable prompts, and reusable templates.
+- Preserve the distinction between live repo files, repo docs, external artifacts, runnable prompts, reusable templates, and examples.
 - Tailor docs to this repo's job as a workflow meta repo. Do not write as if this repo were an application repo.
 - Use clean technical language. Avoid manifesto phrasing, speculative systems, or generic process bloat.
 

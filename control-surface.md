@@ -1,6 +1,6 @@
 # control-surface.md
 
-This file is the live control model for the `control-surface` repo.
+This file is the canonical reusable external control-surface artifact published by `control-surface` for ASK projects.
 
 ## Roles
 
@@ -10,47 +10,63 @@ This file is the live control model for the `control-surface` repo.
 
 The control surface should decide what work is being asked for. Codex should execute against local repo truth rather than inventing repo policy.
 
+## Intended Use
+
+Use this artifact as the external orchestration layer around a target ASK repo.
+
+It is intentionally outside the repo it governs, even if a project chooses to store a copy locally for convenience.
+
 ## Boundary Model
 
-The repo keeps a clear separation between:
+Keep a clear separation between:
 
-- external prompt-compiler or orchestration rules
-- repo-local execution rules
-- runnable startup prompts
-- reusable templates
+- external control-surface rules in this document
+- repo-local execution rules in the target repo's `AGENTS.md`
+- runnable startup prompts used to attach ChatGPT or Codex
+- explanatory docs that describe the workflow system
+- examples that show how a project maps onto the model
 
 Those categories are related, but they are not interchangeable.
 
-## What Is Live In This Repo
+## Repo Attachment Defaults
 
-This repo contains its own live operating documents:
+- expected local repo root: `[absolute local repo root]`
+- canonical GitHub repo: `[owner/name]`
+- default base branch: `[branch]`
 
-- `AGENTS.md` is the repo-local execution contract for work inside this repo
-- `control-surface.md` is the live control model for this repo
+## Execution Defaults
 
-These root files are active for `control-surface` itself and should be read before any template is treated as guidance.
+- verify repo attachment before meaningful work
+- stop on mismatch
+- report the exact working directory, git toplevel, origin remote URL, current branch, and working-tree state
+- read repo-local files first after verification
+- treat repo-local files as the source of truth for work inside the attached repo
 
-## What This Repo Publishes For Reuse
+## Phase Guidance
 
-This repo also publishes reusable downstream assets:
+### Planning
 
-- prompt files under `prompts/`
-- template files under `templates/`
+- clarify goal, scope, constraints, and deliverable format
+- prefer the smallest honest scaffold or change
+- do not treat templates or examples as live policy unless the task explicitly says so
 
-Those files are reusable workflow assets. They are not automatically live for every target repo.
+### Implementation
 
-## Downstream Template Rule
+- branch from the current base when the workflow calls for implementation
+- keep changes scoped to one coherent intent
+- show the exact diff and resulting repo state before final handoff when requested
 
-For downstream ASK projects:
+### Review And Handoff
 
-- `AGENTS.template.md` is a starter for a repo-local file that would usually become `AGENTS.md` inside the target repo
-- `control-surface.template.md` is a starter for the external orchestration layer around a target repo
+- keep durable repo truth in repo files
+- keep migration framing and review context in the PR
+- keep comments for local clarification rather than policy storage
 
-That external control-surface template is not assumed to live inside each target repo by default. A project may store it elsewhere in its workflow system and inject it when starting a thread.
+## Project Slots
 
-## Operating Implications
+Fill or adapt these project-specific fields when using this artifact:
 
-- When attaching to a repo, verify the attachment first.
-- Read live repo files before reusable templates.
-- Treat templates as starting points, not active policy.
-- Keep migration or rollout rationale in the PR, not in the permanent control model unless it becomes durable operating guidance.
+- project-specific defaults: `[defaults]`
+- protected paths or constraints: `[constraints]`
+- required verification steps: `[checks]`
+- preferred response format: `[format]`
