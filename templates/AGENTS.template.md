@@ -30,6 +30,7 @@ List the files or directories an agent should read first:
 
 - Keep changes aligned to the task at hand.
 - Separate durable repo docs from temporary migration notes.
+- Keep external control-surface artifacts separate from repo-local operating files.
 - Avoid introducing new tooling or structure without a clear repo need.
 
 ## Comments, Docs, And PR Boundary
