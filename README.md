@@ -4,7 +4,7 @@ Reusable control-surface workflow assets for ASK projects.
 
 This repo contains both live repo files for `control-surface` itself and reusable workflow artifacts for other ASK projects.
 
-The structure separates five concerns:
+The structure separates six concerns:
 
 - Live repo-operating files for this repo itself
 - Repo explanatory docs for this meta repo
