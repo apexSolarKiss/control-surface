@@ -1,5 +1,7 @@
 # control-surface
 
+![control-surface banner](control-surface-banner.png)
+
 Reusable control-surface workflow assets for ASK projects.
 
 This repo contains both live repo files for `control-surface` itself and reusable workflow artifacts for other ASK projects.
