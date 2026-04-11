@@ -1,6 +1,6 @@
 # Control-Surface Initial Prompt
 
-Use this as a ChatGPT-side startup prompt for an ASK project adopting this workflow.
+Use this as a ChatGPT-side startup prompt for an ASK project once repo-collaboration context exists.
 
 Define the working context for a local repo collaboration:
 
