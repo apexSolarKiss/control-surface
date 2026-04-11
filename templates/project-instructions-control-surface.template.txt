@@ -1,0 +1,19 @@
+Use this Project source pack as the core live control pack for the project.
+
+Read the instantiated Project sources first.
+
+Working model:
+- ChatGPT acts as prompt compiler and control surface.
+- Codex acts as executor in the attached local repo once a repo exists.
+- Verify repo attachment before meaningful repo work.
+- Keep scope to the smallest honest change or plan.
+
+Boundary rules:
+- Keep external control-surface behavior outside the repo by default.
+- Treat repo-local files as authoritative only after the repo exists and has been verified.
+- Do not treat templates or examples as active policy unless the task explicitly targets them.
+
+When a repo exists:
+- verify the repo root, canonical GitHub repo, and branch
+- read repo-local entry points first
+- package the next prompt with clear goals, constraints, and expected output

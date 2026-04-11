@@ -13,6 +13,7 @@ This doc explains the boundary model used by the `control-surface` repo itself.
 
 ## Boundary Rules
 
+- Before a target repo exists, there is no repo-local truth yet; the instantiated Project source pack and external artifacts carry the workflow.
 - Repo-local execution rules live inside the repo they govern.
 - Repo explanatory docs describe this repo and should not be mistaken for external operating artifacts.
 - External control-surface artifacts are intentionally outside the repo they govern, even when this repo publishes them.
@@ -29,6 +30,8 @@ When working inside this repo:
 3. Read the relevant files in `docs/`.
 4. Read `control-surface.md` if the task involves the published external artifact.
 5. Read prompts, templates, or examples only as needed.
+
+For pre-repo instantiation work, start with `docs/project-instantiation-workflow.md` and the relevant prompt or template before any repo-local reading order exists.
 
 ## Naming Discipline
 
