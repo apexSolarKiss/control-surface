@@ -11,7 +11,7 @@ The structure separates six concerns:
 - Live repo-operating files for this repo itself
 - Repo explanatory docs for this meta repo
 - External control-surface artifacts published for reuse
-- Runnable startup prompts used to attach ChatGPT or Codex to a repo
+- Runnable startup prompts for ChatGPT-side instantiation and Codex-side repo attachment
 - Reusable templates for downstream ASK projects
 - Examples that show how an ASK project maps onto the structure
 
@@ -67,7 +67,7 @@ Templates are copyable starters for repo-local docs that a downstream repo may c
 | understand this meta repo's own boundary or architecture | `docs/` |
 | set up the workflow before the target repo exists | `docs/project-instantiation-workflow.md` and `prompts/project-instantiation-initial-prompt.md` |
 | adapt the canonical external orchestration artifact for a project | `control-surface.md` |
-| start a ChatGPT-side or Codex-side workflow thread | `prompts/` |
+| start a ChatGPT-side instantiation thread or a Codex-side repo workflow thread | `prompts/` |
 | create repo-local starter docs for a downstream repo | `templates/` |
 | see how the structure mapped onto a real ASK project | `examples/` |
 
