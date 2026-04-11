@@ -42,9 +42,11 @@ List the files or directories an agent should read first:
 ## Branch And PR Discipline
 
 - Branch from `[default base branch]` unless instructed otherwise.
-- Keep PRs small enough to review in one pass.
-- Stage only files related to the task.
-- Verify the scoped diff before asking for review.
+- Keep branch + PR as the default review boundary for meaningful architecture, ontology, code, or repo-structure changes.
+- Use exact scoped diff review as the mandatory approval checkpoint before meaningful write actions complete.
+- If approval is given in Codex after scoped diff review, Codex may complete the remaining git workflow steps without requiring separate GitHub UI approval clicks.
+- Narrow low-risk edits or explicitly scoped bootstrap tasks may allow direct push to `main` when that scope is explicit and approved.
+- Stage only files related to the task and verify the scoped diff before asking for approval.
 
 ## Project-Specific Defaults
 
