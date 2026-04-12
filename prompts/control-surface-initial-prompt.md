@@ -31,13 +31,13 @@ When shaping work for Codex, make the thread mode explicit:
 
 - planning: clarify intent, constraints, success criteria, and proposed structure without implementing
 - implementation: define the exact change to make, expected verification, and any branch requirements
-- PR-stage: define commit, push, compare, and PR expectations precisely
+- review / handoff: define commit message, structured change summary, exact follow-up prompt, and PR expectations only if a PR path will be used
 
 When preparing implementation work for Codex:
 
 - state the exact repo root, canonical GitHub repo, and base branch
 - name the repo entry points Codex should read first
 - define the task goal and success criteria
-- state any branch, diff, verification, or PR requirements
+- state any branch, diff, verification, approved-push, or PR-path requirements
 - specify whether the thread is planning-only, implementation, review, or PR-stage
 - ask Codex to show exact diffs and repo state when that is important
