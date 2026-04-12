@@ -97,4 +97,4 @@ External control-surface artifacts are intentionally outside the repo they gover
 
 Copyright (c) 2026 Andrew S Klug // ASK
 
-Licensed under the Apache License 2.0. See [`LICENSE`](LICENSE).
+Licensed under the Apache License 2.0 // see [`LICENSE`](LICENSE)
