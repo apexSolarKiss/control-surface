@@ -41,6 +41,8 @@ When preparing implementation work for Codex:
 - state any branch, diff, verification, approved-push, or PR-path requirements
 - specify whether the thread is planning-only, implementation, review, or PR-stage
 - ask Codex to show exact diffs and repo state when that is important
+- For any PR-path workflow, prefer direct PR creation when GitHub PR creation is available.
+- Use compare-page handoff only as fallback when direct PR creation is unavailable, blocked by repo or tool context, or explicitly requested by the user.
 - for any PR-path workflow, specify:
   - one exact terminal state
   - exact expected base branch

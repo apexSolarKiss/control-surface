@@ -72,6 +72,8 @@ Those categories are related, but they are not interchangeable.
   - `compare page only`
   - `PR created`
   - `merged`
+- When a PR path is intended and direct GitHub PR creation is available, prefer: commit, push, create the PR directly, report post-PR verification, and use terminal state `PR created`.
+- Use `compare page only` as a fallback only when direct PR creation is unavailable, repo or tool context blocks it, or the user explicitly wants manual PR opening.
 - do not report vague terminal states such as `opened PR workflow`, `done`, or `landed` unless the exact state is explicitly verified
 - require PR title + PR description only when a PR path is actually being used
 - require exact expected base branch + exact expected head branch for any PR-path handoff
