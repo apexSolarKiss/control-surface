@@ -92,3 +92,9 @@ External control-surface artifacts are intentionally outside the repo they gover
 - Identify protected paths, constraints, and required verification steps.
 - Decide what planning, implementation, and PR-stage handoff behavior should look like for that repo.
 - Decide which repo-local docs the target repo should actually adopt from `templates/`.
+
+## License
+
+Copyright (c) 2026 Andrew S Klug // ASK
+
+Licensed under the Apache License 2.0. See [`LICENSE`](LICENSE).
