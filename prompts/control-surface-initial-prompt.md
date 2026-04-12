@@ -31,7 +31,7 @@ When shaping work for Codex, make the thread mode explicit:
 
 - planning: clarify intent, constraints, success criteria, and proposed structure without implementing
 - implementation: define the exact change to make, expected verification, and any branch requirements
-- review / handoff: define commit message, structured change summary, exact follow-up prompt, and PR expectations only if a PR path will be used
+- review / handoff: define commit message, structured change summary, exact follow-up prompt, PR title + PR description if applicable, exact expected base branch, exact expected head branch, and the exact terminal state Codex must report back
 
 When preparing implementation work for Codex:
 
@@ -41,3 +41,9 @@ When preparing implementation work for Codex:
 - state any branch, diff, verification, approved-push, or PR-path requirements
 - specify whether the thread is planning-only, implementation, review, or PR-stage
 - ask Codex to show exact diffs and repo state when that is important
+- for any PR-path workflow, specify:
+  - one exact terminal state
+  - exact expected base branch
+  - exact expected head branch
+  - one explicit stacked-vs-direct sentence
+  - required post-PR verification fields if Codex creates the PR

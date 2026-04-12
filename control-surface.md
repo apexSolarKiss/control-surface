@@ -67,7 +67,24 @@ Those categories are related, but they are not interchangeable.
 - keep comments for local clarification rather than policy storage
 - state whether the handoff is planning-only, implementation, review, or PR-stage
 - include commit message, structured change summary, and exact Codex prompt in review-stage output
+- require one exact terminal state for every review-stage or PR-stage workflow:
+  - `pushed branch only`
+  - `compare page only`
+  - `PR created`
+  - `merged`
+- do not report vague terminal states such as `opened PR workflow`, `done`, or `landed` unless the exact state is explicitly verified
 - require PR title + PR description only when a PR path is actually being used
+- require exact expected base branch + exact expected head branch for any PR-path handoff
+- stop if the actual PR base/head differs from the expected base/head
+- treat PR creation and merge as separate states
+- report `merged` only after explicit verification
+- require post-PR verification fields whenever Codex creates or updates a PR:
+  - PR number
+  - draft or ready state
+  - actual base branch
+  - actual head branch
+  - mergeable state
+  - PR URL
 
 ## Handoff Packaging
 
@@ -78,6 +95,17 @@ When sending work to Codex, package:
 - exact files or artifact classes to inspect
 - explicit constraints, protected paths, or out-of-scope areas
 - expected diff, verification, and PR-stage output
+- for PR-path handoff:
+  - commit message
+  - structured change summary
+  - PR title
+  - PR description
+  - exact expected base branch
+  - exact expected head branch
+  - exact terminal state to report back
+- include one explicit stacked-PR sentence:
+  - `This PR is intentionally stacked on top of [branch] and should not target main yet.`
+  - or `This PR must target main directly.`
 
 ## Structured Change Summary
 
@@ -87,6 +115,14 @@ For meaningful repo updates, require a structured change summary with:
 - what changed
 - what did not change
 - what remains out of scope
+
+## Branch Topology Recovery
+
+Use these recovery defaults when branch topology drifts:
+
+- if local `main` was accidentally fast-forwarded, stop and re-establish the intended feature branch before continuing PR work
+- if a PR was opened against the wrong base, stop, restate the expected base/head, and correct the PR target before reporting success
+- if a stacked seam needs clean integration back onto `main`, restate whether the branch should remain stacked or be rebased or merged for direct-to-main targeting before continuing
 
 ## Adaptation Notes
 
