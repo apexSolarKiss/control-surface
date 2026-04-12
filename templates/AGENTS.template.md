@@ -37,7 +37,8 @@ List the files or directories an agent should read first:
 
 - Put inline explanation in code or config only when local clarity needs it.
 - Put durable architecture or workflow guidance in repo docs.
-- Put change motivation, rollout notes, and reviewer framing in the PR.
+- Use a structured change summary for meaningful repo updates.
+- If a PR path is used, put that structured change summary in the PR description.
 
 ## Branch And PR Discipline
 
@@ -46,6 +47,7 @@ List the files or directories an agent should read first:
 - Use exact scoped diff review as the mandatory approval checkpoint before meaningful write actions complete.
 - If approval is given in Codex after scoped diff review, Codex may complete the remaining git workflow steps without requiring separate GitHub UI approval clicks.
 - Narrow low-risk edits or explicitly scoped bootstrap tasks may allow direct push to `main` when that scope is explicit and approved.
+- Require the structured change summary for meaningful changes whether the workflow ends in a PR or an approved push.
 - Stage only files related to the task and verify the scoped diff before asking for approval.
 
 ## Project-Specific Defaults

@@ -63,9 +63,11 @@ Those categories are related, but they are not interchangeable.
 ### Review And Handoff
 
 - keep durable repo truth in repo files
-- keep migration framing and review context in the PR
+- keep migration framing and review context in a structured change summary
 - keep comments for local clarification rather than policy storage
 - state whether the handoff is planning-only, implementation, review, or PR-stage
+- include commit message, structured change summary, and exact Codex prompt in review-stage output
+- require PR title + PR description only when a PR path is actually being used
 
 ## Handoff Packaging
 
@@ -76,6 +78,15 @@ When sending work to Codex, package:
 - exact files or artifact classes to inspect
 - explicit constraints, protected paths, or out-of-scope areas
 - expected diff, verification, and PR-stage output
+
+## Structured Change Summary
+
+For meaningful repo updates, require a structured change summary with:
+
+- why this change exists
+- what changed
+- what did not change
+- what remains out of scope
 
 ## Adaptation Notes
 

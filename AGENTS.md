@@ -44,15 +44,17 @@ Read the live repo-local files and repo docs before treating any external artifa
 
 - Comments belong in local truth when a file needs inline clarification.
 - Docs describe architecture, boundaries, operating contracts, and reusable guidance.
-- PR descriptions explain migration intent, review framing, and why a change is being made now.
+- Use a structured change summary to capture review framing, why a change exists, what changed, what did not change, and what remains out of scope.
+- If a PR path is used, that structured change summary belongs in the PR description.
 
-Do not push PR-only explanation into permanent repo docs, and do not hide durable operating rules inside PR text.
+Do not push PR-only explanation into permanent repo docs, and do not hide durable operating rules inside a PR or approval record.
 
 ## Commit And PR Hygiene
 
 - Prefer small, coherent PRs with a clear boundary.
 - Use commit messages that describe the actual repo-facing change.
 - Stage only files that belong to the task.
+- For meaningful changes, require the structured change summary before meaningful write actions complete, whether the path ends in a PR or an approved push.
 - Before proposing a PR, check the scoped diff and confirm that terminology around `live`, `template`, `external`, and `repo-local` is consistent.
 
 ## Defaults
