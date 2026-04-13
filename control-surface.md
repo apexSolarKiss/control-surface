@@ -72,6 +72,7 @@ Those categories are related, but they are not interchangeable.
   - `compare page only`
   - `PR created`
   - `merged`
+  - `merged branches cleaned up`
 - When a PR path is intended and direct GitHub PR creation is available, prefer: commit, push, create the PR directly, report post-PR verification, and use terminal state `PR created`.
 - Use `compare page only` as a fallback only when direct PR creation is unavailable, repo or tool context blocks it, or the user explicitly wants manual PR opening.
 - do not report vague terminal states such as `opened PR workflow`, `done`, or `landed` unless the exact state is explicitly verified
@@ -80,6 +81,7 @@ Those categories are related, but they are not interchangeable.
 - stop if the actual PR base/head differs from the expected base/head
 - treat PR creation and merge as separate states
 - report `merged` only after explicit verification
+- after merge is explicitly verified, treat merged-branch cleanup as the default immediate next step unless the user explicitly wants to retain the branch
 - require post-PR verification fields whenever Codex creates or updates a PR:
   - PR number
   - draft or ready state
@@ -87,6 +89,30 @@ Those categories are related, but they are not interchangeable.
   - actual head branch
   - mergeable state
   - PR URL
+
+### Post-merge Cleanup
+
+- cleanup happens only after explicit merge verification
+- never infer cleanup from:
+  - `PR created`
+  - `pushed branch only`
+  - `compare page only`
+  - `done`
+  - `looks merged`
+- after merge is explicitly verified, ChatGPT should normally provide one more ready-to-send Codex prompt to clean up the merged branch or branches
+- cleanup prompts must verify before deletion:
+  - repo attachment again
+  - refreshed `main`
+  - branch merged into `main`
+  - branch is not `main`
+  - branch is not intentionally being kept
+  - branch belongs to the verified attached repo
+- cleanup actions must include:
+  - delete local merged task branch if present
+  - delete remote merged task branch if present
+  - prune refs
+  - show final local and remote branch state
+- if multiple stale merged task branches exist, one cleanup pass may remove all of them, but merged-state verification must still be required per branch
 
 ## Handoff Packaging
 
@@ -108,6 +134,7 @@ When sending work to Codex, package:
 - include one explicit stacked-PR sentence:
   - `This PR is intentionally stacked on top of [branch] and should not target main yet.`
   - or `This PR must target main directly.`
+- after explicit merge verification, default to one more cleanup handoff unless the branch is intentionally being retained
 
 ## Structured Change Summary
 
