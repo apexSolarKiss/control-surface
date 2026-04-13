@@ -44,6 +44,56 @@ Those categories are related, but they are not interchangeable.
 - read repo-local files first after verification
 - treat repo-local files as the source of truth for work inside the attached repo
 
+## Green-path Vs Recovery Mode
+
+Use green-path mode when all of the following are true:
+
+- same repo
+- same task chain
+- working tree was previously clean
+- base branch is still `main`
+- no branch-topology ambiguity
+- no failed checkout, pull, ref-lock, or dirty-tree interruption since the last verified step
+
+In green-path mode, ChatGPT should not restart the full verification ceremony on every normal step.
+
+- when the repo, branch lineage, and working tree were already verified in the immediately preceding step, ChatGPT should use the smallest next prompt that is still safe
+- after planning -> implementation from fresh `main`: full verification is still reasonable
+- after implementation review -> review / write: compact verification is enough
+- after explicit merge verification -> branch cleanup: compact cleanup prompt is enough
+- compact review / write verification in the same task chain usually requires only:
+  - `git branch --show-current`
+  - `git status --short`
+  - the requested test command or verification command for that step
+- compact post-merge cleanup in the same task chain usually requires only:
+  - `git fetch origin --prune`
+  - `git checkout main`
+  - `git pull origin main`
+  - confirm the merged branch exists and is merged into `main`
+  - delete the local merged task branch if present
+  - delete the remote merged task branch if present
+  - report final local and remote branch lists
+
+Use recovery mode only when something failed or became ambiguous, including:
+
+- branch mismatch
+- dirty working tree
+- failed checkout
+- failed fast-forward
+- ref-lock issue
+- PR base/head mismatch
+- ancestry ambiguity
+- local branch not merged but possibly content-obsolete
+
+Default to green-path compact prompts and escalate to recovery prompts only on explicit failure or ambiguity.
+
+This split does not relax:
+
+- PR-created vs merged distinction
+- explicit base/head branch naming
+- stopping on mismatch
+- smallest-honest-scope discipline
+
 ## Phase Guidance
 
 ### Planning
@@ -82,6 +132,7 @@ Those categories are related, but they are not interchangeable.
 - treat PR creation and merge as separate states
 - report `merged` only after explicit verification
 - after merge is explicitly verified, treat merged-branch cleanup as the default immediate next step unless the user explicitly wants to retain the branch
+- prefer compact green-path review / handoff prompts first, and escalate to recovery prompts only on failure or ambiguity
 - require post-PR verification fields whenever Codex creates or updates a PR:
   - PR number
   - draft or ready state
@@ -100,6 +151,7 @@ Those categories are related, but they are not interchangeable.
   - `done`
   - `looks merged`
 - after merge is explicitly verified, ChatGPT should normally provide one more ready-to-send Codex prompt to clean up the merged branch or branches
+- in the same repo and task chain, prefer a compact cleanup prompt first and escalate to recovery prompts only if checkout, pull, merge verification, or branch topology becomes ambiguous
 - cleanup prompts must verify before deletion:
   - repo attachment again
   - refreshed `main`
@@ -135,6 +187,7 @@ When sending work to Codex, package:
   - `This PR is intentionally stacked on top of [branch] and should not target main yet.`
   - or `This PR must target main directly.`
 - after explicit merge verification, default to one more cleanup handoff unless the branch is intentionally being retained
+- for normal same-repo same-task-chain progress, prefer green-path compact prompts and reserve recovery prompts for checkout, pull, status, ancestry, or branch-topology failure or ambiguity
 
 ## Structured Change Summary
 
