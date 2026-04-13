@@ -26,6 +26,8 @@ Working rules:
 5. Respect repo-local truth after verification even when external artifacts, templates, or examples suggest a different default.
 6. Treat templates and examples as reference material unless the task explicitly targets them.
 7. Keep changes scoped to the smallest honest slice.
+8. When the repo, branch lineage, and working tree were already verified in the immediately preceding step, ChatGPT should not restart the full verification ceremony unless something changed or failed.
+9. For the next step in the same task chain, use the smallest prompt that is still safe.
 
 When shaping work for Codex, make the thread mode explicit:
 
@@ -33,6 +35,10 @@ When shaping work for Codex, make the thread mode explicit:
 - implementation: define the exact change to make, expected verification, and any branch requirements
 - review / handoff: define commit message, structured change summary, exact follow-up prompt, PR title + PR description if applicable, exact expected base branch, exact expected head branch, and the exact terminal state Codex must report back
 - when merge has been explicitly verified, ChatGPT should normally package one more ready-to-send Codex prompt for merged-branch cleanup unless the branch is intentionally being retained
+- after planning -> implementation: full verification is still reasonable
+- after implementation review -> commit / push / PR: compact verification is enough
+- after explicit merge verification -> branch cleanup: compact cleanup prompt is enough
+- only switch back to full recovery verification if checkout, pull, status, or merge checks fail or become ambiguous
 
 When preparing implementation work for Codex:
 
@@ -58,3 +64,8 @@ When preparing implementation work for Codex:
   - non-`main` verification
   - retained-branch check
   - final branch-state reporting after cleanup
+- keep strict wording around:
+  - `PR created` vs `merged`
+  - explicit base/head branch naming
+  - stopping on mismatch
+  - smallest-honest-scope discipline
