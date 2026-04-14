@@ -16,6 +16,14 @@ Use this artifact as the external orchestration layer around a target ASK repo.
 
 It is intentionally outside the repo it governs, even if a project chooses to store a copy locally for convenience.
 
+## Core Rule
+
+When operating in Codex workflow, ChatGPT should provide a ready-to-send prompt.
+
+That prompt should already encode the workflow, not assume the user will reconstruct execution steps manually.
+
+Advice alone is insufficient once the next step is ready for Codex execution.
+
 ## Boundary Model
 
 Keep a clear separation between:
@@ -43,6 +51,32 @@ Those categories are related, but they are not interchangeable.
 - report the exact working directory, git toplevel, origin remote URL, current branch, and working-tree state
 - read repo-local files first after verification
 - treat repo-local files as the source of truth for work inside the attached repo
+
+## Default Repo-attachment Verification
+
+Before meaningful Codex work, prompts should usually verify:
+
+- `pwd`
+- `git rev-parse --show-toplevel`
+- `git branch --show-current`
+- `git status --short`
+
+If the prompt depends on a specific branch or clone, state the expected branch and expected repo root explicitly.
+
+Stop on mismatch rather than improvising.
+
+## Branch Freshness Rule
+
+When work should begin from current `main`, prefer:
+
+1. switch or checkout `main`
+2. `git fetch origin`
+3. `git pull origin main`
+4. show current `HEAD`
+5. show a short recent log
+6. branch from updated `main`
+
+Prefer this refresh path when implementation is starting after planning, a previously used branch may be stale, or GitHub may have advanced since the last local action.
 
 ## Green-path Vs Recovery Mode
 
@@ -127,6 +161,7 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - prefer the smallest honest scaffold or change
 - do not treat templates or examples as live policy unless the task explicitly says so
 - identify which repo-local files are authoritative before proposing changes
+- stop after the planning recommendation
 
 ### Implementation
 
@@ -134,6 +169,8 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - keep changes scoped to one coherent intent
 - show the exact diff and resulting repo state before final handoff when requested
 - package the task so Codex knows the exact files, constraints, and expected verification output
+- require exact scoped diff, `git status --short`, and stop before commit or push
+- do not drift into write-stage language until the implementation result has been reviewed
 
 ### Review And Handoff
 
@@ -156,6 +193,7 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - stop if the actual PR base/head differs from the expected base/head
 - treat PR creation and merge as separate states
 - report `merged` only after explicit verification
+- if a PR path is not used, the same structured change summary should still appear in the Codex handoff or approval record before meaningful write actions complete
 - after merge is explicitly verified, keep merged-branch cleanup available and recommended, but defer or batch it by default unless the user explicitly wants cleanup now or branch hygiene is operationally necessary
 - prefer compact green-path review / handoff prompts first, and escalate to recovery prompts only on failure or ambiguity
 - green-path and tiny-docs green-path reduce verification and GitHub ceremony, but they do not bypass the diff-approval checkpoint
@@ -215,6 +253,41 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
   - prune refs
   - show final local and remote branch state
 - if multiple stale merged task branches exist, one cleanup pass may remove all of them, but merged-state verification must still be required per branch
+
+## Merge Verification
+
+Report `merged` only when merge has been explicitly verified.
+
+PR creation, compare-page generation, or push completion do not count as merge verification.
+
+If merge is expected, prompts should require Codex to verify that the branch landed on the intended base before reporting `merged`.
+
+## Branch / State Discipline
+
+- if the checked-out branch is not the intended one for the current task, stop and redirect to the correct branch workflow
+- if a planning branch is active when implementation should begin, create a fresh implementation branch from updated `main`
+- if the user says a branch, compare page, or PR has already been merged, prefer checking current `main` state before inferring what still needs to happen
+- when merge history is messy, current `main` file content is the operational truth
+
+## GitHub / Compare-url Discipline
+
+When a PR path is intended, prompts should target the canonical GitHub repo and explicit expected base branch already named in the task framing.
+
+If the actual PR base/head differs, stop and report the mismatch rather than continuing.
+
+If a follow-up commit is added after a PR was already merged, treat the next step as a new small PR rather than as part of the already-merged PR.
+
+## Scope Discipline
+
+- prefer the smallest honest unit of work
+- do not mix docs cleanup, architecture revision, and code changes unless that combined scope is deliberate and clearly justified
+- do not invent broader abstractions when a local seam is enough
+
+## Docs Vs Code Comments
+
+- source comments = local truth
+- docs = architectural truth
+- structured change summaries and PR descriptions = change-specific framing
 
 ## Handoff Packaging
 
@@ -282,3 +355,20 @@ Fill or adapt these project-specific fields when using this artifact:
 - protected paths or constraints: `[constraints]`
 - required verification steps: `[checks]`
 - preferred response format: `[format]`
+
+## Short Version
+
+In practice, the workflow should default to:
+
+- green-path compact prompts for normal same-repo same-task-chain progress
+- recovery prompts only when checkout, pull, status, ancestry, or branch topology fail or become ambiguous
+- tiny-docs green path for tiny docs or example-only work in the same repo and task chain
+- ready-to-send prompts rather than advice that still needs manual translation
+- repo attachment verification before meaningful Codex work
+- full review-stage packaging when a write-stage handoff is needed:
+  - exact scoped diff and `git status --short`
+  - commit message
+  - structured change summary
+  - PR title and PR description when a PR path is used
+  - exact expected base/head
+  - exact terminal state to report back
