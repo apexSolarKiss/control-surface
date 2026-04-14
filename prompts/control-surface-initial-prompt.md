@@ -46,7 +46,7 @@ When shaping work for Codex, make the thread mode explicit:
 - compact verification does not remove the approval stop
 - after explicit merge verification -> branch cleanup: compact cleanup prompt is enough
 - only switch back to full recovery verification if checkout, pull, status, or merge checks fail or become ambiguous
-- tiny-docs green path: resume existing task branch if appropriate, make the narrow docs change, show exact scoped diff plus `git status --short`, and stop for explicit approval before commit, push, or PR creation unless scope drift or ambiguity appears
+- tiny-docs green path: resume existing task branch if appropriate, make the narrow docs change, and use the same exact scoped diff + `git status --short` approval stop before commit, push, or PR creation unless scope drift or ambiguity appears
 
 When preparing implementation work for Codex:
 
@@ -90,9 +90,7 @@ When preparing implementation work for Codex:
 - in that case:
   - resume the existing task branch if it already contains the intended scoped work
   - do not recreate from `main` unless there is real ambiguity
-  - show the exact scoped diff
-  - show `git status --short`
-  - stop for explicit approval before commit, push, or PR creation
+  - use the same exact scoped diff + `git status --short` approval stop before commit, push, or PR creation
   - verify merge normally
   - treat cleanup as best-effort tail work unless cleanup fails or becomes ambiguous
 - for meaningful repo updates on a non-PR path, still require the same structured change summary in the Codex handoff or approval record before meaningful write actions complete

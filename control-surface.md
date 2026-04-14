@@ -61,9 +61,7 @@ Before meaningful Codex work, prompts should usually verify:
 - `git branch --show-current`
 - `git status --short`
 
-If the prompt depends on a specific branch or clone, state the expected branch and expected repo root explicitly.
-
-Stop on mismatch rather than improvising.
+If the prompt depends on a specific branch or clone, state the expected branch and expected repo root explicitly, then stop on mismatch rather than improvising.
 
 ## Branch Freshness Rule
 
@@ -127,6 +125,7 @@ This split does not relax:
 - explicit base/head branch naming
 - stopping on mismatch
 - smallest-honest-scope discipline
+- exact scoped diff + `git status --short` approval stop before commit, push, or PR creation
 
 ### Tiny-docs Green Path
 
@@ -201,8 +200,7 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - default tiny-docs flow:
   - resume the existing task branch if appropriate
   - make the narrow docs change
-  - show the exact scoped diff and `git status --short`
-  - stop for explicit approval before commit, push, or PR creation
+  - use the same exact scoped diff + `git status --short` approval stop before commit, push, or PR creation
 - stop early if:
   - multiple files changed unexpectedly
   - scope widened
@@ -365,10 +363,5 @@ In practice, the workflow should default to:
 - tiny-docs green path for tiny docs or example-only work in the same repo and task chain
 - ready-to-send prompts rather than advice that still needs manual translation
 - repo attachment verification before meaningful Codex work
-- full review-stage packaging when a write-stage handoff is needed:
-  - exact scoped diff and `git status --short`
-  - commit message
-  - structured change summary
-  - PR title and PR description when a PR path is used
-  - exact expected base/head
-  - exact terminal state to report back
+- exact scoped diff + `git status --short` approval stop before commit, push, or PR creation
+- full review-stage packaging when a write-stage handoff is needed
