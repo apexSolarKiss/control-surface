@@ -39,6 +39,7 @@ When shaping work for Codex, make the thread mode explicit:
 - when merge has been explicitly verified, ChatGPT may package an immediate merged-branch cleanup prompt, but cleanup may also be deferred or batched unless the user explicitly wants it now or branch hygiene is operationally necessary
 - after planning -> implementation: full verification is still reasonable
 - after implementation review -> commit / push / PR: compact verification is enough
+- compact verification does not remove the approval stop
 - after explicit merge verification -> branch cleanup: compact cleanup prompt is enough
 - only switch back to full recovery verification if checkout, pull, status, or merge checks fail or become ambiguous
 - tiny-docs green path: resume existing task branch if appropriate, make the narrow docs change, show exact scoped diff, and continue directly through commit, push, and PR creation in the same pass unless scope drift or ambiguity appears
@@ -51,6 +52,10 @@ When preparing implementation work for Codex:
 - state any branch, diff, verification, approved-push, or PR-path requirements
 - specify whether the thread is planning-only, implementation, review, or PR-stage
 - ask Codex to show exact diffs and repo state when that is important
+- for any implementation or tiny-docs green-path workflow:
+  - show exact scoped diff
+  - show `git status --short`
+  - stop for explicit approval before commit, push, or PR creation
 - For any PR-path workflow, prefer direct PR creation when GitHub PR creation is available.
 - Use compare-page handoff only as fallback when direct PR creation is unavailable, blocked by repo or tool context, or explicitly requested by the user.
 - for any PR-path workflow, specify:
@@ -80,7 +85,8 @@ When preparing implementation work for Codex:
   - resume the existing task branch if it already contains the intended scoped work
   - do not recreate from `main` unless there is real ambiguity
   - show the exact scoped diff
-  - if the diff remains narrow and expected, continue directly through commit, push, and PR creation in the same pass
+  - show `git status --short`
+  - stop for explicit approval before commit, push, or PR creation
   - verify merge normally
   - treat cleanup as best-effort tail work unless cleanup fails or becomes ambiguous
 - stop immediately if:
