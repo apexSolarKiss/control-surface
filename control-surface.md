@@ -111,8 +111,7 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 
 - resume the existing task branch if it already contains the intended scoped work
 - make the narrow docs or example change
-- show the exact scoped diff
-- if the diff remains narrow and expected, continue directly through commit, push, and PR creation in the same pass
+- show the exact scoped diff and `git status --short`, then stop for explicit approval before commit, push, or PR creation
 - verify merge normally
 - treat cleanup as best-effort tail work rather than a separate conversational phase unless cleanup fails or becomes ambiguous
 - do not recreate from `main` by default when the expected task branch already exists locally and the working tree contains only the intended scoped artifact
@@ -159,12 +158,13 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - report `merged` only after explicit verification
 - after merge is explicitly verified, keep merged-branch cleanup available and recommended, but defer or batch it by default unless the user explicitly wants cleanup now or branch hygiene is operationally necessary
 - prefer compact green-path review / handoff prompts first, and escalate to recovery prompts only on failure or ambiguity
+- green-path and tiny-docs green-path reduce verification and GitHub ceremony, but they do not bypass the diff-approval checkpoint
 - tiny-docs green-path work should not be split into separate high-ceremony phases for implementation, review, write, merge verification, and cleanup unless scope drift or ambiguity appears
 - default tiny-docs flow:
   - resume the existing task branch if appropriate
   - make the narrow docs change
-  - show the exact scoped diff
-  - if the diff is narrow and expected, continue directly through commit, push, and PR creation in the same pass
+  - show the exact scoped diff and `git status --short`
+  - stop for explicit approval before commit, push, or PR creation
 - stop early if:
   - multiple files changed unexpectedly
   - scope widened
@@ -238,7 +238,7 @@ When sending work to Codex, package:
   - or `This PR must target main directly.`
 - after explicit merge verification, keep cleanup available as follow-on work, but allow it to be deferred or batched by default unless cleanup is needed now
 - for normal same-repo same-task-chain progress, prefer green-path compact prompts and reserve recovery prompts for checkout, pull, status, ancestry, or branch-topology failure or ambiguity
-- tiny-docs green-path work should package the smallest safe single-pass handoff
+- tiny-docs green-path work should package the smallest safe single-pass handoff after approval
 - this usually means:
   - current branch
   - `git status --short`
@@ -248,6 +248,7 @@ When sending work to Codex, package:
   - PR title and PR description if a PR path is used
   - explicit expected base and head
   - exact terminal state to report back
+- compact workflow means compact verification and compact transport after approval, not automatic continuation past approval
 - tiny-docs green-path work should not automatically be split into separate implementation and write handoffs unless ambiguity or scope drift appears
 
 ## Structured Change Summary
