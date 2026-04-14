@@ -12,11 +12,11 @@ This repo publishes a ChatGPT-to-Codex workflow model where:
 
 - ChatGPT acts as prompt compiler and control surface
 - Codex executes inside the attached local repo
-- repo-local `AGENTS.md` remains separate from external control-surface behavior
+- repo-local AGENTS.md governs execution inside this repo, but remains downstream of the external control surface, which governs higher-level workflow framing and prompt compilation
 - ready-to-send prompts are expected once the next execution step is clear
-- green-path prompts are preferred for normal progress, with recovery prompts reserved for failure or ambiguity
 - exact scoped diff + `git status --short` approval remains a hard stop before commit, push, or PR creation
 - structured change summaries are first-class on both PR and non-PR paths
+- green-path prompts are preferred for normal progress, with recovery prompts reserved for failure or ambiguity
 - direct PR creation is preferred where tooling allows
 - post-merge cleanup remains available, but is deferred or batched by default
 
@@ -33,9 +33,7 @@ The structure separates six concerns:
 
 ### Live files in this repo
 
-- `AGENTS.md`: repo-local execution rules for work inside this repo
-
-`AGENTS.md` is the live repo-local operating file for this repo.
+- `AGENTS.md`: the live repo-local operating file that governs execution inside this repo
 
 ### Repo docs
 
