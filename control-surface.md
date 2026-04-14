@@ -94,6 +94,32 @@ This split does not relax:
 - stopping on mismatch
 - smallest-honest-scope discipline
 
+### Tiny-docs Green Path
+
+Use tiny-docs green path when all of the following are true:
+
+- docs-only
+- one or two files maximum
+- no code
+- no architecture rewrite
+- same repo
+- same task chain
+- no dirty-tree ambiguity except the intended file
+- no branch-topology ambiguity
+
+This is a rule-based classification. ChatGPT should not ask the user to decide when the scope is already clear.
+
+- resume the existing task branch if it already contains the intended scoped work
+- make the narrow docs or example change
+- show the exact scoped diff
+- if the diff remains narrow and expected, continue directly through commit, push, and PR creation in the same pass
+- verify merge normally
+- treat cleanup as best-effort tail work rather than a separate conversational phase unless cleanup fails or becomes ambiguous
+- do not recreate from `main` by default when the expected task branch already exists locally and the working tree contains only the intended scoped artifact
+- use fresh-branch-from-`main` flow only when there is real ambiguity about branch state, scope, or lineage
+- code or structural architecture work should use the stricter existing workflow
+- tiny docs or example artifacts should use compact single-pass workflow when tiny-docs green-path conditions are met
+
 ## Phase Guidance
 
 ### Planning
@@ -133,6 +159,23 @@ This split does not relax:
 - report `merged` only after explicit verification
 - after merge is explicitly verified, treat merged-branch cleanup as the default immediate next step unless the user explicitly wants to retain the branch
 - prefer compact green-path review / handoff prompts first, and escalate to recovery prompts only on failure or ambiguity
+- tiny-docs green-path work should not be split into separate high-ceremony phases for implementation, review, write, merge verification, and cleanup unless scope drift or ambiguity appears
+- default tiny-docs flow:
+  - resume the existing task branch if appropriate
+  - make the narrow docs change
+  - show the exact scoped diff
+  - if the diff is narrow and expected, continue directly through commit, push, and PR creation in the same pass
+- stop early if:
+  - multiple files changed unexpectedly
+  - scope widened
+  - wording became architecturally meaningful
+  - branch state is ambiguous
+  - the working tree is dirty beyond the intended docs artifact
+- for same-thread, same-repo, same-task-chain tiny-docs work, full repo verification should happen once at task-chain start
+- after that, compact checks are enough unless something failed:
+  - current branch
+  - `git status --short`
+  - optionally `git fetch origin --prune` before PR creation or cleanup
 - require post-PR verification fields whenever Codex creates or updates a PR:
   - PR number
   - draft or ready state
@@ -152,6 +195,13 @@ This split does not relax:
   - `looks merged`
 - after merge is explicitly verified, ChatGPT should normally provide one more ready-to-send Codex prompt to clean up the merged branch or branches
 - in the same repo and task chain, prefer a compact cleanup prompt first and escalate to recovery prompts only if checkout, pull, merge verification, or branch topology becomes ambiguous
+- for tiny-docs green-path work, post-merge cleanup remains the default after explicit merge verification, but should be treated as best-effort tail work rather than a separate conversational phase
+- surface cleanup as a separate step only if:
+  - deletion fails
+  - branch state is ambiguous
+  - the local branch is content-obsolete but ancestry-unmerged
+  - the working tree is dirty
+  - checkout, pull, or ref state is blocked
 - cleanup prompts must verify before deletion:
   - repo attachment again
   - refreshed `main`
@@ -188,6 +238,17 @@ When sending work to Codex, package:
   - or `This PR must target main directly.`
 - after explicit merge verification, default to one more cleanup handoff unless the branch is intentionally being retained
 - for normal same-repo same-task-chain progress, prefer green-path compact prompts and reserve recovery prompts for checkout, pull, status, ancestry, or branch-topology failure or ambiguity
+- tiny-docs green-path work should package the smallest safe single-pass handoff
+- this usually means:
+  - current branch
+  - `git status --short`
+  - exact scoped diff
+  - commit message
+  - structured change summary
+  - PR title and PR description if a PR path is used
+  - explicit expected base and head
+  - exact terminal state to report back
+- tiny-docs green-path work should not automatically be split into separate implementation and write handoffs unless ambiguity or scope drift appears
 
 ## Structured Change Summary
 

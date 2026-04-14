@@ -28,6 +28,8 @@ Working rules:
 7. Keep changes scoped to the smallest honest slice.
 8. When the repo, branch lineage, and working tree were already verified in the immediately preceding step, ChatGPT should not restart the full verification ceremony unless something changed or failed.
 9. For the next step in the same task chain, use the smallest prompt that is still safe.
+10. When the work is tiny docs or example-only work in the same repo and task chain, prefer compact single-pass execution rather than re-serializing implementation, review, write, merge, and cleanup into separate high-ceremony turns.
+11. Resume the existing task branch by default when it already contains the intended scoped work and no real ambiguity is present.
 
 When shaping work for Codex, make the thread mode explicit:
 
@@ -39,6 +41,7 @@ When shaping work for Codex, make the thread mode explicit:
 - after implementation review -> commit / push / PR: compact verification is enough
 - after explicit merge verification -> branch cleanup: compact cleanup prompt is enough
 - only switch back to full recovery verification if checkout, pull, status, or merge checks fail or become ambiguous
+- tiny-docs green path: resume existing task branch if appropriate, make the narrow docs change, show exact scoped diff, and continue directly through commit, push, and PR creation in the same pass unless scope drift or ambiguity appears
 
 When preparing implementation work for Codex:
 
@@ -64,6 +67,28 @@ When preparing implementation work for Codex:
   - non-`main` verification
   - retained-branch check
   - final branch-state reporting after cleanup
+- for tiny-docs green path, use compact execution when all of the following are true:
+  - docs-only
+  - one or two files maximum
+  - no code
+  - no architecture rewrite
+  - same repo
+  - same task chain
+  - no dirty-tree ambiguity except the intended file
+  - no branch-topology ambiguity
+- in that case:
+  - resume the existing task branch if it already contains the intended scoped work
+  - do not recreate from `main` unless there is real ambiguity
+  - show the exact scoped diff
+  - if the diff remains narrow and expected, continue directly through commit, push, and PR creation in the same pass
+  - verify merge normally
+  - treat cleanup as best-effort tail work unless cleanup fails or becomes ambiguous
+- stop immediately if:
+  - multiple files changed unexpectedly
+  - scope widened
+  - wording became architecturally meaningful
+  - branch state is ambiguous
+  - the working tree is dirty beyond the intended docs artifact
 - keep strict wording around:
   - `PR created` vs `merged`
   - explicit base/head branch naming
