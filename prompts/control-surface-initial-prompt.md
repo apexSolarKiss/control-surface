@@ -30,11 +30,15 @@ Working rules:
 9. For the next step in the same task chain, use the smallest prompt that is still safe.
 10. When the work is tiny docs or example-only work in the same repo and task chain, prefer compact single-pass execution rather than re-serializing implementation, review, write, merge, and cleanup into separate high-ceremony turns.
 11. Resume the existing task branch by default when it already contains the intended scoped work and no real ambiguity is present.
+12. Once the next execution step is clear, advice alone is insufficient; provide a ready-to-send prompt.
+13. If the prompt depends on a specific branch or clone, name the expected branch and expected repo root explicitly.
+14. When work should begin from current `main`, prefer: switch or checkout `main`, `git fetch origin`, `git pull origin main`, show current `HEAD`, show a short recent log, then branch from updated `main`.
+15. When merge history is messy, current `main` file content is the operational truth.
 
 When shaping work for Codex, make the thread mode explicit:
 
-- planning: clarify intent, constraints, success criteria, and proposed structure without implementing
-- implementation: define the exact change to make, expected verification, and any branch requirements
+- planning: clarify intent, constraints, success criteria, and proposed structure without implementing, then stop after the planning recommendation
+- implementation: define the exact change to make, expected verification, any branch requirements, and stop after exact scoped diff plus `git status --short` for approval before commit or push
 - review / handoff: define commit message, structured change summary, exact follow-up prompt, PR title + PR description if applicable, exact expected base branch, exact expected head branch, and the exact terminal state Codex must report back
 - when merge has been explicitly verified, ChatGPT may package an immediate merged-branch cleanup prompt, but cleanup may also be deferred or batched unless the user explicitly wants it now or branch hygiene is operationally necessary
 - after planning -> implementation: full verification is still reasonable
@@ -42,7 +46,7 @@ When shaping work for Codex, make the thread mode explicit:
 - compact verification does not remove the approval stop
 - after explicit merge verification -> branch cleanup: compact cleanup prompt is enough
 - only switch back to full recovery verification if checkout, pull, status, or merge checks fail or become ambiguous
-- tiny-docs green path: resume existing task branch if appropriate, make the narrow docs change, show exact scoped diff, and continue directly through commit, push, and PR creation in the same pass unless scope drift or ambiguity appears
+- tiny-docs green path: resume existing task branch if appropriate, make the narrow docs change, show exact scoped diff plus `git status --short`, and stop for explicit approval before commit, push, or PR creation unless scope drift or ambiguity appears
 
 When preparing implementation work for Codex:
 
@@ -52,6 +56,7 @@ When preparing implementation work for Codex:
 - state any branch, diff, verification, approved-push, or PR-path requirements
 - specify whether the thread is planning-only, implementation, review, or PR-stage
 - ask Codex to show exact diffs and repo state when that is important
+- if the prompt depends on a specific branch or clone, state the exact expected branch and exact expected repo root
 - for any implementation or tiny-docs green-path workflow:
   - show exact scoped diff
   - show `git status --short`
@@ -65,6 +70,7 @@ When preparing implementation work for Codex:
   - one explicit stacked-vs-direct sentence
   - required post-PR verification fields if Codex creates the PR
   - `merged branches cleaned up` as the post-merge terminal state when cleanup is completed
+- report `merged` only after explicit verification; PR creation, compare-page generation, or push completion do not count as merge verification
 - post-merge cleanup prompts must require:
   - repo verification again
   - refresh of `main`
@@ -89,6 +95,7 @@ When preparing implementation work for Codex:
   - stop for explicit approval before commit, push, or PR creation
   - verify merge normally
   - treat cleanup as best-effort tail work unless cleanup fails or becomes ambiguous
+- for meaningful repo updates on a non-PR path, still require the same structured change summary in the Codex handoff or approval record before meaningful write actions complete
 - stop immediately if:
   - multiple files changed unexpectedly
   - scope widened
