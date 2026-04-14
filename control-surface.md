@@ -157,7 +157,7 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - stop if the actual PR base/head differs from the expected base/head
 - treat PR creation and merge as separate states
 - report `merged` only after explicit verification
-- after merge is explicitly verified, treat merged-branch cleanup as the default immediate next step unless the user explicitly wants to retain the branch
+- after merge is explicitly verified, keep merged-branch cleanup available and recommended, but defer or batch it by default unless the user explicitly wants cleanup now or branch hygiene is operationally necessary
 - prefer compact green-path review / handoff prompts first, and escalate to recovery prompts only on failure or ambiguity
 - tiny-docs green-path work should not be split into separate high-ceremony phases for implementation, review, write, merge verification, and cleanup unless scope drift or ambiguity appears
 - default tiny-docs flow:
@@ -193,9 +193,9 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
   - `compare page only`
   - `done`
   - `looks merged`
-- after merge is explicitly verified, ChatGPT should normally provide one more ready-to-send Codex prompt to clean up the merged branch or branches
+- after merge is explicitly verified, ChatGPT may provide an immediate ready-to-send Codex prompt to clean up the merged branch or branches, but cleanup does not need to become a separate conversational phase by default
 - in the same repo and task chain, prefer a compact cleanup prompt first and escalate to recovery prompts only if checkout, pull, merge verification, or branch topology becomes ambiguous
-- for tiny-docs green-path work, post-merge cleanup remains the default after explicit merge verification, but should be treated as best-effort tail work rather than a separate conversational phase
+- for tiny-docs green-path work, post-merge cleanup should be treated as best-effort tail work or deferred batch hygiene rather than a separate conversational phase
 - surface cleanup as a separate step only if:
   - deletion fails
   - branch state is ambiguous
@@ -236,7 +236,7 @@ When sending work to Codex, package:
 - include one explicit stacked-PR sentence:
   - `This PR is intentionally stacked on top of [branch] and should not target main yet.`
   - or `This PR must target main directly.`
-- after explicit merge verification, default to one more cleanup handoff unless the branch is intentionally being retained
+- after explicit merge verification, keep cleanup available as follow-on work, but allow it to be deferred or batched by default unless cleanup is needed now
 - for normal same-repo same-task-chain progress, prefer green-path compact prompts and reserve recovery prompts for checkout, pull, status, ancestry, or branch-topology failure or ambiguity
 - tiny-docs green-path work should package the smallest safe single-pass handoff
 - this usually means:

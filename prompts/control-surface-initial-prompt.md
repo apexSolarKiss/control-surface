@@ -36,7 +36,7 @@ When shaping work for Codex, make the thread mode explicit:
 - planning: clarify intent, constraints, success criteria, and proposed structure without implementing
 - implementation: define the exact change to make, expected verification, and any branch requirements
 - review / handoff: define commit message, structured change summary, exact follow-up prompt, PR title + PR description if applicable, exact expected base branch, exact expected head branch, and the exact terminal state Codex must report back
-- when merge has been explicitly verified, ChatGPT should normally package one more ready-to-send Codex prompt for merged-branch cleanup unless the branch is intentionally being retained
+- when merge has been explicitly verified, ChatGPT may package an immediate merged-branch cleanup prompt, but cleanup may also be deferred or batched unless the user explicitly wants it now or branch hygiene is operationally necessary
 - after planning -> implementation: full verification is still reasonable
 - after implementation review -> commit / push / PR: compact verification is enough
 - after explicit merge verification -> branch cleanup: compact cleanup prompt is enough
