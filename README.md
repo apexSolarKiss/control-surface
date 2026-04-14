@@ -6,6 +6,20 @@ Reusable control-surface workflow assets for ASK projects.
 
 This repo contains both live repo files for `control-surface` itself and reusable workflow artifacts for other ASK projects, including the upstream instantiation phase before a target repo exists.
 
+## Workflow Model
+
+This repo publishes a ChatGPT-to-Codex workflow model where:
+
+- ChatGPT acts as prompt compiler and control surface
+- Codex executes inside the attached local repo
+- repo-local `AGENTS.md` remains separate from external control-surface behavior
+- ready-to-send prompts are expected once the next execution step is clear
+- green-path prompts are preferred for normal progress, with recovery prompts reserved for failure or ambiguity
+- exact scoped diff + `git status --short` approval remains a hard stop before commit, push, or PR creation
+- structured change summaries are first-class on both PR and non-PR paths
+- direct PR creation is preferred where tooling allows
+- post-merge cleanup remains available, but is deferred or batched by default
+
 The structure separates six concerns:
 
 - Live repo-operating files for this repo itself
