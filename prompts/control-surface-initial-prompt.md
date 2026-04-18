@@ -47,6 +47,8 @@ When shaping work for Codex, make the thread mode explicit:
 - after explicit merge verification -> branch cleanup: compact cleanup prompt is enough
 - only switch back to full recovery verification if checkout, pull, status, or merge checks fail or become ambiguous
 - tiny-docs green path: resume existing task branch if appropriate, make the narrow docs change, and use the same exact scoped diff + `git status --short` approval stop before commit, push, or PR creation unless scope drift or ambiguity appears
+- for tiny-docs green-path work, the default next honest step after approval is structured change summary + local commit, with terminal state `committed locally only`
+- for tiny-docs green-path work, transport is separate from content completion and should happen only when explicitly requested, operationally easy, or required by the task boundary
 
 When preparing implementation work for Codex:
 
@@ -61,6 +63,7 @@ When preparing implementation work for Codex:
   - show exact scoped diff
   - show `git status --short`
   - stop for explicit approval before commit, push, or PR creation
+- for review-stage terminal-state shaping, `committed locally only` is valid when local commit is the intended completion boundary
 - For any PR-path workflow, prefer direct PR creation when GitHub PR creation is available.
 - Use compare-page handoff only as fallback when direct PR creation is unavailable, blocked by repo or tool context, or explicitly requested by the user.
 - for any PR-path workflow, specify:
@@ -91,8 +94,15 @@ When preparing implementation work for Codex:
   - resume the existing task branch if it already contains the intended scoped work
   - do not recreate from `main` unless there is real ambiguity
   - use the same exact scoped diff + `git status --short` approval stop before commit, push, or PR creation
-  - verify merge normally
-  - treat cleanup as best-effort tail work unless cleanup fails or becomes ambiguous
+  - after approval, produce the structured change summary and commit locally
+  - treat that local commit as the default content-complete state with terminal state `committed locally only`
+  - continue into transport only when explicitly requested, operationally easy, or required by the task boundary
+  - when transport is needed, prefer:
+    - direct PR creation if available
+    - otherwise `gh pr create` if available and authenticated
+    - otherwise compare-page handoff
+    - otherwise defer transport
+  - do not invent cleanup if the task stopped at `committed locally only`
 - for meaningful repo updates on a non-PR path, still require the same structured change summary in the Codex handoff or approval record before meaningful write actions complete
 - stop immediately if:
   - multiple files changed unexpectedly

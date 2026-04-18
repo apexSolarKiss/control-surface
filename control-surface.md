@@ -145,8 +145,9 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - resume the existing task branch if it already contains the intended scoped work
 - make the narrow docs or example change
 - show the exact scoped diff and `git status --short`, then stop for explicit approval before commit, push, or PR creation
-- verify merge normally
-- treat cleanup as best-effort tail work rather than a separate conversational phase unless cleanup fails or becomes ambiguous
+- after approval, produce the structured change summary and commit locally
+- treat that local commit as the default content-complete state
+- only continue into push, PR creation, or cleanup when transport is explicitly requested, operationally easy, or required by the task boundary
 - do not recreate from `main` by default when the expected task branch already exists locally and the working tree contains only the intended scoped artifact
 - use fresh-branch-from-`main` flow only when there is real ambiguity about branch state, scope, or lineage
 - code or structural architecture work should use the stricter existing workflow
@@ -179,6 +180,7 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - state whether the handoff is planning-only, implementation, review, or PR-stage
 - include commit message, structured change summary, and exact Codex prompt in review-stage output
 - require one exact terminal state for every review-stage or PR-stage workflow:
+  - `committed locally only`
   - `pushed branch only`
   - `compare page only`
   - `PR created`
@@ -201,6 +203,9 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
   - resume the existing task branch if appropriate
   - make the narrow docs change
   - use the same exact scoped diff + `git status --short` approval stop before commit, push, or PR creation
+  - after approval, produce the structured change summary
+  - commit locally
+  - stop at `committed locally only` unless transport is explicitly requested, operationally easy, or required by the task boundary
 - stop early if:
   - multiple files changed unexpectedly
   - scope widened
@@ -212,6 +217,16 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
   - current branch
   - `git status --short`
   - optionally `git fetch origin --prune` before PR creation or cleanup
+- for tiny-docs green-path work, distinguish clearly between:
+  - content completion: approved diff, structured change summary, and local commit
+  - transport completion: push, compare page, PR creation, merge verification, or cleanup
+- for tiny-docs green-path work, the structured change summary is the primary anti-drift artifact and local commit is the default completion boundary
+- use transport only when it is explicitly requested, operationally easy, or required by the task boundary
+- when transport is needed, prefer:
+  - direct PR creation if available
+  - otherwise `gh pr create` if available and authenticated
+  - otherwise `compare page only`
+  - otherwise defer transport
 - require post-PR verification fields whenever Codex creates or updates a PR:
   - PR number
   - draft or ready state
@@ -222,8 +237,10 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 
 ### Post-merge Cleanup
 
+- if a task stopped at `committed locally only`, there is no merge or cleanup phase yet and ChatGPT should not invent one
 - cleanup happens only after explicit merge verification
 - never infer cleanup from:
+  - `committed locally only`
   - `PR created`
   - `pushed branch only`
   - `compare page only`
