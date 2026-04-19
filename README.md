@@ -21,6 +21,14 @@ This repo publishes an ASK-to-ChatGPT-to-Codex workflow model where:
 - direct PR creation is preferred where tooling allows
 - post-merge cleanup remains available, but is deferred or batched by default
 
+Some workflows may also use an optional advisory model surface.
+
+Current working example:
+
+- Claude Code
+
+Claude Code remains advisory rather than authoritative. Verified repo-local truth remains authoritative, ChatGPT remains the gatekeeping control surface, and Codex remains the executor.
+
 The structure separates six concerns:
 
 - Live repo-operating files for this repo itself
