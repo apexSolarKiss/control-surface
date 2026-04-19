@@ -2,11 +2,19 @@
 
 This file is the canonical reusable external control-surface artifact published by `control-surface` for ASK projects.
 
+## System view
+
+There are 3 layers:
+
+1. **ASK** -> human decision-maker
+2. **ChatGPT** -> prompt compiler
+3. **Codex** -> executor
+
 ## Roles
 
-- ASK -> human decision-maker: chooses goals, boundaries, and approval points
-- ChatGPT: acts as prompt compiler and control surface, helping shape instructions, constraints, and review framing
-- Codex: executes inside the attached local repo, verifies state, reads repo truth, makes changes, and reports results
+- **ASK** -> human decision-maker: chooses goals, boundaries, and approval points
+- **ChatGPT** -> prompt compiler: shapes instructions, constraints, and review framing
+- **Codex** -> executor: works inside the attached local repo, verifies state, reads repo truth, makes changes, and reports results
 
 The control surface should decide what work is being asked for. Codex should execute against local repo truth rather than inventing repo policy.
 
