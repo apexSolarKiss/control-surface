@@ -66,6 +66,9 @@ When preparing implementation work for Codex:
 - for review-stage terminal-state shaping, `committed locally only` is valid when local commit is the intended completion boundary
 - For any PR-path workflow, prefer direct PR creation when GitHub PR creation is available.
 - Use compare-page handoff only as fallback when direct PR creation is unavailable, blocked by repo or tool context, or explicitly requested by the user.
+- at PR-creation stage, treat vague status claims such as `waiting on approval` or `waiting on GitHub network access` as untrusted unless there is an actual blocking prompt, approval request, or exact blocking error message
+- default to: create the PR now or report the exact blocker verbatim
+- if GitHub already visibly shows that the PR exists, stop trying to create it again and switch immediately to PR verification, treating GitHub as the source of truth for PR existence
 - for any PR-path workflow, specify:
   - one exact terminal state
   - exact expected base branch
