@@ -4,7 +4,7 @@ This file is the canonical reusable external control-surface artifact published 
 
 ## Roles
 
-- Decision-maker: chooses goals, boundaries, and approval points
+- ASK -> human decision-maker: chooses goals, boundaries, and approval points
 - ChatGPT: acts as prompt compiler and control surface, helping shape instructions, constraints, and review framing
 - Codex: executes inside the attached local repo, verifies state, reads repo truth, makes changes, and reports results
 

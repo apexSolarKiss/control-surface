@@ -8,8 +8,9 @@ This repo contains both live repo files for `control-surface` itself and reusabl
 
 ## Workflow Model
 
-This repo publishes a ChatGPT-to-Codex workflow model where:
+This repo publishes an ASK-to-ChatGPT-to-Codex workflow model where:
 
+- ASK -> human decision-maker sets goals, boundaries, and approval points
 - ChatGPT acts as prompt compiler and control surface
 - Codex executes inside the attached local repo
 - repo-local AGENTS.md governs execution inside this repo, but remains downstream of the external control surface, which governs higher-level workflow framing and prompt compilation
