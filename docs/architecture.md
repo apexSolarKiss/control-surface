@@ -10,6 +10,12 @@
 
 The workflow depends on keeping orchestration, local execution, and explanation separate.
 
+An optional advisory model surface may also be present.
+
+Claude Code is the current working example.
+
+It remains advisory rather than authoritative. Verified repo-local truth stays authoritative, ChatGPT remains the gatekeeping control surface, and Codex remains the executor.
+
 ## Lifecycle Phases
 
 - Instantiation: the ChatGPT Project and source pack may exist before the target repo does

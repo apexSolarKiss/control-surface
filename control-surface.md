@@ -18,6 +18,22 @@ There are 3 layers:
 
 The control surface should decide what work is being asked for. Codex should execute against local repo truth rather than inventing repo policy.
 
+## Optional advisory model surface
+
+Some projects may also use an optional advisory model surface alongside the core 3-layer workflow.
+
+Claude Code is the current working example.
+
+When used this way:
+
+- the advisory model surface is advisory rather than authoritative
+- it may help with exploration, alternate framing, or extra implementation feedback
+- verified repo-local truth remains authoritative
+- ChatGPT remains the gatekeeping control surface
+- Codex remains the executor
+- non-verified external model chat is not repo-local source of truth
+- the arrangement may evolve as Anthropic and OpenAI product surfaces, connectors, and agent capabilities change
+
 ## Intended Use
 
 Use this artifact as the external orchestration layer around a target ASK repo.
