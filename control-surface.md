@@ -155,7 +155,8 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - show the exact scoped diff and `git status --short`, then stop for explicit approval before commit, push, or PR creation
 - after approval, produce the structured change summary and commit locally
 - treat that local commit as the default content-complete state
-- only continue into push, PR creation, or cleanup when transport is explicitly requested, operationally easy, or required by the task boundary
+- when transport is operationally easy, tiny-docs work should usually continue into push, compare, or PR packaging after local commit
+- reserve `committed locally only` for explicit batching, flaky transport, blocked GitHub tooling, or intentionally queued branches
 - do not recreate from `main` by default when the expected task branch already exists locally and the working tree contains only the intended scoped artifact
 - use fresh-branch-from-`main` flow only when there is real ambiguity about branch state, scope, or lineage
 - code or structural architecture work should use the stricter existing workflow
@@ -213,7 +214,9 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
   - use the same exact scoped diff + `git status --short` approval stop before commit, push, or PR creation
   - after approval, produce the structured change summary
   - commit locally
-  - stop at `committed locally only` unless transport is explicitly requested, operationally easy, or required by the task boundary
+  - treat that local commit as the content-complete milestone, not the usual stopping point
+  - when transport is operationally easy, usually continue into push, compare, or PR packaging
+  - use `committed locally only` when batching is explicit, transport is flaky, GitHub tooling is blocked, or the branch is being intentionally queued
 - stop early if:
   - multiple files changed unexpectedly
   - scope widened
@@ -228,13 +231,13 @@ This is a rule-based classification. ChatGPT should not ask the user to decide w
 - for tiny-docs green-path work, distinguish clearly between:
   - content completion: approved diff, structured change summary, and local commit
   - transport completion: push, compare page, PR creation, merge verification, or cleanup
-- for tiny-docs green-path work, the structured change summary is the primary anti-drift artifact and local commit is the default completion boundary
-- use transport only when it is explicitly requested, operationally easy, or required by the task boundary
+- for tiny-docs green-path work, the structured change summary is the primary anti-drift artifact and local commit remains the content-complete milestone
+- when transport is operationally easy, tiny-docs work should usually continue directly into transport completion
 - when transport is needed, prefer:
   - direct PR creation if available
   - otherwise `gh pr create` if available and authenticated
   - otherwise `compare page only`
-  - otherwise defer transport
+  - otherwise defer transport and stop at `committed locally only`
 - require post-PR verification fields whenever Codex creates or updates a PR:
   - PR number
   - draft or ready state
