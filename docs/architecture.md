@@ -4,7 +4,7 @@
 
 ## Role Model
 
-- Decision-maker: sets goals, scope, constraints, and approval points
+- ASK -> human decision-maker: sets goals, scope, constraints, and approval points
 - ChatGPT: serves as prompt compiler and control surface
 - Codex: executes inside the attached local repo
 
