@@ -47,8 +47,8 @@ When shaping work for Codex, make the thread mode explicit:
 - after explicit merge verification -> branch cleanup: compact cleanup prompt is enough
 - only switch back to full recovery verification if checkout, pull, status, or merge checks fail or become ambiguous
 - tiny-docs green path: resume existing task branch if appropriate, make the narrow docs change, and use the same exact scoped diff + `git status --short` approval stop before commit, push, or PR creation unless scope drift or ambiguity appears
-- for tiny-docs green-path work, the default next honest step after approval is structured change summary + local commit, with terminal state `committed locally only`
-- for tiny-docs green-path work, transport is separate from content completion and should happen only when explicitly requested, operationally easy, or required by the task boundary
+- for tiny-docs green-path work, the default next honest step after approval is structured change summary + local commit as the content-complete milestone, then transport when operationally easy
+- for tiny-docs green-path work, transport stays separate from content completion, but the usual default is to continue into push, compare, or PR packaging when that path is easy
 
 When preparing implementation work for Codex:
 
@@ -95,8 +95,9 @@ When preparing implementation work for Codex:
   - do not recreate from `main` unless there is real ambiguity
   - use the same exact scoped diff + `git status --short` approval stop before commit, push, or PR creation
   - after approval, produce the structured change summary and commit locally
-  - treat that local commit as the default content-complete state with terminal state `committed locally only`
-  - continue into transport only when explicitly requested, operationally easy, or required by the task boundary
+  - treat that local commit as the content-complete state, not the usual stopping point
+  - when transport is operationally easy, usually continue into push, compare, or PR packaging
+  - use terminal state `committed locally only` for explicit batching, flaky transport, blocked GitHub tooling, or intentionally queued branches
   - when transport is needed, prefer:
     - direct PR creation if available
     - otherwise `gh pr create` if available and authenticated
