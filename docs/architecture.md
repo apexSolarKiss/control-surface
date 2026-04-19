@@ -4,9 +4,9 @@
 
 ## Role Model
 
-- ASK -> human decision-maker: sets goals, scope, constraints, and approval points
-- ChatGPT: serves as prompt compiler and control surface
-- Codex: executes inside the attached local repo
+- **ASK** -> human decision-maker: sets goals, scope, constraints, and approval points
+- **ChatGPT** -> prompt compiler: shapes instructions and control-surface framing
+- **Codex** -> executor: works inside the attached local repo
 
 The workflow depends on keeping orchestration, local execution, and explanation separate.
 
