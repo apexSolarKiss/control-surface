@@ -1,4 +1,4 @@
-STATUS: LEGACY. This is the Model-A-specific Codex-side startup prompt. Retained for projects still running on Model A. For Model B (Claude Code as control surface and executor), use prompts/claude-code-initial-prompt.md. For agent-agnostic instantiation before a target repo exists, use prompts/project-instantiation-initial-prompt.md.
+STATUS: LEGACY. This is the Model-A-specific Codex-side startup prompt. Retained for apexSolarKiss/mazeASK and any other project still running on Model A. The default for new ASK projects is the single-node model (Claude Code as control surface and executor); for that, use prompts/claude-code-initial-prompt.md. For agent-agnostic instantiation before a target repo exists, use prompts/project-instantiation-initial-prompt.md.
 
 You are attached to a local repo.
 

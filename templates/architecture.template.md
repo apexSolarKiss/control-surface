@@ -11,11 +11,11 @@ This template is agent-agnostic.
 
 ## Operating Model
 
-- `[which operating model this project runs on: Model A (ChatGPT/Codex), Model B (Claude Code), or either]`
-- live operator: `[Claude Code | Codex | both | other]`
+- operating model: `[single-node (Claude Code as control surface and executor) — default for new ASK projects | legacy Model A (ChatGPT/Codex split)]`
+- live operator: `[Claude Code | Codex | other]`
 - optional advisors: `[GPT | Claude Code | none]`
 
-The same workflow rules apply regardless of which agent does the executing. Rules live in repo-local `AGENTS.md`.
+The workflow rules apply regardless of which agent does the executing. Rules live in repo-local `AGENTS.md`.
 
 ## Sources Of Truth
 

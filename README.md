@@ -8,19 +8,18 @@ This repo contains both the live operating files for `control-surface` itself an
 
 ## Operating Model
 
-This repo supports two operating models for ASK project work:
+The active operating model for new ASK projects is single-node: **Claude Code as both control surface and executor**. GPT remains available as optional advisor outside the execution thread.
 
-- **Model A — split:** ChatGPT compiles prompts, Codex executes inside the local repo, Claude Code is optional advisor.
-- **Model B — single-node:** Claude Code is both control surface and executor, GPT is optional advisor.
+An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. The Model-A-specific external orchestration artifact (`control-surface.md`) and Model-A-only prompts remain in the repo as legacy.
 
-The same workflow rules apply regardless of which agent does the executing. The rules live in repo-local `AGENTS.md` files, and they are written agent-agnostically so an operator can pick up either model without rewriting the rules.
+`apexSolarKiss/mazeASK` is still operated on Model A and is the working example for any project that still needs it. New ASK projects should default to single-node.
+
+The workflow rules live in repo-local `AGENTS.md` files and are written agent-agnostically — they apply to whoever is executing.
 
 Two live working examples anchor the family:
 
-- `apexSolarKiss/asset-pipeline-ASK` — Model B working example. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family.
-- `apexSolarKiss/mazeASK` — Model A working example. Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against.
-
-Both are supported. The historical Model-A-specific external orchestration artifact (`control-surface.md`) and the Model-A-only prompts are retained as legacy reference.
+- `apexSolarKiss/asset-pipeline-ASK` — single-node working example. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family.
+- `apexSolarKiss/mazeASK` — Model A working example. Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against. Still active for that project.
 
 ## Source-of-Truth Split
 
@@ -65,12 +64,12 @@ Templates are copyable starters. They are not live for this repo unless explicit
 
 ### Examples
 
-- `examples/asset-pipeline-ASK/notes.md` — Model B working example
-- `examples/mazeASK/notes.md` — Model A working example
+- `examples/asset-pipeline-ASK/notes.md` — single-node working example
+- `examples/mazeASK/notes.md` — Model A working example (still active for that project)
 
 ### Legacy docs
 
-These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for projects still running on Model A.
+These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for `apexSolarKiss/mazeASK`, which still runs on Model A.
 
 - `control-surface.md` — Model-A-specific external control-surface artifact
 - `docs/workflow-boundary.md` — earlier boundary categorization, supplanted by `AGENTS.md`'s Source-of-Truth Boundaries section
@@ -78,7 +77,7 @@ These were active when the canonical operating model was ASK→ChatGPT→Codex w
 - `prompts/control-surface-initial-prompt.md` — Model-A ChatGPT-side initial prompt
 - `prompts/codex-initial-prompt.txt` — Model-A Codex-side initial prompt
 
-Each legacy doc carries a deprecation header naming what supersedes it for current Model B work.
+Each legacy doc carries a deprecation header naming what supersedes it for current single-node work.
 
 ## Which File Do I Use?
 
@@ -89,14 +88,14 @@ Each legacy doc carries a deprecation header naming what supersedes it for curre
 | set up the workflow before the target repo exists | `docs/project-instantiation-workflow.md` and `prompts/project-instantiation-initial-prompt.md` |
 | create repo-local starter docs for a downstream repo | `templates/AGENTS.template.md`, `templates/grounding-note.template.md`, `templates/architecture.template.md` |
 | see how the structure mapped onto a real ASK project | `examples/` |
-| understand the previous canonical Model A operating doc | `control-surface.md` (legacy) |
+| understand the previous canonical Model-A operating doc | `control-surface.md` (legacy) |
 
 ## Minimal Adaptation Checklist
 
 For a new ASK project:
 
 - Identify the project purpose, repo name, and initial structure.
-- Decide whether the project will run on Model A, Model B, or either.
+- Default to the single-node operating model unless the project has a specific reason to run on legacy Model A.
 - Copy `templates/AGENTS.template.md` into the new repo as `AGENTS.md` and adapt project-specific defaults.
 - Copy `templates/grounding-note.template.md` into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads.
 - Optionally copy `templates/architecture.template.md` into the new repo as `docs/architecture.md`.

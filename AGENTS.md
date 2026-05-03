@@ -2,12 +2,11 @@
 
 This file defines repo-local workflow rules for whoever executes work on this `control-surface` meta repo.
 
-It applies to both supported operating models:
+The operating model is single-node: Claude Code is both control surface and executor.
 
-- **Model A:** ChatGPT compiles prompts, Codex executes inside the repo, Claude Code is optional advisor.
-- **Model B:** Claude Code is the single control surface and executor, GPT is optional advisor.
+An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor (referred to historically as **Model A**) — shaped this repo's design and is retained as legacy reference. It is no longer active here. `apexSolarKiss/mazeASK` remains on Model A for now and is the working example for any project that still needs it.
 
-The same rules apply regardless of which agent does the executing. Claude Code is currently the live operator on this repo; the rules are written agent-agnostically so a Model A operator can pick this up without re-derivation.
+The rules below are agent-agnostic — they apply to whoever is executing.
 
 For repo-external context (project intent, audience, philosophy, foundational premises, durable loose threads), read the grounding note maintained outside this repository.
 
@@ -204,21 +203,19 @@ Before executing a meaningful repo change, state the plan: what files will chang
 
 This applies whether the executor is a separate process (Codex) or the same agent doing the planning (Claude Code).
 
-The plan-before-execute step preserves the explicit reasoning surface that prompt-compilation provided in Model A. Do not collapse plan and execution into a single opaque step in Model B.
+The plan-before-execute step preserves the explicit reasoning surface that prompt-compilation provides when execution is split across a prompt-compiler and an executor. In a single-node model, plan-before-execute is the rule that restores it. Do not collapse plan and execution into a single opaque step.
 
 ---
 
-## Model-Asymmetric Compensation
+## Why These Rules Exist
 
-Model A and Model B have different default failure modes. The rule set above is calibrated to compensate for both:
+The single-node model collapses several functions that the earlier split-execution model (Model A) handled by default. Most of the rules above are calibrated compensations for what gets lost when a single agent is both compiler and executor:
 
-- **Model A** has a natural prompt-compilation step (ChatGPT framing the work for Codex). Plan-Before-Execute is implicit.
-- **Model B** collapses prompt compilation into the executor. Plan-Before-Execute is the rule that restores the reasoning surface Model A had by default.
-- **Model A** has natural model separation, which surfaces disagreements as visible artifacts.
-- **Model B** runs in a single agent's head, so disagreements become invisible. Structured Change Summary and exact-scoped-diff approval are the rules that compensate.
-- **Model B** has stronger session topology pressure (Claude Code easily spawns parallel threads). Single-Writer Discipline compensates.
+- A split model has a natural prompt-compilation step (ChatGPT framing work for Codex). A single-node model collapses it into the executor. **Plan-Before-Execute** is the rule that restores the reasoning surface.
+- A split model has natural model separation, which surfaces disagreements as visible artifacts. A single-node model runs in one head, so disagreements become invisible. **Structured Change Summary** and **exact-scoped-diff approval** are the rules that compensate.
+- A single-node model has stronger session-topology pressure (Claude Code easily spawns parallel threads). **Single-Writer Discipline** is the compensation.
 
-When proposing rule changes, ask which model the rule is compensating for and whether the compensation is still load-bearing.
+When proposing rule changes, ask which failure mode the rule is compensating for and whether the compensation is still load-bearing.
 
 ---
 

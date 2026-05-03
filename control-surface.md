@@ -1,8 +1,8 @@
 # control-surface.md
 
-> **Status: Legacy.** This file is the Model-A-specific external control-surface artifact (ASK→ChatGPT→Codex with Claude Code as advisory). It is retained for projects still running on Model A and as historical reference.
+> **Status: Legacy.** This file is the Model-A-specific external control-surface artifact (ASK→ChatGPT→Codex with Claude Code as advisory). It is retained for `apexSolarKiss/mazeASK` and any other project still running on Model A.
 >
-> For current Model B (Claude Code as both control surface and executor) or agent-agnostic Model A/B work, the live repo's `AGENTS.md` is the single source of workflow rules. There is no separate external orchestration artifact.
+> The default for new ASK projects is the single-node model (Claude Code as both control surface and executor). For that, the live repo's `AGENTS.md` is the single source of workflow rules — there is no separate external orchestration artifact.
 >
 > Superseded by:
 > - the live operating discipline in `apexSolarKiss/asset-pipeline-ASK`'s `AGENTS.md` (the most advanced working example)

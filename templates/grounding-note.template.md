@@ -40,7 +40,7 @@ Refresh the grounding note only when:
 - a philosophical reframing has occurred
 - audience or positioning has shifted
 - foundational premises have changed
-- the operating model has changed (Model A → Model B, or similar)
+- the operating model has changed (e.g. legacy Model A → single-node, or similar)
 
 Do not refresh for routine repo chronology, recent PR activity, or session-specific context.
 
@@ -72,7 +72,7 @@ Do not refresh for routine repo chronology, recent PR activity, or session-speci
 
 ## Operating Model
 
-`[which operating model this project runs on: Model A (ChatGPT/Codex), Model B (Claude Code as control surface and executor), or either. If Model B, name the live operator and any external advisors.]`
+`[operating model: single-node (Claude Code as control surface and executor) — default for new ASK projects — or legacy Model A (ChatGPT/Codex split). If single-node, name the live operator and any external advisors. If Model A, note why the project still runs on the legacy model.]`
 
 ## Sources Of Truth
 

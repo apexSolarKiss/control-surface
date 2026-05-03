@@ -10,12 +10,11 @@ This template is agent-agnostic. Whoever executes (Codex, Claude Code, or anothe
 
 This file defines repo-local workflow rules for whoever executes work on this repository.
 
-It applies to both supported operating models:
+The default operating model for new ASK projects is single-node: Claude Code is both control surface and executor. GPT remains available as optional advisor outside the execution thread.
 
-- **Model A:** ChatGPT compiles prompts, Codex executes inside the repo, Claude Code is optional advisor.
-- **Model B:** Claude Code is the single control surface and executor, GPT is optional advisor.
+(An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — is referred to historically as **Model A** and is retained as legacy across the family. New projects should default to single-node unless there is a specific reason otherwise.)
 
-The same rules apply regardless of which agent does the executing.
+The rules below are agent-agnostic — they apply to whoever is executing.
 
 For repo-external context (project intent, audience, philosophy, foundational premises, durable loose threads), read the grounding note maintained outside this repository.
 
@@ -146,7 +145,7 @@ Do not bundle unrelated work. Do not widen scope mid-task unless explicitly chos
 
 Before executing a meaningful repo change, state: files in scope, scope in vs out, non-actions, expected terminal state.
 
-This applies whether the executor is a separate process (Codex) or the same agent doing the planning (Claude Code). The plan-before-execute step preserves the explicit reasoning surface that prompt-compilation provides in Model A.
+The plan-before-execute step preserves the explicit reasoning surface that prompt-compilation provides when execution is split across a prompt-compiler and an executor. In a single-node model, plan-before-execute is the rule that restores it.
 
 ---
 

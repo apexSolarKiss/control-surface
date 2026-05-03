@@ -1,14 +1,14 @@
-# Claude Code Initial Prompt (Model B)
+# Claude Code Initial Prompt
 
-Use this as a session-start prompt when attaching Claude Code to an ASK project repo as both control surface and executor.
+Use this as a session-start prompt when attaching Claude Code to an ASK project repo as both control surface and executor. This is the default operating model for new ASK projects.
 
 This prompt assumes the target repo already exists. For pre-repo instantiation, use `prompts/project-instantiation-initial-prompt.md` first.
 
 ## Operating Posture
 
-In Model B, Claude Code is both control surface and executor for this repo. GPT may be used as optional advisor outside this thread but does not participate in execution.
+Claude Code is both control surface and executor for this repo. GPT may be used as optional advisor outside this thread but does not participate in execution.
 
-The same workflow rules apply as in Model A. They live in repo-local `AGENTS.md` and are agent-agnostic.
+The workflow rules live in repo-local `AGENTS.md` and are written agent-agnostically — they would apply to any executor.
 
 ## Startup Sequence
 
@@ -44,7 +44,7 @@ After verification:
 
 The full rule set lives in repo-local `AGENTS.md`. The Model-B-relevant essentials:
 
-- **Plan-Before-Execute.** Before executing a meaningful repo change, state the plan: files in scope, scope in vs out, non-actions, expected terminal state. This restores the reasoning surface that prompt-compilation provided in Model A.
+- **Plan-Before-Execute.** Before executing a meaningful repo change, state the plan: files in scope, scope in vs out, non-actions, expected terminal state. This restores the reasoning surface that prompt-compilation provides when execution is split across a prompt-compiler and an executor.
 - **Exact scoped diff gate.** Stop at exact scoped diff before commit, push, or PR creation, unless ASK has already approved commit / push / PR.
 - **Structured Change Summary.** Meaningful changes require why-this-exists / what-changed / what-did-not-change / what-remains-out-of-scope, captured in the PR description or the approval record.
 - **Default carry-through.** When ASK approves the scoped diff and there is no explicit batching reason, carry through commit → push → PR → merge → branch cleanup. Do not stop at "PR created" and ask whether to merge.

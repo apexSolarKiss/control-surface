@@ -4,19 +4,16 @@
 
 ## Role Model
 
-ASK project work supports two operating models:
+The active operating model for new ASK projects is single-node: Claude Code is both control surface and executor. GPT remains available as optional advisor outside the execution thread.
 
-- **Model A — split:** ChatGPT compiles prompts, Codex executes inside the local repo, Claude Code is optional advisor.
-- **Model B — single-node:** Claude Code is both control surface and executor, GPT is optional advisor.
+An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. `apexSolarKiss/mazeASK` is still operated on Model A and is the working example for any project that still needs it.
 
-The same workflow rules apply regardless of which agent does the executing. Rules are agent-agnostic; operators are interchangeable.
-
-For this meta repo, Claude Code is currently the live operator. Model A is supported and the historical tooling is retained as legacy reference for projects still running on it.
+The workflow rules are agent-agnostic; the rules in `AGENTS.md` apply to whoever is executing.
 
 Two live working examples anchor the family:
 
-- `apexSolarKiss/asset-pipeline-ASK` — Model B working example
-- `apexSolarKiss/mazeASK` — Model A working example
+- `apexSolarKiss/asset-pipeline-ASK` — single-node working example
+- `apexSolarKiss/mazeASK` — Model A working example (still active for that project)
 
 ## Source-of-Truth Split
 
@@ -61,15 +58,15 @@ ASK project work routinely involves multiple operator sessions: parallel Claude 
 
 The single-writer-per-branch rule encoded in `AGENTS.md` handles this. Operators must verify state freshly when picking up a branch, treat the working tree as authoritative over their own memory, and stop on suspected concurrent mutation.
 
-## Model-Asymmetric Compensation
+## Why The Rules Exist
 
-Model A and Model B have different default failure modes. The rule set in `AGENTS.md` is calibrated to compensate for both, not to assert false parity:
+The single-node model collapses several functions that Model A handled by default. Most of the rules in `AGENTS.md` are calibrated compensations for what gets lost when a single agent is both compiler and executor:
 
-- Model A has a natural prompt-compilation step. Model B collapses it into the executor; Plan-Before-Execute is the rule that restores the reasoning surface.
-- Model A's two-model separation surfaces disagreements as visible artifacts. Model B runs in one head; Structured Change Summary and exact-scoped-diff approval are the compensations.
-- Model B has stronger session-topology pressure (Claude Code spawns parallel threads easily); single-writer discipline is the compensation.
+- A split model has a natural prompt-compilation step. A single-node model collapses it into the executor; **Plan-Before-Execute** is the rule that restores the reasoning surface.
+- A split model's two-model separation surfaces disagreements as visible artifacts. A single-node model runs in one head; **Structured Change Summary** and **exact-scoped-diff approval** are the compensations.
+- A single-node model has stronger session-topology pressure (Claude Code spawns parallel threads easily); **single-writer discipline** is the compensation.
 
-When proposing rule changes, ask which model's failure mode the rule is compensating for and whether the compensation is still load-bearing.
+When proposing rule changes, ask which failure mode the rule is compensating for and whether the compensation is still load-bearing.
 
 ## Current Shape
 
@@ -79,6 +76,6 @@ This repo is intentionally small:
 - a small downstream template set (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`)
 - one agent-agnostic instantiation prompt
 - a minimal example set
-- a legacy reference set retained for Model A projects
+- a legacy reference set retained for `mazeASK` and any other project still on Model A
 
 It does not include automation, sync tooling, CI, generators, or a larger framework system.
