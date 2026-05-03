@@ -4,115 +4,98 @@
 
 Reusable control-surface workflow assets for ASK projects.
 
-This repo contains both live repo files for `control-surface` itself and reusable workflow artifacts for other ASK projects, including the upstream instantiation phase before a target repo exists.
+This repo contains both the live operating files for `control-surface` itself and reusable workflow artifacts for downstream ASK projects, including the upstream instantiation phase before a target repo exists.
 
-## Workflow Model
+## Operating Model
 
-This repo publishes an ASK-to-ChatGPT-to-Codex workflow model where:
+This repo supports two operating models for ASK project work:
 
-- ASK -> human decision-maker sets goals, boundaries, and approval points
-- ChatGPT acts as prompt compiler and control surface
-- Codex executes inside the attached local repo
-- repo-local AGENTS.md governs execution inside this repo, but remains downstream of the external control surface, which governs higher-level workflow framing and prompt compilation
-- ready-to-send prompts are expected once the next execution step is clear
-- exact scoped diff + `git status --short` approval remains a hard stop before commit, push, or PR creation
-- structured change summaries are first-class on both PR and non-PR paths
-- green-path prompts are preferred for normal progress, with recovery prompts reserved for failure or ambiguity
-- direct PR creation is preferred where tooling allows
-- post-merge cleanup remains available, but is deferred or batched by default
+- **Model A — split:** ChatGPT compiles prompts, Codex executes inside the local repo, Claude Code is optional advisor.
+- **Model B — single-node:** Claude Code is both control surface and executor, GPT is optional advisor.
 
-Some workflows may also use an optional advisory model surface.
+The same workflow rules apply regardless of which agent does the executing. The rules live in repo-local `AGENTS.md` files, and they are written agent-agnostically so an operator can pick up either model without rewriting the rules.
 
-Current working example:
+The current working example, `apexSolarKiss/asset-pipeline-ASK`, has been operated end-to-end on Model B and has produced the most advanced live `AGENTS.md` in the family. Model A remains supported and the historical tooling is retained as legacy reference.
 
-- Claude Code
+## Source-of-Truth Split
 
-Claude Code remains advisory rather than authoritative. Verified repo-local truth remains authoritative, ChatGPT remains the gatekeeping control surface, and Codex remains the executor.
+ASK project work uses three durable sources of truth plus operator-side ephemeral memory:
 
-The structure separates six concerns:
+- **Repo** = project state (artifacts, decisions, current navigation)
+- **`AGENTS.md`** (in-repo) = workflow rules, agent-agnostic, applies to whoever executes
+- **Grounding note** (external) = repo-external context: intent, audience, philosophy, foundational premises, durable loose threads
+- **Per-conversation memory** (operator-side: Claude Code's MEMORY.md, ChatGPT thread history, task lists) = ephemeral session state, does not flow into the durable sources
 
-- Live repo-operating files for this repo itself
-- Repo explanatory docs for this meta repo
-- External control-surface artifacts published for reuse
-- Runnable startup prompts for ChatGPT-side instantiation and Codex-side repo attachment
-- Reusable templates for downstream ASK projects
-- Examples that show how an ASK project maps onto the structure
+### Aging-Rate Principle
+
+The split is not just separation of concerns. It is separation by *aging rate*:
+
+- A doc that *tracks state* ages fast and must be refreshed often.
+- A doc that *points to state* ages slowly and stays useful across many sessions.
+- A rules doc that contains rules only ages slowly.
+- A context doc that contains context only ages slowly.
+- A doc that mixes rules, context, and state ages at the rate of its fastest-aging contents.
+
+This is the load-bearing rationale for the source-of-truth split. Each source is sized to a single aging rate.
 
 ## Repo Layout
 
-### Live files in this repo
+### Live operating files for this repo
 
-- `AGENTS.md`: the live repo-local operating file that governs execution inside this repo
+- `AGENTS.md` — repo-local workflow rules that govern execution inside this repo
+- `CLAUDE.md` — pointer to `AGENTS.md` for Claude Code operators
+- `docs/architecture.md` — meta architecture of this repo and the role model behind it
 
-### Repo docs
+### Reusable templates for downstream ASK repos
 
-- `docs/workflow-boundary.md`: explains the boundary between repo-local rules, repo docs, external artifacts, prompts, templates, and examples
-- `docs/architecture.md`: explains the meta architecture of this repo and the role model behind it
-- `docs/project-instantiation-workflow.md`: explains how the workflow starts before the target repo exists and then transitions into bootstrap and operational use
+- `templates/AGENTS.template.md` — agent-agnostic starter for repo-local execution rules; aligned to the current asset-pipeline-ASK live AGENTS.md
+- `templates/grounding-note.template.md` — starter for the external grounding note that travels with each ASK project
+- `templates/architecture.template.md` — starter for a downstream repo's architecture doc
 
-These docs explain this repo. They are not external control-surface artifacts.
-
-### External artifact
-
-- `control-surface.md`: canonical reusable external control-surface artifact published by this repo for ASK projects
-
-This file is not the live local governance file for `control-surface` itself.
+Templates are copyable starters. They are not live for this repo unless explicitly adopted somewhere else.
 
 ### Prompts
 
-- `prompts/`: startup prompts that can be used when attaching an agent to a repo
-
-This includes both pre-repo instantiation prompts and later repo-collaboration prompts.
-
-Prompts are runnable inputs. They are not the same thing as live repo policy, explanatory docs, or templates.
-
-### Reusable templates
-
-- `templates/AGENTS.template.md`: starter for repo-local execution rules in downstream ASK repos
-- `templates/workflow-boundary.template.md`: starter for a downstream repo's own workflow-boundary doc
-- `templates/architecture.template.md`: starter for a downstream repo's own architecture doc
-- `templates/project-instructions-control-surface.template.txt`: starter for ChatGPT Project instructions before or alongside repo creation
-
-Templates are copyable starters for repo-local docs that a downstream repo may choose to adopt. They are not live for this repo unless explicitly adopted somewhere else.
+- `prompts/project-instantiation-initial-prompt.md` — agent-agnostic startup prompt for the pre-repo instantiation phase
 
 ### Examples
 
-- `examples/mazeASK/notes.md`: concise mapping note showing how mazeASK fits this structure
-- `examples/asset-pipeline-ASK/notes.md`: concise mapping note for a project instantiated before the target repo exists
+- `examples/asset-pipeline-ASK/notes.md` — current Model B operational working example
+- `examples/mazeASK/notes.md` — earlier Model A worked example
+
+### Legacy docs
+
+These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for projects still running on Model A.
+
+- `control-surface.md` — Model-A-specific external control-surface artifact
+- `docs/workflow-boundary.md` — earlier boundary categorization, supplanted by `AGENTS.md`'s Source-of-Truth Boundaries section
+- `docs/project-instantiation-workflow.md` — pre-repo instantiation workflow (still valid, agent-agnostic)
+- `prompts/control-surface-initial-prompt.md` — Model-A ChatGPT-side initial prompt
+- `prompts/codex-initial-prompt.txt` — Model-A Codex-side initial prompt
+
+Each legacy doc carries a deprecation header naming what supersedes it for current Model B work.
 
 ## Which File Do I Use?
 
 | If you need to... | Use |
 | --- | --- |
 | define execution rules inside the current repo | `AGENTS.md` |
-| understand this meta repo's own boundary or architecture | `docs/` |
+| understand this meta repo's own architecture | `docs/architecture.md` |
 | set up the workflow before the target repo exists | `docs/project-instantiation-workflow.md` and `prompts/project-instantiation-initial-prompt.md` |
-| adapt the canonical external orchestration artifact for a project | `control-surface.md` |
-| start a ChatGPT-side instantiation thread or a Codex-side repo workflow thread | `prompts/` |
-| create repo-local starter docs for a downstream repo | `templates/` |
+| create repo-local starter docs for a downstream repo | `templates/AGENTS.template.md`, `templates/grounding-note.template.md`, `templates/architecture.template.md` |
 | see how the structure mapped onto a real ASK project | `examples/` |
-
-## Boundary Summary
-
-The key distinction in this repo is:
-
-- `AGENTS.md` is repo-local and governs execution inside a repo
-- `docs/` explains this meta repo's own boundary and architecture
-- `control-surface.md` is an external reusable artifact intended to govern work around another repo
-- `prompts/` contains runnable startup text
-- `templates/` contains copyable starters
-- `examples/` contains concrete mapping notes
-
-External control-surface artifacts are intentionally outside the repo they govern, even when this repo publishes them as canonical reusable assets.
+| understand the previous canonical Model A operating doc | `control-surface.md` (legacy) |
 
 ## Minimal Adaptation Checklist
 
-- Fill `[absolute local repo root]`, `[owner/name]`, and `[branch]` in the external artifact or startup prompt you are adapting.
-- Decide whether you are still in instantiation, moving into bootstrap, or already in operational repo collaboration.
-- Identify the target repo's entry points, architecture docs, and repo-local operating files.
-- Identify protected paths, constraints, and required verification steps.
-- Decide what planning, implementation, and PR-stage handoff behavior should look like for that repo.
-- Decide which repo-local docs the target repo should actually adopt from `templates/`.
+For a new ASK project:
+
+- Identify the project purpose, repo name, and initial structure.
+- Decide whether the project will run on Model A, Model B, or either.
+- Copy `templates/AGENTS.template.md` into the new repo as `AGENTS.md` and adapt project-specific defaults.
+- Copy `templates/grounding-note.template.md` into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads.
+- Optionally copy `templates/architecture.template.md` into the new repo as `docs/architecture.md`.
+- Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
 
 ## License
 

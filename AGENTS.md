@@ -1,64 +1,279 @@
 # AGENTS.md
 
-This file is the live repo-local execution guide for work inside `control-surface`.
+This file defines repo-local workflow rules for whoever executes work on this `control-surface` meta repo.
 
-## Repo Purpose
+It applies to both supported operating models:
 
-This repo owns workflow architecture assets for ASK projects:
+- **Model A:** ChatGPT compiles prompts, Codex executes inside the repo, Claude Code is optional advisor.
+- **Model B:** Claude Code is the single control surface and executor, GPT is optional advisor.
 
-- live operating docs for this repo
-- explanatory docs for this meta repo
-- canonical external control-surface artifacts
-- reusable templates for downstream repos
-- bootstrap prompts for attaching ChatGPT or Codex to a repo
+The same rules apply regardless of which agent does the executing. Claude Code is currently the live operator on this repo; the rules are written agent-agnostically so a Model A operator can pick this up without re-derivation.
 
-This repo does not own product application code. Changes here should improve workflow structure, operating clarity, or reusable scaffolding.
+For repo-external context (project intent, audience, philosophy, foundational premises, durable loose threads), read the grounding note maintained outside this repository.
 
-## Entry Points
+For project state (artifacts, decisions, current navigation), read the repo itself.
 
-Start with these files when working in this repo:
+This file owns workflow rules. It does not track project state, current direction, or recommended next paths.
 
-1. `README.md`
-2. `AGENTS.md`
-3. relevant files under `docs/`
-4. `control-surface.md` when working on the published external artifact
-5. relevant files under `prompts/`, `templates/`, or `examples/`
+---
 
-Read the live repo-local files and repo docs before treating any external artifact or template as authoritative for this repo.
+## Source-of-Truth Boundaries
 
-## Working Style
+- **Repo** = project truth: artifacts, docs, templates, examples, decisions.
+- **`AGENTS.md`** (this file) = workflow rules for repo execution.
+- **Grounding note** (external) = repo-external context: intent, audience, philosophy, foundational premises, durable loose threads.
+- **Per-conversation memory** (operator-side: Claude Code's MEMORY.md, ChatGPT thread history, task lists) = ephemeral session state that does NOT belong in the grounding note.
 
-- Keep scope narrow and intentional. Prefer the smallest coherent scaffold that clarifies the workflow boundary.
-- Preserve the distinction between live repo files, repo docs, external artifacts, runnable prompts, reusable templates, and examples.
-- Tailor docs to this repo's job as a workflow meta repo. Do not write as if this repo were an application repo.
-- Use clean technical language. Avoid manifesto phrasing, speculative systems, or generic process bloat.
+### Aging-Rate Principle
 
-## Change Discipline
+The split between repo, `AGENTS.md`, grounding note, and per-conversation memory is not just separation of concerns — it is separation by *aging rate*.
 
-- Branch from current `main` for each task unless instructed otherwise.
-- Keep changes grouped by one reviewable intent. Avoid mixing new structure, broad rewrites, and unrelated cleanup.
-- Do not create extra folders, tools, or automation unless the task requires them.
-- If a template changes, confirm whether the corresponding live file also needs an update, or whether the divergence is intentional.
+- A doc that *tracks state* ages fast and must be refreshed often.
+- A doc that *points to state* ages slowly and stays useful across many sessions.
+- A rules doc that contains rules only ages slowly.
+- A context doc that contains context only ages slowly.
+- A doc that mixes rules, context, and state ages at the rate of its fastest-aging contents — usually badly.
 
-## Comments, Docs, And PR Boundary
+If a statement would become stale when a PR lands, a chain closes, or a next path changes, it does not belong in this file or in the grounding note.
 
-- Comments belong in local truth when a file needs inline clarification.
+---
+
+## Required Reading Before Meaningful Work
+
+Before any meaningful repo work, read:
+
+- `README.md`
+- `AGENTS.md` (this file)
+- `docs/architecture.md`
+
+Then read whatever templates, prompts, examples, or legacy docs are relevant to the task.
+
+For external context, read the grounding note.
+
+---
+
+## Repo Workflow Discipline
+
+### Branch Freshness
+
+For repo implementation work, follow this sequence:
+
+1. verify local repo attachment
+2. verify clean working tree
+3. `git fetch origin --prune`
+4. `git checkout main`
+5. `git pull --ff-only origin main`
+6. create task branch from refreshed `main`
+7. stop if any verification fails
+
+Do not start meaningful repo work from a stale, dirty, detached, or ambiguous branch.
+
+### Default Verification
+
+Before meaningful work, verify:
+
+```text
+pwd
+git rev-parse --show-toplevel
+git remote get-url origin
+git branch --show-current
+git status --short
+```
+
+Stop if repo root, remote, branch, or working tree does not match the task requirements.
+
+### Terminal-State Discipline
+
+Do not conflate:
+
+- local edits
+- exact scoped diff
+- local commit
+- pushed branch
+- PR created
+- merged PR
+- branch cleanup
+
+Use explicit terminal states:
+
+```text
+exact scoped diff ready for approval
+committed locally only
+pushed branch only
+PR created
+merged
+merged branches cleaned up
+```
+
+### Exact Scoped Diff Gate
+
+Stop at exact scoped diff unless ASK has already approved commit / push / PR.
+
+The default implementation terminal state is:
+
+```text
+exact scoped diff ready for approval
+```
+
+Exact scoped diff review is the mandatory approval checkpoint before meaningful write actions complete. Approval may be given inside the executor session after the diff is reviewed; once given, the executor may complete the remaining git workflow without separate manual GitHub UI ceremony.
+
+### Structured Change Summary
+
+Meaningful changes require a structured change summary covering:
+
+- why this change exists
+- what changed
+- what did not change
+- what remains out of scope
+
+If a PR is used, this belongs in the PR description. If no PR is used, the same summary must be produced in the executor handoff or approval record before write actions complete.
+
+### PR Creation
+
+When creating a PR, report:
+
+- branch name
+- commit SHA
+- PR number
+- PR URL
+- actual base branch
+- actual head branch
+- validation performed
+- terminal state: `PR created`
+
+### Default: Carry Through to Merged + Cleanup
+
+When ASK approves the scoped diff and there is no explicit batching, transport blocker, or operational reason to stop early, the default workflow continues through commit, push, PR creation, merge verification, and merged-branch cleanup.
+
+Do not stop at `PR created` and ask whether to merge unless the PR is intentionally queued, stacked, or under external review.
+
+### Post-Merge Cleanup
+
+After merge, verify `main`, delete merged task branches where safe, verify remote branch state, and report:
+
+- current main HEAD
+- whether merge commit is present
+- whether expected changes are present
+- local branch cleanup
+- remote branch cleanup
+- final branches
+- final working tree status
+- terminal state: `merged branches cleaned up`
+
+### Direct Push to Main
+
+Branch plus PR is the default for meaningful structure or rule changes. Narrow low-risk edits or explicitly scoped bootstrap tasks may allow direct push to `main` when scope is made explicit and approved.
+
+---
+
+## Session Topology / Single-Writer Discipline
+
+Multiple operator sessions (multiple Claude Code threads, parallel Codex sessions, ChatGPT thread plus Codex thread) can mutate the same repo files concurrently. This is a real failure mode, not a hypothetical.
+
+Rules:
+
+- **One writer at a time per branch.** A second operator session on the same branch must verify state freshly, treat the working tree as authoritative over its own memory, and not assume mid-flight context from another session.
+- **Treat repo and remote as the audit trail.** When two sessions disagree about state, prefer `git status`, `git log`, and remote-branch state over either session's recollection.
+- **Stop on suspected concurrent mutation.** If a working tree contains changes the current session did not make, do not overwrite. Re-orient against the repo before continuing.
+
+This rule applies whether the second session is the same agent, a different agent, or a human editor.
+
+---
+
+## Scope Discipline
+
+Match the unit of work to the level of the question.
+
+For implementation and repo hygiene, prefer the smallest honest unit. Small bounded PRs are usually best. Avoid bundling, widening, or design-in-advance.
+
+For conceptual architecture, prefer the largest tractable structural question. The smallest honest unit at the architecture layer is often a structural question or a model attempt against a concrete example, not another local prototype probe.
+
+Do not let "smallest unit" become a rule that prevents zooming out to the right scale. A series of small honest units at the wrong layer can add up to ceremony without architectural progress.
+
+Do not bundle unrelated work.
+
+Do not widen scope mid-task unless the widening is explicitly chosen.
+
+Do not create artifacts merely because a process pattern exists.
+
+---
+
+## Plan-Before-Execute Rule
+
+Before executing a meaningful repo change, state the plan: what files will change, what scope is in vs out, what non-actions apply, what terminal state is expected.
+
+This applies whether the executor is a separate process (Codex) or the same agent doing the planning (Claude Code).
+
+The plan-before-execute step preserves the explicit reasoning surface that prompt-compilation provided in Model A. Do not collapse plan and execution into a single opaque step in Model B.
+
+---
+
+## Model-Asymmetric Compensation
+
+Model A and Model B have different default failure modes. The rule set above is calibrated to compensate for both:
+
+- **Model A** has a natural prompt-compilation step (ChatGPT framing the work for Codex). Plan-Before-Execute is implicit.
+- **Model B** collapses prompt compilation into the executor. Plan-Before-Execute is the rule that restores the reasoning surface Model A had by default.
+- **Model A** has natural model separation, which surfaces disagreements as visible artifacts.
+- **Model B** runs in a single agent's head, so disagreements become invisible. Structured Change Summary and exact-scoped-diff approval are the rules that compensate.
+- **Model B** has stronger session topology pressure (Claude Code easily spawns parallel threads). Single-Writer Discipline compensates.
+
+When proposing rule changes, ask which model the rule is compensating for and whether the compensation is still load-bearing.
+
+---
+
+## Comments, Docs, and PR Roles
+
+- Comments belong in implementation artifacts only when local clarity needs them.
 - Docs describe architecture, boundaries, operating contracts, and reusable guidance.
-- Use a structured change summary to capture review framing, why a change exists, what changed, what did not change, and what remains out of scope.
-- If a PR path is used, that structured change summary belongs in the PR description.
+- Structured change summaries and PR descriptions hold change-specific framing.
 
 Do not push PR-only explanation into permanent repo docs, and do not hide durable operating rules inside a PR or approval record.
 
-## Commit And PR Hygiene
+---
 
-- Prefer small, coherent PRs with a clear boundary.
-- Use commit messages that describe the actual repo-facing change.
-- Stage only files that belong to the task.
-- For meaningful changes, require the structured change summary before meaningful write actions complete, whether the path ends in a PR or an approved push.
-- Before proposing a PR, check the scoped diff and confirm that terminology around `live`, `template`, `external`, and `repo-local` is consistent.
+## Refresh Cadences
+
+### `AGENTS.md`
+
+Refresh this file only when a workflow rule is added, removed, or materially revised.
+
+Do not refresh because project state changed.
+Do not refresh because a PR landed.
+Do not refresh because the next direction changed.
+
+If a proposed update says "the project currently should do X," it does not belong in this file.
+
+### Templates
+
+Refresh `templates/` only when the corresponding live rule has changed and the change is intended to flow to downstream ASK projects.
+
+A rule that lives in this repo's `AGENTS.md` but is project-specific to control-surface itself does not need to flow to the templates.
+
+### Legacy Docs
+
+Legacy docs (Model-A-specific control-surface artifact, workflow-boundary doc, ChatGPT/Codex-specific prompts) are not refreshed. They are kept as historical reference for the operating model they documented.
+
+---
 
 ## Defaults
 
 - Prefer ASK reuse over world-scale abstraction.
 - Prefer explicit structure over clever indirection.
 - Prefer updating root docs and a small set of templates over adding systems around them.
+- Prefer the smallest coherent scaffold that clarifies the workflow boundary.
+- Tailor docs to this repo's job as a workflow meta repo. Do not write as if this repo were an application repo.
+- Use clean technical language. Avoid manifesto phrasing, speculative systems, or generic process bloat.
+
+---
+
+## Short Version
+
+- Verify repo state before meaningful work.
+- Read repo-local truth and grounding note before responding.
+- Stop at exact scoped diff before commit; carry through to merged + cleanup once approved.
+- State the plan before executing.
+- Single-writer per branch. Treat repo as audit trail.
+- Match the unit of work to the level of the question.
+- Refresh `AGENTS.md` only for rule changes; refresh templates only for downstream-relevant rule changes.
+- Keep this file workflow-only. Repo holds state. Grounding note holds external context.

@@ -4,55 +4,76 @@
 
 ## Role Model
 
-- **ASK** -> human decision-maker: sets goals, scope, constraints, and approval points
-- **ChatGPT** -> prompt compiler: shapes instructions and control-surface framing
-- **Codex** -> executor: works inside the attached local repo
+ASK project work supports two operating models:
 
-The workflow depends on keeping orchestration, local execution, and explanation separate.
+- **Model A — split:** ChatGPT compiles prompts, Codex executes inside the local repo, Claude Code is optional advisor.
+- **Model B — single-node:** Claude Code is both control surface and executor, GPT is optional advisor.
 
-An optional advisory model surface may also be present.
+The same workflow rules apply regardless of which agent does the executing. Rules are agent-agnostic; operators are interchangeable.
 
-Claude Code is the current working example.
+For this meta repo, Claude Code is currently the live operator. Model A is supported and the historical tooling is retained as legacy reference for projects still running on it.
 
-It remains advisory rather than authoritative. Verified repo-local truth stays authoritative, ChatGPT remains the gatekeeping control surface, and Codex remains the executor.
+## Source-of-Truth Split
+
+ASK project work uses three durable sources of truth plus operator-side ephemeral memory:
+
+- **Repo** = project state (artifacts, decisions, current navigation)
+- **`AGENTS.md`** (in-repo) = workflow rules, agent-agnostic
+- **Grounding note** (external) = repo-external context (intent, audience, philosophy, foundational premises, durable loose threads)
+- **Per-conversation memory** (operator-side) = ephemeral session state; does not flow into the durable sources
+
+### Aging-Rate Principle
+
+The split is separation by *aging rate*:
+
+- Docs that *track state* age fast.
+- Docs that *point to state* age slowly.
+- Rules docs age slowly when they contain rules only.
+- Context docs age slowly when they contain context only.
+- Mixed docs age at the rate of their fastest-aging contents.
+
+This is the load-bearing rationale for keeping the four sources separate.
 
 ## Lifecycle Phases
 
-- Instantiation: the ChatGPT Project and source pack may exist before the target repo does
-- Bootstrap: the target repo exists and repo-local truth starts to become explicit
-- Operational: the repo exists, repo-local files are authoritative, and normal control-surface workflow applies
+- **Instantiation:** the project is being defined and the target repo does not yet exist; the grounding note and any pre-repo prompts carry the workflow.
+- **Bootstrap:** the target repo exists, repo-local truth begins to form, and starter templates are adopted.
+- **Operational:** repo-local files are authoritative, normal workflow rules apply, and the grounding note remains the external context anchor.
 
 ## Artifact Model
 
-- `AGENTS.md`: live repo-local execution rules for this repo
-- `docs/`: explanatory docs for this repo's own boundary and architecture
-- `docs/project-instantiation-workflow.md`: procedural guide for the upstream instantiation phase
-- `control-surface.md`: canonical reusable external control-surface artifact
-- `prompts/`: runnable startup prompts for ChatGPT-side and Codex-side setup
-- `templates/`: reusable starters for downstream repo-local files
-- `examples/`: concise mappings from real ASK projects to this structure
+- `AGENTS.md` — live repo-local execution rules for this meta repo
+- `CLAUDE.md` — pointer to `AGENTS.md` for Claude Code operators
+- `docs/architecture.md` — this doc; explains the meta architecture
+- `templates/` — reusable starters for downstream repo-local files and the external grounding note
+- `prompts/project-instantiation-initial-prompt.md` — agent-agnostic startup prompt for the pre-repo phase
+- `examples/` — concise mappings from real ASK projects to this structure
+- legacy docs (`control-surface.md`, `docs/workflow-boundary.md`, `docs/project-instantiation-workflow.md`, Model-A-specific prompts) — retained for reference; deprecation headers name what supersedes them
 
-## How The Pieces Relate
+## Session Topology
 
-- The repo uses `AGENTS.md` plus `docs/` to govern work inside `control-surface`.
-- The repo models an upstream phase where the Project source pack may be instantiated before the target repo exists.
-- The repo models a bootstrap phase where the target repo becomes real and repo-local truth begins to form.
-- The repo publishes `control-surface.md` as a reusable external artifact for other ASK projects.
-- Prompts help attach tools or threads to a project using this workflow.
-- The pre-repo prompt and Project-instructions template cover instantiation before repo creation.
-- Templates provide starting points where a downstream repo needs its own local file.
-- Examples show how the model applies in practice without turning example content into policy.
+ASK project work routinely involves multiple operator sessions: parallel Claude Code threads, ChatGPT plus Codex, Claude Chat as advisor plus Claude Code as executor. The repo and remote are the audit trail when sessions disagree.
+
+The single-writer-per-branch rule encoded in `AGENTS.md` handles this. Operators must verify state freshly when picking up a branch, treat the working tree as authoritative over their own memory, and stop on suspected concurrent mutation.
+
+## Model-Asymmetric Compensation
+
+Model A and Model B have different default failure modes. The rule set in `AGENTS.md` is calibrated to compensate for both, not to assert false parity:
+
+- Model A has a natural prompt-compilation step. Model B collapses it into the executor; Plan-Before-Execute is the rule that restores the reasoning surface.
+- Model A's two-model separation surfaces disagreements as visible artifacts. Model B runs in one head; Structured Change Summary and exact-scoped-diff approval are the compensations.
+- Model B has stronger session-topology pressure (Claude Code spawns parallel threads easily); single-writer discipline is the compensation.
+
+When proposing rule changes, ask which model's failure mode the rule is compensating for and whether the compensation is still load-bearing.
 
 ## Current Shape
 
 This repo is intentionally small:
 
-- one canonical external control-surface artifact
-- a small downstream template set for repo-local docs
-- a small prompt set
-- a small docs set
+- one set of live operating files for this repo
+- a small downstream template set (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`)
+- one agent-agnostic instantiation prompt
 - a minimal example set
+- a legacy reference set retained for Model A projects
 
-The repo keeps templates only where a downstream repo is likely to want its own local counterpart.
-
-It does not yet include automation, sync tooling, CI, generators, or a larger framework system.
+It does not include automation, sync tooling, CI, generators, or a larger framework system.

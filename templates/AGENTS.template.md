@@ -2,53 +2,161 @@
 
 Use this as a starter for `AGENTS.md` in a downstream ASK repo.
 
-## Repo Purpose
+This template is agent-agnostic. Whoever executes (Codex, Claude Code, or another agent) follows the same rules. Replace bracketed `[...]` placeholders with project-specific values.
 
-Describe the repo in 2 to 4 lines:
+---
 
-- `[what the repo owns]`
-- `[what the repo does not own]`
-- `[what kind of work agents should expect here]`
+# AGENTS.md
 
-## Entry Points
+This file defines repo-local workflow rules for whoever executes work on this repository.
 
-List the files or directories an agent should read first:
+It applies to both supported operating models:
 
-1. `README.md`
-2. `[primary architecture doc]`
-3. `[repo-specific operating doc]`
-4. `[key app or package paths]`
+- **Model A:** ChatGPT compiles prompts, Codex executes inside the repo, Claude Code is optional advisor.
+- **Model B:** Claude Code is the single control surface and executor, GPT is optional advisor.
 
-## Working Style
+The same rules apply regardless of which agent does the executing.
 
-- Prefer the smallest coherent change.
-- Read live repo files before making assumptions.
-- Match the repo's architecture and naming conventions.
-- Avoid unrelated cleanup unless explicitly requested.
+For repo-external context (project intent, audience, philosophy, foundational premises, durable loose threads), read the grounding note maintained outside this repository.
+
+For project state (artifacts, decisions, current navigation), read the repo itself.
+
+This file owns workflow rules. It does not track project state, current direction, or recommended next paths.
+
+---
+
+## Source-of-Truth Boundaries
+
+- **Repo** = project truth: artifacts, decisions, findings, architecture docs, navigation.
+- **`AGENTS.md`** (this file) = workflow rules for repo execution.
+- **Grounding note** (external) = repo-external context: intent, audience, philosophy, foundational premises, durable loose threads.
+- **Per-conversation memory** (operator-side: Claude Code's MEMORY.md, ChatGPT thread history, task lists) = ephemeral session state that does NOT belong in the grounding note.
+- `[project-specific live truth surfaces, e.g. a database, an external service, direct visual evidence]`
+
+### Aging-Rate Principle
+
+The split is separation by *aging rate*. A doc that tracks state ages fast; a doc that points to state ages slowly. If a statement would become stale when a PR lands, a chain closes, or a next path changes, it does not belong in this file or in the grounding note.
+
+---
+
+## Required Reading Before Meaningful Work
+
+Before any meaningful repo work, read:
+
+- `README.md`
+- `AGENTS.md` (this file)
+- `[primary architecture doc]`
+- `[repo-specific entry-point doc]`
+
+Then read the latest milestone or finding artifact relevant to the task.
+
+For external context, read the grounding note.
+
+---
+
+## Repo Workflow Discipline
+
+### Branch Freshness
+
+For repo implementation work, follow this sequence:
+
+1. verify local repo attachment
+2. verify clean working tree
+3. `git fetch origin --prune`
+4. `git checkout main`
+5. `git pull --ff-only origin main`
+6. create task branch from refreshed `main`
+7. stop if any verification fails
+
+### Default Verification
+
+Before meaningful work, verify:
+
+```text
+pwd
+git rev-parse --show-toplevel
+git remote get-url origin
+git branch --show-current
+git status --short
+```
+
+Stop if repo root, remote, branch, or working tree does not match the task requirements.
+
+### Terminal-State Discipline
+
+Use explicit terminal states:
+
+```text
+exact scoped diff ready for approval
+committed locally only
+pushed branch only
+PR created
+merged
+merged branches cleaned up
+```
+
+### Exact Scoped Diff Gate
+
+Stop at exact scoped diff unless ASK has already approved commit / push / PR. Once approved in the executor session, the executor may complete the remaining git workflow without separate manual GitHub UI ceremony.
+
+### Structured Change Summary
+
+Meaningful changes require:
+
+- why this change exists
+- what changed
+- what did not change
+- what remains out of scope
+
+If a PR is used, this belongs in the PR description. If no PR is used, the same summary belongs in the executor handoff or approval record.
+
+### Default: Carry Through to Merged + Cleanup
+
+When ASK approves the scoped diff and there is no explicit batching reason, carry through commit → push → PR → merge → branch cleanup. Do not stop at "PR created" and ask whether to merge unless the PR is intentionally queued, stacked, or under external review.
+
+### PR Creation
+
+When creating a PR, report: branch name, commit SHA, PR number, PR URL, actual base branch, actual head branch, validation performed, terminal state.
+
+### Direct Push to Main
+
+Branch plus PR is the default for meaningful structure or rule changes. Narrow low-risk edits or explicitly scoped bootstrap tasks may allow direct push to `main` when scope is made explicit and approved.
+
+---
+
+## Session Topology / Single-Writer Discipline
+
+Multiple operator sessions can mutate the same repo files concurrently. Rules:
+
+- One writer at a time per branch.
+- Treat repo and remote as the audit trail when sessions disagree.
+- Stop on suspected concurrent mutation. Re-orient against the repo before continuing.
+
+---
 
 ## Scope Discipline
 
-- Keep changes aligned to the task at hand.
-- Separate durable repo docs from temporary migration notes.
-- Keep external control-surface artifacts separate from repo-local operating files.
-- Avoid introducing new tooling or structure without a clear repo need.
+For implementation, prefer the smallest honest unit. For conceptual architecture, prefer the largest tractable structural question. Do not let "smallest unit" prevent zooming out to architecture scale.
 
-## Comments, Docs, And PR Boundary
+Do not bundle unrelated work. Do not widen scope mid-task unless explicitly chosen. Do not create artifacts merely because a process pattern exists.
 
-- Put inline explanation in code or config only when local clarity needs it.
-- Put durable architecture or workflow guidance in repo docs.
-- Use a structured change summary for meaningful repo updates.
-- If a PR path is used, put that structured change summary in the PR description.
+---
 
-## Branch And PR Discipline
+## Plan-Before-Execute Rule
 
-- Branch from `[default base branch]` unless instructed otherwise.
-- Keep branch + PR as the default review boundary for meaningful architecture, ontology, code, or repo-structure changes.
-- Use exact scoped diff review as the mandatory approval checkpoint before meaningful write actions complete.
-- If approval is given in Codex after scoped diff review, Codex may complete the remaining git workflow steps without requiring separate GitHub UI approval clicks.
-- Narrow low-risk edits or explicitly scoped bootstrap tasks may allow direct push to `main` when that scope is explicit and approved.
-- Require the structured change summary for meaningful changes whether the workflow ends in a PR or an approved push.
-- Stage only files related to the task and verify the scoped diff before asking for approval.
+Before executing a meaningful repo change, state: files in scope, scope in vs out, non-actions, expected terminal state.
+
+This applies whether the executor is a separate process (Codex) or the same agent doing the planning (Claude Code). The plan-before-execute step preserves the explicit reasoning surface that prompt-compilation provides in Model A.
+
+---
+
+## Comments, Docs, and PR Roles
+
+- Comments belong in implementation artifacts only when local clarity needs them.
+- Docs hold durable repo-local truth, boundary definitions, and architecture framing.
+- PRs hold change-specific explanation, reviewer guidance, tradeoffs.
+
+---
 
 ## Project-Specific Defaults
 
@@ -56,5 +164,50 @@ Fill in local expectations here:
 
 - `[testing or verification commands]`
 - `[protected paths or high-risk areas]`
+- `[external systems with their own mutation discipline, e.g. a live database, a CMS, a workflow tool]`
 - `[terminology to preserve]`
-- `[project-specific approval boundaries]`
+- `[domain-specific creative or governance acts that should be modeled as first-class — see Architecture-Specific Rules below]`
+
+---
+
+## Architecture-Specific Rules (optional, project-by-project)
+
+If the project's information architecture has a load-bearing creative or governance act (e.g. curation, capture, ratification, selection), model it as first-class in the schema and in the rules. Generic process rules cannot stand in for domain-specific structural decisions.
+
+If the project has a prototype surface, decide whether the prototype is a pressure surface for studying the architecture or a deliverable in its own right. Document the answer.
+
+If the project has external systems (databases, CMSs, workflow tools), decide how mutations to those systems are governed (Plan-Before-Execute applies; Structured Change Summary applies; per-action authorization may or may not be required depending on reversibility).
+
+---
+
+## Refresh Cadences
+
+### Grounding Note
+
+Refresh the grounding note only when external handoff context changes:
+
+- new strategic direction
+- philosophical reframing
+- audience or positioning shift
+- foundational premises change
+- operating model changes
+
+Do not refresh for routine repo chronology. Possible future directions belong in the grounding note only as durable loose threads, not as recommended next paths.
+
+### `AGENTS.md`
+
+Refresh this file only when a workflow rule is added, removed, or materially revised.
+
+Do not refresh because project state changed. Do not refresh because a PR landed. Do not refresh because the next direction changed.
+
+---
+
+## Short Version
+
+- Verify repo state before meaningful work.
+- Read repo-local truth and grounding note before responding.
+- Stop at exact scoped diff before commit; carry through to merged + cleanup once approved.
+- State the plan before executing.
+- Single-writer per branch. Repo is the audit trail.
+- Match unit of work to level of question.
+- Keep this file workflow-only. Repo holds state. Grounding note holds external context.

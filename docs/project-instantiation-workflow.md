@@ -1,22 +1,27 @@
 # Project Instantiation Workflow
 
-This doc explains the workflow before a target ASK repo exists, and how that upstream phase transitions into normal control-surface usage.
+This doc explains the workflow before a target ASK repo exists, and how that upstream phase transitions into normal operational use.
+
+It is agent-agnostic. It applies whether the project will run on Model A (ChatGPT/Codex) or Model B (Claude Code as control surface and executor).
 
 ## Phases
 
 ### 1. Instantiation
 
-Use this phase when the ChatGPT Project and source pack are instantiated before the target repo exists.
+Use this phase when the project is being defined and the target repo does not yet exist.
 
 During instantiation:
 
-- read the Project source pack first
+- read whatever instantiation source pack exists (Project source pack in ChatGPT, conversation context in Claude Code, or both)
 - use `apexSolarKiss/control-surface` as the master reference repo
-- use `apexSolarKiss/mazeASK` as the worked example
+- use `apexSolarKiss/asset-pipeline-ASK` as the current Model B operational working example
+- use `apexSolarKiss/mazeASK` as an earlier Model A worked example
 - refine project purpose, repo name, repo description, and initial structure
+- decide which operating model the project will use (Model A, Model B, or either)
 - decide which assets should remain external versus which should eventually live in the repo
+- decide where the external grounding note will live (path outside the repo)
 
-At this point, there is no repo-local truth yet because the target repo does not exist.
+At this point, there is no repo-local truth yet because the target repo does not exist. The instantiation prompt is `prompts/project-instantiation-initial-prompt.md`.
 
 ### 2. Bootstrap
 
@@ -25,37 +30,43 @@ Use this phase once the target repo exists and the first repo-local files can be
 During bootstrap:
 
 - verify the new repo attachment
+- copy `templates/AGENTS.template.md` into the repo as `AGENTS.md` and adapt project-specific defaults
+- copy `templates/grounding-note.template.md` into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads
+- optionally copy `templates/architecture.template.md` into the repo as `docs/architecture.md`
+- if running Model B, optionally add `CLAUDE.md` as a pointer to `AGENTS.md`
 - identify the first repo-local entry points
-- decide which starter docs from `templates/` should be adopted
-- establish the initial boundary between repo-local files and external control-surface artifacts
 
-This is the phase where repo-local truth begins to exist.
+This is the phase where repo-local truth begins to exist. The transition prompt is:
+
+- `prompts/claude-code-initial-prompt.md` for Model B operators
+- `prompts/control-surface-initial-prompt.md` and `prompts/codex-initial-prompt.txt` for Model A operators (legacy)
 
 ### 3. Operational
 
-Use this phase once the target repo has active repo-local docs and normal work can proceed through the external control surface.
+Use this phase once the target repo has active repo-local docs and normal work can proceed.
 
 During operational use:
 
 - treat repo-local files as the source of truth for work inside the repo
-- use the external control-surface artifact to package work for Codex
+- treat the external grounding note as the source of truth for repo-external context
 - use prompts for startup or handoff, not as permanent repo policy
+- treat per-conversation memory (Claude Code's MEMORY.md, ChatGPT thread history, task lists) as ephemeral session state — do not promote it into the durable sources
 
 ## What Stays External
 
 Keep these external unless a project has a deliberate reason to mirror them:
 
-- the control-surface artifact
-- ChatGPT Project instructions
+- the grounding note (always external, by design)
+- ChatGPT Project instructions (Model A only)
 - startup prompts used to frame or hand off work
 
 ## What Usually Becomes Repo-Local
 
 Once the repo exists, these are typical local candidates:
 
-- `AGENTS.md`
-- a workflow-boundary doc
-- an architecture doc
+- `AGENTS.md` (always)
+- `CLAUDE.md` pointer (Model B convenience)
+- a project architecture doc
 - project-specific entry-point docs
 
 ## Practical Output
@@ -65,5 +76,5 @@ The normal output of instantiation is not code yet.
 It is a ready-to-send next prompt that can:
 
 - create or attach the target repo
-- establish the initial repo-local docs
-- begin bootstrap using the agreed project purpose and structure
+- copy and adapt the relevant templates
+- begin bootstrap using the agreed project purpose, structure, and operating model

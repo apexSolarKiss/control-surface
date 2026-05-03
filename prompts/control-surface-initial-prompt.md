@@ -1,5 +1,9 @@
 # Control-Surface Initial Prompt
 
+> **Status: Legacy.** This is the Model-A-specific ChatGPT-side startup prompt. It is retained for projects still running on Model A.
+>
+> For Model B (Claude Code as both control surface and executor), use `prompts/claude-code-initial-prompt.md`. For agent-agnostic instantiation work before a target repo exists, use `prompts/project-instantiation-initial-prompt.md`.
+
 Use this as a ChatGPT-side startup prompt for an ASK project once repo-collaboration context exists.
 
 Define the working context for a local repo collaboration:

@@ -1,5 +1,11 @@
 # Workflow Boundary
 
+> **Status: Legacy.** This doc's category model (live / repo-local / external / prompts / templates / examples) is supplanted by `AGENTS.md`'s Source-of-Truth Boundaries section, which uses the simpler four-source split: Repo / `AGENTS.md` / Grounding note / Per-conversation memory.
+>
+> Retained as historical reference for the earlier categorization, particularly the `external control-surface artifact` category that applied when Model A was the canonical operating model.
+>
+> For current work, use `AGENTS.md`.
+
 This doc explains the boundary model used by the `control-surface` repo itself.
 
 ## Categories
