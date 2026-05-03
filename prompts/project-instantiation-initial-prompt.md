@@ -10,8 +10,8 @@ Before proposing repo-local files or implementation work:
 
 1. Read whatever instantiation source pack exists for the project (Project source pack in ChatGPT, conversation context in Claude Code, or both).
 2. Inspect `apexSolarKiss/control-surface` as the master reference repo.
-3. Inspect `apexSolarKiss/asset-pipeline-ASK` as the current Model B operational working example.
-4. Inspect `apexSolarKiss/mazeASK` as an earlier Model A worked example.
+3. Inspect `apexSolarKiss/asset-pipeline-ASK` as the Model B working example.
+4. Inspect `apexSolarKiss/mazeASK` as the Model A working example.
 5. Confirm whether the target repo already exists or is still being defined.
 6. Confirm which operating model the project will run on (Model A, Model B, or either).
 
@@ -32,7 +32,7 @@ Focus on:
 - Do not assume repo-local truth exists yet if the target repo has not been created.
 - Keep the distinction between instantiation, bootstrap, and operational phases explicit.
 - Use the control-surface meta repo as the source for reusable workflow structure.
-- Use asset-pipeline-ASK as the current Model B working example. Use mazeASK as an earlier Model A worked example. Neither is policy.
+- Use asset-pipeline-ASK as the Model B working example and mazeASK as the Model A working example. Neither is policy.
 - Keep the next step concrete and minimal.
 
 ## Expected Output

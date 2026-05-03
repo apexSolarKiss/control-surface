@@ -15,7 +15,12 @@ This repo supports two operating models for ASK project work:
 
 The same workflow rules apply regardless of which agent does the executing. The rules live in repo-local `AGENTS.md` files, and they are written agent-agnostically so an operator can pick up either model without rewriting the rules.
 
-The current working example, `apexSolarKiss/asset-pipeline-ASK`, has been operated end-to-end on Model B and has produced the most advanced live `AGENTS.md` in the family. Model A remains supported and the historical tooling is retained as legacy reference.
+Two live working examples anchor the family:
+
+- `apexSolarKiss/asset-pipeline-ASK` — Model B working example. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family.
+- `apexSolarKiss/mazeASK` — Model A working example. Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against.
+
+Both are supported. The historical Model-A-specific external orchestration artifact (`control-surface.md`) and the Model-A-only prompts are retained as legacy reference.
 
 ## Source-of-Truth Split
 
@@ -60,8 +65,8 @@ Templates are copyable starters. They are not live for this repo unless explicit
 
 ### Examples
 
-- `examples/asset-pipeline-ASK/notes.md` — current Model B operational working example
-- `examples/mazeASK/notes.md` — earlier Model A worked example
+- `examples/asset-pipeline-ASK/notes.md` — Model B working example
+- `examples/mazeASK/notes.md` — Model A working example
 
 ### Legacy docs
 

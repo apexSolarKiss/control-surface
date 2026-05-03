@@ -1,6 +1,6 @@
 # asset-pipeline-ASK Notes
 
-`apexSolarKiss/asset-pipeline-ASK` is the current Model B operational working example for the control-surface workflow.
+`apexSolarKiss/asset-pipeline-ASK` is the Model B working example for the control-surface workflow. `apexSolarKiss/mazeASK` is the parallel Model A working example.
 
 ## Operating Model
 

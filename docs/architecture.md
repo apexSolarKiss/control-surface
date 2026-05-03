@@ -13,6 +13,11 @@ The same workflow rules apply regardless of which agent does the executing. Rule
 
 For this meta repo, Claude Code is currently the live operator. Model A is supported and the historical tooling is retained as legacy reference for projects still running on it.
 
+Two live working examples anchor the family:
+
+- `apexSolarKiss/asset-pipeline-ASK` — Model B working example
+- `apexSolarKiss/mazeASK` — Model A working example
+
 ## Source-of-Truth Split
 
 ASK project work uses three durable sources of truth plus operator-side ephemeral memory:

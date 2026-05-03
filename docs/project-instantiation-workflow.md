@@ -14,8 +14,8 @@ During instantiation:
 
 - read whatever instantiation source pack exists (Project source pack in ChatGPT, conversation context in Claude Code, or both)
 - use `apexSolarKiss/control-surface` as the master reference repo
-- use `apexSolarKiss/asset-pipeline-ASK` as the current Model B operational working example
-- use `apexSolarKiss/mazeASK` as an earlier Model A worked example
+- use `apexSolarKiss/asset-pipeline-ASK` as the Model B working example
+- use `apexSolarKiss/mazeASK` as the Model A working example
 - refine project purpose, repo name, repo description, and initial structure
 - decide which operating model the project will use (Model A, Model B, or either)
 - decide which assets should remain external versus which should eventually live in the repo
