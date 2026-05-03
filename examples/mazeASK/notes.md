@@ -1,6 +1,12 @@
 # mazeASK Notes
 
-`mazeASK` is the motivating ASK project for this repo's first structure, and its current repo docs show the boundary model in a concrete form.
+`apexSolarKiss/mazeASK` is the Model A working example for the control-surface workflow. `apexSolarKiss/asset-pipeline-ASK` is the parallel Model B working example.
+
+`mazeASK` is also the motivating ASK project for this repo's first structure, and its repo docs show the boundary model in a concrete form.
+
+## Operating Model
+
+Model A — ChatGPT compiles prompts, Codex executes inside the local repo. The original concrete instance the boundary model was sketched against, and the worked example the Model-A-specific external orchestration artifact (`control-surface.md`) was calibrated for.
 
 ## Repo-local files in mazeASK
 

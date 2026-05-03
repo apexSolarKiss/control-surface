@@ -1,5 +1,14 @@
 # control-surface.md
 
+> **Status: Legacy.** This file is the Model-A-specific external control-surface artifact (ASK→ChatGPT→Codex with Claude Code as advisory). It is retained for projects still running on Model A and as historical reference.
+>
+> For current Model B (Claude Code as both control surface and executor) or agent-agnostic Model A/B work, the live repo's `AGENTS.md` is the single source of workflow rules. There is no separate external orchestration artifact.
+>
+> Superseded by:
+> - the live operating discipline in `apexSolarKiss/asset-pipeline-ASK`'s `AGENTS.md` (the most advanced working example)
+> - `templates/AGENTS.template.md` (agent-agnostic starter for downstream ASK repos)
+> - `templates/grounding-note.template.md` (external grounding-note starter)
+
 This file is the canonical reusable external control-surface artifact published by `control-surface` for ASK projects.
 
 ## System view

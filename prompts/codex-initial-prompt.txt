@@ -1,3 +1,5 @@
+STATUS: LEGACY. This is the Model-A-specific Codex-side startup prompt. Retained for projects still running on Model A. For Model B (Claude Code as control surface and executor), use prompts/claude-code-initial-prompt.md. For agent-agnostic instantiation before a target repo exists, use prompts/project-instantiation-initial-prompt.md.
+
 You are attached to a local repo.
 
 Before any meaningful work:
