@@ -101,6 +101,15 @@ For a new ASK project:
 - Optionally copy `templates/architecture.template.md` into the new repo as `docs/architecture.md`.
 - Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
 
+## Background Reading
+
+The control-surface design recorded in this repo is anchored to two pieces of external writing:
+
+- [*Beyond Vibe Coding: Constraining LLMs*](https://atomicspacekitten.substack.com/p/beyond-vibe-coding-constraining-llms) — the prior argument that reliable AI-native execution requires *constrained* LLMs, with explicit rules, explicit boundaries, explicit reasoning surfaces, and ready-to-send prompts that already encode the workflow rather than asking the human to reconstruct it on every turn. The original case for the structural friction that the legacy split-execution control surface (Model A) operationalized.
+- [*Lessons from the First Prototype Phase*](https://atomicspacekitten.substack.com/p/lessons-from-the-first-prototype) — the structural retrospective that justifies the current state. Records the migration of structural friction into rules in the repo, the sunset of Model A, the ~50x ceremony reduction that single-node operation produces, and the reframe of the rules as calibrated compensations for what single-node collapses relative to the legacy split.
+
+Together they describe why the control-surface rules look the way they do and why the operating model evolved from split-execution to single-node.
+
 ## License
 
 Copyright (c) 2026 Andrew S Klug // ASK
