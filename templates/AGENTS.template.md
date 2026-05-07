@@ -10,7 +10,7 @@ This template is agent-agnostic. Whoever executes (Codex, Claude Code, or anothe
 
 This file defines repo-local workflow rules for whoever executes work on this repository.
 
-The default operating model for new ASK projects is single-node: Claude Code is both control surface and executor. GPT remains available as optional advisor outside the execution thread.
+The default operating model for new ASK projects is single-node: Claude Code is both control surface and executor. An advisor in chat-based form — typically GPT or Claude — remains available outside the execution thread.
 
 (An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — is referred to historically as **Model A** and is retained as legacy across the family. New projects should default to single-node unless there is a specific reason otherwise.)
 
