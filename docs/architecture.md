@@ -4,7 +4,7 @@
 
 ## Role Model
 
-The active operating model for new ASK projects is single-node: Claude Code is both control surface and executor. GPT remains available as optional advisor outside the execution thread.
+The active operating model for new ASK projects is single-node: Claude Code is both control surface and executor. An advisor in chat-based form — typically GPT or Claude — remains available outside the execution thread.
 
 An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. `apexSolarKiss/mazeASK` is still operated on Model A and is the working example for any project that still needs it.
 

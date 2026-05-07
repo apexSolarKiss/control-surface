@@ -8,7 +8,7 @@ This repo contains both the live operating files for `control-surface` itself an
 
 ## Operating Model
 
-The active operating model for new ASK projects is single-node: **Claude Code as both control surface and executor**. GPT remains available as optional advisor outside the execution thread.
+The active operating model for new ASK projects is single-node: **Claude Code as both control surface and executor**. An advisor in chat-based form — typically GPT or Claude — remains available outside the execution thread.
 
 An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. The Model-A-specific external orchestration artifact (`control-surface.md`) and Model-A-only prompts remain in the repo as legacy.
 
