@@ -103,11 +103,12 @@ For a new ASK project:
 
 ## Background Reading
 
-The control-surface design recorded in this repo is anchored to three pieces of external writing:
+The control-surface design recorded in this repo is anchored to four pieces of external writing:
 
 - [*Beyond Vibe Coding: Constraining LLMs*](https://atomicspacekitten.substack.com/p/beyond-vibe-coding-constraining-llms) — the prior argument that reliable AI-native execution requires *constrained* LLMs, with explicit rules, explicit boundaries, explicit reasoning surfaces, and ready-to-send prompts that already encode the workflow rather than asking the human to reconstruct it on every turn. The original case for the structural friction that the legacy split-execution control surface (Model A) operationalized.
 - [*Lessons from the First Prototype Phase*](https://atomicspacekitten.substack.com/p/lessons-from-the-first-prototype) — the structural retrospective that justifies the current state. Records the migration of structural friction into rules in the repo, the sunset of Model A, the ~50x ceremony reduction that single-node operation produces, and the reframe of the rules as calibrated compensations for what single-node collapses relative to the legacy split.
 - [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration) — the next workflow piece, recording where dual-agent dialogue went after Model A retired. Once execution-layer friction had compressed into rules, the dual-agent surface relocated to the architectural layer — where the work hasn't yet compressed and may never compress that way. Names adversarial collaboration (Kahneman / Mellers) as the working term, with multi-agent debate and actor-critic as adjacent shapes of the same family. The pattern's tractability depends on the durable backbone of repo, grounding note, and `AGENTS.md` rules.
+- [*From Execution Proof Back to Normative Structure*](https://atomicspacekitten.substack.com/p/from-execution-proof-back-to-normative) — the next workflow piece after *Adversarial Collaboration*. Names two related-but-distinct patterns: adversarial collaboration (multi-mind, one moment) and adversarial iteration (single-mind, across time / the swing methodology). Both are load-bearing in the working method.
 
 Together they describe why the control-surface rules look the way they do, why the operating model evolved from split-execution to single-node, and where dual-agent dialogue still earns its keep above the rules.
 

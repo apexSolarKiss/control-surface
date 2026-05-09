@@ -140,11 +140,13 @@ When creating a PR, report:
 - validation performed
 - terminal state: `PR created`
 
-### Default: Carry Through to Merged + Cleanup
+### Default: Hold or Carry Through Per Adversarial-Collaboration Preconditions
 
-When ASK approves the scoped diff and there is no explicit batching, transport blocker, or operational reason to stop early, the default workflow continues through commit, push, PR creation, merge verification, and merged-branch cleanup.
+When ASK has approved the scoped diff, the workflow continues through commit and push to PR creation.
 
-Do not stop at `PR created` and ask whether to merge unless the PR is intentionally queued, stacked, or under external review.
+If the project meets the preconditions for adversarial collaboration (per [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration)) — hardened backbone, active architectural uncertainty, configured advisor surface — hold at `PR created` until the advisor relay returns approval, then continue to merge. The pushed-not-merged PR is the advisor's structural review window.
+
+If no advisor surface is configured, carry through to merged + cleanup once diff approval is given. The pattern is proportional to architectural uncertainty live at any moment.
 
 ### Post-Merge Cleanup
 
