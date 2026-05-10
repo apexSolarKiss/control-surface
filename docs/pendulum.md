@@ -147,7 +147,7 @@ Absorption reviews are explicitly not always artifact-producing. The right outpu
 
 The method maintains discipline about which voice belongs in which surface. Different artifact types (workflow rules, methodology articulation, project documentation, grounding notes, external writing) have different audiences and different appropriate voices.
 
-Repo-local prose (this doc, `AGENTS.md`, project documentation) stays in systemic / architectural voice. ASK-positioning voice belongs in operator-side grounding notes and in external writing whose purpose is to position. The full articulation of which vocabulary belongs where lives operator-side; this document references the principle structurally without carrying its content.
+Repo-local prose (this doc, `AGENTS.md`, project documentation) stays in systemic / architectural voice. ASK-positioning voice belongs in operator-side grounding notes and external writing. The full articulation of which vocabulary belongs where lives operator-side; this document references the principle structurally without carrying its content.
 
 The principle is recursive: the rule about voice externality stays operator-side. Naming the rule's specifics inside repo prose would itself name the framing the rule keeps out. This document carries the structural reference (voice categories as method elements) and points to operator-side surfaces for the full articulation.
 
