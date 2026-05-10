@@ -52,7 +52,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 
 ### Methodology docs
 
-- `docs/pendulum.md` — methodology layer; working-name articulation of the method for designing systems-of-systems; will graduate to its own repo when accumulation earns it
+- `docs/method.md` — methodology layer; articulation of the method for designing systems-of-systems; transitional bridge that may graduate to its own repo when accumulation earns it
 
 ### Reusable templates for downstream ASK repos
 
