@@ -1,12 +1,12 @@
-# Pendulum (working name) // The Method
+# Method // Designing Systems-of-Systems
 
-This document is a working-name articulation of the method used to design systems-of-systems. It lives in this meta repo because the method does not yet have its own repo. It will graduate to its own repo when accumulation earns it.
+This document is the methodology layer's articulation of the method used to design systems-of-systems. It lives in this meta repo as a transitional bridge because the method does not yet have its own repo. It will graduate to its own repo when accumulation earns it.
 
 ## Posture
 
 ```text
 methodology layer
-working-name doc
+transitional bridge in control-surface
 not just adversarial iteration
 comprehensive statement of the method
 will graduate to its own repo when earned
@@ -19,7 +19,7 @@ The two layers are at different altitudes:
 - **Execution protocol** — per-session, per-PR, multi-agent dialogue at the architectural altitude. Workflow rules live in `control-surface/AGENTS.md`; advisor posture and cadence context are recorded in the meta repo's grounding note. Anchored on [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration).
 - **Methodology** — cross-phase, across-time, single-mind project rhythm. Lives here. Anchored on [*From Execution Proof Back to Normative Structure*](https://atomicspacekitten.substack.com/p/from-execution-proof-back-to-normative).
 
-This document is named after the swing (the pendulum motion that *From Execution Proof Back to Normative Structure* names as the project's rhythm), but it covers more than the swing. The swing is one element of the method. Other elements — ontology development, vocabulary deconstruction, pressure-surface use of prototypes, evidence-trail integrity, and several more — are equally load-bearing. The working name reflects the most recent and visible metaphor; the contents reflect the broader method.
+The pendulum / swing motion that *From Execution Proof Back to Normative Structure* names as the project's rhythm is one element of the method, not the whole. Other elements — ontology development, vocabulary deconstruction, pressure-surface use of prototypes, evidence-trail integrity, and several more — are equally load-bearing. The doc covers the broader method; the swing is the most recent and visible metaphor but does not exhaust the content.
 
 ## What This Doc Captures
 
@@ -182,11 +182,13 @@ The method is not separate from this history; it is what makes the history coher
 
 ## Self-Superseding Clause
 
-This document is a working-name doc. It should be superseded by:
+This document is a transitional bridge. It should be superseded by:
 
-- its own graduation to a separate repo (working name `pendulum`, may earn a different name as it accumulates content beyond the swing metaphor)
+- its own graduation to a separate repo when accumulation earns the move
 - subsequent articulations of the method that earn deeper coverage of any single element above
 - whatever later synthesis absorbs the methodology layer alongside the project's own evolution
+
+Additional methodology artifacts should not accumulate in this repo by default; if the method layer needs more than this bridge document, that is evidence for a separate methodology repo.
 
 The articulation is not finished. Each method element above could earn its own deeper treatment. Some elements may dissolve as later work shows they were instances of more general principles; others may earn first-class status as their own articulated patterns.
 

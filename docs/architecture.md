@@ -15,6 +15,16 @@ Two live working examples anchor the family:
 - `apexSolarKiss/asset-pipeline-ASK` — single-node working example
 - `apexSolarKiss/mazeASK` — Model A working example (still active for that project)
 
+## Layer Map
+
+This repo sits in the middle of a three-tier structure:
+
+- **Methodology layer** — adversarial iteration / cross-phase swing discipline. Currently represented by [`docs/method.md`](method.md) as a transitional bridge; may graduate to its own repo when accumulation earns it.
+- **Execution-protocol layer** — this repo's core purpose. `AGENTS.md`, templates, review cadence, and branch discipline encode how work gets done within a session.
+- **Project repos** — applications of the method and protocol to concrete domains. `apexSolarKiss/asset-pipeline-ASK` is the single-node working example and primary pressure surface for rule evolution; `apexSolarKiss/mazeASK` is the legacy Model A working example.
+
+The control-surface repo owns the execution-protocol layer. It may temporarily host methodology articulation but should not become the methodology repo by default.
+
 ## Source-of-Truth Split
 
 ASK project work uses three durable sources of truth plus operator-side ephemeral memory:
