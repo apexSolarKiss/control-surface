@@ -50,6 +50,10 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 - `CLAUDE.md` — pointer to `AGENTS.md` for Claude Code operators
 - `docs/architecture.md` — meta architecture of this repo and the role model behind it
 
+### Methodology docs
+
+- `docs/pendulum.md` — methodology layer; working-name articulation of the method for designing systems-of-systems; will graduate to its own repo when accumulation earns it
+
 ### Reusable templates for downstream ASK repos
 
 - `templates/AGENTS.template.md` — agent-agnostic starter for repo-local execution rules; aligned to the current asset-pipeline-ASK live AGENTS.md
