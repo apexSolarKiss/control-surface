@@ -117,6 +117,24 @@ This guards against the failure mode where every operational discrepancy or proc
 
 Every meaningful artifact names what would supersede it. This holds the work in place without locking it. A reader can see what the artifact intends to remain authoritative for, and what would replace or absorb it under specified conditions.
 
+### Fresh-context critique cycle
+
+At thresholds where the project's structure, posture, or direction needs re-examination, start fresh advisor threads and give each only the durable context — the repo and the grounding note. Do not give them the working thread's accumulated explanations unless the task is to fold a prior critique. The load-bearing property is **context reset**: the critic is denied working-thread momentum and forced to reconstruct the project from durable truth. That reconstruction is what surfaces drift, ceremony, overclaimed architecture, stale navigation, weak naming, missing proof, or mismatched source-of-truth boundaries.
+
+The cycle has three moves:
+
+1. **Independent critique** — each advisor reads durable truth and produces high-level concerns without seeing the other critique. Same prompt, same inputs, no awareness of each other's output.
+2. **Folded synthesis** — a follow-up pass compares the critiques, names convergence and divergence, and proposes a plan bounded by scope discipline.
+3. **Bounded absorption** — only corrections that survive synthesis become repo work, grounding-note updates, or held threads.
+
+This pattern composes both adversarial collaboration and adversarial iteration: the independent critiques create multi-mind opposition in one moment (collaboration); the synthesis and absorption metabolize that opposition into the next cross-time swing of the project (iteration). Adversarial iteration uses adversarial collaboration as a pressure mechanism at the structural-review altitude.
+
+This is distinct from Stage 2 PR review. Stage 2 is targeted advisor review of a pushed branch before merge, scoped to the change at hand. The fresh-context critique cycle is broader: repo- or phase-level critique of accumulated system state at structural-posture moments. Different cadences, different surfaces.
+
+The cycle is not a standing ceremony. It is warranted at thresholds — after a major plateau, when proof-chain gravity has accumulated, when naming or tier ownership has become unstable, or when the project's artifacts feel more coherent locally than globally. Routinizing the cycle would re-introduce the ceremony class the method is calibrated against.
+
+The prompts the cycle uses are deliberately small. The work happens in the durable backbone (repo + grounding note) and in the critics' independent reads. The operator does not direct what any critic should find; the artifacts speak. When the durable backbone is honest enough to serve as ground truth, the critique can be open-ended without losing focus.
+
 ## Cross-Phase Workflow Shape
 
 How the project navigates its own evolution.
@@ -200,7 +218,7 @@ The articulation is not finished. Each method element above could earn its own d
 - [*From Normative Structure to Execution Proof*](https://atomicspacekitten.substack.com/p/from-normative-structure-to-execution) — the swing toward implementation; "architecture should not rush to implementation, but it should eventually submit itself to it"
 - [*Lessons from the First Prototype Phase*](https://atomicspacekitten.substack.com/p/lessons-from-the-first-prototype) — the structural retrospective; ~50x ceremony reduction; calibrated compensations for what single-node collapses relative to split-execution
 - [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration) — the within-session multi-mind layer; complement to this document at the execution-protocol altitude
-- [*From Execution Proof Back to Normative Structure*](https://atomicspacekitten.substack.com/p/from-execution-proof-back-to-normative) — the swing back to abstraction; introduces *adversarial iteration* alongside adversarial collaboration; the pendulum framing this document is named after
+- [*From Execution Proof Back to Normative Structure*](https://atomicspacekitten.substack.com/p/from-execution-proof-back-to-normative) — the swing back to abstraction; introduces *adversarial iteration* alongside adversarial collaboration
 
 ### Meta repo and project anchors
 
