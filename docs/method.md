@@ -1,6 +1,6 @@
-# Method // Designing Systems-of-Systems
+# Method // Designing Systems That Build Systems
 
-This document is the methodology layer's articulation of the method used to design systems-of-systems. It lives in this meta repo as a transitional bridge because the method does not yet have its own repo. It will graduate to its own repo when accumulation earns it.
+This document is the methodology layer's articulation of the method used to design systems that produce, govern, template, or instantiate other systems. Some downstream systems are themselves systems-of-systems; the broader target is the system-building layer. It lives in this meta repo as a transitional bridge because the method does not yet have its own repo. It will graduate to its own repo when accumulation earns it.
 
 ## Posture
 
@@ -28,6 +28,18 @@ The method is the practice of designing systems whose structure is itself worth 
 The method is not a single principle. It is a coherent collection of pre-architecture moves, execution disciplines, synthesis disciplines, cross-phase workflow shape, surface-and-voice discipline, and a recursive observation about methodology itself.
 
 This doc names them in one place so a returning operator or external reader can read the method as itself, not only as residue distributed across other artifacts.
+
+## Recursive System Roles
+
+The method applies across recursive system roles, not a single fixed level.
+
+- **Articulated system** — a discrete artifact or project whose structure is worth making explicit. [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the historical project-scale example: a concrete maze-game repo whose Model-A workflow pressure helped surface the need for a reusable control-surface pattern, later generalized in this meta repo.
+- **System-of-systems** — an operational system composed of interacting subsystems. A governed visual asset production pipeline can fit this role: brand inputs, product data, reference systems, generation surfaces, curation seams, governance records, and output assets operate together as one production system.
+- **System-building system** — a system that produces, governs, templates, or instantiates other systems. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) fits this role for governed visual asset production pipelines. [`apexSolarKiss/control-surface`](https://github.com/apexSolarKiss/control-surface) fits this role for AI-native execution workflows.
+
+The method does not change shape across these roles. Ontology development, vocabulary deconstruction, architecture-attempt-before-prototype, pressure-surface prototypes, ceremony budget, evidence-trail integrity, self-superseding clauses, the swing, and the fresh-context critique cycle apply whether the work is an articulated system, a system-of-systems, or a system-building system.
+
+The recursion is part of why the method is worth articulating as itself. This document is itself a structured artifact produced by the method it describes.
 
 ## Pre-Architecture Moves
 
