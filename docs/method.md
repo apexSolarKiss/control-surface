@@ -145,7 +145,7 @@ This is distinct from Stage 2 PR review. Stage 2 is targeted advisor review of a
 
 The cycle is not a standing ceremony. It is warranted at thresholds — after a major plateau, when proof-chain gravity has accumulated, when naming or tier ownership has become unstable, or when the project's artifacts feel more coherent locally than globally. Routinizing the cycle would re-introduce the ceremony class the method is calibrated against.
 
-The prompts the cycle uses are deliberately small. The work happens in the durable backbone (repo + grounding note) and in the critics' independent reads. The operator does not direct what any critic should find; the artifacts speak. When the durable backbone is honest enough to serve as ground truth, the critique can be open-ended without losing focus.
+The cycle's reusable prompts live in [`prompts/repo-critique-initial-prompt.md`](../prompts/repo-critique-initial-prompt.md) and [`prompts/repo-critique-synthesis-prompt.md`](../prompts/repo-critique-synthesis-prompt.md). The work happens in the durable backbone (repo + grounding note) and in the critics' independent reads. The operator does not direct what any critic should find; the artifacts speak. When the durable backbone is honest enough to serve as ground truth, the critique can be open-ended without losing focus.
 
 ## Cross-Phase Workflow Shape
 
