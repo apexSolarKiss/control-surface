@@ -231,6 +231,7 @@ The articulation is not finished. Each method element above could earn its own d
 - [*Lessons from the First Prototype Phase*](https://atomicspacekitten.substack.com/p/lessons-from-the-first-prototype) — the structural retrospective; ~50x ceremony reduction; calibrated compensations for what single-node collapses relative to split-execution
 - [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration) — the within-session multi-mind layer; complement to this document at the execution-protocol altitude
 - [*From Execution Proof Back to Normative Structure*](https://atomicspacekitten.substack.com/p/from-execution-proof-back-to-normative) — the swing back to abstraction; introduces *adversarial iteration* alongside adversarial collaboration
+- [*Method // Designing Systems That Build Systems*](https://atomicspacekitten.substack.com/p/method-designing-systems-that-build) — the external articulation of this document; names the category the method targets (system-building systems) and the productive Russellian shape of the method's self-membership
 
 ### Meta repo and project anchors
 
