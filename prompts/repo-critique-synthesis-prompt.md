@@ -1,18 +1,28 @@
 # Repo Critique // Synthesis Prompt
 
-Use this prompt after a critic has produced an initial critique (using `repo-critique-initial-prompt.md`) and an additional independent critique is available from another mind — another model, or a separate fresh thread of the same model.
+Use this prompt in the advisor surface after two independent fresh-context critiques have been produced (using `repo-critique-initial-prompt.md`) — typically one from the execution-surface thread and one from a separate advisor-surface thread.
 
-This prompt asks the critic to fold the second critique into its own analysis and propose a plan. The plan is advisory only; it does not authorize execution. Execution still goes through the project's normal scope-discipline and approval gates.
+The synthesis pass is assigned to the advisor role specifically. The role, not the model: the value comes from exteriority to execution-thread momentum, not from which model occupies the role. The same model can occupy either the critic role or the synthesis role in different threads.
+
+This prompt asks the advisor surface to fold both critiques into one analysis and propose an advisory plan. The plan is advisory only; it does not authorize execution. The plan will be handed back to the execution surface via `repo-critique-execution-prompt.md`, where it goes through the project's normal scope-discipline and approval gates.
 
 ---
 
-The following is an additional independent critique of the same repo:
+The following are two independent critiques of the same repo, produced by independent fresh-context threads:
+
+**Critique A:**
+
+```
+[paste the first critique here]
+```
+
+**Critique B:**
 
 ```
 [paste the second critique here]
 ```
 
-1. Consider this critique alongside your prior analysis. Note convergence (where the two critiques overlap), divergence (what each found that the other missed), and the net diagnosis.
+1. Fold both critiques. Note convergence (where they overlap), divergence (what each found that the other missed), and the net diagnosis.
 2. Propose a plan to address the issues that survive synthesis.
 
-The plan is advisory. It is not authorization to execute. Each item in the plan is a candidate for the operator to sequence, edit, or reject. Do not begin work on any item until directed.
+The plan is advisory. It is not authorization to execute. Each item in the plan is a candidate for the operator to sequence, edit, or reject. The execution surface will scope, sequence, and stop at exact scoped diff before any commit.
