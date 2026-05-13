@@ -133,11 +133,11 @@ Every meaningful artifact names what would supersede it. This holds the work in 
 
 At thresholds where the project's structure, posture, or direction needs re-examination, start fresh advisor threads and give each only the durable context — the repo and the grounding note. Do not give them the working thread's accumulated explanations unless the task is to fold a prior critique. The load-bearing property is **context reset**: the critic is denied working-thread momentum and forced to reconstruct the project from durable truth. That reconstruction is what surfaces drift, ceremony, overclaimed architecture, stale navigation, weak naming, missing proof, or mismatched source-of-truth boundaries.
 
-The cycle has three moves:
+The cycle has three moves, each assigned to a distinct surface:
 
-1. **Independent critique** — each advisor reads durable truth and produces high-level concerns without seeing the other critique. Same prompt, same inputs, no awareness of each other's output.
-2. **Folded synthesis** — a follow-up pass compares the critiques, names convergence and divergence, and proposes a plan bounded by scope discipline.
-3. **Bounded absorption** — only corrections that survive synthesis become repo work, grounding-note updates, or held threads.
+1. **Independent critique** — each critic thread reads durable truth and produces high-level concerns without seeing the other critique. Same prompt, same inputs, no shared thread momentum.
+2. **Advisor-role synthesis** — a separate thread in the advisor surface folds both critiques into one analysis and produces an advisory plan, from outside execution momentum. The role is what matters; the model occupying it does not need to differ from the critique threads. The structural value is exteriority to the threads that produced the critiques.
+3. **Bounded absorption** — the execution surface verifies repo state fresh, scopes the advisory plan into implementation work, and stops at exact scoped diff before any commit. Only corrections that survive synthesis and operator approval become repo work, grounding-note updates, or held threads.
 
 This pattern composes both adversarial collaboration and adversarial iteration: the independent critiques create multi-mind opposition in one moment (collaboration); the synthesis and absorption metabolize that opposition into the next cross-time swing of the project (iteration). Adversarial iteration uses adversarial collaboration as a pressure mechanism at the structural-review altitude.
 
@@ -145,7 +145,11 @@ This is distinct from Stage 2 PR review. Stage 2 is targeted advisor review of a
 
 The cycle is not a standing ceremony. It is warranted at thresholds — after a major plateau, when proof-chain gravity has accumulated, when naming or tier ownership has become unstable, or when the project's artifacts feel more coherent locally than globally. Routinizing the cycle would re-introduce the ceremony class the method is calibrated against.
 
-The cycle's reusable prompts live in [`prompts/repo-critique-initial-prompt.md`](../prompts/repo-critique-initial-prompt.md) and [`prompts/repo-critique-synthesis-prompt.md`](../prompts/repo-critique-synthesis-prompt.md). The work happens in the durable backbone (repo + grounding note) and in the critics' independent reads. The operator does not direct what any critic should find; the artifacts speak. When the durable backbone is honest enough to serve as ground truth, the critique can be open-ended without losing focus.
+The cycle earns its keep not only by producing better critiques, but by identifying when the current pressure surface has saturated. A successful cycle may end by naming that the thread should stop, that the project needs exterior digestion, or that new operator intent is required before further work would be meaningful. Plateau detection is itself a successful outcome of the cycle, not a failure to produce one.
+
+A third failure mode appears when the cycle works too well: correct moves chained too quickly become their own drift vector. The remedy is the self-diagnostic plateau signal — stop, preserve what landed, and re-enter through a fresh-context pass only when new intent or new pressure is available. The remedy is not more procedure; more procedure is the failure mode this guards against.
+
+The cycle's reusable prompts live in [`prompts/repo-critique-initial-prompt.md`](../prompts/repo-critique-initial-prompt.md), [`prompts/repo-critique-synthesis-prompt.md`](../prompts/repo-critique-synthesis-prompt.md), and [`prompts/repo-critique-execution-prompt.md`](../prompts/repo-critique-execution-prompt.md). The work happens in the durable backbone (repo + grounding note) and in the critics' independent reads. The operator does not direct what any critic should find; the artifacts speak. When the durable backbone is honest enough to serve as ground truth, the critique can be open-ended without losing focus.
 
 ## Cross-Phase Workflow Shape
 
