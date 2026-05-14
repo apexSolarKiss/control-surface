@@ -254,6 +254,7 @@ The articulation is not finished. Each method element above could earn its own d
 - [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration) — the within-session multi-mind layer; complement to this document at the execution-protocol altitude
 - [*From Execution Proof Back to Normative Structure*](https://atomicspacekitten.substack.com/p/from-execution-proof-back-to-normative) — the swing back to abstraction; introduces *adversarial iteration* alongside adversarial collaboration
 - [*Method // Designing Systems That Build Systems*](https://atomicspacekitten.substack.com/p/method-designing-systems-that-build) — the external articulation of this document; names the category the method targets (system-building systems) and the productive Russellian shape of the method's self-membership
+- [*Machine Builds Machine*](https://atomicspacekitten.substack.com/p/machine-builds-machine) — the recursive limit of AI-native work; the plateau signal as a two-part discipline (when to ask for new operator intent + when not to ask); Russell + Hegel as bracketing anchors
 
 ### Meta repo and project anchors
 
