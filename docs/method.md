@@ -129,6 +129,24 @@ This guards against the failure mode where every operational discrepancy or proc
 
 Every meaningful artifact names what would supersede it. This holds the work in place without locking it. A reader can see what the artifact intends to remain authoritative for, and what would replace or absorb it under specified conditions.
 
+### Source-of-intent guard
+
+Fresh critique, synthesis, and handoff recaps may surface gaps between stated purpose and current evidence. Those gaps must not automatically become requests for the operator to reauthorize the purpose.
+
+When the grounding note or repo-local premise already states the end, treat the gap as an architectural means problem: what carrier, trace, model attempt, pressure test, inheritance structure, or boundary correction is required to make the stated purpose real?
+
+A held implementation question is not the same as a held purpose question. Do not promote unresolved means into an unresolved source-of-intent fork.
+
+Before naming operator-required input, distinguish:
+
+- source-of-intent premises already supplied
+- unresolved architectural means
+- sequencing choices among valid routes
+- operator-side positioning choices
+- evidence-depth assessments
+
+The operator should be asked to decide only the latter categories when the durable sources do not already answer them. Where the premise is already supplied and the means are unresolved, the method should force an architecture attempt against the premise.
+
 ### Fresh-context critique cycle
 
 At thresholds where the project's structure, posture, or direction needs re-examination, start fresh advisor threads and give each only the durable context — the repo and the grounding note. Do not give them the working thread's accumulated explanations unless the task is to fold a prior critique. The load-bearing property is **context reset**: the critic is denied working-thread momentum and forced to reconstruct the project from durable truth. That reconstruction is what surfaces drift, ceremony, overclaimed architecture, stale navigation, weak naming, missing proof, or mismatched source-of-truth boundaries.
