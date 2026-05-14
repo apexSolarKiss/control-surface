@@ -228,7 +228,7 @@ The first swing was pure ontology — abstract architecture work. Then a directi
 
 The prototype phase produced its plateau (milestone-7) and surfaced corrective principles: architecture-attempt-before-prototype, vocabulary deconstruction before architectural commitment, synthesis-attempt-against-concrete-example, proof-chain gravity well guard. These are the moves articulated above, surfaced through the project's actual work rather than imposed in advance.
 
-The second swing was back to abstraction — Phase 1 of the IA layered-content redirection. Four worked-example mode sketches plus a cross-mode synthesis. Phase 2 (brand discovery / digestion architecture) is currently in motion. Eventually a third swing back to demonstration will likely close the gap further; the asymptote does not arrive.
+The second swing moved back toward abstraction through the IA layered-content redirection: worked-example mode sketches, cross-mode synthesis, and later architecture attempts that pressure layered references, constraints, discretion, and inheritance. Later swings may return to demonstration or operational proof. The method cares about the pattern, not the worked example's current phase state: abstraction and execution keep pressuring each other; the asymptote does not arrive.
 
 The method is not separate from this history; it is what makes the history coherent.
 
