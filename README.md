@@ -6,6 +6,47 @@ Reusable control-surface workflow assets for ASK projects.
 
 This repo contains both the live operating files for `control-surface` itself and reusable workflow artifacts for downstream ASK projects, including the upstream instantiation phase before a target repo exists.
 
+## Start Here // Instantiate a New ASK Project
+
+To start a new ASK project from this meta repo, beginning from zero:
+
+1. Create a new GitHub repo for the target ASK project, usually under `apexSolarKiss/<project-name>`. Example: `apexSolarKiss/new-working-example-ASK`.
+2. Clone the new repo to the local ASK workspace.
+3. Create the repo-external project folder beside the repo:
+
+   ```text
+   <project-name>-EXTERNAL/
+     scratch/
+     sources of intent/
+   ```
+
+4. Instantiate the grounding note from [`templates/grounding-note.template.md`](templates/grounding-note.template.md) into the external folder:
+
+   ```text
+   <project-name>-EXTERNAL/sources of intent/<project-name>_grounding-note_v1.md
+   <project-name>-EXTERNAL/sources of intent/<project-name>_grounding-note.md
+   ```
+
+   The canonical unversioned mirror should equal v1.
+
+5. Copy and adapt the repo-local starter files into the new repo:
+
+   ```text
+   templates/AGENTS.template.md       → AGENTS.md
+   templates/architecture.template.md → docs/architecture.md
+   templates/CLAUDE.template.md       → CLAUDE.md
+   ```
+
+   For a new worked example, treat `docs/architecture.md` as default rather than optional.
+
+6. Create a minimal `README.md` for the new repo if one does not already exist.
+7. Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code to the new repo and begin bootstrap.
+8. Once bootstrap begins, the new repo's `AGENTS.md` governs execution.
+
+Default operating model: single-node Claude Code as both control surface and executor. Legacy Model A prompts are retained only for projects that explicitly need that older split.
+
+For deeper context on the three phases (Instantiation → Bootstrap → Operational), see [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md).
+
 ## Operating Model
 
 The active operating model for new ASK projects is single-node: **Claude Code as both control surface and executor**. An advisor in chat-based form — typically GPT or Claude — remains available outside the execution thread.
@@ -63,12 +104,14 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 - [`templates/AGENTS.template.md`](templates/AGENTS.template.md) — agent-agnostic starter for repo-local execution rules; derived from the shared workflow core of asset-pipeline-ASK's live AGENTS.md (project-specific architecture rules in that repo are not absorbed by default)
 - [`templates/grounding-note.template.md`](templates/grounding-note.template.md) — starter for the external grounding note that travels with each ASK project
 - [`templates/architecture.template.md`](templates/architecture.template.md) — starter for a downstream repo's architecture doc
+- [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) — optional Claude Code pointer file for downstream single-node repos
 
 Templates are copyable starters. They are not live for this repo unless explicitly adopted somewhere else.
 
 ### Prompts
 
 - [`prompts/project-instantiation-initial-prompt.md`](prompts/project-instantiation-initial-prompt.md) — agent-agnostic startup prompt for the pre-repo instantiation phase
+- [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) — session-start prompt for attaching Claude Code to an existing single-node project repo
 - [`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md) — open-ended structural critique against repo + grounding note (initial pass of the fresh-context critique cycle)
 - [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md) — advisor-role synthesis of two independent critiques into an advisory plan (synthesis pass)
 - [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md) — hand the advisory plan back to the execution surface for scoped implementation (execution pass)
@@ -96,7 +139,8 @@ Each legacy doc carries a deprecation header naming what supersedes it for curre
 | define execution rules inside the current repo | [`AGENTS.md`](AGENTS.md) |
 | understand this meta repo's own architecture | [`docs/architecture.md`](docs/architecture.md) |
 | set up the workflow before the target repo exists | [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md) and [`prompts/project-instantiation-initial-prompt.md`](prompts/project-instantiation-initial-prompt.md) |
-| create repo-local starter docs for a downstream repo | [`templates/AGENTS.template.md`](templates/AGENTS.template.md), [`templates/grounding-note.template.md`](templates/grounding-note.template.md), [`templates/architecture.template.md`](templates/architecture.template.md) |
+| attach Claude Code to an existing single-node repo | [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) |
+| create repo-local starter docs for a downstream repo | [`templates/AGENTS.template.md`](templates/AGENTS.template.md), [`templates/grounding-note.template.md`](templates/grounding-note.template.md), [`templates/architecture.template.md`](templates/architecture.template.md), [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) |
 | see how the structure mapped onto a real ASK project | [`examples/`](examples/) |
 | understand the previous canonical Model-A operating doc | [`control-surface.md`](control-surface.md) (legacy) |
 
@@ -109,7 +153,9 @@ For a new ASK project:
 - Copy [`templates/AGENTS.template.md`](templates/AGENTS.template.md) into the new repo as `AGENTS.md` and adapt project-specific defaults.
 - Copy [`templates/grounding-note.template.md`](templates/grounding-note.template.md) into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads.
 - Optionally copy [`templates/architecture.template.md`](templates/architecture.template.md) into the new repo as `docs/architecture.md`.
+- Optionally copy [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) into the new repo as `CLAUDE.md` when using Claude Code.
 - Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
+- Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code after the repo exists.
 
 ## Background Reading
 

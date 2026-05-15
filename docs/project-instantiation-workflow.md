@@ -33,7 +33,7 @@ During bootstrap:
 - copy `templates/AGENTS.template.md` into the repo as `AGENTS.md` and adapt project-specific defaults
 - copy `templates/grounding-note.template.md` into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads
 - optionally copy `templates/architecture.template.md` into the repo as `docs/architecture.md`
-- if running single-node, optionally add `CLAUDE.md` as a pointer to `AGENTS.md`
+- if running single-node, optionally copy `templates/CLAUDE.template.md` into the repo as `CLAUDE.md`
 - identify the first repo-local entry points
 
 This is the phase where repo-local truth begins to exist. The transition prompt is:
