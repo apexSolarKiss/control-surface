@@ -10,7 +10,20 @@ This repo contains both the live operating files for `control-surface` itself an
 
 To start a new ASK project from this meta repo, beginning from zero:
 
-1. Create a new GitHub repo for the target ASK project, usually under `apexSolarKiss/<project-name>`. Example: `apexSolarKiss/new-working-example-ASK`.
+1. Create a new GitHub repo for the target ASK project.
+
+   Repo pattern:
+
+   ```text
+   apexSolarKiss/<project-name>
+   ```
+
+   Example:
+
+   ```text
+   apexSolarKiss/new-working-example-ASK
+   ```
+
 2. Clone the new repo to the local ASK workspace.
 3. Create the repo-external project folder beside the repo:
 
