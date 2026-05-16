@@ -21,3 +21,14 @@ Do not rely on:
 The point is context reset: reconstruct the project from durable truth and surface what reads unclear, contradictory, overclaimed, stale, or structurally awkward. Open-ended is the posture; the durable backbone does the focusing.
 
 This is a critique, not a plan. Produce observations, not corrective actions.
+
+Also identify what additional external operator source of intent or direction is needed next, if any. Distinguish:
+
+- missing intent (the operator must supply a new purpose-level decision)
+- unresolved means (the premise is supplied; an architecture attempt or pressure test is implied)
+- sequencing choices among valid routes
+- repo-local absorption or routing
+- evidence-depth assessments
+- need for further fresh-context critique
+
+When the premise is already supplied by the durable sources, do not flag it as missing intent.
