@@ -161,7 +161,11 @@ This nudge operationalizes the source-of-intent guard. It reduces false stops, w
 
 The nudge is a lighter-weight control loop than the fresh-context critique cycle. Use it before invoking fresh external critique when the question is local sequencing, absorption, routing, or next-pressure choice. Escalate to fresh-context critique when the nudge surfaces drift, stale durable context, unresolved purpose, or a need for independent reconstruction from repo plus grounding note.
 
-The nudge has two reusable variants: [`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](../prompts/repo-next-source-of-intent-nudge-minimal-prompt.md) is a lightweight single-question nudge anchored against the grounding note; [`prompts/repo-next-source-of-intent-nudge-prompt.md`](../prompts/repo-next-source-of-intent-nudge-prompt.md) is the structured seven-outcome boundary-classification pass for cases where the pause needs explicit routing.
+The nudge currently has one live/default reusable prompt and two untested prototype variants:
+
+- [`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](../prompts/repo-next-source-of-intent-nudge-minimal-prompt.md) — live/default lightweight single-question nudge anchored against the grounding note
+- [`prompts/repo-next-source-of-intent-nudge-prompt.md`](../prompts/repo-next-source-of-intent-nudge-prompt.md) — untested structured seven-outcome boundary-classification prototype
+- [`prompts/repo-next-source-of-intent-nudge-externality-prototype-prompt.md`](../prompts/repo-next-source-of-intent-nudge-externality-prototype-prompt.md) — untested externality-decision extension of the structured prototype
 
 ### Fresh-context critique cycle
 

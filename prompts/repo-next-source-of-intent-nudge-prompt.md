@@ -1,4 +1,10 @@
-# Repo Source-of-Intent Nudge // Structured Advisor Prompt
+# Repo Source-of-Intent Nudge // Structured Prototype Advisor Prompt
+
+Prototype status: untested.
+
+This prompt is a structured prototype. The current live/default operating prompt remains the minimal nudge:
+
+`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`
 
 Use this prompt in the advisor surface at local plateaus, after meaningful absorptions, or when the next move is unclear but the durable purpose may already be sufficient. It is a lightweight boundary-classification pass, not generic "what next?"
 
