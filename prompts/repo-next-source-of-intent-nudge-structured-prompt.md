@@ -1,6 +1,6 @@
 # Repo Source-of-Intent Nudge // Structured Advisor Prompt
 
-Status: tested non-default routing instrument.
+Status: non-default routing instrument.
 
 The current live/default operating prompt remains the minimal nudge:
 
