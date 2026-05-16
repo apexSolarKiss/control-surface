@@ -130,6 +130,7 @@ Templates are copyable starters. They are not live for this repo unless explicit
 - [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md) — hand the advisory plan back to the execution surface for scoped implementation (execution pass)
 - [`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](prompts/repo-next-source-of-intent-nudge-minimal-prompt.md) — lightweight boundary nudge at local plateaus / absorptions / unclear next moves; single open-ended question anchored against the grounding note
 - [`prompts/repo-next-source-of-intent-nudge-prompt.md`](prompts/repo-next-source-of-intent-nudge-prompt.md) — structured seven-outcome boundary-classification pass; use when the pause needs explicit routing (continue / absorb / sequence / synthesize / ask / fresh-critique)
+- [`prompts/repo-next-source-of-intent-nudge-externality-prototype-prompt.md`](prompts/repo-next-source-of-intent-nudge-externality-prototype-prompt.md) — prototype extension of the structured nudge; tests whether the advisor can classify when external synthesis, fresh-context critique, or new operator intent is needed; not the default prompt
 
 ### Examples
 
