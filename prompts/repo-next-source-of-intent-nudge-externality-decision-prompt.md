@@ -1,12 +1,20 @@
-# Repo Source-of-Intent Nudge // Structured Prototype Advisor Prompt
+# Repo Source-of-Intent Nudge // Externality Decision Advisor Prompt
 
-Prototype status: untested.
+Status: tested non-default externality-decision instrument.
 
-This prompt is a structured prototype. The current live/default operating prompt remains the minimal nudge:
+This prompt extends the structured source-of-intent nudge with an explicit Externality Decision section. It is not the default nudge. The current live/default operating prompt remains the minimal nudge:
 
 `prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`
 
-Use this prompt in the advisor surface at local plateaus, after meaningful absorptions, or when the next move is unclear but the durable purpose may already be sufficient. It is a lightweight boundary-classification pass, not generic "what next?"
+Use this prompt when the pause requires an explicit Externality Decision among:
+
+- no externality needed
+- external synthesis from current durable state
+- fresh-context critique
+- new operator source-of-intent
+- simultaneous operator critique + fresh-context critique
+
+---
 
 The nudge is assigned to the advisor role. The role, not the model: the value comes from exteriority to execution-thread momentum, not from which model occupies the role. The same model can occupy the execution role or the advisor role in different threads.
 
@@ -42,5 +50,23 @@ Classify the answer into one of the following:
 A response of *"no new purpose-level source-of-intent is needed"* is a successful result.
 
 A response of *"real pause point; do not auto-chain"* is also a successful result, but it requires routing: name whether the pause routes to absorption, external synthesis, or fresh-context critique, and why.
+
+## Externality Decision
+
+After classifying the next boundary, decide whether the next move requires externality.
+
+Choose one:
+
+1. **No externality needed** — the durable sources and current repo state are sufficient; proceed with the bounded next move.
+2. **External synthesis from current durable state** — the current state is coherent but saturated; synthesize before selecting the next move.
+3. **Fresh-context critique** — the current thread may be momentum-loaded or globally stale; independent reconstruction from repo + grounding note is needed.
+4. **New operator source-of-intent** — the durable sources do not answer a necessary premise, value judgment, audience/positioning choice, or strategic direction.
+5. **Simultaneous operator critique + fresh-context critique** — the question is both source-of-intent sensitive and structurally uncertain; run fresh critique while also asking the operator to critique or restate the relevant intent.
+
+Do not use milestones as an automatic trigger. A milestone may be evidence of closure or saturation, but the trigger is the boundary classification above.
+
+Before recommending fresh-context critique, explain why external synthesis from current durable state is insufficient.
+
+Before asking for new operator source-of-intent, explain why the grounding note and repo-local durable sources do not already supply the premise.
 
 Do not route every plateau to the operator. Do not route every plateau to fresh-context critique. Classify the boundary first.
