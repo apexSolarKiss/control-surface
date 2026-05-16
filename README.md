@@ -128,7 +128,8 @@ Templates are copyable starters. They are not live for this repo unless explicit
 - [`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md) — open-ended structural critique against repo + grounding note (initial pass of the fresh-context critique cycle)
 - [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md) — advisor-role synthesis of two independent critiques into an advisory plan (synthesis pass)
 - [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md) — hand the advisory plan back to the execution surface for scoped implementation (execution pass)
-- [`prompts/repo-next-source-of-intent-nudge-prompt.md`](prompts/repo-next-source-of-intent-nudge-prompt.md) — advisor-role boundary-classification pass at local plateaus / absorptions / unclear next moves; lighter than the fresh-context critique cycle
+- [`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](prompts/repo-next-source-of-intent-nudge-minimal-prompt.md) — lightweight boundary nudge at local plateaus / absorptions / unclear next moves; single open-ended question anchored against the grounding note
+- [`prompts/repo-next-source-of-intent-nudge-prompt.md`](prompts/repo-next-source-of-intent-nudge-prompt.md) — structured seven-outcome boundary-classification pass; use when the pause needs explicit routing (continue / absorb / sequence / synthesize / ask / fresh-critique)
 
 ### Examples
 
