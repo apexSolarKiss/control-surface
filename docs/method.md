@@ -161,6 +161,8 @@ This nudge operationalizes the source-of-intent guard. It reduces false stops, w
 
 The nudge is a lighter-weight control loop than the fresh-context critique cycle. Use it before invoking fresh external critique when the question is local sequencing, absorption, routing, or next-pressure choice. Escalate to fresh-context critique when the nudge surfaces drift, stale durable context, unresolved purpose, or a need for independent reconstruction from repo plus grounding note.
 
+The nudge's reusable prompt lives in [`prompts/repo-next-source-of-intent-nudge-prompt.md`](../prompts/repo-next-source-of-intent-nudge-prompt.md).
+
 ### Fresh-context critique cycle
 
 At larger thresholds where the project's structure, posture, or direction needs re-examination beyond what a source-of-intent nudge can classify, start fresh advisor threads and give each only the durable context — the repo and the grounding note. Do not give them the working thread's accumulated explanations unless the task is to fold a prior critique. The load-bearing property is **context reset**: the critic is denied working-thread momentum and forced to reconstruct the project from durable truth. That reconstruction is what surfaces drift, ceremony, overclaimed architecture, stale navigation, weak naming, missing proof, or mismatched source-of-truth boundaries.
