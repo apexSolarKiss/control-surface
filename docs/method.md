@@ -147,9 +147,23 @@ Before naming operator-required input, distinguish:
 
 The operator should be asked to decide only the latter categories when the durable sources do not already answer them. Where the premise is already supplied and the means are unresolved, the method should force an architecture attempt against the premise.
 
+### Source-of-intent nudge
+
+At local plateaus, after meaningful absorptions, or when the next move is unclear but the durable purpose may already be sufficient, ask the advisor surface what additional operator source of intent or direction is needed to continue developing the project toward its stated purpose.
+
+The nudge is not the same as asking "what next?" It is a boundary-classification pass. The advisor should distinguish whether the project needs new source intent, a sequencing choice, a bounded architecture attempt, repo-local absorption or routing, external synthesis, or a fresh-context reset.
+
+A good nudge can return "no new purpose-level source-of-intent is needed." That is a successful result. It means the durable sources already contain the premise, and the next move should be derived from the current architecture rather than routed back to the operator as a new decision.
+
+A good nudge can also return a stop signal: the current closure is a real pause point and the next move should not auto-chain. That is also a successful result. It should route to absorption, external synthesis, or fresh-context critique depending on whether the current durable state merely needs sequencing, needs synthesis from current context, or needs independent reconstruction from repo plus grounding note.
+
+This nudge operationalizes the source-of-intent guard. It reduces false stops, where the system asks for operator input even though the intent is already supplied, and false autonomy, where the system continues without noticing that a genuine source-of-intent premise is missing or changed.
+
+The nudge is a lighter-weight control loop than the fresh-context critique cycle. Use it before invoking fresh external critique when the question is local sequencing, absorption, routing, or next-pressure choice. Escalate to fresh-context critique when the nudge surfaces drift, stale durable context, unresolved purpose, or a need for independent reconstruction from repo plus grounding note.
+
 ### Fresh-context critique cycle
 
-At thresholds where the project's structure, posture, or direction needs re-examination, start fresh advisor threads and give each only the durable context — the repo and the grounding note. Do not give them the working thread's accumulated explanations unless the task is to fold a prior critique. The load-bearing property is **context reset**: the critic is denied working-thread momentum and forced to reconstruct the project from durable truth. That reconstruction is what surfaces drift, ceremony, overclaimed architecture, stale navigation, weak naming, missing proof, or mismatched source-of-truth boundaries.
+At larger thresholds where the project's structure, posture, or direction needs re-examination beyond what a source-of-intent nudge can classify, start fresh advisor threads and give each only the durable context — the repo and the grounding note. Do not give them the working thread's accumulated explanations unless the task is to fold a prior critique. The load-bearing property is **context reset**: the critic is denied working-thread momentum and forced to reconstruct the project from durable truth. That reconstruction is what surfaces drift, ceremony, overclaimed architecture, stale navigation, weak naming, missing proof, or mismatched source-of-truth boundaries.
 
 The cycle has three moves, each assigned to a distinct surface:
 
