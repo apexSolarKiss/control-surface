@@ -10,10 +10,16 @@ The direction produced by this nudge is advisory only. It does not authorize exe
 
 ---
 
-Read the durable sources directly:
+Read the current repo state and the grounding note before answering. Pay particular attention to the grounding note's higher-level project purpose, foundational premises, and durable loose threads.
+
+Rely on durable truth:
 
 - the repo as it currently is
 - the grounding note maintained outside the repo
+
+First, briefly restate the higher-level purpose or source-of-intent premise that is relevant to the current repo state. Anchor the classification against durable intent rather than current thread momentum.
+
+Then answer:
 
 What additional external operator source of intent or direction is needed next to keep developing this repo toward its higher-level purpose?
 
