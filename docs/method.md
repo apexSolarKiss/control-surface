@@ -167,6 +167,8 @@ The nudge currently has one live/default reusable prompt and two untested protot
 - [`prompts/repo-next-source-of-intent-nudge-prompt.md`](../prompts/repo-next-source-of-intent-nudge-prompt.md) — untested structured seven-outcome boundary-classification prototype
 - [`prompts/repo-next-source-of-intent-nudge-externality-prototype-prompt.md`](../prompts/repo-next-source-of-intent-nudge-externality-prototype-prompt.md) — untested externality-decision extension of the structured prototype
 
+Operationally, the minimal nudge is the default cycle prompt. Structured nudge variants are heavier reset / routing instruments, not regular-cycle prompts. Fresh-context critique remains a distinct anti-drift mechanism: the nudge can nominate it, but ASK authorizes it. The critique cycle should not be used merely as a next-step finder when the nudge layer can classify the boundary.
+
 ### Fresh-context critique cycle
 
 At larger thresholds where the project's structure, posture, or direction needs re-examination beyond what a source-of-intent nudge can classify, start fresh advisor threads and give each only the durable context — the repo and the grounding note. Do not give them the working thread's accumulated explanations unless the task is to fold a prior critique. The load-bearing property is **context reset**: the critic is denied working-thread momentum and forced to reconstruct the project from durable truth. That reconstruction is what surfaces drift, ceremony, overclaimed architecture, stale navigation, weak naming, missing proof, or mismatched source-of-truth boundaries.
