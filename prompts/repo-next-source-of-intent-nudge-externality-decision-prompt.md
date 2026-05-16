@@ -1,6 +1,6 @@
 # Repo Source-of-Intent Nudge // Externality Decision Advisor Prompt
 
-Status: tested non-default externality-decision instrument.
+Status: non-default externality-decision instrument.
 
 This prompt extends the structured source-of-intent nudge with an explicit Externality Decision section. It is not the default nudge. The current live/default operating prompt remains the minimal nudge:
 

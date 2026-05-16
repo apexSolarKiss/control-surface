@@ -161,11 +161,11 @@ This nudge operationalizes the source-of-intent guard. It reduces false stops, w
 
 The nudge is a lighter-weight control loop than the fresh-context critique cycle. Use it before invoking fresh external critique when the question is local sequencing, absorption, routing, or next-pressure choice. Escalate to fresh-context critique when the nudge surfaces drift, stale durable context, unresolved purpose, or a need for independent reconstruction from repo plus grounding note.
 
-The nudge currently has one live/default reusable prompt and two tested non-default routing instruments:
+The nudge currently has one live/default reusable prompt and two non-default routing instruments:
 
 - [`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](../prompts/repo-next-source-of-intent-nudge-minimal-prompt.md) — live/default lightweight single-question nudge anchored against the grounding note
-- [`prompts/repo-next-source-of-intent-nudge-structured-prompt.md`](../prompts/repo-next-source-of-intent-nudge-structured-prompt.md) — tested non-default structured seven-outcome boundary-classification instrument
-- [`prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md`](../prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md) — tested non-default externality-decision extension for serious pause / routing decisions
+- [`prompts/repo-next-source-of-intent-nudge-structured-prompt.md`](../prompts/repo-next-source-of-intent-nudge-structured-prompt.md) — non-default structured seven-outcome boundary-classification instrument
+- [`prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md`](../prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md) — non-default externality-decision instrument for serious pause / routing decisions
 
 Operationally, the minimal nudge is the default cycle prompt. Structured nudge variants are heavier reset / routing instruments, not regular-cycle prompts. Fresh-context critique remains a distinct anti-drift mechanism: the nudge can nominate it, but ASK authorizes it. The critique cycle should not be used merely as a next-step finder when the nudge layer can classify the boundary.
 
