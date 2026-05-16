@@ -129,8 +129,8 @@ Templates are copyable starters. They are not live for this repo unless explicit
 - [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md) — advisor-role synthesis of two independent critiques into an advisory plan (synthesis pass)
 - [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md) — hand the advisory plan back to the execution surface for scoped implementation (execution pass)
 - [`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](prompts/repo-next-source-of-intent-nudge-minimal-prompt.md) — live/default nudge prompt; lightweight boundary nudge at local plateaus / absorptions / unclear next moves; single open-ended question anchored against the grounding note
-- [`prompts/repo-next-source-of-intent-nudge-prompt.md`](prompts/repo-next-source-of-intent-nudge-prompt.md) — untested prototype; structured seven-outcome boundary-classification pass; not the default prompt
-- [`prompts/repo-next-source-of-intent-nudge-externality-prototype-prompt.md`](prompts/repo-next-source-of-intent-nudge-externality-prototype-prompt.md) — untested prototype extension of the structured nudge prototype; tests whether the advisor can classify when external synthesis, fresh-context critique, or new operator intent is needed; not the default prompt
+- [`prompts/repo-next-source-of-intent-nudge-structured-prompt.md`](prompts/repo-next-source-of-intent-nudge-structured-prompt.md) — tested non-default seven-outcome boundary-classification pass; not the default prompt
+- [`prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md`](prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md) — tested non-default extension for deciding whether the pause needs external synthesis, fresh-context critique, new operator intent, or simultaneous operator + fresh critique; not the default prompt
 
 ### Examples
 
