@@ -161,7 +161,7 @@ This nudge operationalizes the source-of-intent guard. It reduces false stops, w
 
 The nudge is a lighter-weight control loop than the fresh-context critique cycle. Use it before invoking fresh external critique when the question is local sequencing, absorption, routing, or next-pressure choice. Escalate to fresh-context critique when the nudge surfaces drift, stale durable context, unresolved purpose, or a need for independent reconstruction from repo plus grounding note.
 
-The nudge's reusable prompt lives in [`prompts/repo-next-source-of-intent-nudge-prompt.md`](../prompts/repo-next-source-of-intent-nudge-prompt.md).
+The nudge has two reusable variants: [`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](../prompts/repo-next-source-of-intent-nudge-minimal-prompt.md) is a lightweight single-question nudge anchored against the grounding note; [`prompts/repo-next-source-of-intent-nudge-prompt.md`](../prompts/repo-next-source-of-intent-nudge-prompt.md) is the structured seven-outcome boundary-classification pass for cases where the pause needs explicit routing.
 
 ### Fresh-context critique cycle
 

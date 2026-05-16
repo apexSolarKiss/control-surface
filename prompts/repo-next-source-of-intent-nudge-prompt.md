@@ -1,4 +1,4 @@
-# Repo Source-of-Intent Nudge // Advisor Prompt
+# Repo Source-of-Intent Nudge // Structured Advisor Prompt
 
 Use this prompt in the advisor surface at local plateaus, after meaningful absorptions, or when the next move is unclear but the durable purpose may already be sufficient. It is a lightweight boundary-classification pass, not generic "what next?"
 
