@@ -54,7 +54,8 @@ To start a new ASK project from this meta repo, beginning from zero:
 
 6. Create a minimal `README.md` for the new repo if one does not already exist.
 7. Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code to the new repo and begin bootstrap.
-8. Once bootstrap begins, the new repo's `AGENTS.md` governs execution.
+8. (Optional) When an external advisor surface is used, adapt [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) into an operator-side advisor-startup prompt, typically alongside the grounding note in `<project-name>-EXTERNAL/sources of intent/`.
+9. Once bootstrap begins, the new repo's `AGENTS.md` governs execution.
 
 Default operating model: single-node Claude Code as both control surface and executor. Legacy Model A prompts are retained only for projects that explicitly need that older split.
 
@@ -118,6 +119,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 - [`templates/grounding-note.template.md`](templates/grounding-note.template.md) — starter for the external grounding note that travels with each ASK project
 - [`templates/architecture.template.md`](templates/architecture.template.md) — starter for a downstream repo's architecture doc
 - [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) — optional Claude Code pointer file for downstream single-node repos
+- [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) — optional starter for attaching an external advisor surface (GPT or Claude in chat form) to a downstream repo; the project-specific instantiation typically lives operator-side alongside the grounding note
 
 Templates are copyable starters. They are not live for this repo unless explicitly adopted somewhere else.
 
@@ -156,6 +158,7 @@ Each legacy doc carries a deprecation header naming what supersedes it for curre
 | understand this meta repo's own architecture | [`docs/architecture.md`](docs/architecture.md) |
 | set up the workflow before the target repo exists | [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md) and [`prompts/project-instantiation-initial-prompt.md`](prompts/project-instantiation-initial-prompt.md) |
 | attach Claude Code to an existing single-node repo | [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) |
+| attach an external advisor surface (GPT or Claude in chat form) to an existing repo | [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) |
 | create repo-local starter docs for a downstream repo | [`templates/AGENTS.template.md`](templates/AGENTS.template.md), [`templates/grounding-note.template.md`](templates/grounding-note.template.md), [`templates/architecture.template.md`](templates/architecture.template.md), [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) |
 | see how the structure mapped onto a real ASK project | [`examples/`](examples/) |
 | understand the previous canonical Model-A operating doc | [`control-surface.md`](control-surface.md) (legacy) |
@@ -172,6 +175,7 @@ For a new ASK project:
 - Optionally copy [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) into the new repo as `CLAUDE.md` when using Claude Code.
 - Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
 - Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code after the repo exists.
+- Optionally adapt [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) into an operator-side advisor-startup prompt when an external advisor surface is used.
 
 ## Background Reading
 
