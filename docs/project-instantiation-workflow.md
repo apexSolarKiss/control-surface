@@ -52,6 +52,7 @@ During operational use:
 - use prompts for startup or handoff, not as permanent repo policy
 - treat per-conversation memory (Claude Code's MEMORY.md, ChatGPT thread history, task lists) as ephemeral session state — do not promote it into the durable sources
 - when an external advisor surface is used (GPT or Claude in chat form), adapt `templates/advisor-initial-prompt.template.md` into an operator-side advisor-startup prompt, typically alongside the grounding note in `<project-name>-EXTERNAL/sources of intent/`
+- when the project will use the advisor / nudge / critique surfaces, adapt the meta-repo's reusable nudge prompts (`prompts/repo-next-source-of-intent-nudge-*-prompt.md`) and critique prompts (`prompts/repo-critique-*-prompt.md`) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`; the meta-repo prompts remain canonical, the operator-side copies are project-flavored adaptations
 
 ## What Stays External
 
