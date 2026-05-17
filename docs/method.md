@@ -19,7 +19,9 @@ The two layers are at different altitudes:
 - **Execution protocol** — per-session, per-PR, multi-agent dialogue at the architectural altitude. Workflow rules live in `control-surface/AGENTS.md`; advisor posture and cadence context are recorded in the meta repo's grounding note. Anchored on [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration).
 - **Methodology** — cross-phase, across-time, single-mind project rhythm. Lives here. Anchored on [*From Execution Proof Back to Normative Structure*](https://atomicspacekitten.substack.com/p/from-execution-proof-back-to-normative).
 
-The pendulum / swing motion that *From Execution Proof Back to Normative Structure* names as the project's rhythm is one element of the method, not the whole. Other elements — ontology development, vocabulary deconstruction, pressure-surface use of prototypes, evidence-trail integrity, and several more — are equally load-bearing. The doc covers the broader method; the swing is the most recent and visible metaphor but does not exhaust the content.
+The pendulum / swing motion that *From Execution Proof Back to Normative Structure* names as the project's rhythm is one element of the method, not the whole. It names the across-time rhythm of adversarial iteration. Other elements — ontology development, vocabulary deconstruction, pressure-surface use of prototypes, evidence-trail integrity, fresh-context critique, source-of-intent guard, source-of-intent nudge, externality-decision routing, and drift audit — are equally load-bearing.
+
+The nudge layer adds something different from a metaphor. It is an operational simulation of the external-intent boundary: the system asks whether durable sources already supply enough intent for the next move, whether new operator intent is needed, whether external synthesis is enough, or whether fresh-context critique should be nominated. The method doc covers the broader method; no single rhythm, metaphor, or control layer exhausts the content.
 
 ## What This Doc Captures
 
