@@ -51,6 +51,7 @@ During operational use:
 - treat the external grounding note as the source of truth for repo-external context
 - use prompts for startup or handoff, not as permanent repo policy
 - treat per-conversation memory (Claude Code's MEMORY.md, ChatGPT thread history, task lists) as ephemeral session state — do not promote it into the durable sources
+- when an external advisor surface is used (GPT or Claude in chat form), adapt `templates/advisor-initial-prompt.template.md` into an operator-side advisor-startup prompt, typically alongside the grounding note in `<project-name>-EXTERNAL/sources of intent/`
 
 ## What Stays External
 
