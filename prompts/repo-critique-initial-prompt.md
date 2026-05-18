@@ -1,4 +1,6 @@
-# Repo Critique Initial Prompt // Minimal
+# Repo Critique Initial Prompt
+
+Use this prompt to invoke an open-ended fresh-context critique of a repo against its grounding note.
 
 Review the current state of the repo and surface high-level observations — concerns, doubts, or things that do not make sense — anchored in the grounding note and the higher-level purpose articulated therein.
 

@@ -165,7 +165,7 @@ The nudge is a lighter-weight control loop than the fresh-context critique cycle
 
 The nudge currently has one live/default reusable prompt and two non-default routing instruments:
 
-- [`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](../prompts/repo-next-source-of-intent-nudge-minimal-prompt.md) — live/default lightweight single-question nudge anchored against the grounding note
+- [`prompts/repo-nudge-prompt.md`](../prompts/repo-nudge-prompt.md) — default lightweight single-question nudge anchored against the grounding note
 - [`prompts/repo-next-source-of-intent-nudge-structured-prompt.md`](../prompts/repo-next-source-of-intent-nudge-structured-prompt.md) — non-default structured seven-outcome boundary-classification instrument
 - [`prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md`](../prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md) — non-default externality-decision instrument for serious pause / routing decisions
 
@@ -181,7 +181,7 @@ The cycle has three moves, each assigned to a distinct surface:
 2. **Advisor-role synthesis** — a separate thread in the advisor surface folds both critiques into one analysis and produces an advisory plan, from outside execution momentum. The role is what matters; the model occupying it does not need to differ from the critique threads. The structural value is exteriority to the threads that produced the critiques.
 3. **Bounded absorption** — the execution surface verifies repo state fresh, scopes the advisory plan into implementation work, and stops at exact scoped diff before any commit. Only corrections that survive synthesis and operator approval become repo work, grounding-note updates, or held threads.
 
-The fresh-context critique cycle now has two initial-prompt variants. The minimal initial prompt preserves the open-ended critique behavior: high-level observations, concerns, doubts, and source-of-intent needs anchored in the grounding note. The structured initial prompt is non-default and belongs at the critique-cycle altitude when explicit boundary classification is useful. This preserves the same distinction the nudge ladder established: lightweight prompts keep regular motion organic; structured prompts are heavier routing instruments.
+The fresh-context critique cycle now has default and non-default structured variants across its prompt surfaces. The default initial prompt preserves open-ended critique behavior: high-level observations, concerns, doubts, and source-of-intent needs anchored in the grounding note. The default synthesis prompt preserves simple fold-and-plan behavior. The default execution prompt preserves the fuller-context handoff: independent critique plus folded advisory plan, with execution still stopping at exact scoped diff. Structured variants are non-default and belong at the critique-cycle altitude when explicit boundary classification, convergence/divergence synthesis, or stricter execution scoping is useful. This preserves the same distinction the nudge ladder established: lightweight prompts keep regular motion organic; structured prompts are heavier routing instruments.
 
 This pattern composes both adversarial collaboration and adversarial iteration: the independent critiques create multi-mind opposition in one moment (collaboration); the synthesis and absorption metabolize that opposition into the next cross-time swing of the project (iteration). Adversarial iteration uses adversarial collaboration as a pressure mechanism at the structural-review altitude.
 

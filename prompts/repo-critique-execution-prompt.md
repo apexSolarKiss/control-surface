@@ -1,23 +1,15 @@
 # Repo Critique Execution Prompt
 
-The following or attached advisory plan was produced by the advisor surface after synthesizing independent fresh-context critique work for `<project>`.
+Following or attached is an independent critique of `<project>` produced by a separate fresh-context advisor thread.
 
-You are the execution surface. Your job is not to re-litigate the critique. Your job is to verify repo state, scope any accepted advisory moves into implementation work, and stop at exact scoped diff before commit.
+I passed your above critique to the advisor, asked it to fold into its own critique as appropriate, and it produced the following advisory plan to address the issues.
 
-Before editing:
+Use both the independent critique and the folded advisory plan as context. Scope only the work ASK asks you to scope. Stop at exact scoped diff before commit.
 
-- verify repo state fresh
-- identify files in scope
-- identify scope out
-- identify non-actions
-- identify expected terminal state
+## Independent critique
 
-Only implement what the operator has approved or explicitly asked you to scope.
+Paste or attach the independent critique below.
 
-Do not widen the advisory plan.
-Do not turn held questions into authorized work.
-Do not mutate repo files before the scoped plan is clear.
+## Folded advisory plan
 
-## Advisory plan to scope into execution
-
-Paste or attach the advisory plan below.
+Paste or attach the folded advisory plan below.

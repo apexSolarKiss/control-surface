@@ -4,7 +4,7 @@ Status: non-default routing instrument.
 
 The current live/default operating prompt remains the minimal nudge:
 
-`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`
+`prompts/repo-nudge-prompt.md`
 
 Use this prompt in the advisor surface at local plateaus, after meaningful absorptions, or when the next move is unclear but the durable purpose may already be sufficient. It is a lightweight boundary-classification pass, not generic "what next?"
 
