@@ -120,6 +120,14 @@ Meaningful changes require:
 
 If a PR is used, this belongs in the PR description. If no PR is used, the same summary belongs in the executor handoff or approval record.
 
+### Voice Externality Scan
+
+Before presenting an exact scoped diff for approval, scan added prose for voice-externality risk according to the project's operator-side voice discipline memory and grounding-note voice guidance.
+
+Flag any matches or concerns honestly in the structured change summary. Do not auto-sanitize: some apparent matches may be legitimate domain vocabulary that the project needs to name directly.
+
+The scan rule may live in `AGENTS.md`; the token list, translation table, and protected domain-vocabulary list do not. Those specifics are operator-side context and must not be copied into repo-local artifacts.
+
 ### Default: Hold or Carry Through Per Adversarial-Collaboration Preconditions
 
 When ASK has approved the scoped diff, the workflow continues through commit and push to PR creation.
