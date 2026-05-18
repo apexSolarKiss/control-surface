@@ -1,21 +1,23 @@
-# Repo Critique // Execution Prompt
+# Repo Critique Execution Prompt
 
-Use this prompt in the execution surface after the advisor surface has produced a synthesized critique and advisory plan (using `repo-critique-synthesis-prompt.md`).
+The following or attached advisory plan was produced by the advisor surface after synthesizing independent fresh-context critique work for `<project>`.
 
-This prompt hands the advisor plan to the execution surface. The execution surface verifies repo state fresh, reads the relevant repo truth directly, turns the advisory plan into a scoped implementation plan, and stops at exact scoped diff before any commit. The execution surface does not auto-authorize work; each scoped diff goes through the operator's normal approval gates.
+You are the execution surface. Your job is not to re-litigate the critique. Your job is to verify repo state, scope any accepted advisory moves into implementation work, and stop at exact scoped diff before commit.
 
-The advisor plan is direction, not procedure. The execution surface owns sequencing, scoping, and the per-PR cadence.
+Before editing:
 
----
+- verify repo state fresh
+- identify files in scope
+- identify scope out
+- identify non-actions
+- identify expected terminal state
 
-The following is an advisory plan produced by the advisor surface, synthesized from two independent fresh-context critiques:
+Only implement what the operator has approved or explicitly asked you to scope.
 
-```
-[paste the advisory plan here]
-```
+Do not widen the advisory plan.
+Do not turn held questions into authorized work.
+Do not mutate repo files before the scoped plan is clear.
 
-1. Verify repo state fresh: branch freshness, working tree clean, relevant docs read directly from current main. Do not rely on the plan's repo-state claims without verification.
-2. Turn the advisory plan into a scoped implementation plan: name files in scope, scope in/out, non-actions, and expected terminal state. The sequencing is yours to propose; the advisory plan is direction, not a fixed procedure.
-3. Stop at exact scoped diff before any commit. The operator approves each scoped diff before commit, per the project's normal cadence.
+## Advisory plan to scope into execution
 
-The advisor plan is advisory direction. Execution authority remains with the operator's approval gates. Do not collapse the advisory plan into automatic work.
+Paste or attach the advisory plan below.
