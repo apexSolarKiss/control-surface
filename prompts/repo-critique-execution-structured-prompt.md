@@ -2,6 +2,8 @@
 
 Status: non-default structured critique-execution prompt.
 
+Use this prompt to hand an advisory plan to the execution surface with explicit scope discipline (files in scope, scope out, non-actions, expected terminal state).
+
 The following or attached advisory plan was produced by the advisor surface after synthesizing independent fresh-context critique work for `<project>`.
 
 You are the execution surface. Your job is not to re-litigate the critique. Your job is to verify repo state, scope any accepted advisory moves into implementation work, and stop at exact scoped diff before commit.
