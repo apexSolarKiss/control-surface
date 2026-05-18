@@ -2,6 +2,8 @@
 
 Status: non-default structured critique-synthesis prompt.
 
+Use this prompt to fold another independent fresh-context critique with explicit convergence/divergence analysis and structured boundary classification.
+
 You are in the advisor surface for `<project>`.
 
 You have just produced your own independent fresh-context critique above. Following or attached is another independent critique of `<project>` produced by a separate fresh-context thread.

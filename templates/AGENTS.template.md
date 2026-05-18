@@ -120,9 +120,9 @@ Meaningful changes require:
 
 If a PR is used, this belongs in the PR description. If no PR is used, the same summary belongs in the executor handoff or approval record.
 
-### Voice Externality Scan
+### Operator-Side Voice Scan
 
-Before presenting an exact scoped diff for approval, scan added prose for voice-externality risk according to the project's operator-side voice discipline memory and grounding-note voice guidance.
+Before presenting an exact scoped diff for approval, scan added prose for voice / surface-boundary risk according to the project's operator-side voice discipline memory and grounding-note voice guidance.
 
 Flag any matches or concerns honestly in the structured change summary. Do not auto-sanitize: some apparent matches may be legitimate domain vocabulary that the project needs to name directly.
 
