@@ -35,6 +35,20 @@ Focus on:
 - Use asset-pipeline-ASK as the single-node working example (default) and mazeASK as the legacy Model A working example. Neither is policy.
 - Keep the next step concrete and minimal.
 
+## Operator-side memory layer
+
+During instantiation, identify whether the project needs operator-side memory entries for durable execution context that should guide the control surface but should not live repo-locally.
+
+Examples include:
+
+- voice-discipline / voice-externality operational protections, where the repo may carry the rule but operator-side memory carries project-specific protected vocabulary, translation guidance, or over-sanitization warnings
+- tool-dependent workflow identity, where the repo may carry a tool-agnostic workflow rule but operator-side memory carries the current approved external tool / vendor / surface identity and substitution path
+- other project-specific operator-side specifics that repo rules depend on but should not be copied into repo-local artifacts
+
+The instantiation advisor should name which operator-side memory entries, if any, are needed for the project and what category each entry serves. Do not include concrete token lists, translation tables, hook configs, vendor names, or project-specific protected vocabulary in this prompt output. Those specifics are project-tailored operator-side content and should be created only in the downstream project's operator-side memory layer.
+
+If no operator-side memory entries are needed yet, say so explicitly.
+
 ## Expected Output
 
 Produce the next ready-to-send prompt for creating or bootstrapping the target repo.
