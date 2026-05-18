@@ -4,7 +4,7 @@ Status: non-default externality-decision instrument.
 
 This prompt extends the structured source-of-intent nudge with an explicit Externality Decision section. It is not the default nudge. The current live/default operating prompt remains the minimal nudge:
 
-`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`
+`prompts/repo-nudge-prompt.md`
 
 Use this prompt when the pause requires an explicit Externality Decision among:
 
