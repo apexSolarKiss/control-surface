@@ -204,6 +204,14 @@ If the project has a prototype surface, decide whether the prototype is a pressu
 
 If the project has external systems (databases, CMSs, workflow tools), decide how mutations to those systems are governed (Plan-Before-Execute applies; Structured Change Summary applies; per-action authorization may or may not be required depending on reversibility).
 
+### Tool-Dependent Workflow Rules
+
+When a project workflow depends on an external tool, vendor, model, rendering surface, extraction surface, diagram-generation surface, or other operator-supplied system whose identity may change, encode the repo-local rule tool-agnostically.
+
+In `AGENTS.md`, name the structural role the tool plays, when it is invoked, what inputs and outputs it expects, the authority boundary, and any refresh cadence. In operator-side memory, carry the current approved tool / vendor / surface identity, the substitution path, and any operational details that depend on the specific tool.
+
+The repo rule names the role; operator-side memory names the current occupant of the role. Substitution updates the memory entry, not the repo rule.
+
 ---
 
 ## Refresh Cadences
