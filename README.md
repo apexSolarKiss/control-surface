@@ -61,12 +61,13 @@ To start a new ASK project from this meta repo, beginning from zero:
    prompts/repo-next-source-of-intent-nudge-minimal-prompt.md             → <project-name>_repo-nudge-minimal-prompt.md
    prompts/repo-next-source-of-intent-nudge-structured-prompt.md          → <project-name>_repo-nudge-structured-prompt.md
    prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md → <project-name>_repo-nudge-externality-decision-prompt.md
-   prompts/repo-critique-initial-prompt.md                                → <project-name>_repo-critique-initial-prompt.md
+   prompts/repo-critique-initial-prompt.md                                → <project-name>_repo-critique-initial-prompt.md             (minimal / default)
+   prompts/repo-critique-initial-structured-prompt.md                     → <project-name>_repo-critique-initial-structured-prompt.md  (non-default structured)
    prompts/repo-critique-synthesis-prompt.md                              → <project-name>_repo-critique-synthesis-prompt.md
    prompts/repo-critique-execution-prompt.md                              → <project-name>_repo-critique-execution-prompt.md
    ```
 
-   The meta-repo prompts remain canonical reusable sources; the operator-side copies are project-flavored adaptations so the advisor and control surfaces can operate without re-deriving prompt language each time. Not every project needs all six immediately — adapt only the ones the project will actually use.
+   The meta-repo prompts remain canonical reusable sources; the operator-side copies are project-flavored adaptations so the advisor and control surfaces can operate without re-deriving prompt language each time. Not every project needs all seven immediately — adapt only the ones the project will actually use.
 
 10. Once bootstrap begins, the new repo's `AGENTS.md` governs execution.
 
@@ -189,7 +190,7 @@ For a new ASK project:
 - Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
 - Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code after the repo exists.
 - Optionally adapt [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) into an operator-side advisor-startup prompt when an external advisor surface is used.
-- Optionally adapt the meta-repo's nudge prompts ([`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](prompts/repo-next-source-of-intent-nudge-minimal-prompt.md), [`prompts/repo-next-source-of-intent-nudge-structured-prompt.md`](prompts/repo-next-source-of-intent-nudge-structured-prompt.md), [`prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md`](prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md)) and critique prompts ([`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md), [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md), [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md)) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/` when those surfaces will be used.
+- Optionally adapt the meta-repo's nudge prompts ([`prompts/repo-next-source-of-intent-nudge-minimal-prompt.md`](prompts/repo-next-source-of-intent-nudge-minimal-prompt.md), [`prompts/repo-next-source-of-intent-nudge-structured-prompt.md`](prompts/repo-next-source-of-intent-nudge-structured-prompt.md), [`prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md`](prompts/repo-next-source-of-intent-nudge-externality-decision-prompt.md)) and critique prompts ([`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md) — minimal / default, [`prompts/repo-critique-initial-structured-prompt.md`](prompts/repo-critique-initial-structured-prompt.md) — non-default structured, [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md), [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md)) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/` when those surfaces will be used.
 
 ## Background Reading
 
