@@ -22,6 +22,28 @@ The grounding note lives outside the repo by design. It carries repo-external co
 
 The grounding note ages slowly because it points to state and carries context. If you find yourself updating it weekly, something fast-aging has crept in and should move out.
 
+## Post-Bootstrap Trim Pass
+
+The grounding note often starts life before the target repo exists. During instantiation, it may carry repo-shape thinking, planned file inventory, "future repo" framing, and bootstrap-stage task sequencing — material that is appropriate before the repo exists and becomes fast-aging the moment the repo begins to own project truth.
+
+Once initial bootstrap completes — repo created, `AGENTS.md` adopted, first repo-local docs in place — run a one-time trim pass on the canonical grounding note:
+
+- Remove or relocate material that the repo now owns.
+- Replace "future repo" language with references to the live repo.
+- Move active planning-packet instructions, bootstrap-stage task sequencing, and current-state file inventory out of the grounding note (to operator-side scratch or to repo-local docs, as appropriate).
+- Verify that what remains is durable source-of-intent, audience, philosophy, foundational premises, durable loose threads, voice / surface discipline, and advisor calibration.
+
+Post-bootstrap-specific fast-aging red flags to look for during the trim:
+
+- PR numbers, branch names, commit references
+- "future repo" language after the repo exists
+- active planning-packet instructions
+- bootstrap-stage task sequencing or current / next-task material
+- current repo file inventory used as state tracking (as distinct from pointer references to repo paths)
+- repo-state chronology accumulated across the pre-repo phase
+
+The trim pass is one-time at the bootstrap-to-operational transition. After it, normal "Refresh Triggers" (below) govern further changes. If the grounding note keeps needing trim passes between strategic refreshes, fast-aging material is leaking back in and the boundary between operator-side scratch and the grounding note needs attention.
+
 ## Versioning
 
 Versioned grounding-note files (e.g. `grounding-note-vN.md`) are frozen historical snapshots. The canonical un-versioned mirror (`grounding-note.md`) is always equal to the latest version.

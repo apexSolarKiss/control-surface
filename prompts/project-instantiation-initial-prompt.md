@@ -73,3 +73,5 @@ Once the repo exists, the operator transitions to the bootstrap phase. The relev
 - `prompts/codex-initial-prompt.txt` — for legacy Model A (Codex-side, retained for `mazeASK` and any other project still on Model A)
 
 The bootstrap prompt assumes repo-local `AGENTS.md` (copied and adapted from `templates/AGENTS.template.md`) is now authoritative for execution rules.
+
+After initial bootstrap completes (repo created, `AGENTS.md` adopted, first repo-local docs in place), run the post-bootstrap grounding-note trim pass described in `templates/grounding-note.template.md`. The pre-repo grounding note often carries repo-shape thinking, planned file inventory, "future repo" language, and bootstrap-stage task sequencing that becomes fast-aging once the repo owns project truth.

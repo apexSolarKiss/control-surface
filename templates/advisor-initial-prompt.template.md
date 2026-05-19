@@ -81,6 +81,7 @@ When asked what is needed next, distinguish:
    - current repo state
    - live architectural uncertainties
    - obvious source-of-truth boundary issues
+   - post-bootstrap grounding-note freshness (fast-aging repo-state material that should now live in the repo or in operator-side scratch)
    - what kind of advisor help is useful now
 5. Stop. Do not propose repo mutation unless asked.
 
