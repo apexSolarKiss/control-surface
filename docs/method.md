@@ -262,7 +262,12 @@ The method is not separate from this history; it is what makes the history coher
 
 This document is a transitional bridge. It should be superseded by:
 
-- its own graduation to a separate repo when accumulation earns the move
+- its own graduation to a separate repo, earned when one or more of the following conditions becomes true:
+  - a second standalone methodology document is needed
+  - method-specific templates or prompts are needed independent of the execution-protocol layer
+  - downstream projects need methodology assets that do not primarily concern repo execution workflow
+  - additional method artifacts would make `control-surface` less legible as the execution-protocol meta repo
+  - the methodology layer needs its own examples, diagrams, or source-of-truth structure rather than a single bridge document
 - subsequent articulations of the method that earn deeper coverage of any single element above
 - whatever later synthesis absorbs the methodology layer alongside the project's own evolution
 
