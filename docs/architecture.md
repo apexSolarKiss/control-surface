@@ -10,9 +10,10 @@ An earlier split-execution model — ChatGPT as prompt compiler, Codex as execut
 
 The workflow rules are agent-agnostic; the rules in `AGENTS.md` apply to whoever is executing.
 
-Two live working examples anchor the family:
+Three live working examples anchor the family:
 
-- `apexSolarKiss/asset-pipeline-ASK` — single-node working example
+- `apexSolarKiss/asset-pipeline-ASK` — single-node working example (mature pressure surface)
+- `apexSolarKiss/urban-observatory` — single-node working example (newer; instantiation / source-of-intent recovery pressure surface)
 - `apexSolarKiss/mazeASK` — Model A working example (still active for that project)
 
 ## Layer Map
@@ -21,7 +22,7 @@ This repo sits in the middle of a three-tier structure:
 
 - **Methodology layer** — adversarial iteration / cross-phase swing discipline. Currently represented by [`docs/method.md`](method.md) as a transitional bridge; may graduate to its own repo when accumulation earns it.
 - **Execution-protocol layer** — this repo's core purpose. `AGENTS.md`, templates, review cadence, and branch discipline encode how work gets done within a session.
-- **Project repos** — applications of the method and protocol to concrete domains. `apexSolarKiss/asset-pipeline-ASK` is the single-node working example and primary pressure surface for rule evolution; `apexSolarKiss/mazeASK` is the legacy Model A working example.
+- **Project repos** — applications of the method and protocol to concrete domains. `apexSolarKiss/asset-pipeline-ASK` is the mature single-node working example and primary pressure surface for rule evolution; `apexSolarKiss/urban-observatory` is the second single-node working example, currently in early bootstrap and exercising the meta repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces; `apexSolarKiss/mazeASK` is the legacy Model A working example.
 
 The control-surface repo owns the execution-protocol layer. It may temporarily host methodology articulation but should not become the methodology repo by default.
 
