@@ -35,6 +35,7 @@ During bootstrap:
 - optionally copy `templates/architecture.template.md` into the repo as `docs/architecture.md`
 - if running single-node, optionally copy `templates/CLAUDE.template.md` into the repo as `CLAUDE.md`
 - identify the first repo-local entry points
+- run the post-bootstrap grounding-note trim pass per `templates/grounding-note.template.md` once the repo carries project truth — remove or relocate fast-aging material (repo-state chronology, planning-packet instructions, "future repo" language, bootstrap-stage task sequencing) that the pre-repo grounding note may have accumulated
 
 This is the phase where repo-local truth begins to exist. The transition prompt is:
 
