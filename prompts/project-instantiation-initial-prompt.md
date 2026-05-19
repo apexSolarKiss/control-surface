@@ -26,6 +26,7 @@ Focus on:
 - identifying the smallest initial repo structure
 - deciding what should stay external (grounding note) versus what should become repo-local once the repo exists
 - choosing which templates from `templates/` to adopt: at minimum `AGENTS.template.md` and `grounding-note.template.md`
+- evaluating whether the project profile is architecture-uncertain (ontology-first work, prototypes as pressure surfaces, deferred schema commitment, modeling-before-planning, ceremony-budget pressure) and whether `templates/overlays/architecture-uncertain-rules.template.md` should be adopted on top of the base `AGENTS.template.md`
 
 ## Working Rules
 

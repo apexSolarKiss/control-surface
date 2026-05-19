@@ -34,6 +34,7 @@ During bootstrap:
 - copy `templates/grounding-note.template.md` into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads
 - optionally copy `templates/architecture.template.md` into the repo as `docs/architecture.md`
 - if running single-node, optionally copy `templates/CLAUDE.template.md` into the repo as `CLAUDE.md`
+- if the project profile is architecture-uncertain (ontology-first work, prototypes as pressure surfaces, deferred schema commitment, modeling-before-planning, ceremony-budget pressure), optionally adopt `templates/overlays/architecture-uncertain-rules.template.md` on top of the base `AGENTS.md`; skip when the task surface is known and the work is execution against it
 - identify the first repo-local entry points
 - run the post-bootstrap grounding-note trim pass per `templates/grounding-note.template.md` once the repo carries project truth — remove or relocate fast-aging material (repo-state chronology, planning-packet instructions, "future repo" language, bootstrap-stage task sequencing) that the pre-repo grounding note may have accumulated
 
