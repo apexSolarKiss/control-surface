@@ -87,9 +87,10 @@ An earlier split-execution model — ChatGPT as prompt compiler, Codex as execut
 
 The workflow rules live in repo-local `AGENTS.md` files and are written agent-agnostically — they apply to whoever is executing.
 
-Two live working examples anchor the family:
+Three live working examples anchor the family:
 
-- `apexSolarKiss/asset-pipeline-ASK` — single-node working example, primary pressure surface from which the meta repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
+- `apexSolarKiss/asset-pipeline-ASK` — mature single-node working example and primary pressure surface from which the meta repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
+- `apexSolarKiss/urban-observatory` — second single-node working example. Newer project, currently in early bootstrap and prototype-planning phase. Pressures the meta repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
 - `apexSolarKiss/mazeASK` — Model A working example. Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against. Still active for that project.
 
 ## Source-of-Truth Split
@@ -152,7 +153,8 @@ Templates are copyable starters. They are not live for this repo unless explicit
 
 ### Examples
 
-- [`examples/asset-pipeline-ASK/notes.md`](examples/asset-pipeline-ASK/notes.md) — single-node working example
+- [`examples/asset-pipeline-ASK/notes.md`](examples/asset-pipeline-ASK/notes.md) — single-node working example (mature pressure surface)
+- [`examples/urban-observatory/notes.md`](examples/urban-observatory/notes.md) — single-node working example (newer; instantiation / source-of-intent recovery pressure surface)
 - [`examples/mazeASK/notes.md`](examples/mazeASK/notes.md) — Model A working example (still active for that project)
 
 ### Legacy docs
