@@ -4,6 +4,9 @@
 
 Reusable control-surface workflow assets for ASK projects.
 
+**Current default:** single-node Claude Code as both control surface and executor.
+**Legacy:** Model A split execution is retained only for projects that explicitly need it.
+
 This repo contains both the live operating files for `control-surface` itself and reusable workflow artifacts for downstream ASK projects, including the upstream instantiation phase before a target repo exists.
 
 ## Start Here // Instantiate a New ASK Project
