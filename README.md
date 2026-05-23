@@ -127,7 +127,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 
 ### Methodology docs
 
-- [`docs/method.md`](docs/method.md) — methodology layer; articulation of the method for designing systems that build systems; transitional bridge that may graduate to its own repo when accumulation earns it
+- [`docs/method.md`](docs/method.md) — compact bridge pointing to `apexSolarKiss/method-ASK` as the upstream methodology layer; substantive method articulation now lives in `method-ASK/docs/method.md`
 
 ### Workflow docs
 
