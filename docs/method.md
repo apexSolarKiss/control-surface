@@ -36,6 +36,7 @@ The methodology layer and the execution-protocol layer have different aging rate
 ## Where to read further
 
 - [`apexSolarKiss/method-ASK/docs/method.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/method.md) — the method (current primary articulation)
+- [`apexSolarKiss/method-ASK/docs/articles.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/articles.md) — canonical article-line index for the workflow / method series
 - [`docs/architecture.md`](architecture.md) — this repo's execution-protocol role-model architecture
 
 ## Self-superseding clause
