@@ -14,7 +14,7 @@ The methodology repo carries:
 - the ASK method topology
 - the absorption discipline that governs when n=1 patterns earn promotion to method-level doctrine
 
-The methodology repo's `docs/method.md` is the primary articulation today. Standalone doctrine docs split out as the substrate accumulates.
+The methodology repo's `docs/method.md` is the primary articulation. Standalone doctrine docs have split out as substrate accumulated — see *Where to read further* below.
 
 ## What stays in this repo
 
@@ -37,6 +37,11 @@ The methodology layer and the execution-protocol layer have different aging rate
 
 - [`apexSolarKiss/method-ASK/docs/method.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/method.md) — the method (current primary articulation)
 - [`apexSolarKiss/method-ASK/docs/articles.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/articles.md) — canonical article-line index for the workflow / method series
+- [`apexSolarKiss/method-ASK/docs/relative-externality.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/relative-externality.md) — relative externality and the rule/payload doctrine
+- [`apexSolarKiss/method-ASK/docs/voice-surface-boundary.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/voice-surface-boundary.md) — voice/surface discipline across artifact tiers
+- [`apexSolarKiss/method-ASK/docs/source-of-truth-and-aging-rate.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/source-of-truth-and-aging-rate.md) — source-of-truth split and aging-rate principle
+- [`apexSolarKiss/method-ASK/docs/source-of-intent.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/source-of-intent.md) — source-of-intent recovery, validation loop, and external-handoff classification (observation-level)
+- [`apexSolarKiss/method-ASK/docs/absorption-discipline.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/absorption-discipline.md) — when n=1 patterns earn promotion to method-level doctrine
 - [`docs/architecture.md`](architecture.md) — this repo's execution-protocol role-model architecture
 
 ## Self-superseding clause
