@@ -92,7 +92,7 @@ window.TREE_D01 = {
       tag: 'control-surface-EXTERNAL/',
       children: [
         { label: 'sources of intent/', children: [
-          { label: 'control-surface_grounding-note.md', note: 'canonical mirror · currently v18' },
+          { label: 'control-surface_grounding-note.md', note: 'canonical external context mirror' },
           { label: 'versioned grounding-note history' },
         ]},
         { label: 'scratch/', children: [
