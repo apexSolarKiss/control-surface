@@ -32,6 +32,8 @@ Alongside the project repos, `apexSolarKiss/design-system-ASK` is the family's u
 
 The control-surface repo owns the execution-protocol layer. The methodology layer lives upstream in `method-ASK`.
 
+An illustrative tree of this architecture and its operator-side ecology is at [`docs/diagrams/control-surface_architecture-tree.html`](diagrams/control-surface_architecture-tree.html). The diagram is illustrative; repo prose is source truth.
+
 ## Source-of-Truth Split
 
 ASK project work uses three durable sources of truth plus operator-side ephemeral memory:
