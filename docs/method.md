@@ -11,7 +11,7 @@ The methodology repo carries:
 - source-of-truth and aging-rate doctrine + cross-project lineage
 - source-of-intent recovery, validation loop, and external-handoff classification (observation-level)
 - worked-example explanations at method altitude
-- the ASK method topology
+- the method topology
 - the absorption discipline that governs when n=1 patterns earn promotion to method-level doctrine
 
 The methodology repo's `docs/method.md` is the primary articulation. Standalone doctrine docs have split out as substrate accumulated — see *Where to read further* below.
