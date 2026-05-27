@@ -103,6 +103,12 @@ Do not refresh for routine repo chronology, recent PR activity, or session-speci
 - **This grounding note** (external) — repo-external context
 - **Operator-side memory** — ephemeral session state (Claude Code's MEMORY.md, ChatGPT thread history, task lists); not durable, not promoted into the above
 
+## Inbound Handoff TBI Marker
+
+This project follows `method-ASK/docs/source-of-intent.md` §Inbound handoff TBI marker. Inbound handoff memos arriving in this project's external `sources of intent/` may carry a `-TBI.md` suffix as an ASK ingestion-state marker (to be ingested, not absorbed). The repo-local execution form lives in `AGENTS.md` §Inbound Handoff TBI Marker.
+
+`[Optional: if this project has a domain-authority review surface that is grounded on this grounding note and pointed at the repo but lacks write access to the project's external folder, name the read-only-origin variant here. urban-observatory provides a worked example of this pattern in its grounding note.]`
+
 ## Durable Loose Threads
 
 `[open questions or pressure points that span many conversations and have not been resolved by repo artifacts. Each thread should describe the question and why it has not been closed yet. Threads that have been closed by repo artifacts should be removed, not retained for completeness.]`
