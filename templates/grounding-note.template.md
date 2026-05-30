@@ -48,10 +48,12 @@ The trim pass is one-time at the bootstrap-to-operational transition. After it, 
 
 Versioned grounding-note files (e.g. `grounding-note-vN.md`) are frozen historical snapshots. The canonical un-versioned mirror (`grounding-note.md`) is always equal to the latest version.
 
+The version lives in the H1 title line (`# [project-name] // Grounding Note // v[N]`). The version claimed in the header must match the version in the filename. A header that claims a different version than its filename is a defect — fix it on the spot.
+
 When the grounding note changes meaningfully:
 
-1. Create the new versioned file (`grounding-note-v[N+1].md`).
-2. Overwrite the canonical mirror (`grounding-note.md`) with the new version's contents.
+1. Create the new versioned file (`grounding-note-v[N+1].md`), and set its H1 title version to match: `# [project-name] // Grounding Note // v[N+1]`.
+2. Overwrite the canonical mirror (`grounding-note.md`) with the new version's contents, including the bumped H1.
 3. Do not edit a versioned file in place.
 
 ## Refresh Triggers
@@ -68,9 +70,7 @@ Do not refresh for routine repo chronology, recent PR activity, or session-speci
 
 ---
 
-# Grounding Note // [project-name]
-
-**Version:** `[vN]` — `[YYYY-MM-DD]`
+# [project-name] // Grounding Note // v[N]
 
 ## Project Intent
 
