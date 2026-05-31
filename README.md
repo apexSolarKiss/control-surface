@@ -217,6 +217,6 @@ The control-surface design is anchored to a short execution-protocol subset of t
 
 ## License
 
-Copyright (c) 2026 Andrew S Klug // ASK
+Copyright 2026 Andrew S Klug // ASK
 
 Licensed under the Apache License 2.0 // see [`LICENSE`](LICENSE)
