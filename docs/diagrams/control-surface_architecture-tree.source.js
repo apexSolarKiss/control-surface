@@ -60,18 +60,15 @@ window.TREE_D01 = {
         { label: 'prompts/', children: [
           { label: 'claude-code-initial-prompt.md', note: 'executor attach to existing repo' },
           { label: 'project-instantiation-initial-prompt.md', note: 'pre-repo phase' },
-          { kind: 'group', label: 'nudge ladder', children: [
-            { label: 'repo-nudge-prompt.md', note: 'default' },
-            { label: 'repo-next-source-of-intent-nudge-structured-prompt.md', note: 'non-default · structured' },
-            { label: 'repo-next-source-of-intent-nudge-externality-decision-prompt.md', note: 'non-default · externality-decision' },
+          { label: 'repo-nudge-prompt.md', note: 'source-of-intent nudge' },
+          { kind: 'group', label: 'repo critique cycle', children: [
+            { label: 'repo-critique-initial-prompt.md' },
+            { label: 'repo-critique-synthesis-prompt.md' },
+            { label: 'repo-critique-execution-prompt.md' },
           ]},
-          { kind: 'group', label: 'critique cycle', children: [
-            { label: 'repo-critique-initial-prompt.md', note: 'default' },
-            { label: 'repo-critique-initial-structured-prompt.md', note: 'non-default' },
-            { label: 'repo-critique-synthesis-prompt.md', note: 'default' },
-            { label: 'repo-critique-synthesis-structured-prompt.md', note: 'non-default' },
-            { label: 'repo-critique-execution-prompt.md', note: 'default' },
-            { label: 'repo-critique-execution-structured-prompt.md', note: 'non-default' },
+          { kind: 'group', label: 'ecology critique', children: [
+            { label: 'ecology-critique-initial-prompt.md' },
+            { label: 'ecology-critique-synthesis-prompt.md' },
           ]},
           { label: 'control-surface-initial-prompt.md', note: 'Model A ChatGPT-side', status: 'legacy' },
           { label: 'codex-initial-prompt.txt', note: 'Model A Codex-side', status: 'legacy' },
@@ -123,11 +120,15 @@ window.TREE_D01 = {
     {
       kind: 'section', label: 'design-family inheritance surface',
       children: [
-        { label: 'design-system-ASK', note: 'externalized ASK visual / aesthetic-intent implementation', children: [
+        { label: 'design-system-ASK', note: 'foundations + static-artifact inheritance scaffolds', children: [
           { label: 'Tier 1 foundation', note: 'identity-free primitives' },
           { label: 'Tier 2 ASK design language', note: 'family-level visual grammar' },
           { label: 'Tier 3 ASK instance identity', note: 'excluded from child surfaces unless inheriting entity is ASK' },
-          { label: 'child surfaces inherit Tier 1 + Tier 2 by reference' },
+          { label: 'child surfaces inherit Tier 1 + Tier 2 · supply own Tier 3' },
+          { kind: 'group', label: 'static-artifact scaffolds', children: [
+            { label: 'Class A · diagram-tree', note: 'system / architecture diagram templates' },
+            { label: 'Class B · output-artifact', note: 'project-output artifact templates' },
+          ]},
         ]},
       ],
     },
