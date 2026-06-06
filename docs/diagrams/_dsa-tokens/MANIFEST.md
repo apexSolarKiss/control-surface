@@ -6,8 +6,11 @@ design-system-ASK repo and **no Google Fonts CDN dependency** — the diagram
 renders entirely from these local files.
 
 **Synced from:** `apexSolarKiss/design-system-ASK`
-**Pinned commit:** `3ecc03e615c8862d72b364ded71572c6139b498e`
-**Synced:** 2026-06-02
+**Pinned commit:** `2e1ab4cca45d05a4e32b285e5aaea338611bab1c`
+**Synced:** 2026-06-06
+**`colors_and_type.css` sha256:** `1aeed0fda84cef41a60789613e2a5195b0cae3c208cb047d592f27959bca973c`
+
+**Re-sync 2026-06-06 (`3ecc03e` → `2e1ab4c`):** picks up the foundation light-mode foreground ramp (design-system PR #18 / `f9eed18`) — light `--fg-1/-2/-3` now resolve to dark ink instead of white, fixing white-on-lavender primary text in light mode. Only `colors_and_type.css` changed (new sha256 above); the four font files are byte-identical to the prior snapshot; the diagram engine / `diagrams.css` / `export-png.js` were already current. Diagram `render-vN` stamp bumped (v12 → v13).
 
 | File | Upstream source | Role |
 |---|---|---|
