@@ -13,6 +13,8 @@ The critique may cover:
 1. Consider and fold it into your above critique.
 2. Make an advisory plan to address the issues that survive synthesis.
 
+**Carry through any second-lens findings.** If either critique surfaced relationship-scope / language-governance observations — terms that mis-scope a relationship or silently flatten a distinction — fold them into the synthesis at that altitude; do not drop them as wording nits. Preserve each with its **decision owner** (executor wording fix · advisor-review issue · ASK source-of-intent call).
+
 Keep the synthesis open-ended. Do not convert it into a structured checklist unless ASK explicitly asks.
 
 ## Delivery

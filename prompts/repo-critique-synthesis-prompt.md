@@ -7,6 +7,8 @@ Following or attached is another independent critique of `<project>` produced by
 1. Consider and fold it into your above critique.
 2. Make an advisory plan to address the issues that survive synthesis.
 
+**Carry through any second-lens findings.** If either critique surfaced relationship-scope / language-governance observations — terms that mis-scope a relationship or silently flatten a distinction — fold them into the synthesis at that altitude; do not drop them as wording nits. Preserve each with its **decision owner** (executor wording fix · advisor-review issue · ASK source-of-intent call).
+
 ## Delivery
 
 Open with a `By:` line stating who produced this synthesis (e.g. `By: claude-code`), in both the reply and the saved file — the **`<source>` token is required** so a Claude synthesis and an advisor synthesis can be told apart.
