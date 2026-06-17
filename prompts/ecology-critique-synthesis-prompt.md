@@ -7,6 +7,7 @@ The critique may cover:
 - `control-surface`
 - `method-ASK`
 - `design-system-ASK`
+- `apexSolarKiss/ASK` / `A-S-K.studio` — ASK public front door and live `design-system-ASK` reference implementation; treat as a public identity surface, not a downstream domain project pressure surface
 - downstream ASK project repos and their grounding notes
 - ecology-ASK / ASK system topology overall
 

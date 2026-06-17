@@ -7,6 +7,7 @@ Review the current state of:
 - `apexSolarKiss/control-surface` and its grounding note
 - `apexSolarKiss/method-ASK` and its grounding note
 - `apexSolarKiss/design-system-ASK` and its grounding note
+- `apexSolarKiss/ASK` / `A-S-K.studio` — ASK public front door and live `design-system-ASK` reference implementation; treat as a public identity surface, not a downstream domain project pressure surface
 - the relevant downstream ASK project repos and their grounding notes, when attached or routed into the critique context
 
 Anchor the critique in the repo materials, the grounding notes, and the higher-level purpose articulated there.
