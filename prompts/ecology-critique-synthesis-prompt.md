@@ -11,6 +11,8 @@ The critique may cover:
 - downstream ASK project repos and their grounding notes
 - ecology-ASK / ASK system topology overall
 
+Read this synthesis **in the context of the ASK inheritable identity/design layer** — `personal-ASK/inheritable` (brand architecture, voice/style/typography, visual identity, context-architecture decisions), or the mounted/uploaded equivalents on a surface without filesystem access — the authority the surfaces are expected to conform to (the lens for brand / tier-model / voice / naming-grammar conformance), not itself a critique target.
+
 1. Consider and fold it into your above critique.
 2. Make an advisory plan to address the issues that survive synthesis.
 

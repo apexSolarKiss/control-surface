@@ -12,6 +12,8 @@ Review the current state of:
 
 Anchor the critique in the repo materials, the grounding notes, and the higher-level purpose articulated there.
 
+Read the critique **in the context of the ASK inheritable identity/design layer** — `personal-ASK/inheritable` (`brand-architecture.md`, `voice-style-typography.md`, `visual-identity-system.md`, `context-architecture-decisions.md`), or the mounted/uploaded equivalents on a tool surface without filesystem access. That layer is the **authority the surfaces are expected to conform to** — read it in as the lens for brand, tier-model, voice, and naming-grammar conformance. It is context for the critique, not itself a critique target.
+
 Surface high-level observations — concerns, doubts, tensions, stale surfaces, missing source-of-intent, or things that do not make sense.
 
 What additional ASK source of intent, direction, repo cleanup, grounding-note refresh, or downstream handoff is needed next to keep developing the ASK ecology toward its higher-level purpose?
