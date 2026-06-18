@@ -69,7 +69,7 @@ This is the load-bearing rationale for keeping the four sources separate.
 - `templates/` — reusable starters for downstream repo-local files and the external grounding note
 - `prompts/project-instantiation-initial-prompt.md` — agent-agnostic startup prompt for the pre-repo phase
 - `examples/` — concise mappings from real ASK projects to this structure
-- legacy docs (`control-surface.md`, `docs/workflow-boundary.md`, `docs/project-instantiation-workflow.md`, Model-A-specific prompts) — retained for reference; deprecation headers name what supersedes them
+- legacy docs (`control-surface.md`, `docs/workflow-boundary.md`, Model-A-specific prompts) — retained for reference; deprecation headers name what supersedes them
 
 ## Session Topology
 
