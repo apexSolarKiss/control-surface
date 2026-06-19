@@ -74,6 +74,7 @@ To start a new ASK project from this meta repo, beginning from zero:
    ```text
    prompts/ecology-critique-initial-prompt.md
    prompts/ecology-critique-synthesis-prompt.md
+   prompts/ecology-critique-execution-prompt.md
    ```
 
    These are for system-wide critique across `control-surface`, `method-ASK`, `design-system-ASK`, and relevant downstream repos / grounding notes — not ordinary downstream-project critique.
@@ -158,6 +159,7 @@ Templates are copyable starters. They are not live for this repo unless explicit
 - [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md) — hand the advisory plan back to the execution surface for scoped implementation (execution pass)
 - [`prompts/ecology-critique-initial-prompt.md`](prompts/ecology-critique-initial-prompt.md) — open-ended fresh-context critique across the ASK system-building ecology (`control-surface`, `method-ASK`, `design-system-ASK`, downstream repos / grounding notes)
 - [`prompts/ecology-critique-synthesis-prompt.md`](prompts/ecology-critique-synthesis-prompt.md) — fold another independent ecology critique into the one just produced and make an advisory plan
+- [`prompts/ecology-critique-execution-prompt.md`](prompts/ecology-critique-execution-prompt.md) — hand the ecology advisory synthesis back to the execution surface for per-repo scoped implementation, stopping at exact scoped diff (execution pass)
 
 ### Examples
 
