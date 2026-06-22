@@ -32,18 +32,21 @@ To start a new ASK project from this meta repo, beginning from zero:
 
    ```text
    <project-name>-EXTERNAL/
-     scratch/
-     sources of intent/
+     <project-name>_grounding-note.md   # canonical durable context (root)
+     scratch/                            # _vN snapshots + iteration
+     sources of intent/                  # inbound -TBI handoffs + received records
    ```
 
-4. Instantiate the grounding note from [`templates/grounding-note.template.md`](templates/grounding-note.template.md) into the external folder:
+   Root is the default durable-context layer of an `*-EXTERNAL` surface; named semantic or structural layers (`scratch/`, `sources of intent/`) override it only where explicitly defined.
+
+4. Instantiate the grounding note from [`templates/grounding-note.template.md`](templates/grounding-note.template.md). The canonical durable-context note lives at the `*-EXTERNAL` **root**; its versioned snapshots live in `scratch/`:
 
    ```text
-   <project-name>-EXTERNAL/sources of intent/<project-name>_grounding-note_v1.md
-   <project-name>-EXTERNAL/sources of intent/<project-name>_grounding-note.md
+   <project-name>-EXTERNAL/<project-name>_grounding-note.md          # canonical (root)
+   <project-name>-EXTERNAL/scratch/<project-name>_grounding-note_v1.md
    ```
 
-   The canonical unversioned mirror should equal v1.
+   The canonical unversioned mirror should equal v1, and both carry their version in the first H1 as `// v1`.
 
 5. Copy and adapt the repo-local starter files into the new repo:
 
@@ -57,7 +60,7 @@ To start a new ASK project from this meta repo, beginning from zero:
 
 6. Create a minimal `README.md` for the new repo if one does not already exist.
 7. Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code to the new repo and begin bootstrap.
-8. (Optional) When an external advisor surface is used, adapt [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) into an operator-side advisor-startup prompt, typically alongside the grounding note in `<project-name>-EXTERNAL/sources of intent/`.
+8. (Optional) When an external advisor surface is used, adapt [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) into an operator-side advisor-startup prompt in `<project-name>-EXTERNAL/sources of intent/` (operator prompts keep that designated home; the grounding note itself lives at the `-EXTERNAL` root).
 9. (Optional) When the project will use the advisor / nudge / critique surfaces, adapt the meta-repo's reusable nudge and critique prompts into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`:
 
    ```text
