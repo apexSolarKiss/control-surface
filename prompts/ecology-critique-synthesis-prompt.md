@@ -13,6 +13,8 @@ The critique may cover:
 
 Read this synthesis **in the context of the ASK inheritable identity/design layer** — `personal-ASK/inheritable` (brand architecture, voice/style/typography, visual identity, context-architecture decisions), or the mounted/uploaded equivalents on a surface without filesystem access — the authority the surfaces are expected to conform to (the lens for brand / tier-model / voice / naming-grammar conformance), not itself a critique target.
 
+Read it **also in the context of the canonical source-of-intent doctrine** — the operator-side **Source of Intent** master (`control-surface-EXTERNAL/source-of-intent_master-context-note.md`) and its **Image-Making + Source of Intent** branch (`control-surface-EXTERNAL/image-making-source-of-intent_master-context-note.md`), or the mounted/uploaded equivalents — the reference the ecology's source-of-intent / authorship / governance claims should be coherent with (and the lens for second-lens findings), not itself a critique target; the graduated public form lives in `method-ASK/docs/`.
+
 1. Consider and fold it into your above critique.
 2. Make an advisory plan to address the issues that survive synthesis.
 
