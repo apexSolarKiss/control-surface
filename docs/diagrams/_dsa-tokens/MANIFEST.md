@@ -6,11 +6,11 @@ design-system-ASK repo and **no Google Fonts CDN dependency** — the diagram
 renders entirely from these local files.
 
 **Synced from:** `apexSolarKiss/design-system-ASK`
-**Pinned commit:** `2e1ab4cca45d05a4e32b285e5aaea338611bab1c`
-**Synced:** 2026-06-06
-**`colors_and_type.css` sha256:** `1aeed0fda84cef41a60789613e2a5195b0cae3c208cb047d592f27959bca973c`
+**Pinned commit:** `b5d158e6b2a74faf7dae92e3d15a6ee0a3baba59`
+**Synced:** 2026-06-26
+**`colors_and_type.css` sha256:** `d3a94ac725e76ac8fdd290797ac1288799cf6f5c02e51f269c3cb666be4cb4fa`
 
-**Re-sync 2026-06-06 (`3ecc03e` → `2e1ab4c`):** picks up the foundation light-mode foreground ramp (design-system PR #18 / `f9eed18`) — light `--fg-1/-2/-3` now resolve to dark ink instead of white, fixing white-on-lavender primary text in light mode. Only `colors_and_type.css` changed (new sha256 above); the four font files are byte-identical to the prior snapshot; the diagram engine / `diagrams.css` / `export-png.js` were already current. Diagram `render-vN` stamp bumped (v12 → v13).
+**Re-sync 2026-06-26 (`2e1ab4c` → `b5d158e`) — RENDER-NEUTRAL conformance:** picks up the light-mode foreground conformance (design-system PR #52) and the diagram foreground-alias de-dup (PR #53). In `colors_and_type.css`: `--ask-white`/`--fg-1` comments corrected (white = wordmark, not body text), `--ask-fg-light` (`#6A637F`) + `--fg-high-contrast` (reserved `#201D26`) added, `--fg-on-card` rebound to `var(--fg-1)`, `.bg-ask-light` text white→`var(--fg-1)`. In `diagrams.css`: the scoped text roles `--diagram-ink/muted/faint` now **alias** `var(--fg-1/-2/-3)` instead of hardcoding the ramp (redundant dark-text redefs dropped; structural strokes stay local). **Resolved values are unchanged in both themes** — this diagram uses none of the rebind-affected roles (`--fg-on-card` / `.bg-ask-light`), and `--fg-1` still resolves to `#6A637F`. Only `colors_and_type.css` + `diagrams.css` changed (new sha256 above); the four font files are byte-identical; the diagram engine / `export-png.js` were already current. **Diagram `render-vN` stamp held** (render-neutral).
 
 | File | Upstream source | Role |
 |---|---|---|
