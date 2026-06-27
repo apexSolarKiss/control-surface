@@ -10,7 +10,10 @@ Only findings whose decision owner is **executor wording fix** (or that ASK has 
 
 - **advisor-review issues** → not executor work; they return to the advisor surface.
 - **ASK source-of-intent calls** → not executor work; they wait for ASK's decision.
-- **inheritable identity/design-layer findings** (`personal-ASK/inheritable` — brand-architecture / voice-style-typography / visual-identity-system / context-architecture-decisions) → behind the wall; do not mutate them from this surface. Route as a `-TBI` handoff into the relevant `*-EXTERNAL/sources of intent/`.
+- **inheritable identity/design-layer findings** (`personal-ASK/inheritable`):
+  - **The whole `inheritable/` layer is dual-writer** (2026-06-27). For **any** file inside `personal-ASK/inheritable/` — `context-architecture-decisions.md` (ADR) · `brand-architecture.md` · `visual-identity-system.md` + `.html` · `voice-style-typography.md` · `asymptotic-system-key.md` · `reading-interests.md` · `devices.md` — execution **may proceed directly from the ecology / control-surface thread, but only after explicit ASK approval**, using the dual-writer controls: offline canonical first · one writer per file per session · explicit ASK authorization · byte-parity `ZZZ-ASK/` snapshot · mounted mirrors refreshed after canonical. The whole layer is **in ecology jurisdiction** — not behind the wall.
+  - Per-file nuances: the **ADR** additionally syncs its byte-identical `personal-TMK` twin (+ both `ZZZ-ASK/` and `personal-TMK/ZZZ/` snapshots, all one md5); `visual-identity-system.html` is a **derived companion** (resolve findings against the `.md`); `brand-architecture.md` is **mirror-not-lead** for its public-Notion upstream (govern the file, not its upstream).
+  - The **private root outside** `personal-ASK/inheritable/` remains unreachable and out of scope — never read, summarized, inferred, or mutated.
 
 Do not widen the advisory plan. Do not turn held questions or advisor-review items into authorized work. Do not promote a candidate observation to an edit ASK has not approved.
 
