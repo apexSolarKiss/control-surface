@@ -6,9 +6,11 @@ design-system-ASK repo and **no Google Fonts CDN dependency** — the diagram
 renders entirely from these local files.
 
 **Synced from:** `apexSolarKiss/design-system-ASK`
-**Pinned commit:** `b5d158e6b2a74faf7dae92e3d15a6ee0a3baba59`
+**Pinned commit:** `1231d03040c74eb4eedf7be2e3214da9766e63f7`
 **Synced:** 2026-06-26
-**`colors_and_type.css` sha256:** `d3a94ac725e76ac8fdd290797ac1288799cf6f5c02e51f269c3cb666be4cb4fa`
+**`colors_and_type.css` sha256:** `bcd11e0efeae2851c8653a425f94a76cb6423c770e23cb18b3a0315519a7375f`
+
+**Re-sync 2026-06-26 (`b5d158e` → `1231d03`) — COMMENT-ONLY, render-neutral:** design-system PR #56 corrected two stale **comments** in `colors_and_type.css` ("five-color core" header → "a core identity set"; "Core 5 — backgrounds + text" block label → "Core set — backgrounds, wordmark, dark-mode text"). **No token value, role name, selector, or behavior change** — only the new `colors_and_type.css` sha256 above differs. Fonts byte-identical; `diagrams.css` / engine / `export-png.js` unchanged. **Diagram `render-vN` stamp held.**
 
 **Re-sync 2026-06-26 (`2e1ab4c` → `b5d158e`) — RENDER-NEUTRAL conformance:** picks up the light-mode foreground conformance (design-system PR #52) and the diagram foreground-alias de-dup (PR #53). In `colors_and_type.css`: `--ask-white`/`--fg-1` comments corrected (white = wordmark, not body text), `--ask-fg-light` (`#6A637F`) + `--fg-high-contrast` (reserved `#201D26`) added, `--fg-on-card` rebound to `var(--fg-1)`, `.bg-ask-light` text white→`var(--fg-1)`. In `diagrams.css`: the scoped text roles `--diagram-ink/muted/faint` now **alias** `var(--fg-1/-2/-3)` instead of hardcoding the ramp (redundant dark-text redefs dropped; structural strokes stay local). **Resolved values are unchanged in both themes** — this diagram uses none of the rebind-affected roles (`--fg-on-card` / `.bg-ask-light`), and `--fg-1` still resolves to `#6A637F`. Only `colors_and_type.css` + `diagrams.css` changed (new sha256 above); the four font files are byte-identical; the diagram engine / `export-png.js` were already current. **Diagram `render-vN` stamp held** (render-neutral).
 
