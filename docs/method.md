@@ -41,6 +41,9 @@ The methodology layer and the execution-protocol layer have different aging rate
 - [`apexSolarKiss/method-ASK/docs/voice-surface-boundary.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/voice-surface-boundary.md) — voice/surface discipline across artifact tiers
 - [`apexSolarKiss/method-ASK/docs/source-of-truth-and-aging-rate.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/source-of-truth-and-aging-rate.md) — source-of-truth split and aging-rate principle
 - [`apexSolarKiss/method-ASK/docs/source-of-intent.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/source-of-intent.md) — source-of-intent recovery, validation loop, and external-handoff classification (observation-level)
+- [`apexSolarKiss/method-ASK/docs/normative-apex.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/normative-apex.md) — structural source-of-intent / the normative apex
+- [`apexSolarKiss/method-ASK/docs/governance.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/governance.md) — governance architecture (the apex/governance split)
+- [`apexSolarKiss/method-ASK/docs/bounded-generativity.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/bounded-generativity.md) — bounded discretion + functional-judgment topology
 - [`apexSolarKiss/method-ASK/docs/absorption-discipline.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/absorption-discipline.md) — when n=1 patterns earn promotion to method-level doctrine
 - [`docs/architecture.md`](architecture.md) — this repo's execution-protocol role-model architecture
 
