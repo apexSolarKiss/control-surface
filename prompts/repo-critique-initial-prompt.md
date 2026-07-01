@@ -1,6 +1,8 @@
 # Repo Critique Initial Prompt
 
-Use this prompt to invoke an open-ended fresh-context critique of a repo against its grounding note.
+Use this prompt to invoke an open-ended fresh-context critique of a repo against its grounding note. For how this critique is instantiated — the two fresh-context mechanics by executor type (filesystem executor vs connector advisor) — see `docs/critique-protocol.md`.
+
+**Declare the coverage band first.** Open the critique by stating what it covers and what it does not (which surfaces, docs, or subsystems were read; what was out of scope). Without a declared band, successive passes drift toward coverage-theater. The band is an honesty instrument, not a scope cap.
 
 Review the current state of the repo and surface high-level observations — concerns, doubts, or things that do not make sense — anchored in the grounding note and the higher-level purpose articulated therein.
 
