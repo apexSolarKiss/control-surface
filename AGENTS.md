@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This file defines repo-local workflow rules for whoever executes work on this `control-surface` meta repo.
+This file defines repo-local workflow rules for whoever executes work on this `control-surface` execution-protocol repo.
 
 The operating model is single-node: Claude Code is both control surface and executor.
 
@@ -284,7 +284,7 @@ Legacy docs (Model-A-specific control-surface artifact, workflow-boundary doc, C
 - Prefer explicit structure over clever indirection.
 - Prefer updating root docs and a small set of templates over adding systems around them.
 - Prefer the smallest coherent scaffold that clarifies the workflow boundary.
-- Tailor docs to this repo's job as a workflow meta repo. Do not write as if this repo were an application repo.
+- Tailor docs to this repo's job as an execution-protocol repo. Do not write as if this repo were an application repo.
 - Use clean technical language. Avoid manifesto phrasing, speculative systems, or generic process bloat.
 
 ---

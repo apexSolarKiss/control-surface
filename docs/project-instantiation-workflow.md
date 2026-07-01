@@ -54,7 +54,7 @@ During operational use:
 - use prompts for startup or handoff, not as permanent repo policy
 - treat per-conversation memory (Claude Code's MEMORY.md, ChatGPT thread history, task lists) as ephemeral session state — do not promote it into the durable sources
 - when an external advisor surface is used (GPT or Claude in chat form), adapt `templates/advisor-initial-prompt.template.md` into an operator-side advisor-startup prompt in `<project-name>-EXTERNAL/sources of intent/` (operator prompts keep that designated home; the grounding-note canonical lives at the `-EXTERNAL` root)
-- when the project will use the advisor / nudge / critique surfaces, adapt the meta-repo's reusable nudge prompt (`prompts/repo-nudge-prompt.md`) and the repo critique cycle prompts (`prompts/repo-critique-initial-prompt.md`, `prompts/repo-critique-synthesis-prompt.md`, `prompts/repo-critique-execution-prompt.md`) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`; the meta-repo prompts remain canonical, the operator-side copies are project-flavored adaptations
+- when the project will use the advisor / nudge / critique surfaces, adapt the protocol repo's reusable nudge prompt (`prompts/repo-nudge-prompt.md`) and the repo critique cycle prompts (`prompts/repo-critique-initial-prompt.md`, `prompts/repo-critique-synthesis-prompt.md`, `prompts/repo-critique-execution-prompt.md`) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`; the protocol repo's prompts remain canonical, the operator-side copies are project-flavored adaptations
 
 ## What Stays External
 

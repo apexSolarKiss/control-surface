@@ -31,7 +31,7 @@ The methodology repo's `docs/method.md` is the primary articulation. Standalone 
 
 ## Why the split
 
-The methodology layer and the execution-protocol layer have different aging rates and different audiences. Holding them in one repo would make the meta-repo legible at neither altitude. Keeping the method upstream lets `control-surface` stay tight as the execution-protocol meta repo while the method evolves at its own cadence.
+The methodology layer and the execution-protocol layer have different aging rates and different audiences. Holding them in one repo would make it legible at neither altitude. Keeping the method upstream lets `control-surface` stay tight as the execution-protocol repo while the method evolves at its own cadence.
 
 ## Where to read further
 

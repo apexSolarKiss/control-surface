@@ -32,7 +32,7 @@ Focus on:
 
 - Do not assume repo-local truth exists yet if the target repo has not been created.
 - Keep the distinction between instantiation, bootstrap, and operational phases explicit.
-- Use the control-surface meta repo as the source for reusable workflow structure.
+- Use the control-surface protocol repo as the source for reusable workflow structure.
 - Use asset-pipeline-ASK as the single-node working example (default) and mazeASK as the legacy Model A working example. Neither is policy.
 - Keep the next step concrete and minimal.
 

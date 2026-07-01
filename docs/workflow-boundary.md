@@ -11,7 +11,7 @@ This doc explains the boundary model used by the `control-surface` repo itself.
 ## Categories
 
 - Live repo-local files: active operating files for this repo, such as `AGENTS.md`
-- Repo docs: explanatory docs that describe this meta repo's structure and architecture
+- Repo docs: explanatory docs that describe this protocol repo's structure and architecture
 - External artifacts: reusable control-surface documents intended to govern work around another repo
 - Prompts: runnable startup text for ChatGPT or Codex
 - Templates: copyable starters for downstream repo-local files

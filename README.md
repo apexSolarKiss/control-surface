@@ -11,7 +11,7 @@ This repo contains both the live operating files for `control-surface` itself an
 
 ## Start Here // Instantiate a New ASK Project
 
-To start a new ASK project from this meta repo, beginning from zero:
+To start a new ASK project from this protocol repo, beginning from zero:
 
 1. Create a new GitHub repo for the target ASK project.
 
@@ -61,7 +61,7 @@ To start a new ASK project from this meta repo, beginning from zero:
 6. Create a minimal `README.md` for the new repo if one does not already exist.
 7. Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code to the new repo and begin bootstrap.
 8. (Optional) When an external advisor surface is used, adapt [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) into an operator-side advisor-startup prompt in `<project-name>-EXTERNAL/sources of intent/` (operator prompts keep that designated home; the grounding note itself lives at the `-EXTERNAL` root).
-9. (Optional) When the project will use the advisor / nudge / critique surfaces, adapt the meta-repo's reusable nudge and critique prompts into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`:
+9. (Optional) When the project will use the advisor / nudge / critique surfaces, adapt the protocol repo's reusable nudge and critique prompts into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`:
 
    ```text
    prompts/repo-nudge-prompt.md              → <project-name>_repo-nudge-prompt.md
@@ -70,7 +70,7 @@ To start a new ASK project from this meta repo, beginning from zero:
    prompts/repo-critique-execution-prompt.md → <project-name>_repo-critique-execution-prompt.md
    ```
 
-   The meta-repo prompts remain canonical reusable sources; the operator-side copies are project-flavored adaptations so the advisor and control surfaces can operate without re-deriving prompt language each time. Adapt only the prompts the project will actually use.
+   The protocol repo's prompts remain canonical reusable sources; the operator-side copies are project-flavored adaptations so the advisor and control surfaces can operate without re-deriving prompt language each time. Adapt only the prompts the project will actually use.
 
    System-wide ecology critique prompts live separately at the meta level only — they are not adapted into downstream-project operator-side copies:
 
@@ -100,8 +100,8 @@ The workflow rules live in repo-local `AGENTS.md` files and are written agent-ag
 
 Three live working examples anchor the family:
 
-- `apexSolarKiss/asset-pipeline-ASK` — mature single-node working example and primary pressure surface from which the meta repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
-- `apexSolarKiss/urban-observatory` — second single-node working example. Newer project, currently in early bootstrap and prototype-planning phase. Pressures the meta repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
+- `apexSolarKiss/asset-pipeline-ASK` — mature single-node working example and primary pressure surface from which the protocol repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
+- `apexSolarKiss/urban-observatory` — second single-node working example. Newer project, currently in early bootstrap and prototype-planning phase. Pressures the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
 - `apexSolarKiss/mazeASK` — Model A working example. Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against. Still active for that project.
 
 ## Source-of-Truth Split
@@ -186,7 +186,7 @@ Each legacy doc carries a deprecation header naming what supersedes it for curre
 | If you need to... | Use |
 | --- | --- |
 | define execution rules inside the current repo | [`AGENTS.md`](AGENTS.md) |
-| understand this meta repo's own architecture | [`docs/architecture.md`](docs/architecture.md) |
+| understand this protocol repo's own architecture | [`docs/architecture.md`](docs/architecture.md) |
 | set up the workflow before the target repo exists | [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md) and [`prompts/project-instantiation-initial-prompt.md`](prompts/project-instantiation-initial-prompt.md) |
 | attach Claude Code to an existing single-node repo | [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) |
 | attach an external advisor surface (GPT or Claude in chat form) to an existing repo | [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) |
@@ -208,7 +208,7 @@ For a new ASK project:
 - Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
 - Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code after the repo exists.
 - Optionally adapt [`templates/advisor-initial-prompt.template.md`](templates/advisor-initial-prompt.template.md) into an operator-side advisor-startup prompt when an external advisor surface is used.
-- Optionally adapt the meta-repo's nudge prompt ([`prompts/repo-nudge-prompt.md`](prompts/repo-nudge-prompt.md)) and critique-cycle prompts ([`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md), [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md), [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md)) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/` when those surfaces will be used.
+- Optionally adapt the protocol repo's nudge prompt ([`prompts/repo-nudge-prompt.md`](prompts/repo-nudge-prompt.md)) and critique-cycle prompts ([`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md), [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md), [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md)) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/` when those surfaces will be used.
 
 ## Background Reading
 

@@ -4,4 +4,4 @@ This repository's workflow rules live in `AGENTS.md`. They apply to Claude Code 
 
 For repo-external context (project intent, audience, philosophy, foundational premises, durable loose threads), read the grounding note maintained outside this repository.
 
-For project state (what this meta repo currently contains and how the pieces relate), start from `README.md` and `docs/architecture.md`.
+For project state (what this protocol repo currently contains and how the pieces relate), start from `README.md` and `docs/architecture.md`.

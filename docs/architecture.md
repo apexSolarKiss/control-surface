@@ -1,6 +1,6 @@
 # Architecture
 
-`control-surface` is a meta repo for ASK workflow architecture assets.
+`control-surface` is the execution-protocol repo for ASK workflow architecture assets.
 
 ## Role Model
 
@@ -26,7 +26,7 @@ This repo sits in the middle of a three-tier structure:
 
 - **Methodology layer** — adversarial iteration / cross-phase swing discipline. Lives upstream in [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK); [`docs/method.md`](method.md) in this repo is a compact bridge pointing there.
 - **Execution-protocol layer** — this repo's core purpose. `AGENTS.md`, templates, review cadence, and branch discipline encode how work gets done within a session.
-- **Project repos** — applications of the method and protocol to concrete domains. `apexSolarKiss/asset-pipeline-ASK` is the mature single-node working example and primary pressure surface for rule evolution; `apexSolarKiss/urban-observatory` is the second single-node working example, exercising the meta repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces; `apexSolarKiss/mazeASK` is the legacy Model A working example.
+- **Project repos** — applications of the method and protocol to concrete domains. `apexSolarKiss/asset-pipeline-ASK` is the mature single-node working example and primary pressure surface for rule evolution; `apexSolarKiss/urban-observatory` is the second single-node working example, exercising the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces; `apexSolarKiss/mazeASK` is the legacy Model A working example.
 
 Alongside the project repos, `apexSolarKiss/design-system-ASK` is the family's upstream visual-inheritance reference surface — an externalized ASK visual / aesthetic-intent implementation, not a project pressure surface. Child surfaces inherit Tier 1 + Tier 2 by reference and resolve Tier 3 (instance identity) locally by source-of-intent + brand-distance; ASK-the-entity is the one surface that uses ASK's own Tier 3 (it does not inherit ASK's Tier 3 to downstream surfaces). One downstream child proof has landed (`urban-observatory`). The method-altitude account lives in [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md).
 
@@ -63,7 +63,7 @@ This is the load-bearing rationale for keeping the four sources separate.
 
 ## Artifact Model
 
-- `AGENTS.md` — live repo-local execution rules for this meta repo
+- `AGENTS.md` — live repo-local execution rules for this execution-protocol repo
 - `CLAUDE.md` — pointer to `AGENTS.md` for Claude Code operators
 - `docs/architecture.md` — this doc; explains the meta architecture
 - `templates/` — reusable starters for downstream repo-local files and the external grounding note
