@@ -48,9 +48,11 @@ The band is an honesty instrument: it states what was and was not in scope, so a
 Some critique inputs are not repo files: the operator-side diagram packages (D03 topology, D04 wall/grant boundary), the live `A-S-K.studio` render, the operator-side trackers and source-of-intent masters. Whether these are readable **depends on the surface running the critique**:
 
 - a **filesystem executor** (Claude subagent) reads them directly from disk;
-- a **connector advisor** (GPT) reads them only if their source (`VERSION.md`, `*.html`, `*.source.js`) is **mounted into the advisor Project's Sources**.
+- a **connector advisor** (GPT) reads them through whatever connectors the surface exposes: with a **Dropbox connector**, it can **search/fetch the operator-side source directly** (`VERSION.md`, `*.html`, `*.source.js`, scratch, root-canonicals) from the named `*-EXTERNAL/` path; without one, the source must be **mounted into the advisor Project's Sources** or uploaded.
 
-So the rule is: **mount the package sources when invoking a connector advisor, or the advisor must declare that leg "not reviewed."** A critique never claims to have reviewed a surface it could not read — the same read-path honesty required for repo files and PRs. The critique prompts carry this as an explicit conditional; this doc is the operator-side complement (mount, or declare not-reviewed).
+So the rule is: **the connector advisor fetches the package source directly when a Dropbox connector is available; otherwise mount/upload it — and if neither reaches it, the advisor declares that leg "not reviewed."** A critique never claims to have reviewed a surface it could not read — the same read-path honesty required for repo files and PRs. Connector access is a read path, not a status change (a fetched scratch file stays scratch), and never browses private personal roots unless ASK names the exact path — see the read-path + wall guard in `templates/advisor-project-instructions.template.md`.
+
+**Consequence:** do **not** remount operator-side canonicals into the advisor Project's Sources by default. Where the connector exists, Dropbox is the **preferred live read path** for operator-side canonicals (mounted Sources are for bootstrap / fallback / connector-failure resilience, not routine canonical mirroring). Mounting a package source is the exception — for a critique whose package Dropbox cannot reach or whose path is ambiguous.
 
 ## Related
 
