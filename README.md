@@ -60,7 +60,7 @@ To start a new ASK project from this protocol repo, beginning from zero:
 
 6. Create a minimal `README.md` for the new repo if one does not already exist.
 7. Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code to the new repo and begin bootstrap.
-8. (Optional) When an external advisor surface is used, adapt [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) and install it **once into the advisor GPT Project's Instructions** — not pasted per thread (see [`docs/critique-protocol.md`](docs/critique-protocol.md)). The grounding note itself lives at the `-EXTERNAL` root.
+8. (Optional) When an external advisor surface is used, adapt [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) and install it **once into the advisor Project Instructions** — not pasted per thread (see [`docs/critique-protocol.md`](docs/critique-protocol.md)). The grounding note itself lives at the `-EXTERNAL` root.
 9. (Optional) When the project will use the advisor / nudge / critique surfaces, adapt the protocol repo's reusable nudge and critique prompts into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`:
 
    ```text
@@ -148,7 +148,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 - [`templates/grounding-note.template.md`](templates/grounding-note.template.md) — starter for the external grounding note that travels with each ASK project
 - [`templates/architecture.template.md`](templates/architecture.template.md) — starter for a downstream repo's architecture doc
 - [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) — optional Claude Code pointer file for downstream single-node repos
-- [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) — the advisor bootstrap (role + fail-closed read-path) for an external advisor surface (GPT or Claude in chat form); adapted per project and installed **once into the advisor GPT Project's Instructions**, not pasted per thread (see [`docs/critique-protocol.md`](docs/critique-protocol.md))
+- [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) — the advisor bootstrap (role + fail-closed read-path) for an external advisor surface (GPT or Claude in chat form); adapted per project and installed **once into the advisor Project Instructions**, not pasted per thread (see [`docs/critique-protocol.md`](docs/critique-protocol.md))
 - [`templates/overlays/architecture-uncertain-rules.template.md`](templates/overlays/architecture-uncertain-rules.template.md) — optional opt-in overlay for downstream projects with active architecture or ontology uncertainty; adds rules calibrated for projects whose work is to discover structural categories (architecture-before-prototype, prototype-as-pressure-surface, attempt-model-before-plan, self-evident-premise stop, ceremony budget, proof-chain gravity well guard, bootstrap doc-alignment check) on top of the base template; not used by projects whose task surface is known
 
 Templates are copyable starters. They are not live for this repo unless explicitly adopted somewhere else.
@@ -208,7 +208,7 @@ For a new ASK project:
 - Optionally adopt [`templates/overlays/architecture-uncertain-rules.template.md`](templates/overlays/architecture-uncertain-rules.template.md) when the project profile is architecture-uncertain (ontology-first work, prototypes as pressure surfaces, deferred schema commitment, modeling-before-planning). Append after the base `AGENTS.md` rules; skip when the task surface is known and the work is execution against it.
 - Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
 - Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code after the repo exists.
-- Optionally adapt [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) and install it once into the advisor GPT Project's Instructions when an external advisor surface is used (see [`docs/critique-protocol.md`](docs/critique-protocol.md)).
+- Optionally adapt [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) and install it once into the advisor Project Instructions when an external advisor surface is used (see [`docs/critique-protocol.md`](docs/critique-protocol.md)).
 - Optionally adapt the protocol repo's nudge prompt ([`prompts/repo-nudge-prompt.md`](prompts/repo-nudge-prompt.md)) and critique-cycle prompts ([`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md), [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md), [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md)) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/` when those surfaces will be used.
 
 ## Background Reading
