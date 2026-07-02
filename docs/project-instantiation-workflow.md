@@ -63,7 +63,7 @@ During operational use:
 Keep these external unless a project has a deliberate reason to mirror them:
 
 - the grounding note (always external, by design)
-- ChatGPT Project instructions (legacy Model A only)
+- advisor Project Instructions and the mounted source index / path map, when an external advisor surface (GPT or Claude in chat form) is used
 - startup prompts used to frame or hand off work
 
 ## What Usually Becomes Repo-Local

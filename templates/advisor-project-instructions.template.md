@@ -27,7 +27,7 @@ You are NOT a substitute for:
 
 ## Required sources to read first
 
-**Mounted source index — read this first.** Mount `_INDEX-[project].md` (instantiated from `templates/_INDEX-project.template.md`) as the **primary Project Source**, and read it before anything else: it maps the canonical Dropbox paths, each file's status class, and the wall rules. Fetch canonicals **live from Dropbox by exact path**; mounted canonical copies are **fallback only**. Prefer exact-path fetch over keyword search — search behaves like directory discovery and can reveal filenames from private/archive trees even where content reads are blocked. The numbered sources below are *what* to read; the index is *where* each lives and *which* you may fetch.
+**Mounted source index — read this first.** Mount `_INDEX-<project>.md` (instantiated from `templates/_INDEX-project.template.md`) as the **primary Project Source**, and read it before anything else: it maps the canonical Dropbox paths, each file's status class, and the wall rules. Fetch canonicals **live from Dropbox by exact path**; mounted canonical copies are **fallback only**. Prefer exact-path fetch over keyword search — search behaves like directory discovery and can reveal filenames from private/archive trees even where content reads are blocked. The numbered sources below are *what* to read; the index is *where* each lives and *which* you may fetch.
 
 1. **External grounding note**
    - `[path or description of grounding note]`
