@@ -60,7 +60,9 @@ To start a new ASK project from this protocol repo, beginning from zero:
 
 6. Create a minimal `README.md` for the new repo if one does not already exist.
 7. Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code to the new repo and begin bootstrap.
-8. (Optional) When an external advisor surface is used, adapt [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) and install it **once into the advisor Project Instructions** — not pasted per thread (see [`docs/critique-protocol.md`](docs/critique-protocol.md)). The grounding note itself lives at the `-EXTERNAL` root.
+8. (Optional) When an external advisor surface is used:
+   - Create the source index from [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md) as `<project-name>-EXTERNAL/_INDEX-<project-name>.md` (or `_INDEX-<project-name>-<role>.md` per role), and **mount that index** as the advisor Project's **primary Source** — mount the map, not copies of the canonicals; the advisor fetches canonicals live from Dropbox by exact path.
+   - Adapt [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) and install it **once into the advisor Project Instructions** — not pasted per thread (see [`docs/critique-protocol.md`](docs/critique-protocol.md)); the instructions point at the mounted index as the first read. The grounding note itself lives at the `-EXTERNAL` root.
 9. (Optional) When the project will use the advisor / nudge / critique surfaces, adapt the protocol repo's reusable nudge and critique prompts into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`:
 
    ```text
@@ -149,6 +151,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 - [`templates/architecture.template.md`](templates/architecture.template.md) — starter for a downstream repo's architecture doc
 - [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) — optional Claude Code pointer file for downstream single-node repos
 - [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) — the advisor bootstrap (role + fail-closed read-path) for an external advisor surface (GPT or Claude in chat form); adapted per project and installed **once into the advisor Project Instructions**, not pasted per thread (see [`docs/critique-protocol.md`](docs/critique-protocol.md))
+- [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md) — the **source index / path map** an advisor Project mounts as its primary Source; instantiated as `<project>-EXTERNAL/_INDEX-<project>.md` (or `_INDEX-<project>-<role>.md` per role). Mount the map, not copies of the canonicals — the advisor fetches canonicals live from Dropbox by exact path; mounted copies are fallback only
 - [`templates/overlays/architecture-uncertain-rules.template.md`](templates/overlays/architecture-uncertain-rules.template.md) — optional opt-in overlay for downstream projects with active architecture or ontology uncertainty; adds rules calibrated for projects whose work is to discover structural categories (architecture-before-prototype, prototype-as-pressure-surface, attempt-model-before-plan, self-evident-premise stop, ceremony budget, proof-chain gravity well guard, bootstrap doc-alignment check) on top of the base template; not used by projects whose task surface is known
 
 Templates are copyable starters. They are not live for this repo unless explicitly adopted somewhere else.
@@ -190,7 +193,7 @@ Each legacy doc carries a deprecation header naming what supersedes it for curre
 | understand this protocol repo's own architecture | [`docs/architecture.md`](docs/architecture.md) |
 | set up the workflow before the target repo exists | [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md) and [`prompts/project-instantiation-initial-prompt.md`](prompts/project-instantiation-initial-prompt.md) |
 | attach Claude Code to an existing single-node repo | [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) |
-| attach an external advisor surface (GPT or Claude in chat form) to an existing repo | [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) |
+| attach an external advisor surface (GPT or Claude in chat form) to an existing repo | [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) + [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md) (mount the index as the primary Source) |
 | create repo-local starter docs for a downstream repo | [`templates/AGENTS.template.md`](templates/AGENTS.template.md), [`templates/grounding-note.template.md`](templates/grounding-note.template.md), [`templates/architecture.template.md`](templates/architecture.template.md), [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) |
 | see how the structure mapped onto a real ASK project | [`examples/`](examples/) |
 | understand the previous canonical Model-A operating doc | [`control-surface.md`](control-surface.md) (legacy) |
@@ -208,7 +211,7 @@ For a new ASK project:
 - Optionally adopt [`templates/overlays/architecture-uncertain-rules.template.md`](templates/overlays/architecture-uncertain-rules.template.md) when the project profile is architecture-uncertain (ontology-first work, prototypes as pressure surfaces, deferred schema commitment, modeling-before-planning). Append after the base `AGENTS.md` rules; skip when the task surface is known and the work is execution against it.
 - Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
 - Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code after the repo exists.
-- Optionally adapt [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) and install it once into the advisor Project Instructions when an external advisor surface is used (see [`docs/critique-protocol.md`](docs/critique-protocol.md)).
+- Optionally adapt [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) and install it once into the advisor Project Instructions when an external advisor surface is used (see [`docs/critique-protocol.md`](docs/critique-protocol.md)); alongside it, create `<project>-EXTERNAL/_INDEX-<project>.md` from [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md) and mount that index as the Project's primary Source (the map, not copies of the canonicals).
 - Optionally adapt the protocol repo's nudge prompt ([`prompts/repo-nudge-prompt.md`](prompts/repo-nudge-prompt.md)) and critique-cycle prompts ([`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md), [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md), [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md)) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/` when those surfaces will be used.
 
 ## Background Reading

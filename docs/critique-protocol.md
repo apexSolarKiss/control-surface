@@ -15,6 +15,8 @@ A critique takes a read-and-assess prompt **directly**. The read-reliably setup 
 
 A GPT advisor surface is bootstrapped by the **GPT Project's Instructions**, not by pasting an advisor prompt into each thread. The advisor role + fail-closed read-path discipline is installed once at the Project-Instructions level; `templates/advisor-project-instructions.template.md` is the copyable master for that text.
 
+What the Project's **Sources** mount is a **source index / path map**, not copies of the canonicals — `templates/_INDEX-project.template.md` is the reusable master for that map (instantiated as `<project>-EXTERNAL/_INDEX-<project>.md`). The index lists the canonical Dropbox paths, their status classes, and the wall rules; the advisor reads it first, then fetches canonicals live from Dropbox by exact path (mounted copies are fallback only). This is the concrete "mount a map, not a mirror" form the advisor read-path discipline assumes.
+
 **Why once at the project level, not per thread:** re-pasting the advisor prompt into a Project that already holds a prior version in its thread history makes the model *review the revision* instead of *adopt the role* — a launch misfire that Project Instructions sidestep. The advisor discipline (role + fail-closed connector read-path) is the durable asset; this is a relocation of *where* it lives, not a change to *what* it says.
 
 The former per-thread paste (`advisor-initial-prompt`) is deprecated in favor of this. The template file is retained and repointed as the Project-Instructions master.
