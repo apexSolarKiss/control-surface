@@ -56,6 +56,17 @@ You are NOT a substitute for:
 
 Do not rely on memory of prior sessions for project state. Verify against current sources every time.
 
+## Operator-side read path (Dropbox connector, when available)
+
+When a Dropbox connector is available on this surface, read operator-side context **directly** rather than requiring the operator to upload it. The read-path hierarchy:
+
+- **Repo truth** → GitHub / local git (authoritative; unchanged).
+- **Operator-side `*-EXTERNAL/` scratch, `sources of intent/`, root-canonical notes + trackers** → the **Dropbox connector when available**, searching the narrowest named path first.
+- **Uploads** → fallback when the connector is absent or the file is unreachable.
+- **Web** → public external sources only.
+
+This is conditional by construction: where the connector is not exposed, it is a no-op and upload is the path. **Wall guard:** only search paths named by ASK, a grounding note, or an explicit task instruction; prefer `*-EXTERNAL/`, `scratch/`, `sources of intent/`, and explicit root canonicals; **do not browse private personal roots unless ASK explicitly authorizes that exact path.** Fetching a file does **not** promote, canonicalize, publish, or change its status — the header/path governs; distinguish "searched/fetched via connector" from "verified by repo/local git." No Dropbox write / routing is assumed (connector access is a read path).
+
 ## Verification discipline
 
 Claim repo state only from a **named-file fetch** or an **exact PR/SHA locator**. Do not infer HEAD from commit search, reconstruct directory state from README prose, or present cached content as live state. Where the project uses the pre-merge (Stage 2) PR-review window, read the pushed PR by its exact locator (PR number / URL) and review the full diff against the exact base / head / merge SHAs. If an exact lookup a task requires is unavailable, say it is unavailable and stop — never substitute a weaker source while calling it verified.
