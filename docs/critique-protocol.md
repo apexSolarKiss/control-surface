@@ -52,6 +52,8 @@ Some critique inputs are not repo files: the operator-side diagram packages (D03
 
 So the rule is: **the connector advisor fetches the package source directly when a Dropbox connector is available; otherwise mount/upload it — and if neither reaches it, the advisor declares that leg "not reviewed."** A critique never claims to have reviewed a surface it could not read — the same read-path honesty required for repo files and PRs. Connector access is a read path, not a status change (a fetched scratch file stays scratch), and never browses private personal roots unless ASK names the exact path — see the read-path + wall guard in `templates/advisor-project-instructions.template.md`.
 
+**Consequence:** do **not** remount operator-side canonicals into the advisor Project's Sources by default. Where the connector exists, Dropbox is the **preferred live read path** for operator-side canonicals (mounted Sources are for bootstrap / fallback / connector-failure resilience, not routine canonical mirroring). Mounting a package source is the exception — for a critique whose package Dropbox cannot reach or whose path is ambiguous.
+
 ## Related
 
 - `prompts/repo-critique-initial-prompt.md` · `prompts/ecology-critique-initial-prompt.md` — what to read and assess (single repo · whole ecology).
