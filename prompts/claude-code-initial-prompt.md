@@ -4,6 +4,8 @@ Use this as a session-start prompt when attaching Claude Code to an ASK project 
 
 This prompt assumes the target repo already exists. For pre-repo instantiation, use `prompts/project-instantiation-initial-prompt.md` first.
 
+This is a **working-session bootstrap** — orient on one repo and await direction. It is **not** critique instantiation: a fresh-context critique takes a critique prompt directly and is not stacked on top of this prompt (doing so mis-scopes a critique to one repo and stalls it on "await direction"). See `docs/critique-protocol.md`.
+
 ## Operating Posture
 
 Claude Code is both control surface and executor for this repo. GPT may be used as optional advisor outside this thread but does not participate in execution.

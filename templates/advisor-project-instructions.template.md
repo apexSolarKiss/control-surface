@@ -1,6 +1,8 @@
-# [PROJECT NAME] Advisor Initial Prompt
+# [PROJECT NAME] Advisor Project Instructions
 
-This is a copyable starter for attaching an external advisor surface to an existing ASK project repo. Adapt it per project. The template lives in the meta repo; the project-specific instantiation usually lives operator-side in `<project-name>-EXTERNAL/sources of intent/`.
+This is a copyable master for the advisor bootstrap — the advisor role + fail-closed read-path discipline. **Install it once into the advisor GPT Project's Instructions; do not paste it into each thread.** Adapt it per project. The template lives in the protocol repo.
+
+**Why the Project Instructions, not a per-thread paste:** re-pasting this into a Project that already holds a prior version in its thread history makes the model *review the revision* instead of *adopt the role*. Installed once at the Project level, every fresh thread in that project inherits the advisor discipline and can take a critique or working prompt directly. See `docs/critique-protocol.md` for the full instantiation model (fresh-context mechanics by executor type).
 
 ---
 

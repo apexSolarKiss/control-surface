@@ -1,6 +1,8 @@
 # ecology-ASK // System Critique // Initial Prompt
 
-Use this prompt to invoke an open-ended fresh-context critique of the ASK system-building ecology.
+Use this prompt to invoke an open-ended fresh-context critique of the ASK system-building ecology. For how this critique is instantiated — the two fresh-context mechanics by executor type, and the rule that a filesystem executor reads the operator-side packages directly while a connector advisor needs them mounted or must declare them not-reviewed — see `docs/critique-protocol.md`.
+
+**Declare the coverage band first.** Open the critique by stating what it covers and what it does not — e.g. `band: core ecology (control-surface · method-ASK · design-system-ASK · ASK front door) + publication/propagation drift; downstream deep-state excluded except AP/UO front doors`. Without a declared band, successive passes drift toward coverage-theater (implying total coverage while sampling). The band is an honesty instrument, not a scope cap.
 
 Review the current state of:
 

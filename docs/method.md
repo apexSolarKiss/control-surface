@@ -21,7 +21,7 @@ The methodology repo's `docs/method.md` is the primary articulation. Standalone 
 `apexSolarKiss/control-surface` remains the execution-protocol layer. It owns:
 
 - [`AGENTS.md`](../AGENTS.md) — workflow rules for repo execution
-- [`templates/`](../templates/) — downstream starter files (AGENTS, architecture, grounding note, advisor prompt, overlays)
+- [`templates/`](../templates/) — downstream starter files (AGENTS, architecture, grounding note, advisor Project Instructions, overlays)
 - [`prompts/`](../prompts/) — instantiation prompt, nudge ladder, critique cycle
 - [`examples/`](../examples/) — workflow-asset notes for each worked-example repo
 - [`docs/architecture.md`](architecture.md) — this repo's role-model architecture
