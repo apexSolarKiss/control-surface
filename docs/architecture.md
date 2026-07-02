@@ -8,17 +8,17 @@ The active operating model for new ASK projects is single-node: Claude Code is b
 
 The methodology layer that articulates the method has graduated upstream to [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK). This repo carries the execution-protocol layer that operationalizes the method per session. `control-surface` is meta only relative to downstream project repos; it is itself downstream of `method-ASK`.
 
-An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. `apexSolarKiss/mazeASK` is still operated on Model A and is the working example for any project that still needs it.
+An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. `apexSolarKiss/mazeASK` is the retained legacy Model A reference (currently dormant) — the working example for any project that still needs that model.
 
 The workflow rules are agent-agnostic; the rules in `AGENTS.md` apply to whoever is executing.
 
-Three live working examples anchor the family:
+Three worked examples anchor the family:
 
 - `apexSolarKiss/asset-pipeline-ASK` — single-node working example (mature pressure surface)
 - `apexSolarKiss/urban-observatory` — single-node working example (newer; instantiation / source-of-intent recovery pressure surface)
-- `apexSolarKiss/mazeASK` — Model A working example (still active for that project)
+- `apexSolarKiss/mazeASK` — legacy Model A reference (project currently dormant)
 
-`apexSolarKiss/design-system-ASK` is a distinct kind of surface — an externalized ASK visual / aesthetic-intent implementation. It is the family's upstream visual-inheritance reference surface: the public, repo-shaped carrier of *externalized* aesthetic intent that child artifacts inherit by reference. Source-of-intent proper remains operator-side; this repo carries the implementation surface. One downstream child proof has landed (`urban-observatory`'s Example 2 prototype). [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md) carries the method-altitude account. Not a project pressure surface in the same sense as the three working examples above.
+`apexSolarKiss/design-system-ASK` is a distinct kind of surface — an externalized ASK visual / aesthetic-intent implementation. It is the family's upstream visual-inheritance reference surface: the public, repo-shaped carrier of *externalized* aesthetic intent that child artifacts inherit by reference. Source-of-intent proper remains operator-side; this repo carries the implementation surface. One downstream child proof has landed (`urban-observatory`'s Example 2 prototype). [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md) carries the method-altitude account. Not a project pressure surface in the same sense as the three worked examples above.
 
 ## Layer Map
 

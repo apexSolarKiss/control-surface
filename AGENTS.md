@@ -4,7 +4,7 @@ This file defines repo-local workflow rules for whoever executes work on this `c
 
 The operating model is single-node: Claude Code is both control surface and executor.
 
-An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor (referred to historically as **Model A**) — shaped this repo's design and is retained as legacy reference. It is no longer active here. `apexSolarKiss/mazeASK` remains on Model A for now and is the working example for any project that still needs it.
+An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor (referred to historically as **Model A**) — shaped this repo's design and is retained as legacy reference. It is no longer active here. `apexSolarKiss/mazeASK` is the retained legacy Model A reference (currently dormant) — the working example for any project that still needs that model.
 
 The rules below are agent-agnostic — they apply to whoever is executing.
 
