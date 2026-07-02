@@ -53,7 +53,9 @@ During operational use:
 - treat the external grounding note as the source of truth for repo-external context
 - use prompts for startup or handoff, not as permanent repo policy
 - treat per-conversation memory (Claude Code's MEMORY.md, ChatGPT thread history, task lists) as ephemeral session state — do not promote it into the durable sources
-- when an external advisor surface is used (GPT or Claude in chat form), adapt `templates/advisor-project-instructions.template.md` and install it once into the advisor Project Instructions — not pasted per thread (see `docs/critique-protocol.md`); the grounding-note canonical lives at the `-EXTERNAL` root
+- when an external advisor surface is used (GPT or Claude in chat form):
+  - create `<project-name>-EXTERNAL/_INDEX-<project-name>.md` from `templates/_INDEX-project.template.md` — a **source index / path map** listing the project's canonical Dropbox paths, their status classes, and the wall rules (use `_INDEX-<project-name>-<role>.md` for role-specific advisor surfaces); then **mount that index** as the advisor Project's **primary Source** — *mount the map, not copies of the canonicals* (the advisor fetches canonicals live from Dropbox by exact path; any mounted canonical copies are fallback only). Skip the index for a project with no advisor surface.
+  - adapt `templates/advisor-project-instructions.template.md` and install it once into the advisor Project Instructions — not pasted per thread (see `docs/critique-protocol.md`); the instructions point at the mounted index as the first read; the grounding-note canonical lives at the `-EXTERNAL` root
 - when the project will use the advisor / nudge / critique surfaces, adapt the protocol repo's reusable nudge prompt (`prompts/repo-nudge-prompt.md`) and the repo critique cycle prompts (`prompts/repo-critique-initial-prompt.md`, `prompts/repo-critique-synthesis-prompt.md`, `prompts/repo-critique-execution-prompt.md`) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`; the protocol repo's prompts remain canonical, the operator-side copies are project-flavored adaptations
 
 ## What Stays External
@@ -61,7 +63,7 @@ During operational use:
 Keep these external unless a project has a deliberate reason to mirror them:
 
 - the grounding note (always external, by design)
-- ChatGPT Project instructions (legacy Model A only)
+- advisor Project Instructions and the mounted source index / path map, when an external advisor surface (GPT or Claude in chat form) is used
 - startup prompts used to frame or hand off work
 
 ## What Usually Becomes Repo-Local
