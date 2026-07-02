@@ -100,11 +100,11 @@ An earlier split-execution model — ChatGPT as prompt compiler, Codex as execut
 
 The workflow rules live in repo-local `AGENTS.md` files and are written agent-agnostically — they apply to whoever is executing.
 
-Three live working examples anchor the family:
+Three worked examples anchor the family:
 
 - `apexSolarKiss/asset-pipeline-ASK` — mature single-node working example and primary pressure surface from which the protocol repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
 - `apexSolarKiss/urban-observatory` — second single-node working example. Newer project, currently in early bootstrap and prototype-planning phase. Pressures the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
-- `apexSolarKiss/mazeASK` — Model A working example. Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against. Still active for that project.
+- `apexSolarKiss/mazeASK` — retained legacy Model A reference (project currently dormant). Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against.
 
 ## Source-of-Truth Split
 
@@ -172,11 +172,11 @@ Templates are copyable starters. They are not live for this repo unless explicit
 
 - [`examples/asset-pipeline-ASK/notes.md`](examples/asset-pipeline-ASK/notes.md) — single-node working example (mature pressure surface)
 - [`examples/urban-observatory/notes.md`](examples/urban-observatory/notes.md) — single-node working example (newer; instantiation / source-of-intent recovery pressure surface)
-- [`examples/mazeASK/notes.md`](examples/mazeASK/notes.md) — Model A working example (still active for that project)
+- [`examples/mazeASK/notes.md`](examples/mazeASK/notes.md) — legacy Model A reference (project currently dormant)
 
 ### Legacy docs
 
-These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for `apexSolarKiss/mazeASK`, which still runs on Model A.
+These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for `apexSolarKiss/mazeASK`, the legacy Model A reference (currently dormant).
 
 - [`control-surface.md`](control-surface.md) — Model-A-specific external control-surface artifact
 - [`docs/workflow-boundary.md`](docs/workflow-boundary.md) — earlier boundary categorization, supplanted by [`AGENTS.md`](AGENTS.md)'s Source-of-Truth Boundaries section
