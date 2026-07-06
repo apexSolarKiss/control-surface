@@ -26,7 +26,7 @@ Focus on:
 - identifying the smallest initial repo structure
 - deciding what should stay external (grounding note) versus what should become repo-local once the repo exists
 - choosing which templates from `templates/` to adopt: at minimum `AGENTS.template.md` and `grounding-note.template.md`
-- deciding whether the project will use an external advisor surface (GPT or Claude in chat form) and therefore needs a **source-index map** (`templates/_INDEX-project.template.md`, instantiated as `<project>-EXTERNAL/_INDEX-<project>.md`) mounted as the advisor Project's primary Source; skip for projects with no advisor surface
+- deciding whether the project will use an external advisor surface (GPT or Claude in chat form) and therefore needs **both advisor-surface templates**: `templates/advisor-project-instructions.template.md` (adapted and installed once into the advisor Project's Instructions — not pasted per thread) **and** the **source-index map** `templates/_INDEX-project.template.md` (instantiated as `<project>-EXTERNAL/_INDEX-<project>.md`, mounted as the advisor Project's primary Source, which the instructions point at as the first read); skip both for projects with no advisor surface
 - evaluating whether the project profile is architecture-uncertain (ontology-first work, prototypes as pressure surfaces, deferred schema commitment, modeling-before-planning, ceremony-budget pressure) and whether `templates/overlays/architecture-uncertain-rules.template.md` should be adopted on top of the base `AGENTS.template.md`
 
 ## Working Rules
@@ -63,7 +63,7 @@ That prompt should include:
 - initial repo structure
 - which operating model the project will use
 - which templates from `templates/` will be adopted
-- whether an external advisor surface is planned and, if so, the source-index map's external location (`<project>-EXTERNAL/_INDEX-<project>.md` from `templates/_INDEX-project.template.md`, mounted as the advisor Project's primary Source)
+- whether an external advisor surface is planned and, if so, **both advisor-surface artifacts**: the adapted `templates/advisor-project-instructions.template.md` installed once into the advisor Project's Instructions, and the source-index map `<project>-EXTERNAL/_INDEX-<project>.md` (from `templates/_INDEX-project.template.md`) mounted as the advisor Project's primary Source — the instructions point at the mounted index as the first read
 - where the external grounding note will live (path outside the repo)
 - which repo-local docs should be created first after repo creation
 
