@@ -69,6 +69,9 @@
 
 <script src="control-surface_architecture-tree.source.js"></script>
 <script src="diagrams-static-H-engine.js"></script>
+<!-- DS embedded-font carrier — lets PNG export embed fonts with no server (file://).
+     Must load BEFORE export-png.js. Vendored from design-system-ASK; do not hand-edit. -->
+<script src="./_dsa-tokens/fonts-embedded.js"></script>
 <script src="export-png.js"></script>
 <script>
 window.DIAGRAMS.render(window.TREE_D01);
