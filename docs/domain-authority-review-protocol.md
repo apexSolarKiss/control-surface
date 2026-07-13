@@ -54,7 +54,7 @@ A project instantiates `templates/domain-authority-review-profile.template.md`. 
 - **Standing (slow-aging) fields** — project apex / decision owner, architect-operator, the domain authority and its named domain, authority scope, internal / external relationship, confidentiality / disclosure posture, authorized evidence access, return recipient, execution target, closure / recourse route, and any local package / marker conventions. These change rarely.
 - **Per-review (fast-aging) stage contract** — the current lifecycle / method stage, the fixed target or question, the decisions open in this review, the commitments held or out of scope, the review mode, the expected return mode, exact-wording requirements, and what evidence is supplied versus unavailable. These are set per review request.
 
-The profile is a **minimum, explicitly extensible contract.** Add the fields a project needs; do not freeze the schema. Held until a demonstrated second reviewer type earns them: a closed field taxonomy, a universal package shape, universal artifact classes, and any reviewer-role-design formula (for example a fixed "system owns completeness / expert owns judgment" split) or input-firmness taxonomy not already grounded in method doctrine.
+The profile is a **minimum, explicitly extensible contract.** Add the fields a project needs; do not freeze the schema. Held until a second implemented project/profile instance pressure-tests the contract: a closed field taxonomy, a universal package shape, universal artifact classes, and any reviewer-role-design formula (for example a fixed "system owns completeness / expert owns judgment" split) or input-firmness taxonomy not already grounded in method doctrine.
 
 ## Related
 
