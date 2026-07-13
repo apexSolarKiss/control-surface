@@ -1,6 +1,6 @@
 # Method // Bridge
 
-This document is a bridge. `control-surface` readers find here a short explanation of where the methodology layer lives and what it carries. The substance of the method lives upstream in [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK).
+This document is a bridge. [`control-surface`](../README.md) readers find here a short explanation of where the methodology layer lives and what it carries. The substance of the method lives upstream in [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK).
 
 ## What lives upstream
 
@@ -18,7 +18,7 @@ The methodology repo's `docs/method.md` is the primary articulation. Standalone 
 
 ## What stays in this repo
 
-`apexSolarKiss/control-surface` remains the execution-protocol layer. It owns:
+[`apexSolarKiss/control-surface`](../README.md) remains the execution-protocol layer. It owns:
 
 - [`AGENTS.md`](../AGENTS.md) — workflow rules for repo execution
 - [`templates/`](../templates/) — downstream starter files (AGENTS, architecture, grounding note, advisor Project Instructions, overlays)
@@ -31,7 +31,7 @@ The methodology repo's `docs/method.md` is the primary articulation. Standalone 
 
 ## Why the split
 
-The methodology layer and the execution-protocol layer have different aging rates and different audiences. Holding them in one repo would make it legible at neither altitude. Keeping the method upstream lets `control-surface` stay tight as the execution-protocol repo while the method evolves at its own cadence.
+The methodology layer and the execution-protocol layer have different aging rates and different audiences. Holding them in one repo would make it legible at neither altitude. Keeping the method upstream lets [`control-surface`](../README.md) stay tight as the execution-protocol repo while the method evolves at its own cadence.
 
 ## Where to read further
 

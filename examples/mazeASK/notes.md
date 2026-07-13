@@ -1,6 +1,6 @@
 # mazeASK Notes
 
-`apexSolarKiss/mazeASK` is the working example for the legacy split-execution model — historically referred to as **Model A**. It is the only active project still on Model A. New ASK projects default to single-node; `apexSolarKiss/asset-pipeline-ASK` is the current single-node working example.
+[`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the working example for the legacy split-execution model — historically referred to as **Model A**. It is the only active project still on Model A. New ASK projects default to single-node; [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the current single-node working example.
 
 `mazeASK` is also the motivating ASK project for this repo's first structure, and its repo docs show the boundary model in a concrete form.
 

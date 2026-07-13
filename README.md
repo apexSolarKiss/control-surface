@@ -82,7 +82,7 @@ To start a new ASK project from this protocol repo, beginning from zero:
    prompts/ecology-critique-execution-prompt.md
    ```
 
-   These are for system-wide critique across `control-surface`, `method-ASK`, `design-system-ASK`, and relevant downstream repos / grounding notes — not ordinary downstream-project critique.
+   These are for system-wide critique across `control-surface`, [`method-ASK`](https://github.com/apexSolarKiss/method-ASK), [`design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK), and relevant downstream repos / grounding notes — not ordinary downstream-project critique.
 
 10. Once bootstrap begins, the new repo's `AGENTS.md` governs execution.
 
@@ -96,15 +96,15 @@ The active operating model for new ASK projects is single-node: **Claude Code as
 
 An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. The Model-A-specific external orchestration artifact ([`control-surface.md`](control-surface.md)) and Model-A-only prompts remain in the repo as legacy.
 
-`apexSolarKiss/mazeASK` is still operated on Model A and is the working example for any project that still needs it. New ASK projects should default to single-node.
+[`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is still operated on Model A and is the working example for any project that still needs it. New ASK projects should default to single-node.
 
 The workflow rules live in repo-local `AGENTS.md` files and are written agent-agnostically — they apply to whoever is executing.
 
 Three worked examples anchor the family:
 
-- `apexSolarKiss/asset-pipeline-ASK` — mature single-node working example and primary pressure surface from which the protocol repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
-- `apexSolarKiss/urban-observatory` — second single-node working example. Newer project, currently in early bootstrap and prototype-planning phase. Pressures the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
-- `apexSolarKiss/mazeASK` — retained legacy Model A reference (project currently dormant). Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against.
+- [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — mature single-node working example and primary pressure surface from which the protocol repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
+- [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — second single-node working example. Newer project, currently in early bootstrap and prototype-planning phase. Pressures the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
+- [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) — retained legacy Model A reference (project currently dormant). Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against.
 
 ## Source-of-Truth Split
 
@@ -137,7 +137,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 
 ### Methodology docs
 
-- [`docs/method.md`](docs/method.md) — compact bridge pointing to `apexSolarKiss/method-ASK` as the upstream methodology layer; substantive method articulation now lives in `method-ASK/docs/method.md`
+- [`docs/method.md`](docs/method.md) — compact bridge pointing to [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK) as the upstream methodology layer; substantive method articulation now lives in `method-ASK/docs/method.md`
 
 ### Workflow docs
 
@@ -166,7 +166,7 @@ Templates are copyable starters. They are not live for this repo unless explicit
 - [`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md) — open-ended structural critique against repo + grounding note (initial pass of the fresh-context critique cycle)
 - [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md) — advisor-role synthesis of two independent critiques into an advisory plan (synthesis pass)
 - [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md) — hand the advisory plan back to the execution surface for scoped implementation (execution pass)
-- [`prompts/ecology-critique-initial-prompt.md`](prompts/ecology-critique-initial-prompt.md) — open-ended fresh-context critique across the ASK system-building ecology (`control-surface`, `method-ASK`, `design-system-ASK`, downstream repos / grounding notes)
+- [`prompts/ecology-critique-initial-prompt.md`](prompts/ecology-critique-initial-prompt.md) — open-ended fresh-context critique across the ASK system-building ecology (`control-surface`, [`method-ASK`](https://github.com/apexSolarKiss/method-ASK), [`design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK), downstream repos / grounding notes)
 - [`prompts/ecology-critique-synthesis-prompt.md`](prompts/ecology-critique-synthesis-prompt.md) — fold another independent ecology critique into the one just produced and make an advisory plan
 - [`prompts/ecology-critique-execution-prompt.md`](prompts/ecology-critique-execution-prompt.md) — hand the ecology advisory synthesis back to the execution surface for per-repo scoped implementation, stopping at exact scoped diff (execution pass)
 
@@ -178,7 +178,7 @@ Templates are copyable starters. They are not live for this repo unless explicit
 
 ### Legacy docs
 
-These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for `apexSolarKiss/mazeASK`, the legacy Model A reference (currently dormant).
+These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK), the legacy Model A reference (currently dormant).
 
 - [`control-surface.md`](control-surface.md) — Model-A-specific external control-surface artifact
 - [`docs/workflow-boundary.md`](docs/workflow-boundary.md) — earlier boundary categorization, supplanted by [`AGENTS.md`](AGENTS.md)'s Source-of-Truth Boundaries section

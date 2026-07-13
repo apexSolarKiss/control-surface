@@ -13,9 +13,9 @@ Use this phase when the project is being defined and the target repo does not ye
 During instantiation:
 
 - read whatever instantiation source pack exists (Project source pack in ChatGPT, conversation context in Claude Code, or both)
-- use `apexSolarKiss/control-surface` as the master reference repo
-- use `apexSolarKiss/asset-pipeline-ASK` as the single-node working example (default)
-- use `apexSolarKiss/mazeASK` as the legacy Model A working example (still active for that project)
+- use [`apexSolarKiss/control-surface`](../README.md) as the master reference repo
+- use [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) as the single-node working example (default)
+- use [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) as the legacy Model A working example (still active for that project)
 - refine project purpose, repo name, repo description, and initial structure
 - confirm the operating model — default to single-node unless the project has a specific reason to run on legacy Model A
 - decide which assets should remain external versus which should eventually live in the repo
