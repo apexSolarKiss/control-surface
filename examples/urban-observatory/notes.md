@@ -1,6 +1,6 @@
 # urban-observatory Notes
 
-`apexSolarKiss/urban-observatory` is the second single-node working example for the control-surface workflow. `apexSolarKiss/asset-pipeline-ASK` is the mature single-node working example and primary pressure surface for rule evolution; `apexSolarKiss/mazeASK` is the legacy Model A working example, still active for that project.
+[`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second single-node working example for the control-surface workflow. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature single-node working example and primary pressure surface for rule evolution; [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the legacy Model A working example, still active for that project.
 
 ## Operating Model
 

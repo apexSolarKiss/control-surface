@@ -1,6 +1,6 @@
 # asset-pipeline-ASK Notes
 
-`apexSolarKiss/asset-pipeline-ASK` is the single-node working example for the control-surface workflow — the default operating model for new ASK projects. `apexSolarKiss/mazeASK` is the legacy Model A working example, still active for that project.
+[`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the single-node working example for the control-surface workflow — the default operating model for new ASK projects. [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the legacy Model A working example, still active for that project.
 
 ## Operating Model
 

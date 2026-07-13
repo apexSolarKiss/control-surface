@@ -1,24 +1,24 @@
 # Architecture
 
-`control-surface` is the execution-protocol repo for ASK workflow architecture assets.
+[`control-surface`](../README.md) is the execution-protocol repo for ASK workflow architecture assets.
 
 ## Role Model
 
 The active operating model for new ASK projects is single-node: Claude Code is both control surface and executor. An advisor in chat-based form — typically GPT or Claude — remains available outside the execution thread.
 
-The methodology layer that articulates the method has graduated upstream to [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK). This repo carries the execution-protocol layer that operationalizes the method per session. `control-surface` is meta only relative to downstream project repos; it is itself downstream of `method-ASK`.
+The methodology layer that articulates the method has graduated upstream to [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK). This repo carries the execution-protocol layer that operationalizes the method per session. [`control-surface`](../README.md) is meta only relative to downstream project repos; it is itself downstream of `method-ASK`.
 
-An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. `apexSolarKiss/mazeASK` is the retained legacy Model A reference (currently dormant) — the working example for any project that still needs that model.
+An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the retained legacy Model A reference (currently dormant) — the working example for any project that still needs that model.
 
 The workflow rules are agent-agnostic; the rules in `AGENTS.md` apply to whoever is executing.
 
 Three worked examples anchor the family:
 
-- `apexSolarKiss/asset-pipeline-ASK` — single-node working example (mature pressure surface)
-- `apexSolarKiss/urban-observatory` — single-node working example (newer; instantiation / source-of-intent recovery pressure surface)
-- `apexSolarKiss/mazeASK` — legacy Model A reference (project currently dormant)
+- [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — single-node working example (mature pressure surface)
+- [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — single-node working example (newer; instantiation / source-of-intent recovery pressure surface)
+- [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) — legacy Model A reference (project currently dormant)
 
-`apexSolarKiss/design-system-ASK` is a distinct kind of surface — an externalized ASK visual / aesthetic-intent implementation. It is the family's upstream visual-inheritance reference surface: the public, repo-shaped carrier of *externalized* aesthetic intent that child artifacts inherit by reference. Source-of-intent proper remains operator-side; this repo carries the implementation surface. One downstream child proof has landed (`urban-observatory`'s Example 2 prototype). [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md) carries the method-altitude account. Not a project pressure surface in the same sense as the three worked examples above.
+[`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK) is a distinct kind of surface — an externalized ASK visual / aesthetic-intent implementation. It is the family's upstream visual-inheritance reference surface: the public, repo-shaped carrier of *externalized* aesthetic intent that child artifacts inherit by reference. Source-of-intent proper remains operator-side; this repo carries the implementation surface. One downstream child proof has landed (`urban-observatory`'s Example 2 prototype). [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md) carries the method-altitude account. Not a project pressure surface in the same sense as the three worked examples above.
 
 ## Layer Map
 
@@ -26,11 +26,11 @@ This repo sits in the middle of a three-tier structure:
 
 - **Methodology layer** — adversarial iteration / cross-phase swing discipline. Lives upstream in [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK); [`docs/method.md`](method.md) in this repo is a compact bridge pointing there.
 - **Execution-protocol layer** — this repo's core purpose. `AGENTS.md`, templates, review cadence, and branch discipline encode how work gets done within a session.
-- **Project repos** — applications of the method and protocol to concrete domains. `apexSolarKiss/asset-pipeline-ASK` is the mature single-node working example and primary pressure surface for rule evolution; `apexSolarKiss/urban-observatory` is the second single-node working example, exercising the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces; `apexSolarKiss/mazeASK` is the legacy Model A working example.
+- **Project repos** — applications of the method and protocol to concrete domains. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature single-node working example and primary pressure surface for rule evolution; [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second single-node working example, exercising the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces; [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the legacy Model A working example.
 
-Alongside the project repos, `apexSolarKiss/design-system-ASK` is the family's upstream visual-inheritance reference surface — an externalized ASK visual / aesthetic-intent implementation, not a project pressure surface. Child surfaces inherit Tier 1 + Tier 2 by reference and resolve Tier 3 (instance identity) locally by source-of-intent + brand-distance; ASK-the-entity is the one surface that uses ASK's own Tier 3 (it does not inherit ASK's Tier 3 to downstream surfaces). One downstream child proof has landed (`urban-observatory`). The method-altitude account lives in [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md).
+Alongside the project repos, [`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK) is the family's upstream visual-inheritance reference surface — an externalized ASK visual / aesthetic-intent implementation, not a project pressure surface. Child surfaces inherit Tier 1 + Tier 2 by reference and resolve Tier 3 (instance identity) locally by source-of-intent + brand-distance; ASK-the-entity is the one surface that uses ASK's own Tier 3 (it does not inherit ASK's Tier 3 to downstream surfaces). One downstream child proof has landed (`urban-observatory`). The method-altitude account lives in [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md).
 
-The control-surface repo owns the execution-protocol layer. The methodology layer lives upstream in `method-ASK`.
+The [control-surface](../README.md) repo owns the execution-protocol layer. The methodology layer lives upstream in `method-ASK`.
 
 An illustrative tree of this architecture and its operator-side ecology is at [`docs/diagrams/control-surface_architecture-tree.html`](diagrams/control-surface_architecture-tree.html). The diagram is illustrative; repo prose is source truth.
 
@@ -95,6 +95,6 @@ This repo is intentionally small:
 - a small downstream template set (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`)
 - one agent-agnostic instantiation prompt
 - a minimal example set
-- a legacy reference set retained for `mazeASK` and any other project still on Model A
+- a legacy reference set retained for [`mazeASK`](https://github.com/apexSolarKiss/mazeASK) and any other project still on Model A
 
 It does not include automation, sync tooling, CI, generators, or a larger framework system.
