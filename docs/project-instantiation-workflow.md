@@ -20,6 +20,7 @@ During instantiation:
 - confirm the operating model — default to single-node unless the project has a specific reason to run on legacy Model A
 - decide which assets should remain external versus which should eventually live in the repo
 - decide where the external grounding note will live (path outside the repo)
+- determine whether the project has a **domain authority** in a role distinct from the architect/operator — a person or role that supplies or validates binding judgment within a named domain; if so, it adopts the domain-authority review profile at bootstrap (see [`docs/domain-authority-review-protocol.md`](domain-authority-review-protocol.md))
 
 At this point, there is no repo-local truth yet because the target repo does not exist. The instantiation prompt is `prompts/project-instantiation-initial-prompt.md`.
 
@@ -35,6 +36,7 @@ During bootstrap:
 - optionally copy `templates/architecture.template.md` into the repo as `docs/architecture.md`
 - if running single-node, optionally copy `templates/CLAUDE.template.md` into the repo as `CLAUDE.md`
 - if the project profile is architecture-uncertain (ontology-first work, prototypes as pressure surfaces, deferred schema commitment, modeling-before-planning, ceremony-budget pressure), optionally adopt `templates/overlays/architecture-uncertain-rules.template.md` on top of the base `AGENTS.md`; skip when the task surface is known and the work is execution against it
+- if the project has a domain authority distinct from the architect/operator (determined at instantiation), copy `templates/domain-authority-review-profile.template.md` into the project's operator-side surface and follow [`docs/domain-authority-review-protocol.md`](domain-authority-review-protocol.md) to keep the reviewer's authority, the project stage, and implementation authority independent, classify returned claims by stage, and route judgment to execution; skip when the project's source of intent is authored entirely by the architect/operator
 - identify the first repo-local entry points
 - run the post-bootstrap grounding-note trim pass per `templates/grounding-note.template.md` once the repo carries project truth — remove or relocate fast-aging material (repo-state chronology, planning-packet instructions, "future repo" language, bootstrap-stage task sequencing) that the pre-repo grounding note may have accumulated
 

@@ -143,6 +143,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 
 - [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md) — agent-agnostic workflow doc for the pre-repo instantiation phase before a target ASK repo exists
 - [`docs/critique-protocol.md`](docs/critique-protocol.md) — how a fresh-context critique is instantiated (two mechanics by executor type), how the advisor surface is bootstrapped (Project Instructions, not a per-thread paste), the coverage-band requirement, and the non-repo package-availability rule
+- [`docs/domain-authority-review-protocol.md`](docs/domain-authority-review-protocol.md) — the reviewer-neutral protocol for a review by a domain authority in a role distinct from the architect/operator: the three independent axes (review mode ≠ return mode ≠ authority), the stage contract, claim-level classification, the handoff-necessity gate, and how it stays distinct from SMGI (delivery) and critique-protocol (fresh-context critique)
 
 ### Reusable templates for downstream ASK repos
 
@@ -153,6 +154,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 - [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) — the advisor bootstrap (role + fail-closed read-path) for an external advisor surface (GPT or Claude in chat form); adapted per project and installed **once into the advisor Project Instructions**, not pasted per thread (see [`docs/critique-protocol.md`](docs/critique-protocol.md))
 - [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md) — the **source index / path map** an advisor Project mounts as its primary Source; instantiated as `<project>-EXTERNAL/_INDEX-<project>.md` (or `_INDEX-<project>-<role>.md` per role). Mount the map, not copies of the canonicals — the advisor fetches canonicals live from Dropbox by exact path; mounted copies are fallback only
 - [`templates/overlays/architecture-uncertain-rules.template.md`](templates/overlays/architecture-uncertain-rules.template.md) — optional opt-in overlay for downstream projects with active architecture or ontology uncertainty; adds rules calibrated for projects whose work is to discover structural categories (architecture-before-prototype, prototype-as-pressure-surface, attempt-model-before-plan, self-evident-premise stop, ceremony budget, proof-chain gravity well guard, bootstrap doc-alignment check) on top of the base template; not used by projects whose task surface is known
+- [`templates/domain-authority-review-profile.template.md`](templates/domain-authority-review-profile.template.md) — conditional profile a downstream project instantiates **only if** it has a domain authority in a role distinct from the architect/operator; a minimum, extensible standing-fields + per-review stage-contract profile, governed by [`docs/domain-authority-review-protocol.md`](docs/domain-authority-review-protocol.md)
 
 Templates are copyable starters. They are not live for this repo unless explicitly adopted somewhere else.
 
@@ -194,6 +196,7 @@ Each legacy doc carries a deprecation header naming what supersedes it for curre
 | set up the workflow before the target repo exists | [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md) and [`prompts/project-instantiation-initial-prompt.md`](prompts/project-instantiation-initial-prompt.md) |
 | attach Claude Code to an existing single-node repo | [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) |
 | attach an external advisor surface (GPT or Claude in chat form) to an existing repo | [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) + [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md) (mount the index as the primary Source) |
+| run a review by a domain authority in a role distinct from the architect/operator | [`docs/domain-authority-review-protocol.md`](docs/domain-authority-review-protocol.md) + [`templates/domain-authority-review-profile.template.md`](templates/domain-authority-review-profile.template.md) |
 | create repo-local starter docs for a downstream repo | [`templates/AGENTS.template.md`](templates/AGENTS.template.md), [`templates/grounding-note.template.md`](templates/grounding-note.template.md), [`templates/architecture.template.md`](templates/architecture.template.md), [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) |
 | see how the structure mapped onto a real ASK project | [`examples/`](examples/) |
 | understand the previous canonical Model-A operating doc | [`control-surface.md`](control-surface.md) (legacy) |
