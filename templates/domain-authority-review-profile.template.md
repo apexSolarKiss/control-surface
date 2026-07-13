@@ -1,8 +1,8 @@
 # Domain-authority review profile — <project-name>
 
-Instantiate this **only if** the project has a domain authority in a role distinct from its architect/operator (see [`docs/domain-authority-review-protocol.md`](../docs/domain-authority-review-protocol.md); the instantiation gate is in [`docs/project-instantiation-workflow.md`](../docs/project-instantiation-workflow.md)). Copy it into the project's operator-side surface (`<project-name>-EXTERNAL/`), fill the fields, and delete the guidance notes.
+Instantiate this **only if** the project has a domain authority in a role distinct from its architect/operator (see `apexSolarKiss/control-surface/docs/domain-authority-review-protocol.md`; the instantiation gate is in `apexSolarKiss/control-surface/docs/project-instantiation-workflow.md`). Copy it into the project's operator-side surface (`<project-name>-EXTERNAL/`), fill the fields, and delete the guidance notes.
 
-This is a **minimum, explicitly extensible contract.** Add fields the project needs; do not treat the list as closed. A closed field taxonomy, a universal package shape, universal artifact classes, and any fixed reviewer-role formula or input-firmness taxonomy not already grounded in method doctrine are **held** until a demonstrated second reviewer type earns them.
+This is a **minimum, explicitly extensible contract.** Add fields the project needs; do not treat the list as closed. A closed field taxonomy, a universal package shape, universal artifact classes, and any fixed reviewer-role formula or input-firmness taxonomy not already grounded in method doctrine are **held** until a second implemented project/profile instance pressure-tests the contract.
 
 The profile splits by aging rate: **standing** fields change rarely (they live durably in this profile); the **per-review stage contract** is set fresh for each review request.
 
@@ -36,4 +36,4 @@ The profile splits by aging rate: **standing** fields change rarely (they live d
 
 ---
 
-*The invariants that govern how this profile is used — authority declaration, expertise-is-not-project-authority, no implicit stage advancement, claim-level classification, the handoff-necessity gate, direct-relay sufficiency, exact-wording preservation, advisor/generated-thread non-authorization, and routing — live in [`docs/domain-authority-review-protocol.md`](../docs/domain-authority-review-protocol.md). This template is the fill-in; the protocol is the rule.*
+*The invariants that govern how this profile is used — authority declaration, expertise-is-not-project-authority, no implicit stage advancement, claim-level classification, the handoff-necessity gate, direct-relay sufficiency, exact-wording preservation, advisor/generated-thread non-authorization, and routing — live in `apexSolarKiss/control-surface/docs/domain-authority-review-protocol.md`. This template is the fill-in; the protocol is the rule.*
