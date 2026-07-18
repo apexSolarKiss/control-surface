@@ -53,7 +53,9 @@ For external context, read the grounding note.
 
 ## Inbound Handoff TBI Marker
 
-When an inbound handoff memo in `control-surface-EXTERNAL/sources of intent/` carries the `-TBI.md` suffix, treat the suffix as ASK ingestion-state only: to be ingested, not to be absorbed. When ASK feeds that memo into the active surface, the first action is to rename the file in place to remove `-TBI`; do not edit the memo body. Then classify the memo and record any absorption / hold / rejection in a separate scratch derivative under `control-surface-EXTERNAL/scratch/`. Copy + suffix do not authorize implementation.
+When a routed handoff memo in the shared ecology intake (`ecology-ASK-EXTERNAL/sources of intent/`) carries the `-TBI.md` suffix, treat the suffix as ASK ingestion-state only: a received handoff awaiting ingestion, not a statement about absorption. When ASK feeds that memo into the active surface, the first recipient-side action is to rename the file in place to remove `-TBI`; do not edit the memo body. Then classify the memo. When classification produces a durable action, hold, rejection, or route, record the required closure in the shared ecology scratch (`ecology-ASK-EXTERNAL/scratch/`). Copy + suffix do not authorize implementation. Physical co-location does not merge authority; resulting actions follow each owning repo's or canonical's governing workflow.
+
+`<project>-EXTERNAL/` remains the ordinary standalone / downstream-project convention. The core ASK ecology is a declared multi-repo operating surface and is the exception: its five repos share one external operating surface while their repo authority, grounding notes, and workflows remain separate.
 
 Method-altitude articulation: `method-ASK/docs/source-of-intent.md` §Inbound handoff TBI marker.
 

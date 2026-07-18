@@ -2,7 +2,7 @@
    Source data for the control-surface architecture tree diagram.
    Renderable by diagrams-engine.js.
 
-   D01 // control-surface architecture tree // source-v2 // 2026-05-25
+   D01 // control-surface architecture tree // source-v3 // 2026-07-18
    Single-tree extraction of TREE_D01 from the v9 operator-side ecology-ASK
    package. This repo carries TREE_D01 only; it does not carry TREE_D02
    (method-ASK topology) or TREE_D03 (ecology-ASK overall), which remain
@@ -85,21 +85,23 @@ window.TREE_D01 = {
       ],
     },
     {
-      kind: 'section', label: 'operator-side meta context',
-      tag: 'control-surface-EXTERNAL/',
+      kind: 'section', label: 'operator-side context · shared ecology external surface',
+      tag: 'ecology-ASK-EXTERNAL/ · control-surface slice',
       children: [
-        { label: 'sources of intent/', children: [
-          { label: 'control-surface_grounding-note.md', note: 'canonical external context mirror' },
-          { label: 'versioned grounding-note history' },
+        { label: 'control-surface_grounding-note.md', note: 'root canonical' },
+        { label: 'sources of intent/', note: 'shared ecology intake', children: [
+          { label: 'routed handoffs · -TBI = received, awaiting ingestion' },
+          { label: 'received records across the core ecology' },
         ]},
-        { label: 'scratch/', children: [
+        { label: 'scratch/', note: 'shared ecology operator scratch', children: [
           { label: 'handoffs' },
           { label: 'critique syntheses' },
+          { label: 'versioned grounding-note history' },
           { label: 'topology / methodology-graduation evaluations' },
           { label: 'diagram source drafts' },
           { label: 'article planning artifacts' },
         ]},
-        { label: 'articles/', children: [
+        { label: 'articles/', note: 'shared ecology publication corpus', children: [
           { label: 'Substack draft iterations · reflective method writing' },
           { label: 'not repo truth' },
           { label: 'published Substack remains conceptual source of truth for published essays' },

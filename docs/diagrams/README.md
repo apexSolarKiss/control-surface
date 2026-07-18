@@ -45,7 +45,7 @@ export-png.js                                   3840×2880 PNG export
 
 This diagram was rendered as part of the v9 operator-side `ecology-ASK` diagram package and absorbed here at `source-v2 // render-v9`. Future refreshes will bump the render version and may bump the source version if the tree data changes.
 
-The operator-side package and historical render iterations remain in `control-surface-EXTERNAL/scratch/` and are not repo truth.
+The operator-side package and historical render iterations remain in `ecology-ASK-EXTERNAL/scratch/` and are not repo truth.
 
 ## What this folder does not carry
 
