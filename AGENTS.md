@@ -118,7 +118,7 @@ Before the cutover, list:
 3. every external source index that maps the path;
 4. downstream trackers, adapters, prompts, and routing instructions;
 5. walled or private consumer indexes;
-6. mounted Project Sources and Instructions;
+6. actual Project-source inventories and retrieval behavior — mounted Sources, Instructions, live connector paths, standing mounts, on-demand fallbacks, and any claim about which of those exists;
 7. local launch configs, scripts, agent memory, aliases, symlinks;
 8. human applications keyed to the path;
 9. current locators versus historical event-time paths.
@@ -129,7 +129,7 @@ Before the cutover, list:
 
 **Per-line disposition, never a blanket swap.** A current locator tells the reader where to find a retained artifact — update it. A historical record states where something lived at event time — leave it. A line doing both keeps its narrative and gets its locator corrected, or states both paths explicitly. Ambiguous function stops for an ASK ruling rather than a guess.
 
-**A migration is also an audit.** Reading every consumer surfaces drift that predates the move — stale bases, retired conventions, declarations that disagree with disk. Repair it, but label it as adjacent rather than folding it into the migration's own record.
+**A migration is also an audit.** Reading every consumer may surface drift that predates the move — stale bases, retired conventions, or declarations that disagree with disk or Project UI. Record it as adjacent. Repair it only when the active scope explicitly authorizes that correction and the acting surface has write jurisdiction; otherwise flag or route it under §Cross-Surface Change Routing.
 
 ---
 
