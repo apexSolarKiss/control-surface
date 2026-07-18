@@ -6,7 +6,7 @@
 
 The active operating model for new ASK projects is single-node: Claude Code is both control surface and executor. An advisor in chat-based form — typically GPT or Claude — remains available outside the execution thread.
 
-The methodology layer that articulates the method has graduated upstream to [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK). This repo carries the execution-protocol layer that operationalizes the method per session. [`control-surface`](../README.md) is meta only relative to downstream project repos; it is itself downstream of `method-ASK`.
+The methodology layer that articulates the method has graduated upstream to [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK). This repo carries the execution-protocol layer that operationalizes the method per session. [`control-surface`](../README.md) sits upstream of downstream project repos while remaining downstream of `method-ASK`.
 
 An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the retained legacy Model A reference (currently dormant) — the working example for any project that still needs that model.
 
