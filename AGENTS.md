@@ -107,6 +107,32 @@ Method-altitude articulation: `method-ASK/docs/source-of-intent.md` §Scope guar
 
 ---
 
+## Path Migration: Reverse-Consumer Enumeration
+
+Moving or renaming a canonical path breaks every surface that *points at* it, which is a strictly larger set than the surfaces that *move*. Enumerate consumers; do not reason about scope.
+
+Before the cutover, list:
+
+1. objects that move;
+2. direct references inside the owning surface;
+3. every external source index that maps the path;
+4. downstream trackers, adapters, prompts, and routing instructions;
+5. walled or private consumer indexes;
+6. actual Project-source inventories and retrieval behavior — mounted Sources, Instructions, live connector paths, standing mounts, on-demand fallbacks, and any claim about which of those exists;
+7. local launch configs, scripts, agent memory, aliases, symlinks;
+8. human applications keyed to the path;
+9. current locators versus historical event-time paths.
+
+**A surface being out of scope for moving does not put it out of scope for referencing.** That inference is the characteristic failure: a downstream project keeps its own root, so it is excluded from the migration — and its index, trackers, and prompts keep pointing at an address that no longer exists.
+
+**Post-cutover fail-closed claims must name the carrier set actually tested.** "No stale references remain" is a claim about what was scanned. Scope it explicitly, or it will be read as ecology-wide evidence it cannot support.
+
+**Per-line disposition, never a blanket swap.** A current locator tells the reader where to find a retained artifact — update it. A historical record states where something lived at event time — leave it. A line doing both keeps its narrative and gets its locator corrected, or states both paths explicitly. Ambiguous function stops for an ASK ruling rather than a guess.
+
+**A migration is also an audit.** Reading every consumer may surface drift that predates the move — stale bases, retired conventions, or declarations that disagree with disk or Project UI. Record it as adjacent. Repair it only when the active scope explicitly authorizes that correction and the acting surface has write jurisdiction; otherwise flag or route it under §Cross-Surface Change Routing.
+
+---
+
 ## Repo Workflow Discipline
 
 ### Session-Start Discipline
