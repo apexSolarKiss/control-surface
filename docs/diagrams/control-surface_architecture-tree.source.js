@@ -2,7 +2,7 @@
    Source data for the control-surface architecture tree diagram.
    Renderable by diagrams-engine.js.
 
-   D01 // control-surface architecture tree // source-v4 // 2026-07-19
+   D01 // control-surface architecture tree // source-v4 // 2026-07-18
    Single-tree extraction of TREE_D01 from the v9 operator-side ecology-ASK
    package. This repo carries TREE_D01 only; it does not carry TREE_D02
    (method-ASK topology) or TREE_D03 (ecology-ASK overall), which remain
