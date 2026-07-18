@@ -28,7 +28,7 @@ Keep the synthesis open-ended. Do not convert it into a structured checklist unl
 
 ## Delivery
 
-Open with a `By:` line stating who produced this synthesis (e.g. `By: claude-code`), in both the reply and the saved file — the **`<source>` token is required** so a Claude synthesis and an advisor synthesis can be told apart.
+Open with a `By:` line stating who produced this synthesis (e.g. `By: claude-code`), in both the reply and the saved file — the **`<source>` token is required** so a Claude synthesis and an advisor synthesis can be told apart. This `<source>` token is a critique-cycle disambiguator, not a default model/source suffix for handoffs or other artifact classes.
 
 Deliver the synthesis (the folded critique + advisory plan) in two forms:
 
