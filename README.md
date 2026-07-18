@@ -74,7 +74,7 @@ To start a new ASK project from this protocol repo, beginning from zero:
 
    The protocol repo's prompts remain canonical reusable sources; the operator-side copies are project-flavored adaptations so the advisor and control surfaces can operate without re-deriving prompt language each time. Adapt only the prompts the project will actually use.
 
-   System-wide ecology critique prompts live separately at the meta level only — they are not adapted into downstream-project operator-side copies:
+   System-wide ecology critique prompts live separately at the ecology level only — they are not adapted into downstream-project operator-side copies:
 
    ```text
    prompts/ecology-critique-initial-prompt.md
@@ -133,7 +133,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 
 - [`AGENTS.md`](AGENTS.md) — repo-local workflow rules that govern execution inside this repo
 - [`CLAUDE.md`](CLAUDE.md) — pointer to `AGENTS.md` for Claude Code operators
-- [`docs/architecture.md`](docs/architecture.md) — meta architecture of this repo and the role model behind it
+- [`docs/architecture.md`](docs/architecture.md) — execution-protocol architecture of this repo and the role model behind it
 
 ### Methodology docs
 

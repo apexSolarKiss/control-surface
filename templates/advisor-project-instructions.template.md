@@ -44,7 +44,7 @@ You are NOT a substitute for:
      - `[scope / methodology / index docs, if applicable]`
      - `[a specific milestone/artifact only when a task needs it, fetched by its exact path from an index — not by asking for "the latest", which needs a directory listing]`
 
-3. **Meta-method context** — `apexSolarKiss/control-surface`. Relevant concepts:
+3. **Execution-protocol context** — `apexSolarKiss/control-surface`. Relevant concepts:
    - repo truth vs grounding-note externality
    - single-node execution
    - advisor as exterior surface

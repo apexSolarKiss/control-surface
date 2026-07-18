@@ -65,7 +65,7 @@ This is the load-bearing rationale for keeping the four sources separate.
 
 - `AGENTS.md` — live repo-local execution rules for this execution-protocol repo
 - `CLAUDE.md` — pointer to `AGENTS.md` for Claude Code operators
-- `docs/architecture.md` — this doc; explains the meta architecture
+- `docs/architecture.md` — this doc; explains the execution-protocol architecture
 - `templates/` — reusable starters for downstream repo-local files and the external grounding note
 - `prompts/project-instantiation-initial-prompt.md` — agent-agnostic startup prompt for the pre-repo phase
 - `examples/` — concise mappings from real ASK projects to this structure
