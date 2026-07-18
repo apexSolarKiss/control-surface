@@ -8,7 +8,7 @@ Single-node — Claude Code is both control surface and executor. GPT remains av
 
 The project ran on the legacy split-execution model (Model A) earlier in its history. Model A was sunset on this project once the single-node path proved out at scale (substantially less ceremony, faster iteration, direct ASK-to-Claude conversation in place of operator-as-go-between).
 
-The repo's `AGENTS.md` is the most advanced live working example in the family and is the source the meta repo's `templates/AGENTS.template.md` is now aligned to.
+The repo's `AGENTS.md` is the most advanced live working example in the family and is the source the protocol repo's `templates/AGENTS.template.md` is now aligned to.
 
 ## Lifecycle Stage
 
@@ -26,11 +26,11 @@ These are not policy, but they show what the workflow has produced when applied 
 - **Plan-Before-Execute and Structured Change Summary replaced per-action authorization** for Airtable schema mutations. The discipline is encoded in `AGENTS.md` and is the primary compensation rule for the single-node model's collapsed prompt-compilation step.
 - **Article anchors.** Four published Substack articles are linked from the repo's architecture as the public-facing thread of the work.
 
-## What This Example Surfaced For The Meta Repo
+## What This Example Surfaced For The Protocol Repo
 
 - The aging-rate principle as the load-bearing rationale for the source-of-truth split
 - Session topology / single-writer discipline as a real failure mode worth encoding as a rule
 - Why-the-rules-exist framing: most workflow rules are calibrated compensations for what the single-node model collapses relative to legacy Model A
 - The grounding note's narrower scope when operator-side memory handles per-conversation tracking
 
-These all flow into the meta repo's current `AGENTS.md`, `docs/architecture.md`, and the templates.
+These all flow into the protocol repo's current `AGENTS.md`, `docs/architecture.md`, and the templates.

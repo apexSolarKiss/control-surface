@@ -2,7 +2,7 @@
    Source data for the control-surface architecture tree diagram.
    Renderable by diagrams-engine.js.
 
-   D01 // control-surface architecture tree // source-v3 // 2026-07-18
+   D01 // control-surface architecture tree // source-v4 // 2026-07-18
    Single-tree extraction of TREE_D01 from the v9 operator-side ecology-ASK
    package. This repo carries TREE_D01 only; it does not carry TREE_D02
    (method-ASK topology) or TREE_D03 (ecology-ASK overall), which remain
@@ -16,7 +16,7 @@
 window.TREE_D01 = {
   kind: 'root',
   label: 'control-surface',
-  note: 'execution-protocol meta repo // downstream of method-ASK',
+  note: 'execution-protocol repo // downstream of method-ASK',
   children: [
     {
       kind: 'section', label: 'upstream methodology',
@@ -146,7 +146,7 @@ window.TREE_D01 = {
     {
       kind: 'section', label: 'downstream absorption boundary',
       children: [
-        { label: 'meta may prepare handoff context' },
+        { label: 'ecology operating surface may prepare handoff context' },
         { label: 'downstream reads its repo + grounding note + handoff memo' },
         { label: 'downstream classifies candidate content by layer' },
         { label: 'downstream proposes absorption from its own active project surface' },
