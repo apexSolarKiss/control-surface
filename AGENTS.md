@@ -116,9 +116,10 @@ A verification statement is bounded by the evidence actually gathered.
 - **A check verifies only its direct result.** Separate observation from inference; do not attach an inference to a checked fact and label the composite `verified`.
 - Pattern lists are hypotheses about how a defect may appear, not exhaustive evidence. An exhaustive claim requires enumerating and dispositioning the actual occurrence or carrier set.
 - Where coverage is partial, state the result as: `no unexplained findings in <exact set tested>`.
-- If a durable record overstates its evidence, preserve the original statement and append a correction. Do not silently tidy the audit trail.
+- If a **completed audit, closure, provenance record, or other frozen record** overstates its evidence, preserve the original statement and append a correction. Do not silently tidy the audit trail.
+- If a **live canonical or current instruction** overstates its evidence, correct the operative statement under that carrier's version and snapshot discipline, preserving the prior state in its lineage — rather than leaving a false current instruction in force.
 
-Private agent memory may record an incident or point to this canonical rule. It is not the owner of durable workflow protocol.
+Private agent memory may record an incident or point to this canonical rule **only when ASK explicitly authorizes that memory write**. This section does not itself authorize creating, extending, or revising memory. Private agent memory is not the owner of durable workflow protocol.
 
 ---
 
@@ -132,7 +133,7 @@ Before adding, materially revising, or applying a workflow rule that changes art
 
 A long-standing written rule may have drifted. Repeated artifact practice may also be wrong. **If the rule and governed artifacts disagree, stop and obtain an ASK ruling before mutating either.**
 
-Do not retroactively rename, normalize, or rewrite historical artifacts solely to force apparent conformance. After the ruling, update the canonical rule first, then conform current active carriers within the authorized scope.
+Do not retroactively rename, normalize, or rewrite historical artifacts solely to force apparent conformance. After the ruling: **if the ruling changes the canonical rule**, update that rule first, then conform current active carriers within the authorized scope. **If the rule stands**, leave it unchanged and conform the current artifacts instead.
 
 ---
 
