@@ -1,3 +1,9 @@
 # macOS
 .DS_Store
 **/.DS_Store
+
+# Claude Code local project settings
+.claude/settings.local.json
+
+# Claude Code local launch config (machine- and session-specific paths)
+.claude/launch.json
