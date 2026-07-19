@@ -59,7 +59,7 @@ When an inbound handoff memo in `<project-name>-EXTERNAL/sources of intent/` car
 
 `-TBI` marks material that ASK has saved but has not yet fed into the operating surface responsible for ingesting it. It is an unconsumed ingestion-queue marker — not a repo-ownership marker and not a pending-action marker. That is why the suffix is struck on ingestion rather than at absorption: the item leaves the queue when it is fed in.
 
-**Do not create a `-TBI` handoff between repositories operated by the same active surface.** Change repository context, perform the required repo-boundary reset, and use the owning repository's own required reads, branch, scoped diff, review, and merge gates. A handoff addressed back to the surface that authored it tracks nothing, because nothing left the queue.
+**Do not create a `-TBI` handoff between repositories operated by the same active surface.** Change repository context, perform the required repo-boundary reset, and use the owning repository's own required reads, branch, scoped diff, review, and merge gates. A handoff addressed back to the surface that authored it tracks nothing: the destination operating surface already has the material, so no ingestion boundary was crossed — and feeding it in would mean handing a memo back to its own author.
 
 Separate repository authority does not create a separate ingestion boundary. Pending owner classification or repo action is repo state — carried by the closure, the relay, or task state — not `-TBI` state.
 
