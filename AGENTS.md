@@ -107,6 +107,35 @@ Method-altitude articulation: `method-ASK/docs/source-of-intent.md` §Scope guar
 
 ---
 
+## Verification Claims and Evidence Boundaries
+
+A verification statement is bounded by the evidence actually gathered.
+
+- For claims such as `clean`, `complete`, `current`, `zero residue`, `byte-identical`, or `verified`, name the exact carrier set, path or query, ref or time boundary, and property actually tested.
+- **The boundary of a search is the boundary of the claim.** Absence from one folder, one pattern, one connector result, or one carrier class is not absence from the corpus.
+- **A check verifies only its direct result.** Separate observation from inference; do not attach an inference to a checked fact and label the composite `verified`.
+- Pattern lists are hypotheses about how a defect may appear, not exhaustive evidence. An exhaustive claim requires enumerating and dispositioning the actual occurrence or carrier set.
+- Where coverage is partial, state the result as: `no unexplained findings in <exact set tested>`.
+- If a durable record overstates its evidence, preserve the original statement and append a correction. Do not silently tidy the audit trail.
+
+Private agent memory may record an incident or point to this canonical rule. It is not the owner of durable workflow protocol.
+
+---
+
+## Rule-to-Artifact Conformance Gate
+
+Before adding, materially revising, or applying a workflow rule that changes artifact naming, versioning, snapshots, routing, or lifecycle:
+
+1. read the current canonical rule;
+2. inspect the current artifacts, relevant lineage, and live citations the rule governs;
+3. test the rule against the artifacts and the artifacts against the rule.
+
+A long-standing written rule may have drifted. Repeated artifact practice may also be wrong. **If the rule and governed artifacts disagree, stop and obtain an ASK ruling before mutating either.**
+
+Do not retroactively rename, normalize, or rewrite historical artifacts solely to force apparent conformance. After the ruling, update the canonical rule first, then conform current active carriers within the authorized scope.
+
+---
+
 ## Path Migration: Reverse-Consumer Enumeration
 
 Moving or renaming a canonical path breaks every surface that *points at* it, which is a strictly larger set than the surfaces that *move*. Enumerate consumers; do not reason about scope.
@@ -125,7 +154,7 @@ Before the cutover, list:
 
 **A surface being out of scope for moving does not put it out of scope for referencing.** That inference is the characteristic failure: a downstream project keeps its own root, so it is excluded from the migration — and its index, trackers, and prompts keep pointing at an address that no longer exists.
 
-**Post-cutover fail-closed claims must name the carrier set actually tested.** "No stale references remain" is a claim about what was scanned. Scope it explicitly, or it will be read as ecology-wide evidence it cannot support.
+**Post-cutover fail-closed claims apply §Verification Claims and Evidence Boundaries.** "No stale references remain" is a claim about what was scanned. Name the exact carrier set tested, or the result will be read as broader evidence than the check supports.
 
 **Per-line disposition, never a blanket swap.** A current locator tells the reader where to find a retained artifact — update it. A historical record states where something lived at event time — leave it. A line doing both keeps its narrative and gets its locator corrected, or states both paths explicitly. Ambiguous function stops for an ASK ruling rather than a guess.
 
@@ -381,3 +410,4 @@ Legacy docs (Model-A-specific control-surface artifact, workflow-boundary doc, C
 - Match the unit of work to the level of the question.
 - Refresh `AGENTS.md` only for rule changes; refresh templates only for downstream-relevant rule changes.
 - Keep this file workflow-only. Repo holds state. Grounding note holds external context.
+- Bound every verification claim to the exact evidence gathered; separate checked facts from inferences, and test rules against the live artifacts they govern before applying them.
