@@ -57,6 +57,12 @@ For external context, read the grounding note.
 
 When an inbound handoff memo in `<project-name>-EXTERNAL/sources of intent/` carries the `-TBI.md` suffix, treat the suffix as ASK ingestion-state only: to be ingested, not to be absorbed. When ASK feeds that memo into the active surface, the first action is to rename the file in place to remove `-TBI`; do not edit the memo body. Then classify the memo and record any absorption / hold / rejection in a separate scratch derivative. Copy + suffix do not authorize implementation.
 
+`-TBI` marks material that ASK has saved but has not yet fed into the operating surface responsible for ingesting it. It is an unconsumed ingestion-queue marker — not a repo-ownership marker and not a pending-action marker. That is why the suffix is struck on ingestion rather than at absorption: the item leaves the queue when it is fed in.
+
+**Do not create a `-TBI` handoff between repositories operated by the same active surface.** Change repository context, perform the required repo-boundary reset, and use the owning repository's own required reads, branch, scoped diff, review, and merge gates. A handoff addressed back to the surface that authored it tracks nothing: the destination operating surface already has the material, so no ingestion boundary was crossed — and feeding it in would mean handing a memo back to its own author.
+
+Separate repository authority does not create a separate ingestion boundary. Pending owner classification or repo action is repo state — carried by the closure, the relay, or task state — not `-TBI` state.
+
 Method-altitude articulation: `method-ASK/docs/source-of-intent.md` §Inbound handoff TBI marker.
 
 ---
@@ -91,9 +97,12 @@ YYYY-MM-DD_<surface-or-subject>_<topic>-PTX_vN.md
 
 ## Cross-Surface Change Routing
 
-Before choosing direct operation or `-TBI` routing, classify both the change's authority and the surface's write jurisdiction.
+First determine whether the material crosses an operating-surface boundary.
 
-- **Candidate source-of-intent, project-specific direction, or other material whose recipient must classify** → preserve the origin record, route a recipient copy through `sources of intent/` with `-TBI`, and let the recipient surface own ingestion and absorption.
+- **Same operating surface** → do not create a `-TBI`; reset into the owning repository and use that repository's required reads, branch, scoped diff, review, and merge gates.
+- **Different operating surface** → classify authority and write jurisdiction as below.
+
+- **Candidate source-of-intent, project-specific direction, or other material whose recipient must classify** → preserve the origin record, route a recipient copy through `sources of intent/` with `-TBI`, and let the recipient surface own ingestion and absorption. This branch presumes the recipient is a *different* operating surface; recipient-owned classification inside one surface is a repository-context change, not a handoff.
 - **ASK-authorized conformance to a protocol owned upstream** → propagate directly only where the active surface has write jurisdiction over the consumer. Apply the change through the consumer repo's own branch, diff, PR, review, and merge gates. Do not create a `-TBI` handoff merely to carry an already-authoritative protocol update.
 - **No direct write jurisdiction** → route to the owning surface even when the upstream protocol is authoritative. Protocol ownership does not pierce a wall, create a grant, or bypass a surface boundary.
 
