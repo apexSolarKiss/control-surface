@@ -107,6 +107,36 @@ Method-altitude articulation: `method-ASK/docs/source-of-intent.md` §Scope guar
 
 ---
 
+## Verification Claims and Evidence Boundaries
+
+A verification statement is bounded by the evidence actually gathered.
+
+- For claims such as `clean`, `complete`, `current`, `zero residue`, `byte-identical`, or `verified`, name the exact carrier set, path or query, ref or time boundary, and property actually tested.
+- **The boundary of a search is the boundary of the claim.** Absence from one folder, one pattern, one connector result, or one carrier class is not absence from the corpus.
+- **A check verifies only its direct result.** Separate observation from inference; do not attach an inference to a checked fact and label the composite `verified`.
+- Pattern lists are hypotheses about how a defect may appear, not exhaustive evidence. An exhaustive claim requires enumerating and dispositioning the actual occurrence or carrier set.
+- Where coverage is partial, state the result as: `no unexplained findings in <exact set tested>`.
+- If a **completed audit, closure, provenance record, or other frozen record** overstates its evidence, preserve the original statement and append a correction. Do not silently tidy the audit trail.
+- If a **live canonical or current instruction** overstates its evidence, correct the operative statement under that carrier's version and snapshot discipline, preserving the prior state in its lineage — rather than leaving a false current instruction in force.
+
+Private agent memory may record an incident or point to this canonical rule **only when ASK explicitly authorizes that memory write**. This section does not itself authorize creating, extending, or revising memory. Private agent memory is not the owner of durable workflow protocol.
+
+---
+
+## Rule-to-Artifact Conformance Gate
+
+Before adding, materially revising, or applying a workflow rule that changes artifact naming, versioning, snapshots, routing, or lifecycle:
+
+1. read the current canonical rule;
+2. inspect the current artifacts, relevant lineage, and live citations the rule governs;
+3. test the rule against the artifacts and the artifacts against the rule.
+
+A long-standing written rule may have drifted. Repeated artifact practice may also be wrong. **If the rule and governed artifacts disagree, stop and obtain an ASK ruling before mutating either.**
+
+Do not retroactively rename, normalize, or rewrite historical artifacts solely to force apparent conformance. After the ruling: **if the ruling changes the canonical rule**, update that rule first, then conform current active carriers within the authorized scope. **If the rule stands**, leave it unchanged and conform the current artifacts instead.
+
+---
+
 ## Path Migration: Reverse-Consumer Enumeration
 
 Moving or renaming a canonical path breaks every surface that *points at* it, which is a strictly larger set than the surfaces that *move*. Enumerate consumers; do not reason about scope.
@@ -125,7 +155,7 @@ Before the cutover, list:
 
 **A surface being out of scope for moving does not put it out of scope for referencing.** That inference is the characteristic failure: a downstream project keeps its own root, so it is excluded from the migration — and its index, trackers, and prompts keep pointing at an address that no longer exists.
 
-**Post-cutover fail-closed claims must name the carrier set actually tested.** "No stale references remain" is a claim about what was scanned. Scope it explicitly, or it will be read as ecology-wide evidence it cannot support.
+**Post-cutover fail-closed claims apply §Verification Claims and Evidence Boundaries.** "No stale references remain" is a claim about what was scanned. Name the exact carrier set tested, or the result will be read as broader evidence than the check supports.
 
 **Per-line disposition, never a blanket swap.** A current locator tells the reader where to find a retained artifact — update it. A historical record states where something lived at event time — leave it. A line doing both keeps its narrative and gets its locator corrected, or states both paths explicitly. Ambiguous function stops for an ASK ruling rather than a guess.
 
@@ -333,3 +363,4 @@ Do not refresh because project state changed. Do not refresh because a PR landed
 - Single-writer per branch. Repo is the audit trail.
 - Match unit of work to level of question.
 - Keep this file workflow-only. Repo holds state. Grounding note holds external context.
+- Bound every verification claim to the exact evidence gathered; separate checked facts from inferences, and test rules against the live artifacts they govern before applying them.
