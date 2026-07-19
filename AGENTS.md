@@ -57,6 +57,16 @@ When a routed handoff memo in the shared ecology intake (`ecology-ASK-EXTERNAL/s
 
 `<project>-EXTERNAL/` remains the ordinary standalone / downstream-project convention. The core ASK ecology is a declared multi-repo operating surface and is the exception: its five repos share one external operating surface while their repo authority, grounding notes, and workflows remain separate.
 
+### `-TBI` marks an unconsumed ingestion queue, not repo ownership
+
+The suffix exists so ASK can track handoffs — saved out of an advisor conversation, or arriving from another operating surface — that have not yet been fed into the surface responsible for ingesting them. That is why the suffix is struck **on ingestion** rather than at absorption: it is a queue marker, and the item leaves the queue when it is fed in. It says nothing about which repo owns the eventual decision.
+
+**Do not create a `-TBI` addressed to a surface the acting surface already operates.** Moving between repos inside one operating surface is a hard repo-boundary reset — read that repo's grounding note and `AGENTS.md`, verify live state, work under its own branch, diff, review, and merge gates — not an ingestion event. A handoff written by an operating surface and addressed back to that same surface would require ASK to feed a memo into the surface that authored it. It tracks nothing, because nothing ever left the queue.
+
+Separate repo authority is real and unaffected by this rule. **It does not create a separate ingestion boundary.** Pending owner classification or repo action is repo state — carried by the closure, the relay, or task state — not `-TBI` state.
+
+`-TBI` therefore applies to material crossing between separately operated or walled surfaces: downstream project repos that own their gates, and private surfaces reached only by aperture. The current membership of the directly operated core is operator-side topology, not repo truth; the operator canonical is authoritative on which surfaces are in it.
+
 Method-altitude articulation: `method-ASK/docs/source-of-intent.md` §Inbound handoff TBI marker.
 
 ---
@@ -91,9 +101,10 @@ YYYY-MM-DD_<surface-or-subject>_<topic>-PTX_vN.md
 
 ## Cross-Surface Change Routing
 
-Before choosing direct operation or `-TBI` routing, classify both the change's authority and the surface's write jurisdiction.
+Before choosing direct operation or `-TBI` routing, first establish whether the material crosses an operating-surface boundary at all. Only then classify the change's authority and the surface's write jurisdiction.
 
-- **Candidate source-of-intent, project-specific direction, or other material whose recipient must classify** → preserve the origin record, route a recipient copy through `sources of intent/` with `-TBI`, and let the recipient surface own ingestion and absorption.
+- **Destination inside the same operating surface** → **no `-TBI`, under any authority class.** Change repo context through a hard repo-boundary reset and operate the owning repo directly under its own gates. Answer this test first; a `yes` disposes of the routing question on its own, and the authority and jurisdiction tests below never run.
+- **Candidate source-of-intent, project-specific direction, or other material whose recipient must classify** → preserve the origin record, route a recipient copy through `sources of intent/` with `-TBI`, and let the recipient surface own ingestion and absorption. This branch presumes the recipient is a *different* operating surface; recipient-owned classification inside one surface is a hat swap, not a handoff.
 - **ASK-authorized conformance to a protocol owned upstream** → propagate directly only where the active surface has write jurisdiction over the consumer. Apply the change through the consumer repo's own branch, diff, PR, review, and merge gates. Do not create a `-TBI` handoff merely to carry an already-authoritative protocol update.
 - **No direct write jurisdiction** → route to the owning surface even when the upstream protocol is authoritative. Protocol ownership does not pierce a wall, create a grant, or bypass a surface boundary.
 
