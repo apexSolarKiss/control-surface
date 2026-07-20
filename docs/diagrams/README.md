@@ -16,7 +16,9 @@ Each diagram is a structural snapshot of the repo at a point in time. Diagrams a
 
 The diagram conforms to [`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK) Tier 1 + Tier 2 by reference at generation time. The compiled `diagrams.css` in this folder is render support, not identity source truth. `design-system-ASK` remains the visual authority; this folder does not own visual identity.
 
-`diagrams-fit.js`, `diagrams-static-H-engine.js`, `diagrams.css`, and `export-png.js` are **design-system-owned** — vendored byte-identical and not edited here. `diagrams-fit.js` computes the default zoom-to-fit: it keeps the prior placement when the diagram already clears the caption / legend / HUD panels, and reserves the measured panel edges only when the legacy placement would actually collide. It must load immediately **before** the engine; the engine throws a named error rather than falling back silently if it is missing.
+`diagrams-fit.js`, `diagrams-static-H-engine.js`, `diagrams.css`, and `export-png.js` are **design-system-owned** — vendored byte-identical and not edited here. `diagrams-fit.js` computes a zero-band base candidate, returns that candidate unchanged when it already clears the caption / legend / HUD panels, and reserves the measured panel edges only when the candidate would collide. It must load immediately **before** the engine; the engine throws a named error rather than falling back silently if it is missing.
+
+With no required panel reservation, the prior fit arithmetic is preserved while each available axis is at least twice its requested total clearance. On a more constrained positive axis, total clearance degrades continuously and consumes at most half the available space. Within a fixed available rectangle and panel-reservation state, reducing that axis cannot increase its clearance-limited scale contribution.
 
 Because that fit can land below the engine's ordinary zoom-out floor on a constrained viewport, the live floor is the lower of the historical base floor and the most recent Fit — so zoom-out is a no-op at Fit rather than *increasing* the scale. Fit itself is never clamped.
 
