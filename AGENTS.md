@@ -118,6 +118,41 @@ Method-altitude articulation: `method-ASK/docs/source-of-intent.md` §Scope guar
 
 ---
 
+## Cross-Repo Propagation Waves
+
+When a merged upstream change — a `design-system-ASK` vendored foundation, engine, helper, exporter, CSS, font carrier, or scaffold contract; or a `control-surface` execution-protocol clause marked for downstream propagation — creates a re-sync obligation across multiple consumers, execute it as a **propagation wave**. **Use subagents by default when the execution environment supports them;** fall back to the same phases run sequentially when it does not. The detailed orchestration and the subagent evidence-packet schema live in [`prompts/cross-repo-propagation-wave.md`](prompts/cross-repo-propagation-wave.md), which carries a generic contract plus two typed profiles: **A — diagram / design-system vendor propagation** and **B — execution-protocol carrier propagation**.
+
+**Parallelize** (read-only or isolated, no shared mutable state): consumer or carrier census; owner-state comparison; impact classification; isolated-worktree or byte-parity package-copy staging; and profile-specific verification and evidence generation.
+
+**Serialize under one parent coordinator:** owner-scope interpretation; the GREEN / AMBER / RED / HANDOFF ruling; terminal visual and semantic judgment; PR creation and review narrative; Stage-2 relay; exact-head merge; live operator-canonical writes and frozen snapshots; shared consumer-ledger mutation; closure.
+
+A staging subagent may read, census, create an isolated worktree, edit, test, and prepare a **local** commit in its exclusive area; the **parent alone** inspects the final diff, pushes, opens or updates the PR, writes the narrative, relays Stage-2, and merges. **Subagents never** push; open/update a PR; merge; write the shared consumer ledger; revise a live operator-side canonical; create or advance a frozen snapshot; or decide an unresolved consumer-owned adaptation. Each subagent receives one exclusive worktree or staging copy and returns a bounded evidence packet. The parallel census is **measurement, not authority**: `origin/main`, each package's live `VERSION.md`, the owner bytes, and the operator consumer ledger remain authoritative, and a census finding that conflicts with them is a prompt to re-check, not a fact.
+
+### Classification gate
+
+- **GREEN** — deterministic mechanical conformance; exact scope known; owner bytes match where Profile A requires byte parity, or canonical substance matches while local exceptions are preserved under Profile B; no consumer-owned geometry, semantics, authority, or intentional local policy is changed; the applicable version, raster, carrier, or record operation is unambiguous; expected impact is measurable; no unexpected diff. Enters parallel staging.
+- **AMBER** — a bespoke builder or local adapter exists; a local protocol exception requires interpretation; the consumer skipped an architectural generation; render impact changes committed artifacts; version, date, carrier mapping, or record treatment is ambiguous; an owner file is locally modified; or a clause's meaning depends on project architecture. Subagents may census and stage the proven-mechanical portion but must **stop before the interpretation**; the parent rules first.
+- **RED / HANDOFF** — source data, diagram semantics, project architecture, or a source-of-intent implication is involved, or the wall/grant is absent. Not a propagation-wave operation; route it as project-owned work.
+
+The parent may resolve an AMBER question by issuing an **exact bounded disposition**; the remaining deterministic implementation is then reclassified GREEN and may stage in parallel. The evidence packet records both the original AMBER condition and the parent ruling — a deterministic operation (e.g. a raster regeneration) does not stay outside the lane once its only ambiguity is resolved.
+
+### Standing mechanical maintenance lane
+
+A consumer that grants standing maintenance jurisdiction in its **own** `AGENTS.md` — or that ASK explicitly grants for a wave — may be updated directly by the active ASK control surface after the upstream owner change has merged, for **GREEN** conformance only. This covers two lanes: **design-system vendor maintenance** (DS-owned files, load order, pins, stamps, derived artifacts) and **execution-protocol maintenance** (mechanical re-sync of inherited `control-surface` protocol clauses in declared carriers). Within this lane:
+
+- Recipient `AGENTS.md` opt-in **or** an explicit ASK grant creates jurisdiction. **This rule does not grant itself jurisdiction**, and merely vending owner files does not imply the grant.
+- **No `-TBI` handoff is required** for a pre-authorized GREEN conformance operation — the owner change is already authoritative and the consumer has pre-authorized the bounded work. Use `-TBI` only when the recipient must classify material, make an adaptation decision, or grant authority — never as a deferred-task envelope.
+- The consumer's normal branch / diff / Stage-2 / merge / cleanup gates remain **mandatory**.
+- Execution jurisdiction does not transfer artifact ownership: the consumer remains the owner of its source data, adaptation, stamps, sealed outputs, and project truth.
+
+### At-rest gate
+
+Before writing to a granted consumer, both halves must pass. **Human confirmation** that the consumer's affected surfaces are at rest for this wave, **and machine evidence**: `origin/main` fetched and identified; affected working tree clean; no open PR touching the carriers; no active accessible worktree touching those paths; no unpushed commit or branch carrying related unique work; no in-progress source/render/package advance; current `VERSION.md` or stamp read. A machine conflict stops **only the affected consumer**; the other subagents continue. Human `no` or `unknown` → census only, queue the obligation as re-sync due, no write.
+
+**Branch-name presence is not itself active work.** A branch blocks the gate only when it carries related unique work that is open, unmerged, unresolved, or actively checked out. A closed-and-merged PR head whose change is already represented on current `origin/main` is squash-merge cleanup residue (a diff against a later `main` can look like a revert); classify it from the PR lifecycle, not from the ref's existence, and do **not** require branch deletion merely to make the gate pass. **Machine evidence covers accessible checkouts, worktrees, branches, and remotes; human confirmation covers related unpushed work on inaccessible machines or sessions.** Untracked local config (e.g. `.claude/`) is out of any authorized carrier scope and is left untouched — a fresh isolated worktree from `origin/main` does not inherit it.
+
+---
+
 ## Verification Claims and Evidence Boundaries
 
 A verification statement is bounded by the evidence actually gathered.
