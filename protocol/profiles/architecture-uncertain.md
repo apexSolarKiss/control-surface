@@ -1,36 +1,12 @@
-# Architecture-Uncertain Rules Overlay
+# Profile — architecture-uncertain
 
-Use this as an opt-in overlay for downstream ASK projects with active architecture or ontology uncertainty.
+**Opt-in.** Adopted only by a downstream project whose task surface is **architecture / ontology-uncertain** — work whose job is to discover structural categories, not to execute against a known task surface. The base shared core suffices for execution-against-a-known-surface projects; if these rules start to read as ceremony rather than discipline, the profile may have shifted away from architecture-uncertain — consider removing it rather than letting it calcify.
 
-The base [`templates/AGENTS.template.md`](../AGENTS.template.md) carries the shared workflow discipline that applies to all ASK projects. This overlay layers additional rules that are calibrated for projects whose work is to discover structural categories, not merely execute known tasks.
+**Authoritative owner of the seven rule bodies.** This profile is the **owner** of the seven rule bodies below. `control-surface/templates/overlays/architecture-uncertain-rules.template.md` is the downstream-authoring **twin**: it carries these same seven bodies inside its overlay wrapper plus `When To Adopt` / `How To Adopt` scaffolding that is template-authoring apparatus (not part of this profile). Keep the two surfaces in sync — edit both together; `check.sh` compares the fenced bodies.
 
-## When To Adopt
-
-Adopt this overlay when the project profile matches several of the following:
-
-- **Ontology-first work** — the project's durable deliverable is a structured definition layer (categories, relationships, inheritance) ahead of any single implementation.
-- **Prototype as pressure surface** — prototypes are built to test architectural distinctions, not as the project's primary output.
-- **Refusal of premature schema doctrine** — final schema commitment is explicitly deferred while structural categories are still being discovered.
-- **Need to model before planning** — planning artifacts derive value from prior architectural attempts, not from layer enumeration alone.
-- **Ceremony-budget pressure** — operational friction tends to produce artifact chains that do not advance the architecture.
-
-Do not adopt this overlay when:
-
-- the project's task surface is known and the work is execution against it
-- the architecture is settled and the project is in operational / production mode
-- the additional rules would create ceremony without addressing a real failure mode
-
-The base template suffices for projects whose work is execution against a known task surface. The overlay is opt-in.
-
-## How To Adopt
-
-Copy the rules below into the downstream project's `AGENTS.md` after the rules from `AGENTS.template.md`. The overlay does not modify the base template's rules — it adds to them.
-
-When adopted, note in the downstream `AGENTS.md` that the architecture-uncertain overlay is in effect, so the source is legible to future readers.
+> **Not in this profile:** the `Default: Hold or Carry Through Per Adversarial-Collaboration Preconditions` rule is a self-conditional **shared-core** rule, not one of these seven. The **domain-authority review protocol** is separate, governed by `docs/domain-authority-review-protocol.md` and (when instantiated) `templates/domain-authority-review-profile.template.md`; it is **not** folded in here and does not block this profile.
 
 ---
-
-# Architecture-Uncertain Rules
 
 <!-- BEGIN profile-body: architecture-uncertain -->
 ## Architecture-Before-Prototype
@@ -140,8 +116,6 @@ The failure mode: validated direction lands at the grounding-note layer or in a 
 
 ---
 
-## Refresh Cadence
+## Refresh cadence
 
-These rules belong to the same refresh cadence as the rest of the downstream project's `AGENTS.md`. Refresh only when a workflow rule is added, removed, or materially revised.
-
-If the project starts to find these rules ceremony rather than discipline, that is a signal the project profile may have shifted away from architecture-uncertain. Consider removing the overlay rather than letting unused rules calcify into doctrine.
+Same cadence as the rest of `AGENTS.md`: refresh only when a workflow rule is added, removed, or materially revised. If the rules read as ceremony rather than as live guards, the profile may no longer match the project — consider removing it rather than letting unused rules calcify into doctrine.

@@ -74,6 +74,8 @@ To start a new ASK project from this protocol repo, beginning from zero:
 
    The protocol repo's prompts remain canonical reusable sources; the operator-side copies are project-flavored adaptations so the advisor and control surfaces can operate without re-deriving prompt language each time. Adapt only the prompts the project will actually use.
 
+   Distinct from this copy-and-adapt flow: a new repo also **resolves** the shared protocol carrier ([`protocol/AGENTS.shared.md`](protocol/AGENTS.shared.md)) locally into its own `AGENTS.md` between the `BEGIN`/`END` shared markers. The shared core is resolved in place, not copied-and-adapted like a prompt or template starter.
+
    System-wide ecology critique prompts live separately at the ecology level only — they are not adapted into downstream-project operator-side copies:
 
    ```text
@@ -98,7 +100,7 @@ An earlier split-execution model — ChatGPT as prompt compiler, Codex as execut
 
 [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is still operated on Model A and is the working example for any project that still needs it. New ASK projects should default to single-node.
 
-The workflow rules live in repo-local `AGENTS.md` files and are written agent-agnostically — they apply to whoever is executing.
+The workflow rules live in a shared protocol core ([`protocol/AGENTS.shared.md`](protocol/AGENTS.shared.md)) resolved locally into each repo's own `AGENTS.md`, plus repo-local `AGENTS.md` rules — all written agent-agnostically, so they apply to whoever is executing.
 
 Three worked examples anchor the family:
 
@@ -135,6 +137,16 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 - [`CLAUDE.md`](CLAUDE.md) — pointer to `AGENTS.md` for Claude Code operators
 - [`docs/architecture.md`](docs/architecture.md) — execution-protocol architecture of this repo and the role model behind it
 
+### Shared protocol carriers
+
+Live, authoritative carriers of the distributable execution protocol. Consumers resolve the shared block **locally** — it lands inside their own `AGENTS.md` (already a required read) — rather than each holding an independent copy.
+
+- [`protocol/AGENTS.shared.md`](protocol/AGENTS.shared.md) — the distributable shared execution-protocol body, resolved verbatim into each repo's own `AGENTS.md` between the `BEGIN`/`END` shared markers
+- [`protocol/manifest.json`](protocol/manifest.json) — normative registry for the protocol carriers
+- [`protocol/profiles/`](protocol/profiles/) — per-profile overlays on the shared body
+- [`protocol/fragments/standing-upstream-conformance-grant.md`](protocol/fragments/standing-upstream-conformance-grant.md) — opt-in consumer fragment for a standing upstream-conformance grant
+- [`protocol/check.sh`](protocol/check.sh) — deterministic local validator for the resolved shared block (run locally; not CI)
+
 ### Methodology docs
 
 - [`docs/method.md`](docs/method.md) — compact bridge pointing to [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK) as the upstream methodology layer; substantive method articulation now lives in `method-ASK/docs/method.md`
@@ -147,7 +159,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 
 ### Reusable templates for downstream ASK repos
 
-- [`templates/AGENTS.template.md`](templates/AGENTS.template.md) — agent-agnostic starter for repo-local execution rules; derived from the shared workflow core of asset-pipeline-ASK's live AGENTS.md (project-specific architecture rules in that repo are not absorbed by default)
+- [`templates/AGENTS.template.md`](templates/AGENTS.template.md) — agent-agnostic starter for repo-local execution rules; the shared workflow core now lives in [`protocol/AGENTS.shared.md`](protocol/AGENTS.shared.md) (originally derived from asset-pipeline-ASK's live AGENTS.md), and this template is a copyable starter for the repo-local remainder alongside the resolved shared core (project-specific architecture rules in that repo are not absorbed by default)
 - [`templates/grounding-note.template.md`](templates/grounding-note.template.md) — starter for the external grounding note that travels with each ASK project
 - [`templates/architecture.template.md`](templates/architecture.template.md) — starter for a downstream repo's architecture doc
 - [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) — optional Claude Code pointer file for downstream single-node repos
@@ -156,7 +168,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 - [`templates/overlays/architecture-uncertain-rules.template.md`](templates/overlays/architecture-uncertain-rules.template.md) — optional opt-in overlay for downstream projects with active architecture or ontology uncertainty; adds rules calibrated for projects whose work is to discover structural categories (architecture-before-prototype, prototype-as-pressure-surface, attempt-model-before-plan, self-evident-premise stop, ceremony budget, proof-chain gravity well guard, bootstrap doc-alignment check) on top of the base template; not used by projects whose task surface is known
 - [`templates/domain-authority-review-profile.template.md`](templates/domain-authority-review-profile.template.md) — conditional profile a downstream project instantiates **only if** it has a domain authority in a role distinct from the architect/operator; a minimum, extensible standing-fields + per-review stage-contract profile, governed by [`docs/domain-authority-review-protocol.md`](docs/domain-authority-review-protocol.md)
 
-Templates are copyable starters. They are not live for this repo unless explicitly adopted somewhere else.
+Templates in `templates/` are copyable starters. They are not live for this repo unless explicitly adopted somewhere else. The `protocol/` carriers are different: they are live and authoritative, resolved locally by consumers into their own `AGENTS.md`, not copy-only starters.
 
 ### Prompts
 

@@ -31,7 +31,8 @@ Use this phase once the target repo exists and the first repo-local files can be
 During bootstrap:
 
 - verify the new repo attachment
-- copy `templates/AGENTS.template.md` into the repo as `AGENTS.md` and adapt project-specific defaults
+- copy `templates/AGENTS.template.md` into the repo as `AGENTS.md` — the payload-free shell — and adapt its project-specific defaults (the local delta)
+- resolve the shared execution protocol into that `AGENTS.md`: insert the shared body from `protocol/AGENTS.shared.md` verbatim between the shell's `BEGIN`/`END` shared markers, so each consumer resolves the block locally inside its own already-required `AGENTS.md` rather than holding a separate copy; then add the applicable `protocol/profiles/*.md` and any opt-in `protocol/fragments/*.md` (e.g. `protocol/fragments/standing-upstream-conformance-grant.md`). `protocol/manifest.json` is the normative registry of these pieces, and `protocol/check.sh` validates the resolved `AGENTS.md` locally (a deterministic local validator, not CI)
 - copy `templates/grounding-note.template.md` into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads
 - optionally copy `templates/architecture.template.md` into the repo as `docs/architecture.md`
 - if running single-node, optionally copy `templates/CLAUDE.template.md` into the repo as `CLAUDE.md`
