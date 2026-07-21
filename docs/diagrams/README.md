@@ -58,8 +58,8 @@ The operator-side package and historical render iterations remain in `ecology-AS
 
 ## What this folder does not carry
 
-- `TREE_D02` (method-ASK topology) — lives in `apexSolarKiss/method-ASK/docs/diagrams/` if/when D02 lands there
-- `TREE_D03` (ecology-ASK overall) — operator-side only; not authorized for any repo absorption
+- `TREE_D02` (method-ASK topology) — lives in `apexSolarKiss/method-ASK/docs/diagrams/` (landed)
+- `TREE_D03` (system-ASK topology) — operator-side only; not authorized for any repo absorption
 - Operator-side context architecture substrate (private; conform by reference, do not absorb)
 - `design-system-ASK` Tier 3 instance identity (logo, wordmark, ASK chrome) — excluded by Tier model
 - Runtime dynamic import from `design-system-ASK` CSS (no; conform at generation time)

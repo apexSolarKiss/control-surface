@@ -1,11 +1,22 @@
 /* control-surface_architecture-tree.source.js
    Source data for the control-surface architecture tree diagram.
-   Renderable by diagrams-engine.js.
+   Renderable by diagrams-static-H-engine.js.
 
-   D01 // control-surface architecture tree // source-v4 // 2026-07-18
+   D01 // control-surface architecture tree // source-v5 // 2026-07-21
+   v5 (2026-07-21): ecology-state scrub to the landed shared-protocol architecture —
+   control-surface is now the protocol-carrier OWNER (Wave-1A). Corrects the stale renderer
+   comment (diagrams-engine.js -> diagrams-static-H-engine.js) and the D03 name (ecology-ASK
+   overall -> system-ASK topology); restates AGENTS.md as the resolved OWNER carrier (shared
+   core + core-ecology profile + control-surface coordinator / local delta); adds the protocol/
+   owner subtree + the cross-repo propagation-wave prompt; reclassifies AGENTS.template.md as a
+   bootstrap shell (not an independently maintained protocol payload); adds the operator-side
+   protocol consumer ledger + DS visual consumer ledger; scopes the shared intake as
+   inbound-only; replaces the absolute downstream-no-write claim with the current bounded
+   boundary. Exact live SHAs/PRs stay OUT of the tree (they live in the protocol consumer
+   ledger, the state plane). Content-only; render held render-v18.
    Single-tree extraction of TREE_D01 from the v9 operator-side ecology-ASK
    package. This repo carries TREE_D01 only; it does not carry TREE_D02
-   (method-ASK topology) or TREE_D03 (ecology-ASK overall), which remain
+   (method-ASK topology) or TREE_D03 (system-ASK topology), which remain
    in their respective owners' surfaces.
 
    Each TREE follows the same shape:
@@ -16,7 +27,7 @@
 window.TREE_D01 = {
   kind: 'root',
   label: 'control-surface',
-  note: 'execution-protocol repo // downstream of method-ASK',
+  note: 'execution-protocol repo // downstream of method-ASK · OWNER of the shared execution-protocol carrier (control-surface/protocol/)',
   children: [
     {
       kind: 'section', label: 'upstream methodology',
@@ -39,8 +50,16 @@ window.TREE_D01 = {
       kind: 'section', label: 'repo-local surfaces',
       children: [
         { label: 'README.md' },
-        { label: 'AGENTS.md', note: 'live workflow rules for this repo' },
+        { label: 'AGENTS.md', note: 'resolved OWNER carrier · shared core + core-ecology profile + control-surface coordinator / local delta' },
         { label: 'CLAUDE.md', note: 'pointer to AGENTS.md' },
+        { kind: 'group', label: 'protocol/', note: 'the shared execution-protocol OWNER canonical · control-surface owns it; core repos resolve it locally · normative rules only (state lives in the protocol consumer ledger)', children: [
+          { label: 'AGENTS.shared.md', note: 'shared core — the normative execution-protocol block resolved into every consumer carrier' },
+          { label: 'manifest.json (+ manifest.schema.json)', note: 'normative rule ownership + applicability — the authoritative rule set' },
+          { label: 'profiles/', note: 'core-ecology · architecture-uncertain — the applicable rule profile per consumer class' },
+          { label: 'fragments/standing-upstream-conformance-grant.md', note: 'the standing-GREEN grant body, vendored inside a consumer carrier\'s grant markers' },
+          { label: 'check.sh (+ tests/)', note: 'deterministic validator — --wave / --all conformance + parity checks' },
+          { label: 'README.md', note: 'protocol-layer orientation' },
+        ]},
         { label: 'docs/', children: [
           { label: 'architecture.md', note: 'role model + Layer Map' },
           { label: 'method.md', note: 'compact bridge to method-ASK' },
@@ -48,7 +67,7 @@ window.TREE_D01 = {
           { label: 'workflow-boundary.md', status: 'legacy' },
         ]},
         { label: 'templates/', children: [
-          { label: 'AGENTS.template.md', note: 'downstream execution rule starter' },
+          { label: 'AGENTS.template.md', note: 'bootstrap shell — NOT an independently maintained protocol payload · a new repo resolves the shared core from control-surface/protocol/ at instantiation' },
           { label: 'CLAUDE.template.md' },
           { label: 'architecture.template.md' },
           { label: 'grounding-note.template.md' },
@@ -61,6 +80,7 @@ window.TREE_D01 = {
           { label: 'claude-code-initial-prompt.md', note: 'executor attach to existing repo' },
           { label: 'project-instantiation-initial-prompt.md', note: 'pre-repo phase' },
           { label: 'repo-nudge-prompt.md', note: 'source-of-intent nudge' },
+          { label: 'cross-repo-propagation-wave.md', note: 'operator playbook for a bounded cross-repo protocol / design-system propagation wave under standing or ASK-scoped grants' },
           { kind: 'group', label: 'repo critique cycle', children: [
             { label: 'repo-critique-initial-prompt.md' },
             { label: 'repo-critique-synthesis-prompt.md' },
@@ -69,6 +89,7 @@ window.TREE_D01 = {
           { kind: 'group', label: 'ecology critique', children: [
             { label: 'ecology-critique-initial-prompt.md' },
             { label: 'ecology-critique-synthesis-prompt.md' },
+            { label: 'ecology-critique-execution-prompt.md' },
           ]},
           { label: 'control-surface-initial-prompt.md', note: 'Model A ChatGPT-side', status: 'legacy' },
           { label: 'codex-initial-prompt.txt', note: 'Model A Codex-side', status: 'legacy' },
@@ -89,9 +110,13 @@ window.TREE_D01 = {
       tag: 'ecology-ASK-EXTERNAL/ · control-surface slice',
       children: [
         { label: 'control-surface_grounding-note.md', note: 'root canonical' },
-        { label: 'sources of intent/', note: 'shared ecology intake', children: [
+        { kind: 'group', label: 'consumer / propagation ledgers', note: 'operator-side state planes · kept SEPARATE — execution-protocol state vs visual / tooling state', children: [
+          { label: 'control-surface_protocol-consumer-ledger.md', note: 'execution-protocol STATE plane — installed carriers · grant adoption · visibility · propagation (owned here; the normative rules live in protocol/manifest.json)' },
+          { label: 'design-system-ASK_consumer-ledger.md', note: 'design-system VISUAL propagation state — exact vendored pins + render obligations' },
+        ]},
+        { label: 'sources of intent/', note: 'shared ecology INBOUND intake · genuinely inbound material only — NOT a core-repo routing bus (core-to-core changes cross repo boundaries directly, no -TBI)', children: [
           { label: 'routed handoffs · -TBI = received, awaiting ingestion' },
-          { label: 'received records across the core ecology' },
+          { label: 'received records from separately-operated or walled surfaces' },
         ]},
         { label: 'scratch/', note: 'shared ecology operator scratch', children: [
           { label: 'handoffs' },
@@ -136,10 +161,10 @@ window.TREE_D01 = {
     },
     {
       kind: 'section', label: 'downstream project repos',
-      tag: 'own absorption decisions',
+      tag: 'separately operated · own substantive absorption decisions · standing GREEN protocol / DS maintenance grants',
       children: [
-        { label: 'asset-pipeline-ASK', note: 'mature single-node primary pressure surface' },
-        { label: 'urban-observatory', note: 'newer single-node · source-of-intent recovery pressure surface' },
+        { label: 'asset-pipeline-ASK', note: 'mature single-node primary pressure surface · separately operated · standing GREEN grant for bounded protocol / DS maintenance (substantive project ownership unchanged)' },
+        { label: 'urban-observatory', note: 'newer single-node · source-of-intent recovery pressure surface · separately operated · standing GREEN grant for bounded protocol / DS maintenance' },
         { label: 'mazeASK', note: 'Model A working example', status: 'legacy' },
       ],
     },
@@ -150,7 +175,9 @@ window.TREE_D01 = {
         { label: 'downstream reads its repo + grounding note + handoff memo' },
         { label: 'downstream classifies candidate content by layer' },
         { label: 'downstream proposes absorption from its own active project surface' },
-        { label: 'control-surface does not directly mutate downstream repos / grounding notes / Airtable' },
+        { label: 'candidate source-of-intent + substantive project judgment remain recipient-owned', note: 'the recipient classifies + absorbs from its own active surface' },
+        { label: 'bounded GREEN DS / protocol maintenance may propagate DIRECTLY', note: 'under a consumer-local or ASK-scoped grant — no -TBI for deterministic conformance' },
+        { label: 'execution jurisdiction does not transfer artifact ownership', note: 'acting in a repo under a grant is not owning its source-of-intent' },
       ],
     },
   ],
