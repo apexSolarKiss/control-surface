@@ -228,7 +228,7 @@
   },
   {
    "rule_id": "verification-execution-completion",
-   "scope_class": "candidate",
+   "scope_class": "shared-core",
    "authority_owner": "control-surface",
    "operational_carrier_owner": "control-surface",
    "applies_to": [
@@ -245,11 +245,11 @@
    "source_anchor": "## Verification Claims and Evidence Boundaries",
    "failure_mode": "empty output from a failed/unrun/wrong-glob/wrong-quantity check read as a valid no-match",
    "active_holds": [],
-   "status": "candidate",
+   "status": "active",
    "amended_by": [],
    "explicit_exclusions": [],
-   "proposed_by": "Wave-1A/R1 + ECO-VCR-3",
-   "activated_by": null
+   "proposed_by": null,
+   "activated_by": "#161 / 49434a6c3bbffef87baa31b1fa9eedfbdfcf7e25"
   },
   {
    "rule_id": "private-memory-not-owner",
