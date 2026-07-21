@@ -193,11 +193,14 @@ validate_consumer(){
   rm -f /tmp/_cs.$$
   # installed profiles == metadata PROFILES == manifest-declared == owner fenced bodies
   local installed; installed=$(printf '%s\n' "$body" | grep -oE "<!-- BEGIN profile: [a-z0-9-]+ -->" | sed -E 's/.*profile: (.*) -->/\1/' | sort | tr '\n' ' ')
-  local declared; declared=$(printf '%s' "$m_prof" | tr -d '[]",' )
+  local declared; declared=$(printf '%s' "$m_prof" | tr -d '[]"' | tr ',' ' ')
   local ins_set dec_set; ins_set=$(printf '%s\n' $installed | sort -u | tr '\n' ' '); dec_set=$(printf '%s\n' $declared | sort -u | tr '\n' ' ')
   [ "$ins_set" = "$dec_set" ] && OKAY "$c installed profiles == metadata PROFILES ($ins_set)" || FAIL "$c installed profiles ($ins_set) != metadata ($dec_set)"
   local dupp; dupp=$(printf '%s\n' $installed | sort | uniq -d | tr '\n' ' ')
   [ -z "${dupp// /}" ] && OKAY "$c no duplicate installed profile" || FAIL "$c duplicate installed profile: $dupp"
+  # completeness: every active profile whose non-empty applies_to includes $c (and does not exclude $c) MUST be installed
+  local required rp; required=$(jq -r --arg c "$c" '.rules[]|select(.scope_class=="profile" and .status=="active" and (.applies_to|length>0) and ((.applies_to|index($c))!=null) and (((.explicit_exclusions // [])|index($c))==null))|.profile' "$MANIFEST" | sort -u)
+  for rp in $required; do printf '%s\n' $installed | grep -qx "$rp" && OKAY "$c carries required profile $rp" || FAIL "$c missing required profile $rp"; done
   for p in $installed; do
     manifest_declares_profile "$p" || { FAIL "$c installs profile '$p' not declared as a profile rule in the manifest"; continue; }
     # applicability + exclusion: never install a profile that excludes you; if applies_to is non-empty you must be in it

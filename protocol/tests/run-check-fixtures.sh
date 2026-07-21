@@ -192,13 +192,17 @@ build_consumer asset-pipeline-ASK - y separately-operated "$OWNER_PIN"; mutate_c
 record "NEG grant pin != SHARED_BLOCK_PIN" 1 "GRANT_FRAGMENT pin" mkwave asset-pipeline-ASK separately-operated
 build_consumer asset-pipeline-ASK - y separately-operated "$OWNER_PIN"; mutate_consumer asset-pipeline-ASK 's/(<!-- BEGIN grant: standing-upstream-conformance-grant -->\n)/${1}\n/'
 record "NEG grant blank-line drift (byte identity enforced)" 1 "grant DRIFT vs fragment" mkwave asset-pipeline-ASK separately-operated
-# B5: profile applicability + exclusion
+# B5: profile applicability + exclusion + required-completeness + multi-profile parsing
 build_consumer asset-pipeline-ASK core-ecology y separately-operated "$OWNER_PIN"
 record "NEG AP adopts excluded core-ecology" 1 "explicit_exclusions" mkwave asset-pipeline-ASK separately-operated
-build_consumer method-ASK core-ecology n direct-core "$OWNER_PIN"
-record "POS direct-core adopts applicable core-ecology" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
+build_consumer method-ASK - n direct-core "$OWNER_PIN"
+record "NEG direct-core omits required core-ecology" 1 "missing required profile core-ecology" mkwave method-ASK direct-core
 build_consumer method-ASK architecture-uncertain n direct-core "$OWNER_PIN"
-record "POS architecture-uncertain opt-in adoption" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
+record "NEG opt-in-only omits required core-ecology" 1 "missing required profile core-ecology" mkwave method-ASK direct-core
+build_consumer method-ASK core-ecology n direct-core "$OWNER_PIN"
+record "POS direct-core installs required core-ecology" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
+build_consumer method-ASK "core-ecology architecture-uncertain" n direct-core "$OWNER_PIN"
+record "POS multi-profile: core-ecology + architecture-uncertain" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
 
 # ---- OPTIONAL: real workspace map (path-driven, off by default) ----
 if [ -n "${REAL_ECOLOGY_MAP:-}" ] && [ -f "${REAL_ECOLOGY_MAP}" ]; then
