@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "control-surface protocol manifest",
+  "type": "object",
+  "required": ["holds", "rules", "consumers"],
+  "additionalProperties": true,
+  "properties": {
+    "holds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["hold_id", "description", "blocks"],
+        "properties": {
+          "hold_id": { "type": "string", "pattern": "^hold-[a-z0-9-]+$" },
+          "description": { "type": "string", "minLength": 1 },
+          "blocks": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "consumers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["operating_surface_class"],
+        "properties": {
+          "operating_surface_class": { "enum": ["direct-core", "separately-operated"] },
+          "role": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule_id", "scope_class", "status", "failure_mode", "active_holds", "explicit_exclusions", "amended_by"],
+        "properties": {
+          "rule_id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "scope_class": { "enum": ["shared-core", "coordinator", "opt-in-grant", "profile", "candidate"] },
+          "status": { "enum": ["candidate", "active", "held", "superseded", "retired"] },
+          "carrier_mode": { "enum": ["resolved-local", "referenced", "opt-in-fragment", "profile"] },
+          "authority_owner": { "type": "string", "minLength": 1 },
+          "operational_carrier_owner": { "type": "string", "minLength": 1 },
+          "applies_to": { "type": "array", "items": { "type": "string" } },
+          "explicit_exclusions": { "type": "array", "items": { "type": "string" } },
+          "profile": { "type": ["string", "null"] },
+          "source_anchor": { "type": ["string", "null"] },
+          "failure_mode": { "type": "string", "minLength": 1 },
+          "active_holds": { "type": "array", "items": { "type": "string", "pattern": "^hold-[a-z0-9-]+$" } },
+          "proposed_by": { "type": ["string", "null"] },
+          "activated_by": { "type": ["string", "null"] },
+          "amended_by": { "type": "array", "items": { "type": "string" } },
+          "legacy_evidence": { "type": "string" }
+        },
+        "allOf": [
+          { "if": { "properties": { "scope_class": { "enum": ["shared-core", "candidate"] } } },
+            "then": { "required": ["authority_owner", "operational_carrier_owner", "applies_to", "carrier_mode", "source_anchor"] } },
+          { "if": { "properties": { "scope_class": { "const": "coordinator" } } },
+            "then": { "required": ["carrier_mode", "source_anchor"], "properties": { "carrier_mode": { "const": "referenced" }, "replicated_into_consumers": { "const": false } } } },
+          { "if": { "properties": { "scope_class": { "const": "opt-in-grant" } } },
+            "then": { "required": ["fragment_owner", "grant_eligibility"] } },
+          { "if": { "properties": { "scope_class": { "const": "profile" } } },
+            "then": { "required": ["profile"], "properties": { "profile": { "type": "string" } } } },
+          { "if": { "properties": { "status": { "const": "candidate" } } },
+            "then": { "required": ["proposed_by"], "properties": { "proposed_by": { "type": "string", "minLength": 1 }, "activated_by": { "const": null } } } },
+          { "if": { "properties": { "status": { "const": "held" } } },
+            "then": { "required": ["proposed_by"], "properties": { "proposed_by": { "type": "string", "minLength": 1 }, "activated_by": { "const": null }, "active_holds": { "minItems": 1 } } } },
+          { "if": { "properties": { "status": { "const": "active" } } },
+            "then": { "properties": { "activated_by": { "type": "string", "pattern": "^(#[0-9]+ / [0-9a-f]{7,40}( \\(.*\\))?|[0-9a-f]{7,40}( \\(.*\\))?|legacy: .+)$" } } } }
+        ]
+      }
+    }
+  }
+}

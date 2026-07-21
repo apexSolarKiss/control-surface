@@ -8,7 +8,7 @@ Single-node — Claude Code is both control surface and executor. GPT remains av
 
 The project ran on the legacy split-execution model (Model A) earlier in its history. Model A was sunset on this project once the single-node path proved out at scale (substantially less ceremony, faster iteration, direct ASK-to-Claude conversation in place of operator-as-go-between).
 
-The repo's `AGENTS.md` is the most advanced live working example in the family and is the source the protocol repo's `templates/AGENTS.template.md` is now aligned to.
+The repo's `AGENTS.md` is the most advanced live working example in the family and a pressure-source for the protocol repo's shared execution-protocol core, `protocol/AGENTS.shared.md` — the distributable body each consuming repo resolves verbatim into its own `AGENTS.md` between the shared markers.
 
 ## Lifecycle Stage
 

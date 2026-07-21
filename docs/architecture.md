@@ -25,7 +25,7 @@ Three worked examples anchor the family:
 This repo sits in the middle of a three-tier structure:
 
 - **Methodology layer** — adversarial iteration / cross-phase swing discipline. Lives upstream in [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK); [`docs/method.md`](method.md) in this repo is a compact bridge pointing there.
-- **Execution-protocol layer** — this repo's core purpose. `AGENTS.md`, templates, review cadence, and branch discipline encode how work gets done within a session.
+- **Execution-protocol layer** — this repo's core purpose. `AGENTS.md`, the shared protocol carrier (`protocol/AGENTS.shared.md`, resolved locally into each consumer's own `AGENTS.md`; `protocol/manifest.json`; `protocol/profiles/`; and the `protocol/check.sh` local validator), templates, review cadence, and branch discipline encode how work gets done within a session.
 - **Project repos** — applications of the method and protocol to concrete domains. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature single-node working example and primary pressure surface for rule evolution; [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second single-node working example, exercising the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces; [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the legacy Model A working example.
 
 Alongside the project repos, [`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK) is the family's upstream visual-inheritance reference surface — an externalized ASK visual / aesthetic-intent implementation, not a project pressure surface. Child surfaces inherit Tier 1 + Tier 2 by reference and resolve Tier 3 (instance identity) locally by source-of-intent + brand-distance; ASK-the-entity is the one surface that uses ASK's own Tier 3 (it does not inherit ASK's Tier 3 to downstream surfaces). One downstream child proof has landed (`urban-observatory`). The method-altitude account lives in [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md).
@@ -67,6 +67,7 @@ This is the load-bearing rationale for keeping the four sources separate.
 - `CLAUDE.md` — pointer to `AGENTS.md` for Claude Code operators
 - `docs/architecture.md` — this doc; explains the execution-protocol architecture
 - `templates/` — reusable starters for downstream repo-local files and the external grounding note
+- `protocol/` — the distributable execution-protocol layer: the shared `AGENTS` core (`AGENTS.shared.md`, resolved verbatim into each consumer's own `AGENTS.md` between the shared markers), the normative `manifest.json` registry, downstream `profiles/`, the opt-in standing-upstream-conformance-grant `fragments/` entry, and `check.sh` (a deterministic local validator, not CI); consumers resolve the shared block locally rather than holding an independent copy
 - `prompts/project-instantiation-initial-prompt.md` — agent-agnostic startup prompt for the pre-repo phase
 - `examples/` — concise mappings from real ASK projects to this structure
 - legacy docs (`control-surface.md`, `docs/workflow-boundary.md`, Model-A-specific prompts) — retained for reference; deprecation headers name what supersedes them
@@ -92,9 +93,10 @@ When proposing rule changes, ask which failure mode the rule is compensating for
 This repo is intentionally small:
 
 - one set of live operating files for this repo
-- a small downstream template set (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`)
+- the `protocol/` layer: the shared `AGENTS` core resolved locally into each consumer's own `AGENTS.md`, a normative `manifest.json` registry, downstream `profiles/`, an opt-in standing-upstream-conformance-grant fragment, and `check.sh` (a deterministic local validator, not CI)
+- a small downstream template set (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`) — starters adopted alongside, not instead of, the locally resolved shared protocol
 - one agent-agnostic instantiation prompt
 - a minimal example set
 - a legacy reference set retained for [`mazeASK`](https://github.com/apexSolarKiss/mazeASK) and any other project still on Model A
 
-It does not include automation, sync tooling, CI, generators, or a larger framework system.
+Beyond the bounded `protocol/` resolution-and-validation layer — a distributable shared execution-protocol core resolved locally into each consumer's own `AGENTS.md`, a normative manifest, downstream profiles, an opt-in standing-grant fragment, and `check.sh` (a deterministic validator run locally, by hand) — it does not include automation, sync tooling, CI, generators, or a larger framework system. `check.sh` is a local validator, not continuous integration; the `protocol/` layer resolves and checks existing rules, it does not generate artifacts or constitute a product build framework.
