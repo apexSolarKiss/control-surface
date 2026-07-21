@@ -52,14 +52,16 @@ _dsa-tokens/                                    vendored Tier 1 + Tier 2 token m
 
 ## Lineage
 
-This diagram was rendered as part of the v9 operator-side `ecology-ASK` diagram package and absorbed here at `source-v2 // render-v9`. Future refreshes will bump the render version and may bump the source version if the tree data changes.
+This repo-local diagram originated in the v9 operator-side `ecology-ASK` diagram package and was first absorbed here at `source-v2 // render-v9`.
+
+The current tuple is `source-v5 // render-v18` (2026-07-21). Source advances when the authored architecture changes; render advances only when the renderer realization changes.
 
 The operator-side package and historical render iterations remain in `ecology-ASK-EXTERNAL/scratch/` and are not repo truth.
 
 ## What this folder does not carry
 
-- `TREE_D02` (method-ASK topology) — lives in `apexSolarKiss/method-ASK/docs/diagrams/` if/when D02 lands there
-- `TREE_D03` (ecology-ASK overall) — operator-side only; not authorized for any repo absorption
+- `TREE_D02` (method-ASK topology) — lives in `apexSolarKiss/method-ASK/docs/diagrams/` (landed)
+- `TREE_D03` (system-ASK topology) — operator-side only; not authorized for any repo absorption
 - Operator-side context architecture substrate (private; conform by reference, do not absorb)
 - `design-system-ASK` Tier 3 instance identity (logo, wordmark, ASK chrome) — excluded by Tier model
 - Runtime dynamic import from `design-system-ASK` CSS (no; conform at generation time)
