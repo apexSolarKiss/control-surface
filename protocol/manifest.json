@@ -318,14 +318,15 @@
    ],
    "carrier_mode": "resolved-local",
    "profile": null,
-   "source_anchor": "## Rule-to-Artifact Conformance Gate",
+   "source_anchor": null,
    "failure_mode": "a rule retained after its compensated failure mode stopped occurring (ceremony calcification)",
    "active_holds": [],
    "status": "candidate",
    "amended_by": [],
    "explicit_exclusions": [],
    "proposed_by": "Wave-1A/R4",
-   "activated_by": null
+   "activated_by": null,
+   "note": "candidate; body NOT carried in AGENTS.shared.md until activation is ASK-authorized (Stage-2 exact-head correction 3). Parallels memory-reconciliation-follows-durable-landing."
   },
   {
    "rule_id": "path-migration-reverse-consumer-enumeration",

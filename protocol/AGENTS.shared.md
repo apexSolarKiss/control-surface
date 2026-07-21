@@ -135,9 +135,6 @@ A long-standing written rule may have drifted. Repeated artifact practice may al
 
 Do not retroactively rename, normalize, or rewrite historical artifacts solely to force apparent conformance. After the ruling: **if the ruling changes the canonical rule**, update that rule first, then conform current active carriers within the authorized scope. **If the rule stands**, leave it unchanged and conform the current artifacts instead.
 
-**Load-bearing test for any rule.** Before adding, retaining, or materially revising a workflow rule, name the failure mode it compensates for and verify that the compensation is still load-bearing. A rule whose failure mode no longer occurs is a candidate for retirement, not preservation.
-<!-- rule-id: rule-load-bearing-test -->
-
 ---
 
 ## Path Migration: Reverse-Consumer Enumeration

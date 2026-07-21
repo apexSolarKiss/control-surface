@@ -24,6 +24,7 @@ OWNER="$WORK/owner"; mkdir -p "$OWNER"
 ( cd "$OWNER" && git init -q && git config user.email t@t && git config user.name t && git checkout -q -b main \
   && git add -A && git commit -qm "owner snapshot" )
 OWNER_PIN=$(git -C "$OWNER" rev-parse HEAD)
+OWNER_BARE="$WORK/owner.git"; git init -q --bare "$OWNER_BARE"; ( cd "$OWNER" && git remote add origin "$OWNER_BARE" && git push -q origin main )
 CHECK="$OWNER/protocol/check.sh"
 SHAREDF="$OWNER/protocol/AGENTS.shared.md"; FRAGF="$OWNER/protocol/fragments/standing-upstream-conformance-grant.md"
 
@@ -54,16 +55,17 @@ build_consumer(){
 }
 
 # consumer-map entry
-entry(){ # name surface
-  printf '"%s": {"path":"%s","ref":"origin/main","operating_surface":"%s"}' "$1" "$WORK/consumers/$1" "$2"
+entry(){ # name surface — control-surface routes to the REAL owner root (dogfoods the consumer contract)
+  local p; if [ "$1" = "control-surface" ]; then p="$OWNER"; else p="$WORK/consumers/$1"; fi
+  printf '"%s": {"path":"%s","ref":"origin/main","operating_surface":"%s"}' "$1" "$p" "$2"
 }
 surf_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo separately-operated;; *) echo direct-core;; esac; }
 pin_of(){ case "$1" in control-surface) echo self-resolving-owner-root;; *) echo "$OWNER_PIN";; esac; }
 profs_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo "-";; *) echo "core-ecology";; esac; }
 grant_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo y;; *) echo n;; esac; }
 
-# ---- build the complete synthetic ecology ----
-for n in $CORE asset-pipeline-ASK urban-observatory; do
+# ---- build the ecology: control-surface = the REAL owner root (validated below); synthetic consumers for the rest ----
+for n in method-ASK design-system-ASK personal-context-system ASK asset-pipeline-ASK urban-observatory; do
   build_consumer "$n" "$(profs_of "$n")" "$(grant_of "$n")" "$(surf_of "$n")" "$(pin_of "$n")"
 done
 
@@ -93,7 +95,11 @@ runmode(){ ( bash "$CHECK" "$1" "$2" ); }
 owner_copy(){ local d="$WORK/$1"; rm -rf "$d"; cp -R "$OWNER" "$d"; echo "$d"; }
 # mutate a consumer's committed AGENTS.md in place (perl expr), commit, push
 mutate_consumer(){ local name="$1" expr="$2"; local d="$WORK/consumers/$name"; ( cd "$d" && perl -0pi -e "$expr" AGENTS.md && git commit -qam mut && git push -q -f origin main ); }
-one_wave_map(){ printf '{ "wave_consumers":["%s"], "excluded":{}, "consumers": { %s } }\n' "$1" "$(entry "$1" "$2")"; }
+one_wave_map(){ # named surface — complete wave: named in wave, ALL other applicable consumers excluded-with-reason
+  local named="$1" surf="$2" excl=""
+  for n in $CORE asset-pipeline-ASK urban-observatory; do [ "$n" = "$named" ] && continue; excl="$excl\"$n\":{\"reason\":\"out of scope for this single-consumer fixture\"},"; done
+  excl="${excl%,}"
+  printf '{ "wave_consumers":["%s"], "excluded":{ %s }, "consumers": { %s } }\n' "$named" "$excl" "$(entry "$named" "$surf")"; }
 
 # ---- POSITIVE CONTROLS (every mode) ----
 record "POS --local (owner)"                         0 "ALL CHECKS PASSED" runlocal "$OWNER"
@@ -168,6 +174,31 @@ record "NEG operating-surface map contradicts metadata" 1 "!= map" runmode --wav
 
 build_consumer method-ASK core-ecology n direct-core "self-resolving-owner-root"
 record "NEG self-resolving pin on non-owner consumer" 1 "not the protocol owner" mkwave method-ASK direct-core
+
+# ---- Stage-2 exact-head additions (B1/B2/B4/B5) ----
+# B2: root local-delta markers removed (--local)
+d=$(owner_copy B2root); perl -0pi -e 's/<!-- BEGIN local-delta -->//' "$d/AGENTS.md"; record "NEG root local-delta markers removed" 1 "root local-delta markers not exactly once" runlocal "$d"
+# B1: git fetch failure with a stale local ref (origin deleted, origin/main still cached)
+build_consumer method-ASK core-ecology n direct-core "$OWNER_PIN"; rm -rf "$WORK/consumers/method-ASK.git"
+record "NEG git fetch failure (stale local ref)" 1 "git fetch failed" mkwave method-ASK direct-core
+# B4: carrier-metadata fixed fields + grant id/pin + byte identity
+build_consumer method-ASK core-ecology n direct-core "$OWNER_PIN"; mutate_consumer method-ASK 's/CARRIER_TYPE: resolved-local/CARRIER_TYPE: bogus-type/'
+record "NEG wrong CARRIER_TYPE" 1 "CARRIER_TYPE" mkwave method-ASK direct-core
+build_consumer method-ASK core-ecology n direct-core "$OWNER_PIN"; mutate_consumer method-ASK 's{SHARED_BLOCK_SOURCE: apexSolarKiss/control-surface/protocol/AGENTS.shared.md}{SHARED_BLOCK_SOURCE: evil/other/AGENTS.shared.md}'
+record "NEG wrong SHARED_BLOCK_SOURCE" 1 "SHARED_BLOCK_SOURCE" mkwave method-ASK direct-core
+build_consumer asset-pipeline-ASK - y separately-operated "$OWNER_PIN"; mutate_consumer asset-pipeline-ASK 's/GRANT_FRAGMENT: standing-upstream-conformance-grant@/GRANT_FRAGMENT: wrong-grant-id@/'
+record "NEG wrong grant fragment id" 1 "GRANT_FRAGMENT id" mkwave asset-pipeline-ASK separately-operated
+build_consumer asset-pipeline-ASK - y separately-operated "$OWNER_PIN"; mutate_consumer asset-pipeline-ASK 's/(GRANT_FRAGMENT: standing-upstream-conformance-grant@).*/${1}0000000000000000000000000000000000000000/'
+record "NEG grant pin != SHARED_BLOCK_PIN" 1 "GRANT_FRAGMENT pin" mkwave asset-pipeline-ASK separately-operated
+build_consumer asset-pipeline-ASK - y separately-operated "$OWNER_PIN"; mutate_consumer asset-pipeline-ASK 's/(<!-- BEGIN grant: standing-upstream-conformance-grant -->\n)/${1}\n/'
+record "NEG grant blank-line drift (byte identity enforced)" 1 "grant DRIFT vs fragment" mkwave asset-pipeline-ASK separately-operated
+# B5: profile applicability + exclusion
+build_consumer asset-pipeline-ASK core-ecology y separately-operated "$OWNER_PIN"
+record "NEG AP adopts excluded core-ecology" 1 "explicit_exclusions" mkwave asset-pipeline-ASK separately-operated
+build_consumer method-ASK core-ecology n direct-core "$OWNER_PIN"
+record "POS direct-core adopts applicable core-ecology" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
+build_consumer method-ASK architecture-uncertain n direct-core "$OWNER_PIN"
+record "POS architecture-uncertain opt-in adoption" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
 
 # ---- OPTIONAL: real workspace map (path-driven, off by default) ----
 if [ -n "${REAL_ECOLOGY_MAP:-}" ] && [ -f "${REAL_ECOLOGY_MAP}" ]; then

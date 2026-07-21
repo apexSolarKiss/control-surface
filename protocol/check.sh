@@ -135,8 +135,10 @@ assert_local(){
   grep -q "One writer at a time per branch" "$TEMPLATE" && FAIL "template inlines shared payload" || OKAY "template not inlining payload"
   # 8b template profiles surface must not carry an active (installed-looking) profile marker
   extract "<!-- BEGIN profiles -->" "<!-- END profiles -->" < "$TEMPLATE" | grep -qE "^[[:space:]]*<!-- BEGIN profile: [a-z0-9-]+ -->" && FAIL "template profiles surface carries an installed-looking profile marker" || OKAY "template profiles surface is placeholder-only"
-  # 9 root local delta fenced
-  grep -q "## Control-Surface-Local" "$ROOTAGENTS" && OKAY "root local delta fenced" || FAIL "root local delta not fenced"
+  # 9 root local delta carries exact BEGIN/END local-delta markers (same contract as consumer carriers)
+  local nrb nre; nrb=$(grep -c "<!-- BEGIN local-delta -->" "$ROOTAGENTS"); nre=$(grep -c "<!-- END local-delta -->" "$ROOTAGENTS")
+  { [ "$nrb" = "1" ] && [ "$nre" = "1" ]; } && OKAY "root local-delta markers exactly once" || FAIL "root local-delta markers not exactly once ($nrb/$nre)"
+  grep -q "## Control-Surface-Local" "$ROOTAGENTS" && OKAY "root local delta present" || FAIL "root local delta missing"
 }
 
 validate_consumer(){
@@ -146,7 +148,7 @@ validate_consumer(){
   [ -n "$path" ] || { UNRES "$c: no path"; return; }; [ -n "$ref" ] || { UNRES "$c: no explicit ref"; return; }
   if [ "$disp" = "unresolved-carrier" ] || [ "$disp" = "held" ]; then UNRES "$c: carrier_disposition=$disp — visibility NOT complete for $c"; return; fi
   { [ -d "$path/.git" ] || [ -f "$path/.git" ]; } || { UNRES "$c: $path not a git repo"; return; }
-  git -C "$path" fetch origin --quiet 2>/dev/null || true
+  git -C "$path" fetch origin --quiet || { FAIL "$c: git fetch failed"; return; }
   git -C "$path" rev-parse --verify --quiet "$ref^{commit}" >/dev/null || { FAIL "$c: ref '$ref' not found"; return; }
   local body; body=$(git -C "$path" show "$ref:AGENTS.md" 2>/dev/null) || { FAIL "$c: no AGENTS.md"; return; }
   # shared parity (vs current owner)
@@ -159,11 +161,16 @@ validate_consumer(){
   printf '%s\n' "$body" | extract "<!-- BEGIN carrier-metadata -->" "<!-- END carrier-metadata -->" > /tmp/_cm.$$
   [ -s /tmp/_cm.$$ ] || { FAIL "$c has no carrier-metadata block"; rm -f /tmp/_cm.$$ /tmp/_cs.$$; return; }
   grep -qE "<owner-merge-commit>|<direct-core|placeholder" /tmp/_cm.$$ && FAIL "$c carrier-metadata still has placeholder(s)" || OKAY "$c carrier-metadata has no placeholders"
-  local m_pin m_prof m_grant m_surf
+  local m_pin m_prof m_grant m_surf m_ctype m_source
+  m_ctype=$(sed -n 's/^CARRIER_TYPE:[[:space:]]*//p' /tmp/_cm.$$ | awk '{print $1}')
+  m_source=$(sed -n 's/^SHARED_BLOCK_SOURCE:[[:space:]]*//p' /tmp/_cm.$$ | awk '{print $1}')
   m_pin=$(sed -n 's/^SHARED_BLOCK_PIN:[[:space:]]*//p' /tmp/_cm.$$ | awk '{print $1}')
   m_prof=$(sed -n 's/^PROFILES:[[:space:]]*//p' /tmp/_cm.$$); m_grant=$(sed -n 's/^GRANT_FRAGMENT:[[:space:]]*//p' /tmp/_cm.$$ | awk '{print $1}')
   m_surf=$(sed -n 's/^OPERATING_SURFACE:[[:space:]]*//p' /tmp/_cm.$$ | awk '{print $1}')
   rm -f /tmp/_cm.$$
+  # (4A) fixed carrier-metadata fields
+  [ "$m_ctype" = "resolved-local" ] && OKAY "$c CARRIER_TYPE=resolved-local" || FAIL "$c CARRIER_TYPE '$m_ctype' != resolved-local"
+  [ "$m_source" = "apexSolarKiss/control-surface/protocol/AGENTS.shared.md" ] && OKAY "$c SHARED_BLOCK_SOURCE canonical" || FAIL "$c SHARED_BLOCK_SOURCE '$m_source' != apexSolarKiss/control-surface/protocol/AGENTS.shared.md"
   # (5A) OPERATING_SURFACE must agree with the STRUCTURAL class in manifest.consumers (not just the map)
   local mclass; mclass=$(manifest_class "$c")
   if [ -n "$mclass" ]; then { [ "$m_surf" = "$mclass" ] && OKAY "$c operating-surface metadata == manifest class ($mclass)" || FAIL "$c operating-surface ($m_surf) != manifest.consumers class ($mclass)"; }
@@ -193,6 +200,12 @@ validate_consumer(){
   [ -z "${dupp// /}" ] && OKAY "$c no duplicate installed profile" || FAIL "$c duplicate installed profile: $dupp"
   for p in $installed; do
     manifest_declares_profile "$p" || { FAIL "$c installs profile '$p' not declared as a profile rule in the manifest"; continue; }
+    # applicability + exclusion: never install a profile that excludes you; if applies_to is non-empty you must be in it
+    if jq -e --arg c "$c" --arg p "$p" '.rules[]|select(.scope_class=="profile" and .profile==$p)|.explicit_exclusions|index($c)' "$MANIFEST" >/dev/null 2>&1; then FAIL "$c installs profile $p but is in its explicit_exclusions"; continue; fi
+    local pa_len; pa_len=$(jq -r --arg p "$p" '[.rules[]|select(.scope_class=="profile" and .profile==$p)|.applies_to[]?]|length' "$MANIFEST")
+    if [ "${pa_len:-0}" -gt 0 ]; then
+      jq -e --arg c "$c" --arg p "$p" '.rules[]|select(.scope_class=="profile" and .profile==$p)|.applies_to|index($c)' "$MANIFEST" >/dev/null 2>&1 && OKAY "$c profile $p applicable (in applies_to)" || { FAIL "$c installs profile $p but is not in its applies_to"; continue; }
+    else OKAY "$c profile $p is opt-in (empty applies_to)"; fi
     [ -f "$PROFDIR/$p.md" ] || { FAIL "$c installs unknown profile $p"; continue; }
     extract "<!-- BEGIN profile-body: $p -->" "<!-- END profile-body: $p -->" < "$PROFDIR/$p.md" > /tmp/_op.$$
     printf '%s\n' "$body" | extract "<!-- BEGIN profile: $p -->" "<!-- END profile: $p -->" > /tmp/_ip.$$
@@ -205,8 +218,11 @@ validate_consumer(){
   if [ "$m_grant" = "none" ]; then
     [ "$has_grant" = "0" ] && OKAY "$c no grant (metadata none, none installed)" || FAIL "$c metadata GRANT_FRAGMENT none but a grant is installed"
   else
+    local g_id="${m_grant%@*}" g_pin="${m_grant##*@}"
+    [ "$g_id" = "standing-upstream-conformance-grant" ] && OKAY "$c GRANT_FRAGMENT id ok" || FAIL "$c GRANT_FRAGMENT id '$g_id' != standing-upstream-conformance-grant"
+    [ "$g_pin" = "$m_pin" ] && OKAY "$c GRANT_FRAGMENT pin == SHARED_BLOCK_PIN" || FAIL "$c GRANT_FRAGMENT pin '$g_pin' != SHARED_BLOCK_PIN '$m_pin'"
     [ "$eligible" = "yes" ] || FAIL "$c declares a grant but is not eligible"
-    if [ "$has_grant" = "1" ]; then diff -q <(sed '/^$/d' /tmp/_cg.$$) <(sed '/^$/d' "$FRAGMENT") >/dev/null && OKAY "$c grant == owner fragment" || FAIL "$c grant DRIFT vs fragment"; else FAIL "$c metadata declares grant but none installed"; fi
+    if [ "$has_grant" = "1" ]; then diff -q /tmp/_cg.$$ "$FRAGMENT" >/dev/null && OKAY "$c grant == owner fragment (byte-exact)" || FAIL "$c grant DRIFT vs fragment"; else FAIL "$c metadata declares grant but none installed"; fi
   fi
   rm -f /tmp/_cg.$$
 }

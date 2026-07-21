@@ -4,7 +4,7 @@ This repo's `AGENTS.md` is the control-surface owner root, resolved as the four-
 
 <!-- BEGIN carrier-metadata -->
 CARRIER_TYPE: resolved-local
-SHARED_BLOCK_SOURCE: protocol/AGENTS.shared.md (in-repo owner)
+SHARED_BLOCK_SOURCE: apexSolarKiss/control-surface/protocol/AGENTS.shared.md
 SHARED_BLOCK_PIN: self-resolving-owner-root
 PROFILES: [core-ecology]
 GRANT_FRAGMENT: none
@@ -148,9 +148,6 @@ Before adding, materially revising, or applying a workflow rule that changes art
 A long-standing written rule may have drifted. Repeated artifact practice may also be wrong. **If the rule and governed artifacts disagree, stop and obtain an ASK ruling before mutating either.**
 
 Do not retroactively rename, normalize, or rewrite historical artifacts solely to force apparent conformance. After the ruling: **if the ruling changes the canonical rule**, update that rule first, then conform current active carriers within the authorized scope. **If the rule stands**, leave it unchanged and conform the current artifacts instead.
-
-**Load-bearing test for any rule.** Before adding, retaining, or materially revising a workflow rule, name the failure mode it compensates for and verify that the compensation is still load-bearing. A rule whose failure mode no longer occurs is a candidate for retirement, not preservation.
-<!-- rule-id: rule-load-bearing-test -->
 
 ---
 
@@ -462,6 +459,7 @@ If a proposed update says "the project currently should do X," it does not belon
 
 Method-altitude articulation: `method-ASK/docs/source-of-intent.md` §Inbound handoff TBI marker.
 <!-- END profile: core-ecology -->
+<!-- BEGIN local-delta -->
 ## Control-Surface-Local
 
 These rules are specific to `control-surface`'s role as the execution-protocol owner and coordinator. They are **not** part of the shared core and are not inherited by consumers.
@@ -524,3 +522,4 @@ A rule that lives in this repo's local delta but is project-specific to control-
 #### Legacy Docs
 
 Legacy docs (Model-A-specific control-surface artifact, workflow-boundary doc, ChatGPT/Codex-specific prompts) are not refreshed. They are kept as historical reference for the operating model they documented.
+<!-- END local-delta -->
