@@ -3,17 +3,24 @@
    Renderable by diagrams-static-H-engine.js.
 
    D01 // control-surface architecture tree // source-v5 // 2026-07-21
-   v5 (2026-07-21): ecology-state scrub to the landed shared-protocol architecture —
-   control-surface is now the protocol-carrier OWNER (Wave-1A). Corrects the stale renderer
-   comment (diagrams-engine.js -> diagrams-static-H-engine.js) and the D03 name (ecology-ASK
-   overall -> system-ASK topology); restates AGENTS.md as the resolved OWNER carrier (shared
-   core + core-ecology profile + control-surface coordinator / local delta); adds the protocol/
-   owner subtree + the cross-repo propagation-wave prompt; reclassifies AGENTS.template.md as a
-   bootstrap shell (not an independently maintained protocol payload); adds the operator-side
-   protocol consumer ledger + DS visual consumer ledger; scopes the shared intake as
-   inbound-only; replaces the absolute downstream-no-write claim with the current bounded
-   boundary. Exact live SHAs/PRs stay OUT of the tree (they live in the protocol consumer
-   ledger, the state plane). Content-only; render held render-v18.
+   v5 (2026-07-21): ecology-state scrub to the landed shared-protocol architecture.
+   control-surface is the OWNER of the shared execution-protocol CANONICAL at
+   control-surface/protocol/ (landed Wave-1A). Corrects the stale renderer comment
+   (diagrams-engine.js -> diagrams-static-H-engine.js) and the D03 name (ecology-ASK overall
+   -> system-ASK topology). Distinguishes the four deliberately separate carriers:
+   protocol/ (owner canonical) · protocol/AGENTS.shared.md (authoritative shared rule body) ·
+   protocol/manifest.json (normative REGISTRY — rule ownership / scope / applicability /
+   metadata, NOT live state) · control-surface_protocol-consumer-ledger.md (live carrier /
+   grant / visibility / propagation STATE). The root AGENTS.md is the resolved OWNER CARRIER
+   (resolves the shared rule body + core-ecology profile + coordinator / local delta) — not
+   the owner canonical. Resolution is not universal: method / DS / ASK resolved, PCS
+   applicable-but-carrier-blocked, AP / UO separately operated under standing grants. Adds the
+   protocol/ owner subtree + the cross-repo propagation-wave prompt; reclassifies
+   AGENTS.template.md as a bootstrap shell (not an independently maintained protocol payload);
+   adds the operator-side protocol consumer ledger + DS visual consumer ledger as separate
+   state planes; scopes the shared intake inbound-only; replaces the absolute
+   downstream-no-write claim with the current bounded boundary. Exact live SHAs/PRs stay OUT of
+   the tree (they live in the protocol consumer ledger). Content-only; render held render-v18.
    Single-tree extraction of TREE_D01 from the v9 operator-side ecology-ASK
    package. This repo carries TREE_D01 only; it does not carry TREE_D02
    (method-ASK topology) or TREE_D03 (system-ASK topology), which remain
@@ -27,7 +34,7 @@
 window.TREE_D01 = {
   kind: 'root',
   label: 'control-surface',
-  note: 'execution-protocol repo // downstream of method-ASK · OWNER of the shared execution-protocol carrier (control-surface/protocol/)',
+  note: 'execution-protocol repo // downstream of method-ASK · owner of the shared execution-protocol canonical at control-surface/protocol/',
   children: [
     {
       kind: 'section', label: 'upstream methodology',
@@ -50,14 +57,14 @@ window.TREE_D01 = {
       kind: 'section', label: 'repo-local surfaces',
       children: [
         { label: 'README.md' },
-        { label: 'AGENTS.md', note: 'resolved OWNER carrier · shared core + core-ecology profile + control-surface coordinator / local delta' },
+        { label: 'AGENTS.md', note: 'resolved OWNER carrier — resolves the shared rule body + core-ecology profile + control-surface coordinator / local delta (not the owner canonical itself)' },
         { label: 'CLAUDE.md', note: 'pointer to AGENTS.md' },
-        { kind: 'group', label: 'protocol/', note: 'the shared execution-protocol OWNER canonical · control-surface owns it; core repos resolve it locally · normative rules only (state lives in the protocol consumer ledger)', children: [
-          { label: 'AGENTS.shared.md', note: 'shared core — the normative execution-protocol block resolved into every consumer carrier' },
-          { label: 'manifest.json (+ manifest.schema.json)', note: 'normative rule ownership + applicability — the authoritative rule set' },
+        { kind: 'group', label: 'protocol/', note: 'shared execution-protocol OWNER canonical · resolved consumers carry the applicable shared / profile bodies locally · live carrier / grant / visibility state lives in the protocol consumer ledger', children: [
+          { label: 'AGENTS.shared.md', note: 'authoritative shared execution-protocol rule body' },
+          { label: 'manifest.json (+ manifest.schema.json)', note: 'normative registry — rule ownership, scope, applicability, exclusions, carrier / profile / hold / lifecycle metadata; NOT live consumer state' },
           { label: 'profiles/', note: 'core-ecology · architecture-uncertain — the applicable rule profile per consumer class' },
           { label: 'fragments/standing-upstream-conformance-grant.md', note: 'the standing-GREEN grant body, vendored inside a consumer carrier\'s grant markers' },
-          { label: 'check.sh (+ tests/)', note: 'deterministic validator — --wave / --all conformance + parity checks' },
+          { label: 'check.sh (+ tests/)', note: 'deterministic validator — --local / --wave / --all' },
           { label: 'README.md', note: 'protocol-layer orientation' },
         ]},
         { label: 'docs/', children: [
@@ -67,7 +74,7 @@ window.TREE_D01 = {
           { label: 'workflow-boundary.md', status: 'legacy' },
         ]},
         { label: 'templates/', children: [
-          { label: 'AGENTS.template.md', note: 'bootstrap shell — NOT an independently maintained protocol payload · a new repo resolves the shared core from control-surface/protocol/ at instantiation' },
+          { label: 'AGENTS.template.md', note: 'bootstrap shell — NOT an independently maintained protocol payload · a new repo resolves the shared rule body from control-surface/protocol/ at instantiation' },
           { label: 'CLAUDE.template.md' },
           { label: 'architecture.template.md' },
           { label: 'grounding-note.template.md' },
@@ -111,7 +118,7 @@ window.TREE_D01 = {
       children: [
         { label: 'control-surface_grounding-note.md', note: 'root canonical' },
         { kind: 'group', label: 'consumer / propagation ledgers', note: 'operator-side state planes · kept SEPARATE — execution-protocol state vs visual / tooling state', children: [
-          { label: 'control-surface_protocol-consumer-ledger.md', note: 'execution-protocol STATE plane — installed carriers · grant adoption · visibility · propagation (owned here; the normative rules live in protocol/manifest.json)' },
+          { label: 'control-surface_protocol-consumer-ledger.md', note: 'execution-protocol live STATE plane — installed carriers · grant adoption · visibility · propagation (owned here; the normative rule body + registry live in protocol/ — AGENTS.shared.md + manifest.json)' },
           { label: 'design-system-ASK_consumer-ledger.md', note: 'design-system VISUAL propagation state — exact vendored pins + render obligations' },
         ]},
         { label: 'sources of intent/', note: 'shared ecology INBOUND intake · genuinely inbound material only — NOT a core-repo routing bus (core-to-core changes cross repo boundaries directly, no -TBI)', children: [

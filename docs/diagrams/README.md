@@ -52,7 +52,9 @@ _dsa-tokens/                                    vendored Tier 1 + Tier 2 token m
 
 ## Lineage
 
-This diagram was rendered as part of the v9 operator-side `ecology-ASK` diagram package and absorbed here at `source-v2 // render-v9`. Future refreshes will bump the render version and may bump the source version if the tree data changes.
+This repo-local diagram originated in the v9 operator-side `ecology-ASK` diagram package and was first absorbed here at `source-v2 // render-v9`.
+
+The current tuple is `source-v5 // render-v18` (2026-07-21). Source advances when the authored architecture changes; render advances only when the renderer realization changes.
 
 The operator-side package and historical render iterations remain in `ecology-ASK-EXTERNAL/scratch/` and are not repo truth.
 
