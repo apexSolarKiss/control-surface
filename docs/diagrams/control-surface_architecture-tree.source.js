@@ -7,8 +7,9 @@
    control-surface is the OWNER of the shared execution-protocol CANONICAL at
    control-surface/protocol/ (landed Wave-1A). Corrects the stale renderer comment
    (diagrams-engine.js -> diagrams-static-H-engine.js) and the D03 name (ecology-ASK overall
-   -> system-ASK topology). Distinguishes the four deliberately separate carriers:
-   protocol/ (owner canonical) · protocol/AGENTS.shared.md (authoritative shared rule body) ·
+   -> system-ASK topology). Distinguishes the four deliberately separate artifacts / planes
+   (NOT four carriers — protocol/ is the owner canonical; the resolved AGENTS.md files are the
+   carriers): protocol/ (owner canonical) · protocol/AGENTS.shared.md (authoritative shared rule body) ·
    protocol/manifest.json (normative REGISTRY — rule ownership / scope / applicability /
    metadata, NOT live state) · control-surface_protocol-consumer-ledger.md (live carrier /
    grant / visibility / propagation STATE). The root AGENTS.md is the resolved OWNER CARRIER
