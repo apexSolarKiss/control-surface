@@ -816,7 +816,8 @@
    "active_holds": [],
    "status": "active",
    "amended_by": [
-    "#166 / 85e35e4"
+    "#166 / 85e35e4",
+    "#166 / a2fa2bf"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
