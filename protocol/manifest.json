@@ -142,7 +142,8 @@
    "active_holds": [],
    "status": "active",
    "amended_by": [
-    "#166 / 612fc8c"
+    "#166 / 612fc8c",
+    "#166 / dee8d89"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -633,7 +634,9 @@
    "failure_mode": "voice/surface-boundary risk shipped unflagged; or legitimate domain vocab auto-sanitized",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": [
+    "#166 / dee8d89"
+   ],
    "explicit_exclusions": [],
    "proposed_by": null,
    "activated_by": "#74 / 0e80370 (template-origin; promoted to shared per Wave-1A)"
