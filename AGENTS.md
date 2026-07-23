@@ -467,7 +467,11 @@ This applies whether the executor is a separate process (Codex) or the same agen
 
 The plan-before-execute step preserves the explicit reasoning surface that prompt-compilation provides when execution is split across a prompt-compiler and an executor. In a single-node model, plan-before-execute is the rule that restores it. Do not collapse plan and execution into a single opaque step.
 
-Any proposed private-memory mutation must be named as a separate planned operation with its exact target, proposed payload, visible-owner disposition, and terminal state. If it is absent from the approved plan, private memory is out of scope.
+Any proposed private persistent mutation must be named as a separate planned operation with its exact target, exact proposed mutation, visible-owner or no-retention disposition, and terminal state.
+
+For a creation, include the full proposed payload. For an edit, include the exact diff or replacement payload. For a deletion, include the exact path, deletion warrant, pre-deletion size/hash receipt, and expected absence or restored-byte/hash receipt.
+
+If the operation is absent from the approved plan, the private persistent mutation is out of scope.
 
 ---
 
