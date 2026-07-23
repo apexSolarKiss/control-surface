@@ -71,13 +71,13 @@ Any governed private persistent mutation requires all of:
 
 1. the learning has been classified under §Learning Disposition and its visible owner has been named;
 2. a stated reason the visible owner is insufficient for the residual payload;
-3. the exact target file and the exact payload, shown before the write;
-4. explicit ASK authorization of that exact target and payload;
+3. the exact target and exact proposed mutation, shown before execution: full payload for creation; exact diff or replacement payload for an edit; and, for deletion, the exact path plus a pre-deletion size/hash receipt;
+4. explicit ASK authorization of that exact target and exact mutation;
 5. a recorded aging or review trigger.
 
 Approval of a plan, a diff, a PR, a merge, or a task completion is **not** authorization of that private persistent mutation. Neither is advisor agreement.
 
-**Authorization is per artifact.** Approval of a topic file does not authorize an index entry, and approval of an index entry does not authorize the topic file. Every created or modified file requires its own displayed change and ASK decision. Never select a session-wide or standing approval for a governed private persistent path, including "allow Claude to edit its own settings for this session."
+**Authorization is per artifact.** Approval of a topic file does not authorize an index entry, and approval of an index entry does not authorize the topic file. Every created, modified, or deleted artifact requires its own displayed change or deletion receipt and its own ASK decision. Never select a session-wide or standing approval for a governed private persistent path, including "allow Claude to edit its own settings for this session."
 
 **Live credentials, authorization tokens, private keys, and other secrets are never admissible payloads** for a private persistent surface or for any disposition record.
 

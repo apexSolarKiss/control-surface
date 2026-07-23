@@ -1,6 +1,8 @@
 # protocol/adapters/claude-code/ — Claude Code adapter artifacts
 
-The shared execution protocol in `../../AGENTS.shared.md` is **agent-agnostic**: it names structural roles and required dispositions, never a vendor. This namespace holds the **Claude-Code-specific artifacts** that make one of those rules — §Private-Memory Write Gate — technically enforceable on a machine running Claude Code.
+The shared execution protocol in `../../AGENTS.shared.md` is **agent-agnostic**: it names structural roles and required dispositions, never a vendor. This namespace holds the **Claude-Code-specific artifacts** that provide runtime enforcement for the supported built-in file-edit and auto-memory write path of one of those rules — §Private-Memory Write Gate — on a machine running Claude Code.
+
+It does **not** claim OS-level enforcement over arbitrary Bash, Python, Node, or other subprocess writes. The shared protocol prohibits that circumvention semantically; subprocess sandbox hardening remains a separate, out-of-scope capability question unless a demonstrated bypass reopens it.
 
 Nothing here is shared-protocol text, and nothing here is inherited by a consumer's `AGENTS.md`. A different executor would carry a sibling namespace with its own artifacts and the same shared rule above it.
 

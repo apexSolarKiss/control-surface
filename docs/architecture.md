@@ -56,7 +56,7 @@ The split is separation by *aging rate*:
 - Context docs age slowly when they contain context only.
 - Mixed docs age at the rate of their fastest-aging contents.
 
-This is the load-bearing rationale for keeping the four sources separate.
+This is the load-bearing rationale for keeping these durable and non-durable surfaces separate.
 
 ## Lifecycle Phases
 
@@ -71,7 +71,7 @@ This is the load-bearing rationale for keeping the four sources separate.
 - `docs/architecture.md` — this doc; explains the execution-protocol architecture
 - `templates/` — reusable starters for downstream repo-local files and the external grounding note
 - `protocol/` — the distributable execution-protocol layer: the shared `AGENTS` core (`AGENTS.shared.md`, resolved verbatim into each consumer's own `AGENTS.md` between the shared markers), the normative `manifest.json` registry, downstream `profiles/`, the opt-in standing-upstream-conformance-grant `fragments/` entry, and `check.sh` (a deterministic local validator, not CI); consumers resolve the shared block locally rather than holding an independent copy
-- `protocol/adapters/` — typed, executor-specific artifacts that make an agent-agnostic shared rule technically enforceable on a given runtime; **not shared-protocol text and never inherited into a consumer's `AGENTS.md`**. `adapters/claude-code/` carries the native permission fragment for the private-persistent write gate, a static owner-repo check, a machine-local verifier, and their fixtures, run separately so the portable checker stays agent-agnostic
+- `protocol/adapters/` — typed, executor-specific artifacts providing runtime enforcement for a supported write path of an agent-agnostic shared rule on a given runtime, **not** OS-level enforcement over arbitrary subprocess writes (the shared protocol prohibits that circumvention semantically; sandbox hardening is a separate out-of-scope question); **not shared-protocol text and never inherited into a consumer's `AGENTS.md`**. `adapters/claude-code/` carries the native permission fragment for the private-persistent write gate, a static owner-repo check, a machine-local verifier, and their fixtures, run separately so the portable checker stays agent-agnostic
 - `prompts/project-instantiation-initial-prompt.md` — agent-agnostic startup prompt for the pre-repo phase
 - `examples/` — concise mappings from real ASK projects to this structure
 - legacy docs (`control-surface.md`, `docs/workflow-boundary.md`, Model-A-specific prompts) — retained for reference; deprecation headers name what supersedes them

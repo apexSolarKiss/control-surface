@@ -25,10 +25,12 @@ manifest.json       the normative registry (validated by manifest.schema.json + 
 manifest.schema.json  the checked JSON Schema for manifest.json.
 profiles/           each profile = owner explanation + a BEGIN/END profile-body fence around the distributable body.
 fragments/          verbatim opt-in fragments (body-only). The standing grant.
-adapters/           executor-specific artifacts that make an agent-agnostic shared rule technically enforceable on a
-                    given runtime. NOT shared-protocol text and NOT inherited by any consumer's AGENTS.md. One
-                    subdirectory per executor; adapters/claude-code/ carries the native permission fragment, the
-                    static owner-repo adapter check, the machine-local gate verifier, and their fixtures.
+adapters/           executor-specific artifacts providing runtime enforcement for a SUPPORTED WRITE PATH of an
+                    agent-agnostic shared rule on a given runtime — never OS-level enforcement over arbitrary
+                    subprocess writes, which the shared protocol prohibits semantically. NOT shared-protocol text
+                    and NOT inherited by any consumer's AGENTS.md. One subdirectory per executor;
+                    adapters/claude-code/ carries the native permission fragment, the static owner-repo adapter
+                    check, the machine-local gate verifier, and their fixtures.
 check.sh            deterministic local validator, three modes (--local | --wave | --all). NO CI.
 tests/              tests/run-check-fixtures.sh — the durable, map-driven fixture runner (positive controls for every
                     mode + negative fixtures over the checker's rejection paths). Its per-run report is PR/ecology
