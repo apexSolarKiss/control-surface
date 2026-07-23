@@ -141,7 +141,9 @@
    "failure_mode": "an executor mutates a private persistent surface \u2014 auto memory, subagent memory, or a private instruction file \u2014 as an unannounced side effect of an approved task, so durable protocol enters an unreviewed surface",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": [
+    "#166 / 612fc8c"
+   ],
    "explicit_exclusions": [],
    "proposed_by": null,
    "activated_by": "#166 / 85e35e4"
