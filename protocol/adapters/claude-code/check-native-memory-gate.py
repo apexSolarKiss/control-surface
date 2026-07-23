@@ -3,7 +3,9 @@
 
 Proves the STATIC class only: that an installed settings file carries the required
 native permission rules, that bypass mode is disabled, that the runtime is at or
-above the tested floor, and that no rule was reported unmatched at startup.
+above the tested floor, and, when captured startup output is supplied, that it
+contains no unmatched-rule warning. Without `--startup-log` that last check is not
+performed, and the run reports so.
 
 It NEVER emits ACTIVE-CONFORMANT.
 

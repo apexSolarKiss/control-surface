@@ -15,7 +15,7 @@ All four parts are present in the template as marker pairs so the wave can fill 
 
 ## The `CLAUDE.md` adapter
 
-`CLAUDE.template.md` is **required**, not optional, for a Claude-operated repo. Claude Code reads `CLAUDE.md`, not `AGENTS.md`, so its `@AGENTS.md` import is what actually delivers the resolved carrier into an executor's context. Exactly one `@AGENTS.md` import; repo-specific prose may follow it. `../protocol/adapters/claude-code/check-claude-adapter.sh` verifies that.
+`CLAUDE.template.md` is **required**, not optional, for a Claude-operated repo. Claude Code reads `CLAUDE.md`, not `AGENTS.md`, so its `@AGENTS.md` import is what actually delivers the resolved carrier into an executor's context. Exactly one `@AGENTS.md` import; repo-specific prose may follow it. `../protocol/adapters/claude-code/check-claude-adapter.sh` asserts that for **this template and control-surface's own adapter**; a downstream repo's adapter is verified at bootstrap and propagation instead.
 
 ## Why payload-free
 

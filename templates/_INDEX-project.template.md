@@ -62,7 +62,7 @@ Status classes: **root canonical** · **candidate / intake** · **working index*
 
 | File | Path | Status class |
 |---|---|---|
-| shared-protocol owner model | `apexSolarKiss/control-surface/protocol/README.md` | repo canonical |
+| shared-protocol owner model | `apexSolarKiss/control-surface/protocol/README.md` | owner canonical |
 | shared execution-protocol body | `apexSolarKiss/control-surface/protocol/AGENTS.shared.md` | owner canonical |
 | normative protocol manifest | `apexSolarKiss/control-surface/protocol/manifest.json` | normative registry |
 | cross-repo propagation runbook | `apexSolarKiss/control-surface/prompts/cross-repo-propagation-wave.md` | coordinator canonical |

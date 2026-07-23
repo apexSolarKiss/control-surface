@@ -22,7 +22,8 @@ The workflow rules apply regardless of which agent does the executing. Rules liv
 - **Repo** = project state
 - **`AGENTS.md`** = workflow rules
 - **Grounding note** (external) = intent, audience, philosophy, foundational premises, durable loose threads
-- **Per-conversation memory** (operator-side) = ephemeral session state; not durable
+- **Per-conversation / task state** (current chat, task lists, in-flight context) = ephemeral; not durable
+- **Private agent memory** (e.g. Claude Code's auto memory) = persistent but non-authoritative — a read-mostly operator cache, never a durable owner, and not the home for in-flight tracking; every mutation is governed by `AGENTS.md` §Learning Disposition and §Private-Memory Write Gate
 - `[any project-specific live truth surfaces, e.g. a database, a CMS, direct visual evidence]`
 
 ## Artifact Model

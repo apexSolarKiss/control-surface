@@ -110,12 +110,13 @@ Three worked examples anchor the family:
 
 ## Source-of-Truth Split
 
-ASK project work uses three durable sources of truth plus operator-side ephemeral memory:
+ASK project work uses three durable sources of truth, plus two non-durable surfaces that are **not** interchangeable:
 
 - **Repo** = project state (artifacts, decisions, current navigation)
 - **[`AGENTS.md`](AGENTS.md)** (in-repo) = workflow rules, agent-agnostic, applies to whoever executes
 - **Grounding note** (external) = repo-external context: intent, audience, philosophy, foundational premises, durable loose threads
-- **Per-conversation memory** (operator-side: Claude Code's MEMORY.md, ChatGPT thread history, task lists) = ephemeral session state, does not flow into the durable sources
+- **Per-conversation / task state** (current chat, ChatGPT thread history, task lists, in-flight session context) = ephemeral; does not flow into the durable sources
+- **Private agent memory** (Claude Code's auto memory — `MEMORY.md` and its topic files) = **persistent, not ephemeral**: a non-authoritative, read-mostly operator cache. Never a durable owner, never the home for in-flight tracking. Every mutation is governed by [`AGENTS.md`](AGENTS.md) §Learning Disposition and §Private-Memory Write Gate — classify to a visible owner first, and each write is a separate ASK approval unit.
 
 ### Aging-Rate Principle
 
@@ -134,7 +135,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 ### Live operating files for this repo
 
 - [`AGENTS.md`](AGENTS.md) — repo-local workflow rules that govern execution inside this repo
-- [`CLAUDE.md`](CLAUDE.md) — pointer to `AGENTS.md` for Claude Code operators
+- [`CLAUDE.md`](CLAUDE.md) — the Claude Code adapter: Claude Code reads `CLAUDE.md`, not `AGENTS.md`, so its `@AGENTS.md` import is what delivers the resolved carrier into context. Required for a Claude-operated repo, not a convenience pointer
 - [`docs/architecture.md`](docs/architecture.md) — execution-protocol architecture of this repo and the role model behind it
 
 ### Shared protocol carriers
@@ -146,6 +147,7 @@ Live, authoritative carriers of the distributable execution protocol. Consumers 
 - [`protocol/profiles/`](protocol/profiles/) — per-profile overlays on the shared body
 - [`protocol/fragments/standing-upstream-conformance-grant.md`](protocol/fragments/standing-upstream-conformance-grant.md) — opt-in consumer fragment for a standing upstream-conformance grant
 - [`protocol/check.sh`](protocol/check.sh) — deterministic local validator for the resolved shared block (run locally; not CI)
+- [`protocol/adapters/`](protocol/adapters/) — typed, executor-specific adapters that make an agent-agnostic shared rule technically enforceable on a given runtime. **Not shared-protocol text and never inherited into a consumer's `AGENTS.md`.** [`protocol/adapters/claude-code/`](protocol/adapters/claude-code/) carries the native permission fragment for the private-persistent write gate, a static owner-repo check, a machine-local verifier, and their fixtures — run separately from `check.sh`, which stays agent-agnostic
 
 ### Methodology docs
 
@@ -162,7 +164,7 @@ Live, authoritative carriers of the distributable execution protocol. Consumers 
 - [`templates/AGENTS.template.md`](templates/AGENTS.template.md) — agent-agnostic starter for repo-local execution rules; the shared workflow core now lives in [`protocol/AGENTS.shared.md`](protocol/AGENTS.shared.md) (originally derived from asset-pipeline-ASK's live AGENTS.md), and this template is a copyable starter for the repo-local remainder alongside the resolved shared core (project-specific architecture rules in that repo are not absorbed by default)
 - [`templates/grounding-note.template.md`](templates/grounding-note.template.md) — starter for the external grounding note that travels with each ASK project
 - [`templates/architecture.template.md`](templates/architecture.template.md) — starter for a downstream repo's architecture doc
-- [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) — optional Claude Code pointer file for downstream single-node repos
+- [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) — the Claude Code adapter for a downstream repo; **required** for any Claude-operated repo, carrying exactly one `@AGENTS.md` import above its repo-specific prose
 - [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) — the advisor bootstrap (role + fail-closed read-path) for an external advisor surface (GPT or Claude in chat form); adapted per project and installed **once into the advisor Project Instructions**, not pasted per thread (see [`docs/critique-protocol.md`](docs/critique-protocol.md))
 - [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md) — the **source index / path map** an advisor Project mounts as its primary Source; instantiated as `<project>-EXTERNAL/_INDEX-<project>.md` (or `_INDEX-<project>-<role>.md` per role). Mount the map, not copies of the canonicals — the advisor fetches canonicals live from Dropbox by exact path; mounted copies are fallback only
 - [`templates/overlays/architecture-uncertain-rules.template.md`](templates/overlays/architecture-uncertain-rules.template.md) — optional opt-in overlay for downstream projects with active architecture or ontology uncertainty; adds rules calibrated for projects whose work is to discover structural categories (architecture-before-prototype, prototype-as-pressure-surface, attempt-model-before-plan, self-evident-premise stop, ceremony budget, proof-chain gravity well guard, bootstrap doc-alignment check) on top of the base template; not used by projects whose task surface is known
@@ -222,7 +224,7 @@ For a new ASK project:
 - Copy [`templates/AGENTS.template.md`](templates/AGENTS.template.md) into the new repo as `AGENTS.md` and adapt project-specific defaults.
 - Copy [`templates/grounding-note.template.md`](templates/grounding-note.template.md) into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads.
 - Optionally copy [`templates/architecture.template.md`](templates/architecture.template.md) into the new repo as `docs/architecture.md`.
-- Optionally copy [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) into the new repo as `CLAUDE.md` when using Claude Code.
+- For a Claude-operated repo, copy [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) into the new repo as `CLAUDE.md` — required, not optional; keep exactly one `@AGENTS.md` import.
 - Optionally adopt [`templates/overlays/architecture-uncertain-rules.template.md`](templates/overlays/architecture-uncertain-rules.template.md) when the project profile is architecture-uncertain (ontology-first work, prototypes as pressure surfaces, deferred schema commitment, modeling-before-planning). Append after the base `AGENTS.md` rules; skip when the task surface is known and the work is execution against it.
 - Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
 - Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code after the repo exists.

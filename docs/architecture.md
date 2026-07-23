@@ -36,12 +36,15 @@ An illustrative tree of this architecture and its operator-side ecology is at [`
 
 ## Source-of-Truth Split
 
-ASK project work uses three durable sources of truth plus operator-side ephemeral memory:
+ASK project work uses three durable sources of truth, plus two non-durable surfaces that are **not** interchangeable:
 
 - **Repo** = project state (artifacts, decisions, current navigation)
 - **`AGENTS.md`** (in-repo) = workflow rules, agent-agnostic
 - **Grounding note** (external) = repo-external context (intent, audience, philosophy, foundational premises, durable loose threads)
-- **Per-conversation memory** (operator-side) = ephemeral session state; does not flow into the durable sources
+- **Per-conversation / task state** (current chat, task lists, in-flight session context) = ephemeral; does not flow into the durable sources
+- **Private agent memory** (Claude Code's auto memory) = **persistent, not ephemeral**: a non-authoritative, read-mostly operator cache; never a durable owner, never the home for in-flight tracking, and every mutation governed by `AGENTS.md` §Learning Disposition and §Private-Memory Write Gate
+
+The last two are separated by *persistence*, not just by authority. Collapsing them is what lets an invisible surface accumulate operative rules: ephemeral state is discarded, while a cache that survives the session keeps whatever was written to it.
 
 ### Aging-Rate Principle
 
@@ -64,10 +67,11 @@ This is the load-bearing rationale for keeping the four sources separate.
 ## Artifact Model
 
 - `AGENTS.md` — live repo-local execution rules for this execution-protocol repo
-- `CLAUDE.md` — pointer to `AGENTS.md` for Claude Code operators
+- `CLAUDE.md` — the Claude Code adapter; its `@AGENTS.md` import is what delivers the resolved carrier into an executor's context. Required for a Claude-operated repo, not a convenience pointer
 - `docs/architecture.md` — this doc; explains the execution-protocol architecture
 - `templates/` — reusable starters for downstream repo-local files and the external grounding note
 - `protocol/` — the distributable execution-protocol layer: the shared `AGENTS` core (`AGENTS.shared.md`, resolved verbatim into each consumer's own `AGENTS.md` between the shared markers), the normative `manifest.json` registry, downstream `profiles/`, the opt-in standing-upstream-conformance-grant `fragments/` entry, and `check.sh` (a deterministic local validator, not CI); consumers resolve the shared block locally rather than holding an independent copy
+- `protocol/adapters/` — typed, executor-specific artifacts that make an agent-agnostic shared rule technically enforceable on a given runtime; **not shared-protocol text and never inherited into a consumer's `AGENTS.md`**. `adapters/claude-code/` carries the native permission fragment for the private-persistent write gate, a static owner-repo check, a machine-local verifier, and their fixtures, run separately so the portable checker stays agent-agnostic
 - `prompts/project-instantiation-initial-prompt.md` — agent-agnostic startup prompt for the pre-repo phase
 - `examples/` — concise mappings from real ASK projects to this structure
 - legacy docs (`control-surface.md`, `docs/workflow-boundary.md`, Model-A-specific prompts) — retained for reference; deprecation headers name what supersedes them
@@ -93,7 +97,7 @@ When proposing rule changes, ask which failure mode the rule is compensating for
 This repo is intentionally small:
 
 - one set of live operating files for this repo
-- the `protocol/` layer: the shared `AGENTS` core resolved locally into each consumer's own `AGENTS.md`, a normative `manifest.json` registry, downstream `profiles/`, an opt-in standing-upstream-conformance-grant fragment, and `check.sh` (a deterministic local validator, not CI)
+- the `protocol/` layer: the shared `AGENTS` core resolved locally into each consumer's own `AGENTS.md`, a normative `manifest.json` registry, downstream `profiles/`, an opt-in standing-upstream-conformance-grant fragment, `check.sh` (a deterministic local validator, not CI), and typed `adapters/` for the executor-specific enforcement of an agent-agnostic rule
 - a small downstream template set (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`) — starters adopted alongside, not instead of, the locally resolved shared protocol
 - one agent-agnostic instantiation prompt
 - a minimal example set
