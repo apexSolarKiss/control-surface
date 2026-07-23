@@ -95,6 +95,56 @@
    "activated_by": "#30 / 362d847"
   },
   {
+   "rule_id": "learning-disposition",
+   "scope_class": "shared-core",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [
+    "control-surface",
+    "method-ASK",
+    "design-system-ASK",
+    "personal-context-system",
+    "ASK",
+    "asset-pipeline-ASK",
+    "urban-observatory"
+   ],
+   "carrier_mode": "resolved-local",
+   "profile": null,
+   "source_anchor": "## Learning Disposition",
+   "failure_mode": "reusable learnings accumulate in invisible private memory instead of a visible durable owner, so rules govern execution without being auditable and drift per-project",
+   "active_holds": [],
+   "status": "candidate",
+   "amended_by": [],
+   "explicit_exclusions": [],
+   "proposed_by": "2026-07-23 memory relapse-prevention v6+v7",
+   "activated_by": null
+  },
+  {
+   "rule_id": "private-memory-write-gate",
+   "scope_class": "shared-core",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [
+    "control-surface",
+    "method-ASK",
+    "design-system-ASK",
+    "personal-context-system",
+    "ASK",
+    "asset-pipeline-ASK",
+    "urban-observatory"
+   ],
+   "carrier_mode": "resolved-local",
+   "profile": null,
+   "source_anchor": "## Private-Memory Write Gate",
+   "failure_mode": "an executor mutates a private persistent surface \u2014 auto memory, subagent memory, or a private instruction file \u2014 as an unannounced side effect of an approved task, so durable protocol enters an unreviewed surface",
+   "active_holds": [],
+   "status": "candidate",
+   "amended_by": [],
+   "explicit_exclusions": [],
+   "proposed_by": "2026-07-23 memory relapse-prevention v6+v7",
+   "activated_by": null
+  },
+  {
    "rule_id": "required-reading",
    "scope_class": "shared-core",
    "authority_owner": "control-surface",
