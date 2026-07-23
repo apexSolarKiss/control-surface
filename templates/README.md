@@ -13,6 +13,10 @@ consumer AGENTS.md  =  resolved shared block   (from protocol/AGENTS.shared.md, 
 
 All four parts are present in the template as marker pairs so the wave can fill them and `check.sh` can verify each.
 
+## The `CLAUDE.md` adapter
+
+`CLAUDE.template.md` is **required**, not optional, for a Claude-operated repo. Claude Code reads `CLAUDE.md`, not `AGENTS.md`, so its `@AGENTS.md` import is what actually delivers the resolved carrier into an executor's context. Exactly one `@AGENTS.md` import; repo-specific prose may follow it. `../protocol/adapters/claude-code/check-claude-adapter.sh` asserts that for **this template and control-surface's own adapter**; a downstream repo's adapter is verified at bootstrap and propagation instead.
+
 ## Why payload-free
 
 A full protocol copy in the template would be a second independently-maintained payload that drifts from the owner canonical. The template carries only the shell + carrier-selection metadata + the four marker surfaces. `protocol/check.sh --local` fails if the template inlines the shared payload or the grant body.

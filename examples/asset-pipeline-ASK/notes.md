@@ -31,6 +31,6 @@ These are not policy, but they show what the workflow has produced when applied 
 - The aging-rate principle as the load-bearing rationale for the source-of-truth split
 - Session topology / single-writer discipline as a real failure mode worth encoding as a rule
 - Why-the-rules-exist framing: most workflow rules are calibrated compensations for what the single-node model collapses relative to legacy Model A
-- The grounding note's narrower scope when operator-side memory handles per-conversation tracking
+- The grounding note's narrower scope when ephemeral task state handles per-conversation tracking and private agent memory remains a persistent, non-authoritative cache rather than a tracking surface
 
 These all flow into the protocol repo's current `AGENTS.md`, `docs/architecture.md`, and the templates.

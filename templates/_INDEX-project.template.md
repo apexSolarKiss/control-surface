@@ -34,7 +34,7 @@ Mount **this index** into the advisor Project's Sources — **not** copies of th
 Define short aliases so the path tables stay readable. Typical bases (adapt to the project):
 
 ```text
-S/ = /studio/studio ASK/2026 studioASK/                     (studio-side, shared)
+S/ = /studio/studio ASK/                                    (studio-side, shared)
 P/ = /Andrew Klug/personal-ASK/inheritable/                 (wall-safe inheritable layer — ONLY if the surface is authorized for it)
 ```
 
@@ -52,9 +52,27 @@ List only the paths this surface is authorized to read. Give each a **status cla
 | sources of intent (intake) | `S/<project>-EXTERNAL/sources of intent/` | candidate / ingestion |
 | scratch | `S/<project>-EXTERNAL/scratch/` | fetch **named** artifacts only (`_vN` snapshots, absorption/closure memos) |
 
-Status classes: **root canonical** · **candidate / intake** · **working index** · **scratch / snapshot** · **reference-only** (available cross-domain context the project has *not* absorbed — consult if a task needs it; not this project's doctrine).
+Status classes: **root canonical** · **candidate / intake** · **working index** · **scratch / snapshot** · **reference-only** (available cross-domain context the project has *not* absorbed — consult if a task needs it; not this project's doctrine). The shared-protocol rows below additionally use **owner canonical** · **normative registry** · **coordinator canonical**.
 
 *(Add cross-system masters, inheritable/brand paths, or shared protocol files only if this surface is authorized for them and the project actually consumes them. Mark consumed vs. reference-only explicitly.)*
+
+### Shared execution-protocol architecture
+
+*(**Required** when the project's `AGENTS.md` resolves the ASK shared execution protocol. Delete this subsection only for a project that does not.)*
+
+| File | Path | Status class |
+|---|---|---|
+| shared-protocol owner model | `apexSolarKiss/control-surface/protocol/README.md` | owner canonical |
+| shared execution-protocol body | `apexSolarKiss/control-surface/protocol/AGENTS.shared.md` | owner canonical |
+| normative protocol manifest | `apexSolarKiss/control-surface/protocol/manifest.json` | normative registry |
+| cross-repo propagation runbook | `apexSolarKiss/control-surface/prompts/cross-repo-propagation-wave.md` | coordinator canonical |
+| live protocol-consumer state | `<authorized operator-side path>/control-surface_protocol-consumer-ledger.md` | root canonical — live state |
+
+- These rows are **mandatory** for a project whose `AGENTS.md` resolves the shared ASK carrier. The advisor instructions require these files for any question about rule placement, `AGENTS.md` / `CLAUDE.md`, private agent memory, learning disposition, grants, or propagation; an index without the rows leaves the advisor no route to them.
+- The four repo canonicals are fetched from **GitHub / local git**, not Dropbox.
+- Instantiate the ledger row **only** where this advisor surface is authorized to read that operator-side path. Omit the row rather than naming a path the surface cannot resolve.
+- Manifest is normative; the ledger is live state. Do not read either as the other.
+- This stays a **map**: mount the index, not copies of these files.
 
 ## Wall + search-hygiene rules
 

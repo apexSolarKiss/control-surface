@@ -25,6 +25,12 @@ manifest.json       the normative registry (validated by manifest.schema.json + 
 manifest.schema.json  the checked JSON Schema for manifest.json.
 profiles/           each profile = owner explanation + a BEGIN/END profile-body fence around the distributable body.
 fragments/          verbatim opt-in fragments (body-only). The standing grant.
+adapters/           executor-specific artifacts providing runtime enforcement for a SUPPORTED WRITE PATH of an
+                    agent-agnostic shared rule on a given runtime — never OS-level enforcement over arbitrary
+                    subprocess writes, which the shared protocol prohibits semantically. NOT shared-protocol text
+                    and NOT inherited by any consumer's AGENTS.md. One subdirectory per executor;
+                    adapters/claude-code/ carries the native permission fragment, the static owner-repo adapter
+                    check, the machine-local gate verifier, and their fixtures.
 check.sh            deterministic local validator, three modes (--local | --wave | --all). NO CI.
 tests/              tests/run-check-fixtures.sh — the durable, map-driven fixture runner (positive controls for every
                     mode + negative fixtures over the checker's rejection paths). Its per-run report is PR/ecology
@@ -34,6 +40,8 @@ tests/              tests/run-check-fixtures.sh — the durable, map-driven fixt
 ## Requirements
 
 `check.sh` and `tests/run-check-fixtures.sh` require **`jq`**, **`python3`**, and the python3 **`jsonschema`** package (`pip install jsonschema`). This is fail-closed: a missing dependency is a hard FAILURE, never a skipped or silently-passed check. The formal JSON-Schema validation of `manifest.json` runs on every invocation.
+
+`adapters/*/` checks are run **separately** and require only `python3`. Keeping them out of `check.sh` is deliberate: the portable AGENTS checker stays agent-agnostic, so a repo operated by a different executor is never failed by another runtime's adapter.
 
 ## The standing-grant fragment (provenance — historical, not live state)
 

@@ -58,6 +58,19 @@ You are NOT a substitute for:
 
 Do not rely on memory of prior sessions for project state. Verify against current sources every time.
 
+### Shared execution-protocol architecture preflight
+
+For any question involving workflow-rule placement, `AGENTS.md`, `CLAUDE.md`, private agent memory, reusable-learning disposition, grants, or cross-repo protocol propagation:
+
+1. fetch the live source index;
+2. read `control-surface/protocol/README.md`;
+3. read `control-surface/protocol/AGENTS.shared.md`;
+4. read `control-surface/protocol/manifest.json`;
+5. read the applicable repo's current resolved `AGENTS.md`;
+6. fetch the live protocol-consumer ledger when the mounted index maps an authorized path; otherwise state that live consumer/propagation state is unavailable and do not infer it.
+
+The shared execution protocol is authored once in `control-surface/protocol/` and resolved into local `AGENTS.md` carriers. Do not recommend manually authored copies across consumers, a repo-local paraphrase of a shared rule, or private-memory retention as a substitute for owner placement and propagation.
+
 ## Connector boundary — read / verify only
 
 Connectors are read / verify instruments on an advisor surface — **capability is not authorization.** A connector may expose write-scoped actions (a GitHub connector: commit · create / update file · branch · open / close / merge PR · comment · enable auto-merge; a Dropbox connector: file save / move / routing). **None of those actions are authorized here.**

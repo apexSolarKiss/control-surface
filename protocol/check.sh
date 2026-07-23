@@ -13,6 +13,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SHARED="$ROOT/protocol/AGENTS.shared.md"; MANIFEST="$ROOT/protocol/manifest.json"; SCHEMA="$ROOT/protocol/manifest.schema.json"
 ROOTAGENTS="$ROOT/AGENTS.md"; TEMPLATE="$ROOT/templates/AGENTS.template.md"; FRAGMENT="$ROOT/protocol/fragments/standing-upstream-conformance-grant.md"
 PROFDIR="$ROOT/protocol/profiles"; OVERLAY="$ROOT/templates/overlays/architecture-uncertain-rules.template.md"
+IDXTEMPLATE="$ROOT/templates/_INDEX-project.template.md"
 # immutable activated_by grammar (ERE): '#<PR> / <hex>[ (note)]' | '<hex>[ (note)]' | 'legacy: <text>'
 PROV_RE='^(#[0-9]+ / [0-9a-f]{7,40}( \(.*\))?|[0-9a-f]{7,40}( \(.*\))?|legacy: .+)$'
 fail=0
@@ -89,7 +90,7 @@ manifest_class(){ jq -r --arg c "$1" '.consumers[$c].operating_surface_class // 
 
 assert_local(){
   require_deps
-  for f in "$SHARED" "$MANIFEST" "$SCHEMA" "$ROOTAGENTS" "$TEMPLATE" "$FRAGMENT" "$OVERLAY" "$PROFDIR/core-ecology.md" "$PROFDIR/architecture-uncertain.md"; do
+  for f in "$SHARED" "$MANIFEST" "$SCHEMA" "$ROOTAGENTS" "$TEMPLATE" "$FRAGMENT" "$OVERLAY" "$IDXTEMPLATE" "$PROFDIR/core-ecology.md" "$PROFDIR/architecture-uncertain.md"; do
     [ -f "$f" ] || FAIL "missing owner file: ${f#$ROOT/}"; done
   [ "$fail" -eq 0 ] || return
   # 1 root shared-block parity
@@ -135,6 +136,14 @@ assert_local(){
   grep -q "One writer at a time per branch" "$TEMPLATE" && FAIL "template inlines shared payload" || OKAY "template not inlining payload"
   # 8b template profiles surface must not carry an active (installed-looking) profile marker
   extract "<!-- BEGIN profiles -->" "<!-- END profiles -->" < "$TEMPLATE" | grep -qE "^[[:space:]]*<!-- BEGIN profile: [a-z0-9-]+ -->" && FAIL "template profiles surface carries an installed-looking profile marker" || OKAY "template profiles surface is placeholder-only"
+  # 8c advisor source-index template routes to the shared-protocol architecture (future-project inheritance:
+  #    a new project can receive the corrected advisor instructions and still mount an index with no route to
+  #    the files those instructions require)
+  grep -q "^### Shared execution-protocol architecture" "$IDXTEMPLATE" && OKAY "index template carries the shared-protocol architecture section" || FAIL "index template missing '### Shared execution-protocol architecture'"
+  local idxmiss="" loc
+  for loc in "protocol/README.md" "protocol/AGENTS.shared.md" "protocol/manifest.json" "prompts/cross-repo-propagation-wave.md" "control-surface_protocol-consumer-ledger.md"; do
+    grep -qF "$loc" "$IDXTEMPLATE" || idxmiss="$idxmiss $loc"; done
+  [ -z "$idxmiss" ] && OKAY "index template maps every shared-protocol locator" || FAIL "index template missing locator(s):$idxmiss"
   # 9 root local delta carries exact BEGIN/END local-delta markers (same contract as consumer carriers)
   local nrb nre; nrb=$(grep -c "<!-- BEGIN local-delta -->" "$ROOTAGENTS"); nre=$(grep -c "<!-- END local-delta -->" "$ROOTAGENTS")
   { [ "$nrb" = "1" ] && [ "$nre" = "1" ]; } && OKAY "root local-delta markers exactly once" || FAIL "root local-delta markers not exactly once ($nrb/$nre)"

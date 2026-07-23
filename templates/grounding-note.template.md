@@ -14,7 +14,7 @@ The grounding note lives outside the repo by design. It carries repo-external co
 
 ## What Does NOT Belong In The Grounding Note
 
-- **Per-conversation state** — what the current Claude Code thread is doing, what was decided in yesterday's session, what the next prompt should be. That belongs in operator-side memory (Claude Code's MEMORY.md, task lists, current chat) — not in the grounding note.
+- **Per-conversation state** — what the current Claude Code thread is doing, what was decided in yesterday's session, what the next prompt should be. That belongs in ephemeral task state (current chat, task lists) — not in the grounding note, and **not** in private agent memory, which is a persistent cache rather than a tracking surface.
 - **In-flight task tracking** — branch names, PR numbers, what's blocked on whom. That lives in the repo, in chat, or in a task list.
 - **Recent activity logs** — what landed last week, which PRs merged. That lives in `git log` and PR history.
 - **Workflow rules** — how the executor should branch, commit, verify, scope. That lives in repo-local `AGENTS.md`.
@@ -101,7 +101,8 @@ Do not refresh for routine repo chronology, recent PR activity, or session-speci
 - **Repo:** `[repo URL or path]` — project state, artifacts, decisions, current navigation
 - **`AGENTS.md`** (in-repo) — workflow rules
 - **This grounding note** (external) — repo-external context
-- **Operator-side memory** — ephemeral session state (Claude Code's MEMORY.md, ChatGPT thread history, task lists); not durable, not promoted into the above
+- **Per-conversation / task state** — ephemeral (current chat, ChatGPT thread history, task lists); not durable, not promoted into the above
+- **Private agent memory** (e.g. Claude Code's auto memory) — persistent but non-authoritative: a read-mostly operator cache, never a durable owner, not the home for in-flight tracking; every mutation is governed by `AGENTS.md` §Learning Disposition and §Private-Memory Write Gate
 
 ## Inbound Handoff TBI Marker
 
@@ -118,8 +119,8 @@ This project follows `method-ASK/docs/source-of-intent.md` §Inbound handoff TBI
 
 ## Out Of Scope For This Note
 
-- per-conversation state (lives in operator-side memory)
-- in-flight task tracking (lives in repo / chat / task list)
+- per-conversation state (lives in ephemeral task state — current chat, task list)
+- in-flight task tracking (lives in repo / chat / task list, never in private agent memory)
 - recent activity logs (lives in `git log` and PR history)
 - workflow rules (lives in repo-local `AGENTS.md`)
 - project state (lives in the repo)

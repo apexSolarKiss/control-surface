@@ -36,7 +36,7 @@ git status --short
 After verification:
 
 1. `README.md`
-2. `AGENTS.md` (and `CLAUDE.md` if present, which usually points to `AGENTS.md`)
+2. `AGENTS.md`, plus `CLAUDE.md` — the required adapter for a Claude-operated repo, whose `@AGENTS.md` import is what actually delivers the resolved carrier into context (if it is missing or does not import, say so rather than proceeding on prose alone)
 3. `docs/architecture.md` if present
 4. `docs/index.md` if present
 5. The latest milestone or finding artifact relevant to the task
@@ -52,7 +52,8 @@ The full rule set lives in repo-local `AGENTS.md`. The Model-B-relevant essentia
 - **Default carry-through.** When ASK approves the scoped diff and there is no explicit batching reason, carry through commit → push → PR → merge → branch cleanup. Do not stop at "PR created" and ask whether to merge.
 - **Single-writer per branch.** Treat repo and remote as the audit trail when sessions disagree. Stop on suspected concurrent mutation.
 - **Scope discipline.** Smallest honest unit for implementation; largest tractable structural question for architecture work. Don't bundle unrelated work.
-- **Repo + grounding note are the durable sources.** Per-conversation memory (Claude Code's MEMORY.md, task lists) is operator-side ephemeral state. Do not promote it into the durable sources.
+- **Repo + grounding note are the durable sources.** Per-conversation state (this thread, task lists, in-flight context) is ephemeral. Do not promote it into the durable sources.
+- **Claude Code auto memory (`MEMORY.md` and its topic files) is persistent, not ephemeral** — a non-authoritative, read-mostly operator cache, never a durable owner. Route every reusable learning to its visible owner first, and treat any memory write as a separate approval unit per `AGENTS.md` §Learning Disposition and §Private-Memory Write Gate.
 
 ## When To Stop And Ask
 

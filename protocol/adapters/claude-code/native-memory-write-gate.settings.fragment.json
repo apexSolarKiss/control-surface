@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "disableBypassPermissionsMode": "disable",
+    "ask": [
+      "Edit(~/.claude/projects/**/memory/**)",
+      "Edit(//**/.claude/agent-memory/**)",
+      "Edit(//**/.claude/agent-memory-local/**)",
+      "Edit(~/.claude/CLAUDE.md)",
+      "Edit(~/.claude/rules/**)",
+      "Edit(//**/CLAUDE.local.md)",
+      "Edit(//**/.claude/settings.json)",
+      "Edit(//**/.claude/settings.local.json)"
+    ]
+  }
+}
