@@ -81,13 +81,21 @@ This gate governs **private persistent agent surfaces**: auto-memory stores and 
 
 A private persistent instruction imported from any other path is governed by this gate as well. It must not be used unless its exact path is declared, a matching `Edit(...)` ask rule is installed, and the active-session receipt classifies it as covered. A private import outside the standard guarded paths is a stop condition.
 
-Any governed private persistent mutation requires all of:
+Any governed private persistent creation or edit requires all of:
 
 1. the learning has been classified under §Learning Disposition and its visible owner has been named;
 2. a stated reason the visible owner is insufficient for the residual payload;
-3. the exact target and exact proposed mutation, shown before execution: full payload for creation; exact diff or replacement payload for an edit; and, for deletion, the exact path plus a pre-deletion size/hash receipt;
+3. the exact target and exact proposed mutation, shown before execution: full payload for creation; exact diff or replacement payload for an edit;
 4. explicit ASK authorization of that exact target and exact mutation;
 5. a recorded aging or review trigger.
+
+Any governed private persistent deletion requires all of:
+
+1. the artifact's current role and disposition have been classified, including its visible owner or a no-retention result;
+2. a stated reason deletion is warranted — for example unauthorized creation, supersession, owner absorption, or expiry of its review trigger;
+3. the exact path plus a pre-deletion size/hash receipt and, when restoring a prior state, the exact baseline bytes or diff;
+4. explicit ASK authorization of that exact deletion;
+5. a post-operation absence receipt, or exact restored-byte/hash verification when deletion is one step in a rollback.
 
 Approval of a plan, a diff, a PR, a merge, or a task completion is **not** authorization of that private persistent mutation. Neither is advisor agreement.
 
@@ -364,11 +372,11 @@ When the work surfaces a potentially reusable learning, include a one-line learn
 ### Operator-Side Voice Scan
 <!-- rule-id: operator-side-voice-scan -->
 
-Before presenting an exact scoped diff for approval, scan added prose for voice / surface-boundary risk according to the project's operator-side voice discipline memory and grounding-note voice guidance.
+Before presenting an exact scoped diff for approval, scan added prose for voice / surface-boundary risk against the project's named operator-side voice owner(s) and grounding-note voice guidance. Do not assume a private-memory artifact exists or owns those constraints. Any private-memory contribution must already have survived §Learning Disposition and remains subject to §Private-Memory Write Gate.
 
 Flag any matches or concerns honestly in the structured change summary. Do not auto-sanitize: some apparent matches may be legitimate domain vocabulary that the project needs to name directly.
 
-The scan rule may live in `AGENTS.md`; the token list, translation table, and protected domain-vocabulary list do not. Those specifics are operator-side context and must not be copied into repo-local artifacts.
+The scan rule may live in `AGENTS.md`; the token list, translation table, and protected domain-vocabulary list do not. Route those specifics to the narrowest authorized operator-side owner suited to their wall and cadence; do not copy them into repo-local artifacts. Private memory may retain only ASK-authorized machine-local, wall-bound, or deliberately non-operative residue under the two gates.
 
 ### Default: Hold or Carry Through Per Adversarial-Collaboration Preconditions
 <!-- rule-id: default-hold-or-carry-through -->
