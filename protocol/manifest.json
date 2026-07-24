@@ -1109,7 +1109,7 @@
    ],
    "status": "held",
    "amended_by": [],
-   "note": "HELD \u2014 concerns PROMOTION of the instrument-scoped method bundle, NOT ownership/maintenance of the already-active verification-claims rule. C1 (verification-execution-completion) is a separate candidate and is NOT suppressed by this hold.",
+   "note": "HELD \u2014 concerns PROMOTION of the instrument-scoped method bundle, NOT ownership/maintenance of the already-active verification-claims rule. C1 (verification-execution-completion) is a separate active rule and is NOT suppressed by this hold.",
    "explicit_exclusions": [],
    "proposed_by": "held",
    "activated_by": null
