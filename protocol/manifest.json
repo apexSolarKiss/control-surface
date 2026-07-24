@@ -606,11 +606,11 @@
    "source_anchor": "### Advisor-Readable Review Objects",
    "failure_mode": "exact-byte advisor review forced through manual operator upload because the review object stayed in unreadable session-local scratch; a single review object truncated by a connector so the patch could not be reviewed completely; a review object overwritten in place after its hash was reported; a wall-bound or secret payload copied into shared scratch or a manual upload; or a proposal-only transport write inferred authority over the canonical, a snapshot, or a companion artifact",
    "active_holds": [],
-   "status": "candidate",
+   "status": "active",
    "amended_by": [],
    "explicit_exclusions": [],
-   "proposed_by": "review-transport-and-subagent-topology (batch proposal label; not a PR forecast)",
-   "activated_by": null
+   "proposed_by": null,
+   "activated_by": "#168 / 256c9253e10f0cd32b30656b2a7f84615ca0b6ca"
   },
   {
    "rule_id": "structured-change-summary",
