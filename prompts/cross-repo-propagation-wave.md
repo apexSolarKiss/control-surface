@@ -38,6 +38,20 @@ GREEN / AMBER / RED / HANDOFF recommendation
 
 The census is **measurement, not authority.** A finding that conflicts with `origin/main`, a live `VERSION.md`, the owner bytes, or the consumer ledger is a prompt to re-check. A failed lookup is `LOOKUP-FAILED`, never a false value.
 
+**Execution topology (required receipt).** Delegate census and deterministic GREEN staging to subagents whenever the active environment provides them. A serial consumer order governs the sequencing of review, push, merge, and closure — it does **not** authorize the parent to perform every consumer's census and staging directly (`serial-delegated` runs one exclusive subagent per consumer even when merges are serialized). The wave closure records:
+
+```text
+subagent_capability_check   exact capability/tool inspected at wave start + result
+subagents_available         yes | no
+execution_mode              parallel-subagents | serial-delegated | parent-direct-fallback | parent-direct-exception
+census_subagents            consumer -> agent (read-only; no worktree)
+staging_subagents           consumer -> agent + exclusive worktree/staging area
+fallback_reason             required for parent-direct-fallback
+ASK_exception               required for parent-direct-exception (exact relay text, when ASK directs parent-only execution)
+```
+
+`subagents_available` is a recorded finding, not a bare assertion. When subagents are available (`parallel-subagents` or `serial-delegated`), both the read-only `census_subagents` and the writable `staging_subagents` mappings are required, separately evidenced even when one worker performs both phases. Parent-direct execution splits by cause: `parent-direct-fallback` conforms only with the `subagent_capability_check` evidence **plus** a recorded subagent-unavailability reason (invalid when subagents were available); `parent-direct-exception` conforms only with an exact ASK relay directing parent-only execution for the named wave. "I chose serial order" is not a fallback reason.
+
 ---
 
 ## 2. Triage (parent coordinator, serial)
@@ -162,6 +176,7 @@ canonicalSubstanceMatched
 authorityBoundariesUnchanged
 reviewMergeReleaseRulesUnchanged
 unexpectedDiff
+executionTopology (subagent_capability_check · execution_mode · census agent · staging agent + exclusive area · fallback_reason/ASK_exception if parent-direct)
 recommendation (STOP | READY)
 ```
 
