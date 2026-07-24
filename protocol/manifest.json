@@ -588,6 +588,31 @@
    "activated_by": "#30 / 362d847"
   },
   {
+   "rule_id": "advisor-readable-review-objects",
+   "scope_class": "shared-core",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [
+    "control-surface",
+    "method-ASK",
+    "design-system-ASK",
+    "personal-context-system",
+    "ASK",
+    "asset-pipeline-ASK",
+    "urban-observatory"
+   ],
+   "carrier_mode": "resolved-local",
+   "profile": null,
+   "source_anchor": "### Advisor-Readable Review Objects",
+   "failure_mode": "exact-byte advisor review forced through manual operator upload because the review object stayed in unreadable session-local scratch; a single review object truncated by a connector so the patch could not be reviewed completely; a review object overwritten in place after its hash was reported; a wall-bound or secret payload copied into shared scratch or a manual upload; or a proposal-only transport write inferred authority over the canonical, a snapshot, or a companion artifact",
+   "active_holds": [],
+   "status": "candidate",
+   "amended_by": [],
+   "explicit_exclusions": [],
+   "proposed_by": "review-transport-and-subagent-topology (batch proposal label; not a PR forecast)",
+   "activated_by": null
+  },
+  {
    "rule_id": "structured-change-summary",
    "scope_class": "shared-core",
    "authority_owner": "control-surface",

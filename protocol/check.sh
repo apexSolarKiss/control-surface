@@ -14,6 +14,7 @@ SHARED="$ROOT/protocol/AGENTS.shared.md"; MANIFEST="$ROOT/protocol/manifest.json
 ROOTAGENTS="$ROOT/AGENTS.md"; TEMPLATE="$ROOT/templates/AGENTS.template.md"; FRAGMENT="$ROOT/protocol/fragments/standing-upstream-conformance-grant.md"
 PROFDIR="$ROOT/protocol/profiles"; OVERLAY="$ROOT/templates/overlays/architecture-uncertain-rules.template.md"
 IDXTEMPLATE="$ROOT/templates/_INDEX-project.template.md"
+APITEMPLATE="$ROOT/templates/advisor-project-instructions.template.md"; INSTDOC="$ROOT/docs/project-instantiation-workflow.md"
 # immutable activated_by grammar (ERE): '#<PR> / <hex>[ (note)]' | '<hex>[ (note)]' | 'legacy: <text>'
 PROV_RE='^(#[0-9]+ / [0-9a-f]{7,40}( \(.*\))?|[0-9a-f]{7,40}( \(.*\))?|legacy: .+)$'
 fail=0
@@ -148,6 +149,21 @@ assert_local(){
   local nrb nre; nrb=$(grep -c "<!-- BEGIN local-delta -->" "$ROOTAGENTS"); nre=$(grep -c "<!-- END local-delta -->" "$ROOTAGENTS")
   { [ "$nrb" = "1" ] && [ "$nre" = "1" ]; } && OKAY "root local-delta markers exactly once" || FAIL "root local-delta markers not exactly once ($nrb/$nre)"
   grep -q "## Control-Surface-Local" "$ROOTAGENTS" && OKAY "root local delta present" || FAIL "root local delta missing"
+  # 10 execution-topology disposition is documented (coordinator-only; both the local delta and the runbook name it)
+  local RUNBOOK="$ROOT/prompts/cross-repo-propagation-wave.md" topomiss="" tok
+  for tok in "parallel-subagents" "serial-delegated" "parent-direct-fallback" "parent-direct-exception" "execution_mode" "subagent_capability_check"; do
+    { grep -qF "$tok" "$ROOTAGENTS" && grep -qF "$tok" "$RUNBOOK"; } || topomiss="$topomiss $tok"; done
+  [ -z "$topomiss" ] && OKAY "execution-topology receipt documented in local delta + runbook" || FAIL "execution-topology token(s) missing from local delta and/or runbook:$topomiss"
+  # 11 advisor-retrieval-contract conformance — CLAUSE-SPECIFIC. A generic token that occurs in baseline read-path prose
+  #    (e.g. "fallback only") must not satisfy this: verify the exact-review paragraph in the advisor PI, the bundle role
+  #    in the _INDEX scratch row, and the exact-review route in the instantiation doc, each by exact phrase.
+  local advmiss="" ph
+  local apiphr=('**Exact-byte review objects.**' 'named `-PROPOSED` review object' 'review bundle' 'reported hash' 'manual upload never bypasses a wall')
+  for ph in "${apiphr[@]}"; do grep -qF -- "$ph" "$APITEMPLATE" || advmiss="$advmiss advisor-PI:{$ph}"; done
+  grep -qF -- '`-PROPOSED` review objects/bundles' "$IDXTEMPLATE" || advmiss="$advmiss _INDEX:{bundle-role}"
+  local instphr=('for exact-byte advisor review' 'mapped shared scratch' 'manual operator upload is fallback only')
+  for ph in "${instphr[@]}"; do grep -qF -- "$ph" "$INSTDOC" || advmiss="$advmiss instantiation:{$ph}"; done
+  [ -z "$advmiss" ] && OKAY "advisor-retrieval-contract clauses present (advisor-PI + _INDEX + instantiation)" || FAIL "advisor-retrieval-contract clause(s) missing:$advmiss"
 }
 
 validate_consumer(){

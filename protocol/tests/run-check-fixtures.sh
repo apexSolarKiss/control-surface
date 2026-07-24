@@ -20,7 +20,7 @@ python3 -c "import jsonschema" 2>/dev/null || { echo "MISSING DEP: python3 jsons
 
 # ---- build a REAL temporary owner repo from the live repo's owner files ----
 OWNER="$WORK/owner"; mkdir -p "$OWNER"
-( cd "$REPO" && cp -R protocol AGENTS.md templates docs "$OWNER/" 2>/dev/null )
+( cd "$REPO" && cp -R protocol AGENTS.md templates docs prompts "$OWNER/" 2>/dev/null )
 ( cd "$OWNER" && git init -q && git config user.email t@t && git config user.name t && git checkout -q -b main \
   && git add -A && git commit -qm "owner snapshot" )
 OWNER_PIN=$(git -C "$OWNER" rev-parse HEAD)
@@ -114,6 +114,11 @@ d=$(owner_copy L3b); for f in protocol/AGENTS.shared.md AGENTS.md; do perl -0pi 
 d=$(owner_copy L3c); for f in protocol/AGENTS.shared.md AGENTS.md; do perl -0pi -e 's/(## Scope Discipline\n)/## Undeclared New Section\n\nbody\n\n---\n\n$1/' "$d/$f"; done; record "NEG new mapped H2 with no manifest rule" 1 "unmapped headings" runlocal "$d"
 d=$(owner_copy L3d); perl -0pi -e 's/^### Shared execution-protocol architecture$/### Something Else/m' "$d/templates/_INDEX-project.template.md"; record "NEG index template loses the protocol section" 1 "index template missing '### Shared execution-protocol architecture'" runlocal "$d"
 d=$(owner_copy L3e); perl -0pi -e 's{apexSolarKiss/control-surface/prompts/cross-repo-propagation-wave\.md}{}' "$d/templates/_INDEX-project.template.md"; record "NEG index template loses a protocol locator" 1 "index template missing locator(s)" runlocal "$d"
+d=$(owner_copy L3f); perl -0pi -e 's/serial-delegated//g' "$d/prompts/cross-repo-propagation-wave.md"; record "NEG runbook loses an execution-topology token" 1 "execution-topology token(s) missing" runlocal "$d"
+d=$(owner_copy L3g); perl -0pi -e 's/subagent_capability_check//g' "$d/prompts/cross-repo-propagation-wave.md"; record "NEG runbook loses the subagent-capability-check token" 1 "execution-topology token(s) missing" runlocal "$d"
+d=$(owner_copy L3h); perl -0pi -e 's/reported hash//g' "$d/templates/advisor-project-instructions.template.md"; record "NEG advisor-PI loses the reported-hash clause" 1 "advisor-retrieval-contract clause(s) missing" runlocal "$d"
+d=$(owner_copy L3i); perl -0pi -e 's/manual upload never bypasses a wall//g' "$d/templates/advisor-project-instructions.template.md"; record "NEG advisor-PI loses the wall sentence" 1 "advisor-retrieval-contract clause(s) missing" runlocal "$d"
+d=$(owner_copy L3j); perl -0pi -e 's/parent-direct-exception//g' "$d/prompts/cross-repo-propagation-wave.md"; record "NEG runbook loses parent-direct-exception mode" 1 "execution-topology token(s) missing" runlocal "$d"
 d=$(owner_copy L4); perl -0pi -e "s/(BEGIN profile-body: architecture-uncertain -->)/\$1\nINJECT/" "$d/protocol/profiles/architecture-uncertain.md"; record "NEG profile/overlay drift" 1 "architecture-uncertain profile/overlay drift" runlocal "$d"
 d=$(owner_copy L5); perl -0pi -e "s/<!-- PROFILE BLOCKS ARE INSERTED HERE BY THE PROPAGATION WAVE -->/<!-- BEGIN profile: core-ecology -->/" "$d/templates/AGENTS.template.md"; record "NEG template carries installed-looking profile" 1 "installed-looking profile marker" runlocal "$d"
 d=$(owner_copy L6); perl -0pi -e "s/\\A/X\n/" "$d/protocol/fragments/standing-upstream-conformance-grant.md"; record "NEG grant fragment not body-only" 1 "fragment not body-only" runlocal "$d"

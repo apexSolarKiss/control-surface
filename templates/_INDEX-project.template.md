@@ -50,7 +50,7 @@ List only the paths this surface is authorized to read. Give each a **status cla
 | \<project> article / domain tracker | `S/<project>-EXTERNAL/<project>-articles.md` | root canonical *(example — delete if N/A)* |
 | working index / corpus-state | `S/<project>-EXTERNAL/scratch/…_<project>_<index>.md` | working index *(resolve-latest by glob, not a pinned date)* |
 | sources of intent (intake) | `S/<project>-EXTERNAL/sources of intent/` | candidate / ingestion |
-| scratch | `S/<project>-EXTERNAL/scratch/` | fetch **named** artifacts only (`_vN` snapshots, absorption/closure memos) |
+| scratch | `S/<project>-EXTERNAL/scratch/` | fetch **named** artifacts only (`-PROPOSED` review objects/bundles, `_vN` snapshots, absorption/closure memos) |
 
 Status classes: **root canonical** · **candidate / intake** · **working index** · **scratch / snapshot** · **reference-only** (available cross-domain context the project has *not* absorbed — consult if a task needs it; not this project's doctrine). The shared-protocol rows below additionally use **owner canonical** · **normative registry** · **coordinator canonical**.
 
