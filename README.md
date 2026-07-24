@@ -104,9 +104,9 @@ The workflow rules live in a shared protocol core ([`protocol/AGENTS.shared.md`]
 
 Three worked examples anchor the family:
 
-- [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — mature single-node working example and primary pressure surface from which the protocol repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
-- [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — second single-node working example. Newer project, currently in early bootstrap and prototype-planning phase. Pressures the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
-- [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) — retained legacy Model A reference (project currently dormant). Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against.
+- [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — single-node working example and primary pressure surface from which the protocol repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
+- [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — second single-node working example. Pressures the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
+- [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) — legacy Model A reference. Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against.
 
 ## Source-of-Truth Split
 
@@ -186,13 +186,13 @@ Templates in `templates/` are copyable starters. They are not live for this repo
 
 ### Examples
 
-- [`examples/asset-pipeline-ASK/notes.md`](examples/asset-pipeline-ASK/notes.md) — single-node working example (mature pressure surface)
-- [`examples/urban-observatory/notes.md`](examples/urban-observatory/notes.md) — single-node working example (newer; instantiation / source-of-intent recovery pressure surface)
-- [`examples/mazeASK/notes.md`](examples/mazeASK/notes.md) — legacy Model A reference (project currently dormant)
+- [`examples/asset-pipeline-ASK/notes.md`](examples/asset-pipeline-ASK/notes.md) — single-node working example (pressure surface)
+- [`examples/urban-observatory/notes.md`](examples/urban-observatory/notes.md) — single-node working example (instantiation / source-of-intent recovery pressure surface)
+- [`examples/mazeASK/notes.md`](examples/mazeASK/notes.md) — legacy Model A reference
 
 ### Legacy docs
 
-These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK), the legacy Model A reference (currently dormant).
+These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK), the legacy Model A reference.
 
 - [`control-surface.md`](control-surface.md) — Model-A-specific external control-surface artifact
 - [`docs/workflow-boundary.md`](docs/workflow-boundary.md) — earlier boundary categorization, supplanted by [`AGENTS.md`](AGENTS.md)'s Source-of-Truth Boundaries section
