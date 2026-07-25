@@ -6,7 +6,7 @@
 
 Adversarial collaboration — ASK is the source-of-intent and authorization apex, the relay across surfaces, and the final adjudicator. A GPT advisor supplies external challenge, reconstruction, and verification from outside the execution thread; Claude Code is the repo-attached execution surface.
 
-The project ran on the legacy split-execution model (Model A) earlier in its history. Model A was sunset on this project once the current advisor–executor topology proved out at scale (substantially less ceremony, faster iteration, direct ASK-to-Claude conversation in place of operator-as-go-between).
+The project ran on the legacy split-execution model (Model A) earlier in its history. Model A was sunset once direct ASK-to-Claude Code execution proved out at scale — substantially less ceremony, faster iteration, and direct ASK-to-Claude conversation in place of operator-as-go-between. AP later adopted the current advisor–executor topology, adding GPT as an external review surface without restoring the old prompt-compiler/executor chain.
 
 The repo's `AGENTS.md` is the most advanced live working example in the family and a pressure-source for the protocol repo's shared execution-protocol core, `protocol/AGENTS.shared.md` — the distributable body each consuming repo resolves verbatim into its own `AGENTS.md` between the shared markers.
 
@@ -30,7 +30,7 @@ These are not policy, but they show what the workflow has produced when applied 
 
 - The aging-rate principle as the load-bearing rationale for the source-of-truth split
 - Session topology / single-writer discipline as a real failure mode worth encoding as a rule
-- Why-the-rules-exist framing: most workflow rules exist to make the advisor/executor boundary productive — turning work that would otherwise stay inside one surface's head into objects a second surface can challenge before anything is hard to unwind
+- Why-the-rules-exist framing: workflow rules make reasoning inspectable across ASK, the executor, and any configured advisor while preserving single-writer mutation; the advisor/executor seam is the standard pressure surface, not the only valid path
 - The grounding note's narrower scope when ephemeral task state handles per-conversation tracking and private agent memory remains a persistent, non-authoritative cache rather than a tracking surface
 
 These all flow into the protocol repo's current `AGENTS.md`, `docs/architecture.md`, and the templates.

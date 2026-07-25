@@ -94,7 +94,7 @@ Do not refresh for routine repo chronology, recent PR activity, or session-speci
 
 ## Operating Model
 
-`[This project runs the adversarial-collaboration operating model — an ASK-apexed advisor–executor topology, with ASK as source-of-intent and authorization apex, relay across surfaces, and final adjudicator. Name who fills the non-writing advisor surface and who fills the repo-attached execution surface, plus any project-specific relay or approval convention. Note that direct execution — ASK driving the executor without an advisor pass — is a bounded proportional path within this model, not a separate one.]`
+`[This project runs the adversarial-collaboration operating model — an ASK-apexed advisor–executor topology, with ASK as source-of-intent and authorization apex, relay across surfaces, and final adjudicator. Name who fills the repo-attached execution surface, and either who occupies the non-writing advisor surface or that it is deliberately unconfigured, plus any project-specific relay or approval convention and which classes of work trigger advisor review. Direct execution — ASK driving the executor without an advisor pass — is a bounded task-level path, not necessarily the absence of a configured advisor surface.]`
 
 ## Sources Of Truth
 

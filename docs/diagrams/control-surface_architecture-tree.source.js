@@ -9,7 +9,8 @@
    bounded proportional path inside that same model. Retires the "single-node" label from the
    human + agent surfaces declaration and from the AP / UO pressure-surface notes, and restates
    mazeASK as a dormant historical origin case rather than a current working example. Model A
-   stays retired as a live option and frozen as historical provenance; the companion .html
+   stays retired as a live option and frozen as historical provenance, and its separately enumerated prompt /
+   example / artifact nodes collapse into one low-noise 'retired historical provenance' node; the companion .html
    legacy legend key is restated to match. Content-only; companion .html stamp re-synced.
    v5 (2026-07-21): ecology-state scrub to the landed shared-protocol architecture.
    control-surface is the OWNER of the shared execution-protocol CANONICAL at
@@ -107,15 +108,12 @@ window.TREE_D01 = {
             { label: 'ecology-critique-synthesis-prompt.md' },
             { label: 'ecology-critique-execution-prompt.md' },
           ]},
-          { label: 'control-surface-initial-prompt.md', note: 'Model A ChatGPT-side', status: 'legacy' },
-          { label: 'codex-initial-prompt.txt', note: 'Model A Codex-side', status: 'legacy' },
         ]},
         { label: 'examples/', children: [
           { label: 'asset-pipeline-ASK/notes.md', note: 'mature primary pressure surface' },
           { label: 'urban-observatory/notes.md', note: 'newer working example · source-of-intent recovery' },
-          { label: 'mazeASK/notes.md', note: 'dormant Model A origin case · not a current working example', status: 'legacy' },
         ]},
-        { label: 'control-surface.md', note: 'Model A external orchestration artifact', status: 'legacy' },
+        { label: 'retired historical provenance', note: 'Model-A artifacts retained in the repo / git history · not a current prompt, example, or operating path', status: 'legacy' },
         { label: 'docs/diagrams/', note: 'illustrative diagrams · not source truth', children: [
           { label: 'control-surface_architecture-tree.html', note: 'this diagram' },
         ]},
@@ -181,7 +179,6 @@ window.TREE_D01 = {
       children: [
         { label: 'asset-pipeline-ASK', note: 'mature primary pressure surface · separately operated · standing GREEN grant for bounded protocol / DS maintenance (substantive project ownership unchanged)' },
         { label: 'urban-observatory', note: 'newer source-of-intent recovery pressure surface · separately operated · standing GREEN grant for bounded protocol / DS maintenance' },
-        { label: 'mazeASK', note: 'dormant Model A origin case · not a current working example', status: 'legacy' },
       ],
     },
     {

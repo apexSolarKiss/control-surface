@@ -6,7 +6,7 @@
 
 Adversarial collaboration — ASK is the source-of-intent and authorization apex, and Claude Code is the repo-attached execution surface. GPT is used as advisor outside the execution thread.
 
-The project was instantiated under the current operating model rather than migrating from Model A.
+The project was instantiated after Model A had been retired rather than migrating from it; it now operates under the current adversarial-collaboration model.
 
 ## Lifecycle Stage
 

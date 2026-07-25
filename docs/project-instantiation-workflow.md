@@ -16,7 +16,7 @@ During instantiation:
 - use [`apexSolarKiss/control-surface`](../README.md) as the master reference repo
 - use [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) as the primary working example
 - refine project purpose, repo name, repo description, and initial structure
-- confirm the advisor surface — the operating model is not a per-project choice; what varies is whether the project configures an external advisor surface (GPT or Claude in chat form) or runs direct execution under ASK where a separate advisor pass would not materially reduce uncertainty
+- confirm the advisor configuration — the operating model is not a per-project choice. Record whether an external advisor surface is configured, who occupies it, and which classes of work trigger advisor review. Direct execution is a bounded task-level path and remains available even when an advisor surface is configured
 - decide which assets should remain external versus which should eventually live in the repo
 - decide where the external grounding note will live (path outside the repo)
 - determine whether the project has a **domain authority** in a role distinct from the architect/operator — a person or role that supplies or validates binding judgment within a named domain; if so, it adopts the domain-authority review profile at bootstrap (see [`docs/domain-authority-review-protocol.md`](domain-authority-review-protocol.md))

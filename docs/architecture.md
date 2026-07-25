@@ -12,15 +12,14 @@ Compactly: **multi-surface in reasoning, single-writer in mutation, single-apex 
 
 The methodology layer that articulates the method has graduated upstream to [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK). This repo carries the execution-protocol layer that operationalizes the method per session. [`control-surface`](../README.md) sits upstream of downstream project repos while remaining downstream of `method-ASK`.
 
-An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor, referred to historically as **Model A** — shaped this repo's early design. **Model A is retired as a live option**; its artifacts remain as frozen historical provenance. [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the dormant historical origin case, not a current working example; if resumed it migrates to the current model.
+An earlier split-execution model, historically **Model A**, shaped this repo's early design and is retired as a live option; its artifacts remain in the repo and git history as frozen provenance under retired-status headers.
 
 The workflow rules are agent-agnostic; the rules in `AGENTS.md` apply to whoever is executing.
 
-Three worked examples anchor the family:
+Two current working examples anchor the family:
 
 - [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — primary pressure surface (mature working example)
 - [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — second working example (instantiation / source-of-intent recovery pressure surface)
-- [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) — dormant historical origin case (retired Model A); historical reference only
 
 [`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK) is a distinct kind of surface — an externalized ASK visual / aesthetic-intent implementation. It is the family's upstream visual-inheritance reference surface: the public, repo-shaped carrier of *externalized* aesthetic intent that child artifacts inherit by reference. Source-of-intent proper remains operator-side; this repo carries the implementation surface. `urban-observatory`'s Example 2 prototype is a downstream inheritance proof. [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md) carries the method-altitude account. Not a project pressure surface in the same sense as the three worked examples above.
 
@@ -30,7 +29,7 @@ This repo sits in the middle of a three-tier structure:
 
 - **Methodology layer** — adversarial iteration / cross-phase swing discipline. Lives upstream in [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK); [`docs/method.md`](method.md) in this repo is a compact bridge pointing there.
 - **Execution-protocol layer** — this repo's core purpose. `AGENTS.md`, the shared protocol carrier (`protocol/AGENTS.shared.md`, resolved locally into each consumer's own `AGENTS.md`; `protocol/manifest.json`; `protocol/profiles/`; and the `protocol/check.sh` local validator), templates, review cadence, and branch discipline encode how work gets done within a session.
-- **Project repos** — applications of the method and protocol to concrete domains. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the primary pressure surface for rule evolution; [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second active working example, exercising the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces; [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the dormant historical origin case, retained as provenance rather than as a current example.
+- **Project repos** — applications of the method and protocol to concrete domains. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the primary pressure surface for rule evolution; [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second active working example, exercising the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces;
 
 Alongside the project repos, [`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK) is the family's upstream visual-inheritance reference surface — an externalized ASK visual / aesthetic-intent implementation, not a project pressure surface. Child surfaces inherit Tier 1 + Tier 2 by reference and resolve Tier 3 (instance identity) locally by source-of-intent + brand-distance; ASK-the-entity is the one surface that uses ASK's own Tier 3 (it does not inherit ASK's Tier 3 to downstream surfaces). `urban-observatory` carries a downstream inheritance proof. The method-altitude account lives in [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md).
 
@@ -88,7 +87,7 @@ The single-writer-per-branch rule encoded in `AGENTS.md` handles this. Operators
 
 ## Why The Rules Exist
 
-Most of the rules in `AGENTS.md` exist to make the advisor/executor boundary productive. They turn work that would otherwise stay inside one surface's head into objects a second surface can challenge before anything is hard to unwind:
+Most rules make reasoning inspectable across ASK, the executor, and any configured advisor while preserving one write authority. In the standard paired path they make the advisor/executor boundary productive; in direct execution they give ASK the same reviewable objects before mutation:
 
 - **Plan-Before-Execute** makes the executor's reasoning inspectable *before* it becomes a diff. It is what an advisor — or ASK — can challenge on scope, assumptions, non-actions, and intended terminal state.
 - **Structured Change Summary** and **exact-scoped-diff approval** are the review objects themselves: what actually crosses the boundary, in a form precise enough to disagree with.
@@ -107,6 +106,5 @@ This repo is intentionally small:
 - a small downstream template set (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`) — starters adopted alongside, not instead of, the locally resolved shared protocol
 - one agent-agnostic instantiation prompt
 - a minimal example set
-- a frozen legacy reference set recording the retired Model-A generation (provenance only; not offered to any project)
 
 Beyond the bounded `protocol/` resolution-and-validation layer — a distributable shared execution-protocol core resolved locally into each consumer's own `AGENTS.md`, a normative manifest, downstream profiles, an opt-in standing-grant fragment, and `check.sh` (a deterministic validator run locally, by hand) — it does not include automation, sync tooling, CI, generators, or a larger framework system. `check.sh` is a local validator, not continuous integration; the `protocol/` layer resolves and checks existing rules, it does not generate artifacts or constitute a product build framework.

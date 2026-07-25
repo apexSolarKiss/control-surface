@@ -101,23 +101,18 @@ ASK projects run an **adversarial-collaboration operating model** — an ASK-ape
 
 In the current stack a GPT advisor fills the advisor role and Claude Code fills the execution role. Model identity is operational, not architectural.
 
-The friction at the advisor/executor boundary is deliberate: independent challenge is how hallucination, confabulation, and drift get caught before they land. Named canonicals and exact repo state arbitrate factual disagreement; ASK adjudicates source-of-intent and authorization questions. Much of what this protocol requires — the plan, the structured change summary, the exact scoped diff, the pushed PR — exists so that boundary has something precise to work on.
+The friction at the advisor/executor boundary is deliberate: differently situated adversarial challenge helps catch hallucination, confabulation, and drift before they land. The surfaces are correlated, not independent; named canonicals and exact repo state arbitrate factual disagreement, while ASK adjudicates source-of-intent and authorization questions. Much of what this protocol requires — the plan, the structured change summary, the exact scoped diff, the pushed PR — exists so that boundary has something precise to work on.
 
 **Direct execution** is the bounded variant: ASK drives the executor without an advisor pass where a separate pass would not materially reduce uncertainty. It is a proportional path within the same model, not a separate model.
 
 In short: **multi-surface in reasoning, single-writer in mutation, single-apex in authority.**
 
-An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor, referred to historically as **Model A** — shaped this repo's early design. **Model A is retired as a live option.** Its artifacts ([`control-surface.md`](control-surface.md) and the Model-A prompts) remain in the repo as frozen historical provenance; they are not offered for new or existing work.
-
-[`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the dormant historical origin case — the concrete instance the boundary model was first sketched against. It is not a current working example; if it is ever resumed it migrates to the current model.
-
 The workflow rules live in a shared protocol core ([`protocol/AGENTS.shared.md`](protocol/AGENTS.shared.md)) resolved locally into each repo's own `AGENTS.md`, plus repo-local `AGENTS.md` rules — all written agent-agnostically, so they apply to whoever is executing.
 
-Three worked examples anchor the family:
+Two current working examples anchor the family:
 
 - [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — primary pressure surface from which the protocol repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end under this model; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
 - [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — second active working example. Pressures the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
-- [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) — dormant historical origin case. Ran on the retired ChatGPT/Codex split; the original concrete instance the boundary model was sketched against. Not a current example.
 
 ## Source-of-Truth Split
 
@@ -199,18 +194,6 @@ Templates in `templates/` are copyable starters. They are not live for this repo
 
 - [`examples/asset-pipeline-ASK/notes.md`](examples/asset-pipeline-ASK/notes.md) — primary pressure surface (mature working example)
 - [`examples/urban-observatory/notes.md`](examples/urban-observatory/notes.md) — second working example (instantiation / source-of-intent recovery pressure surface)
-- [`examples/mazeASK/notes.md`](examples/mazeASK/notes.md) — dormant historical origin case (retired Model A); historical reference only
-
-### Legacy docs
-
-These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. That model is retired. The files below are kept as **frozen historical provenance** — they record what was, and are not offered as a path for any current or future project.
-
-- [`control-surface.md`](control-surface.md) — the retired Model-A external control-surface artifact
-- [`docs/workflow-boundary.md`](docs/workflow-boundary.md) — earlier boundary categorization, supplanted by [`AGENTS.md`](AGENTS.md)'s Source-of-Truth Boundaries section
-- [`prompts/control-surface-initial-prompt.md`](prompts/control-surface-initial-prompt.md) — retired Model-A ChatGPT-side initial prompt
-- [`prompts/codex-initial-prompt.txt`](prompts/codex-initial-prompt.txt) — retired Model-A Codex-side initial prompt
-
-Each legacy doc carries a deprecation header naming what supersedes it for current work.
 
 ## Which File Do I Use?
 
@@ -224,7 +207,6 @@ Each legacy doc carries a deprecation header naming what supersedes it for curre
 | run a review by a domain authority in a role distinct from the architect/operator | [`docs/domain-authority-review-protocol.md`](docs/domain-authority-review-protocol.md) + [`templates/domain-authority-review-profile.template.md`](templates/domain-authority-review-profile.template.md) |
 | create repo-local starter docs for a downstream repo | [`templates/AGENTS.template.md`](templates/AGENTS.template.md), [`templates/grounding-note.template.md`](templates/grounding-note.template.md), [`templates/architecture.template.md`](templates/architecture.template.md), [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) |
 | see how the structure mapped onto a real ASK project | [`examples/`](examples/) |
-| understand the retired Model-A operating doc (historical) | [`control-surface.md`](control-surface.md) (frozen provenance) |
 
 ## Minimal Adaptation Checklist
 
@@ -251,6 +233,10 @@ The control-surface design is anchored to a short execution-protocol subset of t
 - [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration) — the within-session multi-mind layer; the pattern behind this repo's two review windows and per-PR cadence.
 - [*From Conversation to Control Surface*](https://atomicspacekitten.substack.com/p/from-conversation-to-control-surface) — project inception from messy AI-mediated exploration; the recovered intent → validated constraint → repo sequence.
 - [*Three Agents Got Into an Argument // The Repo Won*](https://atomicspacekitten.substack.com/p/three-agents-got-into-an-argument) — the repo-as-arbiter operating rule: artifact-owning surface gets the final read on current file contents.
+
+## Historical provenance
+
+Retired Model-A artifacts — the external control-surface document, the ChatGPT-side and Codex-side startup prompts, and the mazeASK worked example — remain in the repository and its git history as frozen provenance under retired-status headers; they are not a current prompt, example, or operating path.
 
 ## License
 
