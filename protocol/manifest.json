@@ -195,7 +195,8 @@
    "active_holds": [],
    "status": "active",
    "amended_by": [
-    "#154 / 2f38427 (operating-surface boundary; 'unconsumed ingestion queue')"
+    "#154 / 2f38427 (operating-surface boundary; 'unconsumed ingestion queue')",
+    "#169 / b4a3793 (pre-ingestion -SUPERSEDED disposition; immutable-body/current-disposition invariant)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -223,7 +224,8 @@
    "status": "active",
    "amended_by": [
     "#145 / 9c8e043",
-    "#147 / db91c0b"
+    "#147 / db91c0b",
+    "#169 / b4a3793 (cross-axis line acknowledges the -SUPERSEDED pre-ingestion exit)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
