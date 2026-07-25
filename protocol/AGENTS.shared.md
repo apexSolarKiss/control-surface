@@ -474,7 +474,7 @@ Before executing a meaningful repo change, state the plan: what files will chang
 
 This applies whether the executor is a separate process (Codex) or the same agent doing the planning (Claude Code).
 
-The plan-before-execute step preserves the explicit reasoning surface that prompt-compilation provides when execution is split across a prompt-compiler and an executor. In a single-node model, plan-before-execute is the rule that restores it. Do not collapse plan and execution into a single opaque step.
+The plan creates an inspectable reasoning object before mutation. It lets ASK, the executor, and any configured advisor challenge scope, assumptions, non-actions, and the intended terminal state before work becomes harder to unwind. This applies whether planning and execution occur in one session or across multiple surfaces. Do not collapse plan and execution into one opaque step.
 
 Any proposed private persistent mutation must be named as a separate planned operation with its exact target, exact proposed mutation, visible-owner or no-retention disposition, and terminal state.
 
