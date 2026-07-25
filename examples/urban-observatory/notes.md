@@ -1,6 +1,6 @@
 # urban-observatory Notes
 
-[`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second working example for the control-surface workflow. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature working example and primary pressure surface for rule evolution; [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the dormant historical origin case, retained as provenance rather than as a current example.
+[`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second working example for the control-surface workflow. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature working example and primary pressure surface for rule evolution.
 
 ## Operating Model
 

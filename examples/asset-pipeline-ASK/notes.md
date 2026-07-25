@@ -1,6 +1,6 @@
 # asset-pipeline-ASK Notes
 
-[`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature working example for the control-surface workflow and the primary pressure surface for rule evolution. [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the dormant historical origin case, retained as provenance rather than as a current example.
+[`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature working example for the control-surface workflow and the primary pressure surface for rule evolution.
 
 ## Operating Model
 
