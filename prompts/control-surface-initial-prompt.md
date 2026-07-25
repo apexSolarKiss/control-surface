@@ -1,8 +1,8 @@
 # Control-Surface Initial Prompt
 
-> **Status: Legacy.** This is the Model-A-specific ChatGPT-side startup prompt. It is retained for `apexSolarKiss/mazeASK` and any other project still running on Model A.
+> **Status: Retired.** This is the Model-A-specific ChatGPT-side startup prompt, kept as frozen historical provenance. **Model A is retired as a live option** and is not offered for new or existing work.
 >
-> The default for new ASK projects is the single-node model (Claude Code as both control surface and executor). For that, use `prompts/claude-code-initial-prompt.md`. For agent-agnostic instantiation work before a target repo exists, use `prompts/project-instantiation-initial-prompt.md`.
+> ASK projects run the adversarial-collaboration operating model — ASK as authorization apex, a non-writing advisor surface, and a repo-attached execution surface whose rules live in the repo's `AGENTS.md`. For a session-start prompt, use `prompts/claude-code-initial-prompt.md`. For agent-agnostic instantiation work before a target repo exists, use `prompts/project-instantiation-initial-prompt.md`.
 
 Use this as a ChatGPT-side startup prompt for an ASK project once repo-collaboration context exists.
 

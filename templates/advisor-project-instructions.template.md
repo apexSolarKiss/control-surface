@@ -46,7 +46,7 @@ You are NOT a substitute for:
 
 3. **Execution-protocol context** — `apexSolarKiss/control-surface`. Relevant concepts:
    - repo truth vs grounding-note externality
-   - single-node execution
+   - the adversarial-collaboration operating model — an ASK-apexed advisor–executor topology (ASK apex; non-writing advisor surface; repo-attached execution surface)
    - advisor as exterior surface
    - source-of-intent guard / nudge ladder (minimal / structured / externality-decision)
    - fresh-context critique as anti-drift, not next-step finder

@@ -2,7 +2,7 @@
 
 Use this as a starter for the **external** grounding note that travels with an ASK project. Replace bracketed `[...]` placeholders with project-specific values.
 
-The grounding note lives outside the repo by design. It carries repo-external context that operators (Claude Code, Codex, ChatGPT, future-you) need before they can usefully act on the repo's project state. It is the slow-changing companion to the repo's fast-changing artifacts.
+The grounding note lives outside the repo by design. It carries repo-external context that operators (the advisor surface, the execution surface, future-you) need before they can usefully act on the repo's project state. It is the slow-changing companion to the repo's fast-changing artifacts.
 
 ## What Belongs In The Grounding Note
 
@@ -64,7 +64,7 @@ Refresh the grounding note only when:
 - a philosophical reframing has occurred
 - audience or positioning has shifted
 - foundational premises have changed
-- the operating model has changed (e.g. legacy Model A → single-node, or similar)
+- the operating model has changed (e.g. a change in how the advisor and execution surfaces are configured, or in who occupies them)
 
 Do not refresh for routine repo chronology, recent PR activity, or session-specific context.
 
@@ -94,7 +94,7 @@ Do not refresh for routine repo chronology, recent PR activity, or session-speci
 
 ## Operating Model
 
-`[operating model: single-node (Claude Code as control surface and executor) — default for new ASK projects — or legacy Model A (ChatGPT/Codex split). If single-node, name the live operator and any external advisors. If Model A, note why the project still runs on the legacy model.]`
+`[This project runs the adversarial-collaboration operating model — an ASK-apexed advisor–executor topology, with ASK as source-of-intent and authorization apex, relay across surfaces, and final adjudicator. Name who fills the non-writing advisor surface and who fills the repo-attached execution surface, plus any project-specific relay or approval convention. Note that direct execution — ASK driving the executor without an advisor pass — is a bounded proportional path within this model, not a separate one.]`
 
 ## Sources Of Truth
 

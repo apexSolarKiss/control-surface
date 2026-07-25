@@ -2,7 +2,15 @@
    Source data for the control-surface architecture tree diagram.
    Renderable by diagrams-static-H-engine.js.
 
-   D01 // control-surface architecture tree // source-v5 // 2026-07-21
+   D01 // control-surface architecture tree // source-v6 // 2026-07-25
+   v6 (2026-07-25): operating-model current-truth reframe. The live model is the
+   adversarial-collaboration operating model — an ASK-apexed advisor–executor topology,
+   currently occupied by a GPT advisor + a Claude Code executor, with direct execution as a
+   bounded proportional path inside that same model. Retires the "single-node" label from the
+   human + agent surfaces declaration and from the AP / UO pressure-surface notes, and restates
+   mazeASK as a dormant historical origin case rather than a current working example. Model A
+   stays retired as a live option and frozen as historical provenance; the companion .html
+   legacy legend key is restated to match. Content-only; companion .html stamp re-synced.
    v5 (2026-07-21): ecology-state scrub to the landed shared-protocol architecture.
    control-surface is the OWNER of the shared execution-protocol CANONICAL at
    control-surface/protocol/ (landed Wave-1A). Corrects the stale renderer comment
@@ -103,9 +111,9 @@ window.TREE_D01 = {
           { label: 'codex-initial-prompt.txt', note: 'Model A Codex-side', status: 'legacy' },
         ]},
         { label: 'examples/', children: [
-          { label: 'asset-pipeline-ASK/notes.md', note: 'mature single-node pressure surface' },
-          { label: 'urban-observatory/notes.md', note: 'newer single-node · source-of-intent recovery' },
-          { label: 'mazeASK/notes.md', note: 'Model A working example', status: 'legacy' },
+          { label: 'asset-pipeline-ASK/notes.md', note: 'mature primary pressure surface' },
+          { label: 'urban-observatory/notes.md', note: 'newer working example · source-of-intent recovery' },
+          { label: 'mazeASK/notes.md', note: 'dormant Model A origin case · not a current working example', status: 'legacy' },
         ]},
         { label: 'control-surface.md', note: 'Model A external orchestration artifact', status: 'legacy' },
         { label: 'docs/diagrams/', note: 'illustrative diagrams · not source truth', children: [
@@ -148,8 +156,8 @@ window.TREE_D01 = {
           { label: 'source-of-intent principal', note: 'upstream normative authority' },
           { label: 'relay / mediation operator', note: 'adopts advisor output into operative direction' },
         ]},
-        { label: 'Claude Code', note: 'active control surface + executor · single-node' },
-        { label: 'advisor surface', note: 'GPT / Claude chat · outside execution thread · no repo-write authority' },
+        { label: 'Claude Code', note: 'execution surface of the ASK-apexed advisor–executor topology · repo-attached · single-writer-per-branch' },
+        { label: 'advisor surface', note: 'standard surface · GPT / Claude chat · external challenge + verification · outside execution thread · no repo-write authority' },
       ],
     },
     {
@@ -171,9 +179,9 @@ window.TREE_D01 = {
       kind: 'section', label: 'downstream project repos',
       tag: 'separately operated · own substantive absorption decisions · standing GREEN protocol / DS maintenance grants',
       children: [
-        { label: 'asset-pipeline-ASK', note: 'mature single-node primary pressure surface · separately operated · standing GREEN grant for bounded protocol / DS maintenance (substantive project ownership unchanged)' },
-        { label: 'urban-observatory', note: 'newer single-node · source-of-intent recovery pressure surface · separately operated · standing GREEN grant for bounded protocol / DS maintenance' },
-        { label: 'mazeASK', note: 'Model A working example', status: 'legacy' },
+        { label: 'asset-pipeline-ASK', note: 'mature primary pressure surface · separately operated · standing GREEN grant for bounded protocol / DS maintenance (substantive project ownership unchanged)' },
+        { label: 'urban-observatory', note: 'newer source-of-intent recovery pressure surface · separately operated · standing GREEN grant for bounded protocol / DS maintenance' },
+        { label: 'mazeASK', note: 'dormant Model A origin case · not a current working example', status: 'legacy' },
       ],
     },
     {

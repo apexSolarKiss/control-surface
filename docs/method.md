@@ -27,7 +27,7 @@ The methodology repo's `docs/method.md` is the primary articulation. Standalone 
 - [`docs/architecture.md`](architecture.md) — this repo's role-model architecture
 - [`docs/project-instantiation-workflow.md`](project-instantiation-workflow.md) — instantiation / bootstrap / operational phases
 - the architecture-uncertain rules overlay ([`templates/overlays/architecture-uncertain-rules.template.md`](../templates/overlays/architecture-uncertain-rules.template.md))
-- legacy Model A artifacts ([`control-surface.md`](../control-surface.md), legacy prompts)
+- the frozen legacy reference set recording the retired Model-A generation ([`control-surface.md`](../control-surface.md), the retired Model-A prompts) — provenance only, not offered to any project
 
 ## Why the split
 

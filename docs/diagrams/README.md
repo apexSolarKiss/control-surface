@@ -54,7 +54,7 @@ _dsa-tokens/                                    vendored Tier 1 + Tier 2 token m
 
 This repo-local diagram originated in the v9 operator-side `ecology-ASK` diagram package and was first absorbed here at `source-v2 // render-v9`.
 
-The current tuple is `source-v5 // render-v18` (2026-07-21). Source advances when the authored architecture changes; render advances only when the renderer realization changes.
+The current tuple is `source-v6 // render-v18` (2026-07-25). Source advances when the authored architecture changes; render advances only when the renderer realization changes.
 
 The operator-side package and historical render iterations remain in `ecology-ASK-EXTERNAL/scratch/` and are not repo truth.
 

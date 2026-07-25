@@ -2,7 +2,7 @@
 
 Use this when the target repo may not exist yet and the project purpose, repo name, description, or initial structure still need refinement.
 
-This prompt is agent-agnostic. It applies whether the operator runs the default single-node model (Claude Code as control surface and executor) or the legacy split-execution model (ChatGPT/Codex with Claude Code as advisor — referred to historically as Model A).
+This prompt is agent-agnostic. ASK projects run one operating model — adversarial collaboration: ASK as the source-of-intent and authorization apex, a non-writing advisor surface outside the execution thread, and a repo-attached execution surface working under `AGENTS.md`. What varies by project is which surfaces are occupied and by whom, not which model applies.
 
 ## Starting Point
 
@@ -10,14 +10,13 @@ Before proposing repo-local files or implementation work:
 
 1. Read whatever instantiation source pack exists for the project (Project source pack in ChatGPT, conversation context in Claude Code, or both).
 2. Inspect `apexSolarKiss/control-surface` as the master reference repo.
-3. Inspect `apexSolarKiss/asset-pipeline-ASK` as the single-node working example (the default model for new projects).
-4. Inspect `apexSolarKiss/mazeASK` as the legacy Model A working example (still active for that project).
-5. Confirm whether the target repo already exists or is still being defined.
-6. Confirm the operating model. Default to single-node unless the project has a specific reason to run on legacy Model A.
+3. Inspect `apexSolarKiss/asset-pipeline-ASK` as the mature working example (the most advanced live `AGENTS.md` in the family), and `apexSolarKiss/urban-observatory` as the second.
+4. Confirm whether the target repo already exists or is still being defined.
+5. Confirm which surfaces the project will run: the repo-attached execution surface, and whether an external advisor surface is configured. The operating model is not a project choice; surface occupancy is.
 
 ## Operator Role
 
-During the pre-repo phase, the operator is acting as both intent-clarifier and prompt-compiler.
+During the pre-repo phase, the operator is acting as both intent-clarifier and author of the initial instructions.
 
 Focus on:
 
@@ -35,7 +34,7 @@ Focus on:
 - Do not assume repo-local truth exists yet if the target repo has not been created.
 - Keep the distinction between instantiation, bootstrap, and operational phases explicit.
 - Use the control-surface protocol repo as the source for reusable workflow structure.
-- Use asset-pipeline-ASK as the single-node working example (default) and mazeASK as the legacy Model A working example. Neither is policy.
+- Use asset-pipeline-ASK as the mature working example and urban-observatory as the second. Neither is policy.
 - Keep the next step concrete and minimal.
 
 ## Learning Disposition at instantiation
@@ -69,7 +68,7 @@ That prompt should include:
 - proposed repo name
 - proposed repo description
 - initial repo structure
-- which operating model the project will use
+- which executor is attached as the repo's execution surface
 - which templates from `templates/` will be adopted
 - whether an external advisor surface is planned and, if so, **both advisor-surface artifacts**: the adapted `templates/advisor-project-instructions.template.md` installed once into the advisor Project's Instructions, and the source-index map `<project>-EXTERNAL/_INDEX-<project>.md` (from `templates/_INDEX-project.template.md`) mounted as the advisor Project's primary Source — the instructions point at the mounted index as the first read
 - where the external grounding note will live (path outside the repo)
@@ -80,9 +79,7 @@ That prompt should include:
 
 Once the repo exists, the operator transitions to the bootstrap phase. The relevant follow-on prompt is:
 
-- `prompts/claude-code-initial-prompt.md` — for the default single-node model (Claude Code as control surface and executor)
-- `prompts/control-surface-initial-prompt.md` — for legacy Model A (ChatGPT-side, retained for `mazeASK` and any other project still on Model A)
-- `prompts/codex-initial-prompt.txt` — for legacy Model A (Codex-side, retained for `mazeASK` and any other project still on Model A)
+- `prompts/claude-code-initial-prompt.md` — the session-start prompt for the repo-attached execution surface
 
 The bootstrap prompt assumes repo-local `AGENTS.md` (copied and adapted from `templates/AGENTS.template.md`, with the shared execution-protocol core resolved verbatim from `control-surface/protocol/AGENTS.shared.md` into the block between its BEGIN/END shared markers rather than re-authored) is now authoritative for execution rules.
 

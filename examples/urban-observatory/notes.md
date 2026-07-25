@@ -1,12 +1,12 @@
 # urban-observatory Notes
 
-[`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second single-node working example for the control-surface workflow. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature single-node working example and primary pressure surface for rule evolution; [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the legacy Model A working example, still active for that project.
+[`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second working example for the control-surface workflow. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature working example and primary pressure surface for rule evolution; [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the dormant historical origin case, retained as provenance rather than as a current example.
 
 ## Operating Model
 
-Single-node — Claude Code is both control surface and executor. GPT is used as advisor outside the execution thread.
+Adversarial collaboration — ASK is the source-of-intent and authorization apex, and Claude Code is the repo-attached execution surface. GPT is used as advisor outside the execution thread.
 
-The project was instantiated under the single-node default rather than migrating from Model A.
+The project was instantiated under the current operating model rather than migrating from Model A.
 
 ## Lifecycle Stage
 

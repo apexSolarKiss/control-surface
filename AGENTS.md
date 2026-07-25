@@ -581,11 +581,13 @@ These rules are specific to `control-surface`'s role as the execution-protocol o
 
 The shared §Required Reading defers the repo's architecture-doc read to this delta. Before meaningful work, also read:
 
-- `docs/architecture.md` — the repository map and the Model-A compensation rationale for the shared rules.
+- `docs/architecture.md` — the repository map and why the shared rules exist under the current operating model.
 
 ### Operating model
 
-The operating model is single-node: Claude Code is both control surface and executor. An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor (**Model A**) — shaped this repo's design and is retained as legacy reference (`apexSolarKiss/mazeASK` is the retained dormant Model-A example). The Model-A compensation rationale for the shared rules lives in `docs/architecture.md`.
+The operating model is **adversarial collaboration** — an ASK-apexed advisor–executor topology: ASK is the source-of-intent and authorization apex, the relay across surfaces, and the final adjudicator; a non-writing advisor surface supplies challenge, reconstruction, and verification from outside the execution thread; a repo-attached execution surface plans and performs authorized work under this file, single-writer-per-branch. Current occupants are a GPT advisor and Claude Code as executor; model identity is operational, not architectural. **Direct execution** — ASK driving the executor without an advisor pass where a separate pass would not materially reduce uncertainty — is a bounded variant within this model, not a separate model. Compactly: multi-surface in reasoning, single-writer in mutation, single-apex in authority.
+
+Model A — the earlier ChatGPT-as-prompt-compiler / Codex-as-executor split, with Claude Code as optional advisor — shaped this repo's design and is **retired as a live option**; its artifacts are frozen historical provenance and are not offered as a path for any project. The current-model rationale for the shared rules lives in `docs/architecture.md`.
 
 ### Session-Start narrowing
 
@@ -658,5 +660,5 @@ A rule that lives in this repo's local delta but is project-specific to control-
 
 #### Legacy Docs
 
-Legacy docs (Model-A-specific control-surface artifact, workflow-boundary doc, ChatGPT/Codex-specific prompts) are not refreshed. They are kept as historical reference for the operating model they documented.
+Legacy docs (the retired Model-A control-surface artifact, the workflow-boundary doc, the retired Model-A ChatGPT/Codex-side prompts) are not refreshed. They are frozen historical provenance for the retired operating model they documented, never a live path.
 <!-- END local-delta -->
