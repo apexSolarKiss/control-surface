@@ -791,7 +791,9 @@
    "failure_mode": "concurrent mutation / cross-repo branch-flip under a live second session",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": [
+    "#170 / 623c1f7"
+   ],
    "conformance_note": "AP-SWD-1 + DS runtime omission are named ledger conformance rows, not local nominations",
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -844,7 +846,9 @@
    "status": "active",
    "amended_by": [
     "#166 / 85e35e4",
-    "#166 / a2fa2bf"
+    "#166 / a2fa2bf",
+    "#170 / 637c933",
+    "#170 / 623c1f7"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
