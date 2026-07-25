@@ -2,7 +2,7 @@
 
 This doc explains the workflow before a target ASK repo exists, and how that upstream phase transitions into normal operational use.
 
-It is agent-agnostic. The default operating model for new ASK projects is single-node (Claude Code as control surface and executor). The legacy split-execution model (ChatGPT/Codex with Claude Code as advisor — historically referred to as Model A) is retained for projects already running on it.
+It is agent-agnostic. ASK projects run the **adversarial-collaboration operating model** — an ASK-apexed advisor–executor topology: ASK as the source-of-intent and authorization apex, a non-writing advisor surface, and a repo-attached execution surface (currently a GPT advisor and Claude Code as executor; model identity is operational, not architectural). **Direct execution** — ASK driving the executor without an advisor pass where a separate pass would not materially reduce uncertainty — is a bounded variant within that model, not a separate model. The earlier split-execution model (ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — historically **Model A**) is retired as a live option and is not offered to any project. See [`README.md`](../README.md) §Operating Model and [`docs/architecture.md`](architecture.md).
 
 ## Phases
 
@@ -14,10 +14,9 @@ During instantiation:
 
 - read whatever instantiation source pack exists (Project source pack in ChatGPT, conversation context in Claude Code, or both)
 - use [`apexSolarKiss/control-surface`](../README.md) as the master reference repo
-- use [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) as the single-node working example (default)
-- use [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) as the legacy Model A working example (still active for that project)
+- use [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) as the primary working example
 - refine project purpose, repo name, repo description, and initial structure
-- confirm the operating model — default to single-node unless the project has a specific reason to run on legacy Model A
+- confirm the advisor configuration — the operating model is not a per-project choice. Record whether an external advisor surface is configured, who occupies it, and which classes of work trigger advisor review. Direct execution is a bounded task-level path and remains available even when an advisor surface is configured
 - decide which assets should remain external versus which should eventually live in the repo
 - decide where the external grounding note will live (path outside the repo)
 - determine whether the project has a **domain authority** in a role distinct from the architect/operator — a person or role that supplies or validates binding judgment within a named domain; if so, it adopts the domain-authority review profile at bootstrap (see [`docs/domain-authority-review-protocol.md`](domain-authority-review-protocol.md))
@@ -41,10 +40,9 @@ During bootstrap:
 - identify the first repo-local entry points
 - run the post-bootstrap grounding-note trim pass per `templates/grounding-note.template.md` once the repo carries project truth — remove or relocate fast-aging material (repo-state chronology, planning-packet instructions, "future repo" language, bootstrap-stage task sequencing) that the pre-repo grounding note may have accumulated
 
-This is the phase where repo-local truth begins to exist. The transition prompt is:
+This is the phase where repo-local truth begins to exist. The transition prompt is `prompts/claude-code-initial-prompt.md` — executor-side bootstrap under the current operating model.
 
-- `prompts/claude-code-initial-prompt.md` for the default single-node model (Claude Code as control surface and executor)
-- `prompts/control-surface-initial-prompt.md` and `prompts/codex-initial-prompt.txt` for legacy Model A (retained for projects already running on it)
+The retired Model-A prompt pair (`prompts/control-surface-initial-prompt.md`, `prompts/codex-initial-prompt.txt`) remains in the repo as frozen historical provenance. It is not a bootstrap path.
 
 ### 3. Operational
 
@@ -88,4 +86,4 @@ It is a ready-to-send next prompt that can:
 
 - create or attach the target repo
 - copy and adapt the relevant templates
-- begin bootstrap using the agreed project purpose, structure, and operating model
+- begin bootstrap using the agreed project purpose, structure, and advisor-surface decision

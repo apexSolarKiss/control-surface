@@ -4,8 +4,7 @@
 
 Reusable control-surface workflow assets for ASK projects.
 
-**Current default:** single-node Claude Code as both control surface and executor.
-**Legacy:** Model A split execution is retained only for projects that explicitly need it.
+**Operating model:** adversarial collaboration — ASK as authorization apex and relay, a non-writing advisor surface, and a repo-attached execution surface. Currently a GPT advisor and Claude Code as executor.
 
 This repo contains both the live operating files for `control-surface` itself and reusable workflow artifacts for downstream ASK projects, including the upstream instantiation phase before a target repo exists.
 
@@ -88,25 +87,32 @@ To start a new ASK project from this protocol repo, beginning from zero:
 
 10. Once bootstrap begins, the new repo's `AGENTS.md` governs execution.
 
-Default operating model: single-node Claude Code as both control surface and executor. Legacy Model A prompts are retained only for projects that explicitly need that older split.
+New projects run the adversarial-collaboration operating model described below. The retired split-execution model is not an option for new projects.
 
 For deeper context on the three phases (Instantiation → Bootstrap → Operational), see [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md).
 
 ## Operating Model
 
-The active operating model for new ASK projects is single-node: **Claude Code as both control surface and executor**. An advisor in chat-based form — typically GPT or Claude — remains available outside the execution thread.
+ASK projects run an **adversarial-collaboration operating model** — an ASK-apexed advisor–executor topology:
 
-An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. The Model-A-specific external orchestration artifact ([`control-surface.md`](control-surface.md)) and Model-A-only prompts remain in the repo as legacy.
+- **ASK** is the source-of-intent and authorization apex, the relay across surfaces, and the final adjudicator.
+- The **advisor surface** supplies external challenge, reconstruction, and verification. It holds no repo-write authority and sits outside the execution thread.
+- The **execution surface** plans and performs authorized work in the repo under `AGENTS.md`, under single-writer-per-branch discipline.
 
-[`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is still operated on Model A and is the working example for any project that still needs it. New ASK projects should default to single-node.
+In the current stack a GPT advisor fills the advisor role and Claude Code fills the execution role. Model identity is operational, not architectural.
+
+The friction at the advisor/executor boundary is deliberate: differently situated adversarial challenge helps catch hallucination, confabulation, and drift before they land. The surfaces are correlated, not independent; named canonicals and exact repo state arbitrate factual disagreement, while ASK adjudicates source-of-intent and authorization questions. Much of what this protocol requires — the plan, the structured change summary, the exact scoped diff, the pushed PR — exists so that boundary has something precise to work on.
+
+**Direct execution** is the bounded variant: ASK drives the executor without an advisor pass where a separate pass would not materially reduce uncertainty. It is a proportional path within the same model, not a separate model.
+
+In short: **multi-surface in reasoning, single-writer in mutation, single-apex in authority.**
 
 The workflow rules live in a shared protocol core ([`protocol/AGENTS.shared.md`](protocol/AGENTS.shared.md)) resolved locally into each repo's own `AGENTS.md`, plus repo-local `AGENTS.md` rules — all written agent-agnostically, so they apply to whoever is executing.
 
-Three worked examples anchor the family:
+Two current working examples anchor the family:
 
-- [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — single-node working example and primary pressure surface from which the protocol repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end on Claude Code as control surface and executor; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
-- [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — second single-node working example. Pressures the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
-- [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) — legacy Model A reference. Operated on the ChatGPT/Codex split; the original concrete instance the boundary model was sketched against.
+- [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — primary pressure surface from which the protocol repo's rules are discovered, and source of upstream workflow-rule evolution. Operated end-to-end under this model; has produced the most advanced live `AGENTS.md` in the family. Template changes absorb only the portions that generalize beyond that repo's domain.
+- [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — second active working example. Pressures the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
 
 ## Source-of-Truth Split
 
@@ -175,7 +181,7 @@ Templates in `templates/` are copyable starters. They are not live for this repo
 ### Prompts
 
 - [`prompts/project-instantiation-initial-prompt.md`](prompts/project-instantiation-initial-prompt.md) — agent-agnostic startup prompt for the pre-repo instantiation phase
-- [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) — session-start prompt for attaching Claude Code to an existing single-node project repo
+- [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) — session-start prompt for attaching Claude Code to an existing ASK project repo as the execution surface
 - [`prompts/repo-nudge-prompt.md`](prompts/repo-nudge-prompt.md) — lightweight boundary nudge at local plateaus / absorptions / unclear next moves; single open-ended question anchored against the grounding note
 - [`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md) — open-ended structural critique against repo + grounding note (initial pass of the fresh-context critique cycle)
 - [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md) — advisor-role synthesis of two independent critiques into an advisory plan (synthesis pass)
@@ -186,20 +192,8 @@ Templates in `templates/` are copyable starters. They are not live for this repo
 
 ### Examples
 
-- [`examples/asset-pipeline-ASK/notes.md`](examples/asset-pipeline-ASK/notes.md) — single-node working example (pressure surface)
-- [`examples/urban-observatory/notes.md`](examples/urban-observatory/notes.md) — single-node working example (instantiation / source-of-intent recovery pressure surface)
-- [`examples/mazeASK/notes.md`](examples/mazeASK/notes.md) — legacy Model A reference
-
-### Legacy docs
-
-These were active when the canonical operating model was ASK→ChatGPT→Codex with Claude Code as advisory. They are retained for reference and for [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK), the legacy Model A reference.
-
-- [`control-surface.md`](control-surface.md) — Model-A-specific external control-surface artifact
-- [`docs/workflow-boundary.md`](docs/workflow-boundary.md) — earlier boundary categorization, supplanted by [`AGENTS.md`](AGENTS.md)'s Source-of-Truth Boundaries section
-- [`prompts/control-surface-initial-prompt.md`](prompts/control-surface-initial-prompt.md) — Model-A ChatGPT-side initial prompt
-- [`prompts/codex-initial-prompt.txt`](prompts/codex-initial-prompt.txt) — Model-A Codex-side initial prompt
-
-Each legacy doc carries a deprecation header naming what supersedes it for current single-node work.
+- [`examples/asset-pipeline-ASK/notes.md`](examples/asset-pipeline-ASK/notes.md) — primary pressure surface (mature working example)
+- [`examples/urban-observatory/notes.md`](examples/urban-observatory/notes.md) — second working example (instantiation / source-of-intent recovery pressure surface)
 
 ## Which File Do I Use?
 
@@ -208,19 +202,18 @@ Each legacy doc carries a deprecation header naming what supersedes it for curre
 | define execution rules inside the current repo | [`AGENTS.md`](AGENTS.md) |
 | understand this protocol repo's own architecture | [`docs/architecture.md`](docs/architecture.md) |
 | set up the workflow before the target repo exists | [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md) and [`prompts/project-instantiation-initial-prompt.md`](prompts/project-instantiation-initial-prompt.md) |
-| attach Claude Code to an existing single-node repo | [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) |
+| attach Claude Code to an existing ASK repo as the execution surface | [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) |
 | attach an external advisor surface (GPT or Claude in chat form) to an existing repo | [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) + [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md) (mount the index as the primary Source) |
 | run a review by a domain authority in a role distinct from the architect/operator | [`docs/domain-authority-review-protocol.md`](docs/domain-authority-review-protocol.md) + [`templates/domain-authority-review-profile.template.md`](templates/domain-authority-review-profile.template.md) |
 | create repo-local starter docs for a downstream repo | [`templates/AGENTS.template.md`](templates/AGENTS.template.md), [`templates/grounding-note.template.md`](templates/grounding-note.template.md), [`templates/architecture.template.md`](templates/architecture.template.md), [`templates/CLAUDE.template.md`](templates/CLAUDE.template.md) |
 | see how the structure mapped onto a real ASK project | [`examples/`](examples/) |
-| understand the previous canonical Model-A operating doc | [`control-surface.md`](control-surface.md) (legacy) |
 
 ## Minimal Adaptation Checklist
 
 For a new ASK project:
 
 - Identify the project purpose, repo name, and initial structure.
-- Default to the single-node operating model unless the project has a specific reason to run on legacy Model A.
+- The operating model is adversarial collaboration (ASK apex + advisor surface + execution surface). Model A is retired and is not an option.
 - Copy [`templates/AGENTS.template.md`](templates/AGENTS.template.md) into the new repo as `AGENTS.md` and adapt project-specific defaults.
 - Copy [`templates/grounding-note.template.md`](templates/grounding-note.template.md) into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads.
 - Optionally copy [`templates/architecture.template.md`](templates/architecture.template.md) into the new repo as `docs/architecture.md`.
@@ -236,10 +229,14 @@ For a new ASK project:
 The control-surface design is anchored to a short execution-protocol subset of the broader ASK workflow / method article line. The full chronological article index lives upstream in [`method-ASK/docs/articles.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/articles.md).
 
 - [*Beyond Vibe Coding: Constraining LLMs*](https://atomicspacekitten.substack.com/p/beyond-vibe-coding-constraining-llms) — the case for constrained LLMs and explicit rules; substrate for the discipline this repo operationalizes.
-- [*Lessons from the First Prototype Phase*](https://atomicspacekitten.substack.com/p/lessons-from-the-first-prototype) — the structural retrospective; calibrated compensations for what single-node collapses relative to the legacy split.
+- [*Lessons from the First Prototype Phase*](https://atomicspacekitten.substack.com/p/lessons-from-the-first-prototype) — the structural retrospective written when the split-execution model was retired; why the protocol's compensating rules exist.
 - [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration) — the within-session multi-mind layer; the pattern behind this repo's two review windows and per-PR cadence.
 - [*From Conversation to Control Surface*](https://atomicspacekitten.substack.com/p/from-conversation-to-control-surface) — project inception from messy AI-mediated exploration; the recovered intent → validated constraint → repo sequence.
 - [*Three Agents Got Into an Argument // The Repo Won*](https://atomicspacekitten.substack.com/p/three-agents-got-into-an-argument) — the repo-as-arbiter operating rule: artifact-owning surface gets the final read on current file contents.
+
+## Historical provenance
+
+Retired Model-A artifacts — the external control-surface document, the ChatGPT-side and Codex-side startup prompts, and the mazeASK worked example — remain in the repository and its git history as frozen provenance under retired-status headers; they are not a current prompt, example, or operating path.
 
 ## License
 

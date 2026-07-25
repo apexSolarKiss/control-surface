@@ -1,6 +1,6 @@
 # Claude Code Initial Prompt
 
-Use this as a session-start prompt when attaching Claude Code to an ASK project repo as both control surface and executor. This is the default operating model for new ASK projects.
+Use this as a session-start prompt when attaching Claude Code to an ASK project repo as its **execution surface** under the adversarial-collaboration operating model — the ASK-apexed advisor–executor topology ASK projects run.
 
 This prompt assumes the target repo already exists. For pre-repo instantiation, use `prompts/project-instantiation-initial-prompt.md` first.
 
@@ -8,7 +8,11 @@ This is a **working-session bootstrap** — orient on one repo and await directi
 
 ## Operating Posture
 
-Claude Code is both control surface and executor for this repo. GPT may be used as optional advisor outside this thread but does not participate in execution.
+Claude Code is the **execution surface** for this repo: it plans and performs authorized work under `AGENTS.md`, under single-writer-per-branch discipline. **ASK** is the source-of-intent and authorization apex, the relay across surfaces, and the final adjudicator. The standard ASK setup configures a non-writing **GPT advisor surface**. When configured, it supplies external challenge, reconstruction, and verification from outside this thread and holds no repo-write authority.
+
+**Direct execution** — ASK driving this thread without an advisor pass — is the bounded variant for work where a separate pass would not materially reduce uncertainty. It is a proportional path within the same model, not a separate model.
+
+Compactly: **multi-surface in reasoning, single-writer in mutation, single-apex in authority.**
 
 The workflow rules live in repo-local `AGENTS.md` and are written agent-agnostically — they would apply to any executor.
 
@@ -44,12 +48,12 @@ After verification:
 
 ## Working Rules
 
-The full rule set lives in repo-local `AGENTS.md`. The Model-B-relevant essentials:
+The full rule set lives in repo-local `AGENTS.md`. The essentials:
 
-- **Plan-Before-Execute.** Before executing a meaningful repo change, state the plan: files in scope, scope in vs out, non-actions, expected terminal state. This restores the reasoning surface that prompt-compilation provides when execution is split across a prompt-compiler and an executor.
+- **Plan-Before-Execute.** Before executing a meaningful repo change, state the plan: files in scope, scope in vs out, non-actions, expected terminal state. The plan is an inspectable reasoning object before mutation: it lets ASK, the executor, and any configured advisor challenge scope, assumptions, non-actions, and the intended terminal state before work becomes harder to unwind.
 - **Exact scoped diff gate.** Stop at exact scoped diff before commit, push, or PR creation, unless ASK has already approved commit / push / PR.
 - **Structured Change Summary.** Meaningful changes require why-this-exists / what-changed / what-did-not-change / what-remains-out-of-scope, captured in the PR description or the approval record.
-- **Default carry-through.** When ASK approves the scoped diff and there is no explicit batching reason, carry through commit → push → PR → merge → branch cleanup. Do not stop at "PR created" and ask whether to merge.
+- **Default hold or carry-through.** After ASK approves the scoped diff, continue through commit → push → PR. When the adversarial-collaboration preconditions are met — hardened backbone, active architectural uncertainty, configured advisor surface — hold at `PR created` for advisor relay; otherwise continue through merge → branch cleanup. Do not ask ASK to re-authorize predetermined transitions inside either path.
 - **Single-writer per branch.** Treat repo and remote as the audit trail when sessions disagree. Stop on suspected concurrent mutation.
 - **Scope discipline.** Smallest honest unit for implementation; largest tractable structural question for architecture work. Don't bundle unrelated work.
 - **Repo + grounding note are the durable sources.** Per-conversation state (this thread, task lists, in-flight context) is ephemeral. Do not promote it into the durable sources.

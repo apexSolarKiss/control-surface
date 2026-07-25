@@ -1,14 +1,14 @@
 # mazeASK Notes
 
-[`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the working example for the legacy split-execution model — historically referred to as **Model A**. It is the only active project still on Model A. New ASK projects default to single-node; [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the current single-node working example.
+[`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the dormant historical origin case for the legacy split-execution model — historically referred to as **Model A**. Model A is retired as a live option, and this project is retained as frozen historical provenance rather than as a current working example; [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the mature current working example.
 
 `mazeASK` is also the motivating ASK project for this repo's first structure, and its repo docs show the boundary model in a concrete form.
 
 ## Operating Model
 
-Legacy Model A — ChatGPT compiles prompts, Codex executes inside the local repo, Claude Code is optional advisor. The original concrete instance the boundary model was sketched against, and the worked example the Model-A-specific external orchestration artifact (`control-surface.md`) was calibrated for.
+Legacy Model A — ChatGPT compiled prompts, Codex executed inside the local repo, Claude Code was optional advisor. The original concrete instance the boundary model was sketched against, and the worked example the Model-A-specific external orchestration artifact (`control-surface.md`) was calibrated for.
 
-Model A remains active here until ASK returns to this project and decides whether to migrate it to single-node.
+The project is dormant. Model A is retired as a live option: if ASK resumes this project, it migrates to the current operating model.
 
 ## Repo-local files in mazeASK
 

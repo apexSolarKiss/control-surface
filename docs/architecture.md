@@ -4,21 +4,24 @@
 
 ## Role Model
 
-The active operating model for new ASK projects is single-node: Claude Code is both control surface and executor. An advisor in chat-based form — typically GPT or Claude — remains available outside the execution thread.
+ASK projects run an **adversarial-collaboration operating model** — an ASK-apexed advisor–executor topology. **ASK** is the source-of-intent and authorization apex, the relay across surfaces, and the final adjudicator. A non-writing **advisor surface** supplies external challenge, reconstruction, and verification from outside the execution thread. A repo-attached **execution surface** plans and performs authorized work under `AGENTS.md`, under single-writer-per-branch discipline. In the current stack a GPT advisor fills the advisor role and Claude Code fills the execution role; model identity is operational, not architectural.
+
+**Direct execution** is the bounded variant — ASK driving the executor without an advisor pass where a separate pass would not materially reduce uncertainty. It is a proportional path within the same model, not a separate model.
+
+Compactly: **multi-surface in reasoning, single-writer in mutation, single-apex in authority.**
 
 The methodology layer that articulates the method has graduated upstream to [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK). This repo carries the execution-protocol layer that operationalizes the method per session. [`control-surface`](../README.md) sits upstream of downstream project repos while remaining downstream of `method-ASK`.
 
-An earlier split-execution model — ChatGPT as prompt compiler, Codex as executor, Claude Code as optional advisor — shaped this repo's design and is retained as legacy reference. It is referred to historically as **Model A**. [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the retained legacy Model A reference — the working example for any project that still needs that model.
+An earlier split-execution model, historically **Model A**, shaped this repo's early design and is retired as a live option; its artifacts remain in the repo and git history as frozen provenance under retired-status headers.
 
 The workflow rules are agent-agnostic; the rules in `AGENTS.md` apply to whoever is executing.
 
-Three worked examples anchor the family:
+Two current working examples anchor the family:
 
-- [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — single-node working example (primary pressure surface)
-- [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — single-node working example (instantiation / source-of-intent recovery pressure surface)
-- [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) — legacy Model A reference
+- [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) — primary pressure surface (mature working example)
+- [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) — second working example (instantiation / source-of-intent recovery pressure surface)
 
-[`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK) is a distinct kind of surface — an externalized ASK visual / aesthetic-intent implementation. It is the family's upstream visual-inheritance reference surface: the public, repo-shaped carrier of *externalized* aesthetic intent that child artifacts inherit by reference. Source-of-intent proper remains operator-side; this repo carries the implementation surface. `urban-observatory`'s Example 2 prototype is a downstream inheritance proof. [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md) carries the method-altitude account. Not a project pressure surface in the same sense as the three worked examples above.
+[`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK) is a distinct kind of surface — an externalized ASK visual / aesthetic-intent implementation. It is the family's upstream visual-inheritance reference surface: the public, repo-shaped carrier of *externalized* aesthetic intent that child artifacts inherit by reference. Source-of-intent proper remains operator-side; this repo carries the implementation surface. `urban-observatory`'s Example 2 prototype is a downstream inheritance proof. [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md) carries the method-altitude account. Not a project pressure surface in the same sense as the two current working examples above.
 
 ## Layer Map
 
@@ -26,7 +29,7 @@ This repo sits in the middle of a three-tier structure:
 
 - **Methodology layer** — adversarial iteration / cross-phase swing discipline. Lives upstream in [`apexSolarKiss/method-ASK`](https://github.com/apexSolarKiss/method-ASK); [`docs/method.md`](method.md) in this repo is a compact bridge pointing there.
 - **Execution-protocol layer** — this repo's core purpose. `AGENTS.md`, the shared protocol carrier (`protocol/AGENTS.shared.md`, resolved locally into each consumer's own `AGENTS.md`; `protocol/manifest.json`; `protocol/profiles/`; and the `protocol/check.sh` local validator), templates, review cadence, and branch discipline encode how work gets done within a session.
-- **Project repos** — applications of the method and protocol to concrete domains. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the single-node working example and primary pressure surface for rule evolution; [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second single-node working example, exercising the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces; [`apexSolarKiss/mazeASK`](https://github.com/apexSolarKiss/mazeASK) is the legacy Model A working example.
+- **Project repos** — applications of the method and protocol to concrete domains. [`apexSolarKiss/asset-pipeline-ASK`](https://github.com/apexSolarKiss/asset-pipeline-ASK) is the primary pressure surface for rule evolution; [`apexSolarKiss/urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) is the second active working example, exercising the protocol repo at the source-of-intent recovery, post-bootstrap grounding-note freshness, and architecture-uncertain instantiation surfaces.
 
 Alongside the project repos, [`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK) is the family's upstream visual-inheritance reference surface — an externalized ASK visual / aesthetic-intent implementation, not a project pressure surface. Child surfaces inherit Tier 1 + Tier 2 by reference and resolve Tier 3 (instance identity) locally by source-of-intent + brand-distance; ASK-the-entity is the one surface that uses ASK's own Tier 3 (it does not inherit ASK's Tier 3 to downstream surfaces). `urban-observatory` carries a downstream inheritance proof. The method-altitude account lives in [`apexSolarKiss/method-ASK/examples/design-system-ASK.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/examples/design-system-ASK.md).
 
@@ -74,23 +77,24 @@ This is the load-bearing rationale for keeping these durable and non-durable sur
 - `protocol/adapters/` — typed, executor-specific artifacts providing runtime enforcement for a supported write path of an agent-agnostic shared rule on a given runtime, **not** OS-level enforcement over arbitrary subprocess writes (the shared protocol prohibits that circumvention semantically; sandbox hardening is a separate out-of-scope question); **not shared-protocol text and never inherited into a consumer's `AGENTS.md`**. `adapters/claude-code/` carries the native permission fragment for the private-persistent write gate, a static owner-repo check, a machine-local verifier, and their fixtures, run separately so the portable checker stays agent-agnostic
 - `prompts/project-instantiation-initial-prompt.md` — agent-agnostic startup prompt for the pre-repo phase
 - `examples/` — concise mappings from real ASK projects to this structure
-- legacy docs (`control-surface.md`, `docs/workflow-boundary.md`, Model-A-specific prompts) — retained for reference; deprecation headers name what supersedes them
 
 ## Session Topology
 
-ASK project work routinely involves multiple operator sessions: parallel Claude Code threads, ChatGPT plus Codex, Claude Chat as advisor plus Claude Code as executor. The repo and remote are the audit trail when sessions disagree.
+ASK project work routinely involves multiple writer-capable sessions: parallel executor threads, subagents in separate worktrees, a human editor alongside an executor. The repo and remote are the audit trail when sessions disagree. (The advisor surface is not a writer — it reviews from outside the execution thread and never mutates the repo.)
 
 The single-writer-per-branch rule encoded in `AGENTS.md` handles this. Operators must verify state freshly when picking up a branch, treat the working tree as authoritative over their own memory, and stop on suspected concurrent mutation.
 
 ## Why The Rules Exist
 
-The single-node model collapses several functions that Model A handled by default. Most of the rules in `AGENTS.md` are calibrated compensations for what gets lost when a single agent is both compiler and executor:
+Most rules make reasoning inspectable across ASK, the executor, and any configured advisor while preserving one write authority. In the standard paired path they make the advisor/executor boundary productive; in direct execution they give ASK the same reviewable objects before mutation:
 
-- A split model has a natural prompt-compilation step. A single-node model collapses it into the executor; **Plan-Before-Execute** is the rule that restores the reasoning surface.
-- A split model's two-model separation surfaces disagreements as visible artifacts. A single-node model runs in one head; **Structured Change Summary** and **exact-scoped-diff approval** are the compensations.
-- A single-node model has stronger session-topology pressure (Claude Code spawns parallel threads easily); **single-writer discipline** is the compensation.
+- **Plan-Before-Execute** makes the executor's reasoning inspectable *before* it becomes a diff. It is what an advisor — or ASK — can challenge on scope, assumptions, non-actions, and intended terminal state.
+- **Structured Change Summary** and **exact-scoped-diff approval** are the review objects themselves: what actually crosses the boundary, in a form precise enough to disagree with.
+- **Single-writer discipline** keeps exactly one write authority while other surfaces read and review. Multi-surface reasoning only works if mutation stays single-writer.
 
-When proposing rule changes, ask which failure mode the rule is compensating for and whether the compensation is still load-bearing.
+Historically these were calibrated against what the retired split-execution model provided by default; that framing is preserved in the article record. Stated forward, they are the machinery of the current model rather than compensation for a retired one.
+
+When proposing rule changes, ask which failure mode the rule addresses and whether it is still load-bearing.
 
 ## Current Shape
 
@@ -101,6 +105,5 @@ This repo is intentionally small:
 - a small downstream template set (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`) — starters adopted alongside, not instead of, the locally resolved shared protocol
 - one agent-agnostic instantiation prompt
 - a minimal example set
-- a legacy reference set retained for [`mazeASK`](https://github.com/apexSolarKiss/mazeASK) and any other project still on Model A
 
 Beyond the bounded `protocol/` resolution-and-validation layer — a distributable shared execution-protocol core resolved locally into each consumer's own `AGENTS.md`, a normative manifest, downstream profiles, an opt-in standing-grant fragment, and `check.sh` (a deterministic validator run locally, by hand) — it does not include automation, sync tooling, CI, generators, or a larger framework system. `check.sh` is a local validator, not continuous integration; the `protocol/` layer resolves and checks existing rules, it does not generate artifacts or constitute a product build framework.

@@ -11,11 +11,11 @@ This template is agent-agnostic.
 
 ## Operating Model
 
-- operating model: `[single-node (Claude Code as control surface and executor) — default for new ASK projects | legacy Model A (ChatGPT/Codex split)]`
-- live operator: `[Claude Code | Codex | other]`
-- optional advisors: `[GPT | Claude Code | none]`
+- operating model: adversarial collaboration — an ASK-apexed advisor–executor topology. ASK is the source-of-intent and authorization apex, the relay across surfaces, and the final adjudicator.
+- advisor surface: `[occupant, or unconfigured — non-writing external challenge, reconstruction, and verification]`
+- execution surface: `[who fills the repo-attached execution role — plans and performs authorized work under AGENTS.md, under single-writer-per-branch discipline]`
 
-The workflow rules apply regardless of which agent does the executing. Rules live in repo-local `AGENTS.md`.
+The workflow rules apply regardless of which agent does the executing. Rules live in repo-local `AGENTS.md`. **Direct execution** — ASK driving the executor without an advisor pass where a separate pass would not materially reduce uncertainty — is a bounded proportional path within the same model, not a separate model. Direct execution describes a bounded task path, not necessarily the absence of a configured advisor surface.
 
 ## Sources Of Truth
 
