@@ -191,7 +191,7 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Inbound Handoff TBI Marker",
-   "failure_mode": "a routed handoff read as an execution authorization; a -TBI created inside one operating surface",
+   "failure_mode": "a routed handoff read as an execution authorization; a -TBI created inside one operating surface; pre-ingestion supersession misread as ingestion; -SUPERSEDED lineage treated as queue-active or pending; a superseded artifact reactivated because it remains in intake; an immutable historical sender status mistaken for current recipient state; disagreement among current disposition carriers \u2014 the filename marker and any present closure or maintained-status record; parent-folder residency mistaken for queue membership; successor linkage implemented by editing the received body",
    "active_holds": [],
    "status": "active",
    "amended_by": [
