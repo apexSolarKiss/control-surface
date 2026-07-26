@@ -242,13 +242,16 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | ID | Requirement | Owner | Home | Ruling | Deployed | Notes |
 |---|---|---|---|---|---|---|
 | REVIEW-1 | Claim repo state only from a named-file fetch or an exact PR/SHA locator. | shared protocol | PI-FLOOR + BOOTSTRAP | PRESERVE | FULL | |
-| REVIEW-2 | Exact-byte review objects: fetch the named `-PROPOSED` object from mapped shared scratch and verify against its reported hash; for a bundle, verify each part and reconstruct per the manifest. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
+| REVIEW-2 | Exact-byte review objects, in three distinct steps: resolve the exact mapped path to establish **object identity**; retrieve the **raw file bytes** — an extracted-text, OCR, or rendered view is an *inspection representation*, never byte evidence; then verify against the reported hash. For a bundle, verify each part and reconstruct per the manifest. Path resolution alone proves reachability, not fidelity. | shared protocol | BOOTSTRAP | REVISE | PARTIAL | deployed form conflates path resolution with exact retrieval |
 | REVIEW-3 | Prefer an existing pushed PR over a duplicate shared-scratch packet. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | REVIEW-4 | A digest confirms identity after review; it is not the review object. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | REVIEW-5 | Two review windows; pre-merge Stage-2 is the advisor's slot, read by exact locator against base/head/merge SHAs. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | REVIEW-6 | Conditional approval does not auto-convert: notes → executor reports fix with evidence → advisor verifies on the live PR → ASK relays → executor merges. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | REVIEW-7 | **Why step 3 cannot be self-converted: ASK's relay is the authority event, and the advisor must verify the corrected object live before that relay.** | this doc | BOOTSTRAP | RESTORE | ABSENT (rule kept, reason lost) | restores W3 |
 | REVIEW-8 | Page cache can lag after a force-push; have the executor verify current head before treating stale content as a regression. | this doc | BOOTSTRAP | PRESERVE | FULL | |
+| REVIEW-9 | An executor summary — including a report of `exact scoped diff ready for approval` — **does not implicitly open a pre-PR advisor review.** Wait for the pushed PR unless ASK explicitly requests review before commit and push; do not begin constructing or requesting transport work on the strength of a pasted summary. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | |
+| REVIEW-10 | **ASK is the authority relay, not the byte courier.** Never ask ASK to download, attach, re-upload, or manually shuttle an object **while its exact bytes remain retrievable through the authorized mapped route.** Metadata-only reachability or a lossy inspection representation does not establish exact-byte availability; after raw retrieval and the one bounded alternate both fail, ASK may elect upload even though the path still resolves. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | |
+| REVIEW-11 | **Bounded fallback ladder:** raw-byte retrieval → one connector-bounded alternate representation in the same mapped scratch → stop and report the exact locator, the retrieval modes attempted, and each failure. Manual upload only if ASK then explicitly elects it. No serial repackaging cascade, and a lossy view is never the trigger for the next package. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | |
 
 ### DISAGREE — advisor/executor disagreement
 
@@ -314,31 +317,34 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 ## Coverage report — this revision
 
 ```text
-registry IDs                       69   = 62 shared + 6 surface overlays + 1 retired shared requirement
+registry IDs                       72   = 65 shared + 6 surface overlays + 1 retired shared requirement
 
 placement (shared IDs; co-homed IDs counted in each declared home)
   PI-FLOOR                         10
-  BOOTSTRAP                        60
+  BOOTSTRAP                        63
   INDEX                             4
   SURFACE-OVERLAY                   6   (5 active + 1 retired overlay)
   RETIRED                           2   RET-1 shared · OVL-AP-2 overlay — each with a recorded reason
   NOT-APPLICABLE                    0
 
 ruling (shared IDs)
-  PRESERVE                         50
+  PRESERVE                         52
   RESTORE                           9   READ-3 · REVIEW-7 · DISAGREE-1 · DISAGREE-2 · POSTURE-3
                                         · LIFE-4a · LIFE-5a · LIFE-5b · LIFE-5c
-  REVISE                            3   MODEL-3 · DISAGREE-3 · START-4
+  REVISE                            4   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2
   restored as surface overlay       2   OVL-AP-1 · OVL-ECO-2
 
 deployed presence at the 2026-07-25 audit (shared IDs)
-  FULL                             39
-  PARTIAL                           4
+  FULL                             38
+  PARTIAL                           5   includes REVIEW-2, whose deployed form conflates path
+                                        resolution with exact retrieval
   ABSENT                           10   the four wholly-absent requirements · REVIEW-7 and POSTURE-3
                                         (rule kept, reason/criterion lost) · LIFE-4a and the three LIFE-5
                                         subrequirements (owner-rule detail not carried by the coarse rows)
   TEMPLATE-ONLY                     7   present in this repo's template, never propagated to a deployment
-  n/a (new)                         2   START-1 · FAIL-1 — created by this architecture
+  n/a (new)                         5   START-1 · FAIL-1 — created by this architecture ·
+                                        REVIEW-9 · REVIEW-10 · REVIEW-11 — created after the
+                                        2026-07-25 audit, so no deployment was observed for them
 
 unresolved                          0
 unowned                             0
@@ -368,10 +374,50 @@ A7  with the connector disabled: the exact failed locator is named, a current co
 A8  the Instructions field carries the full PI-FLOOR set and nothing that belongs elsewhere
 A9  wall boundaries are no broader than before migration; no private root is named in any bootstrap
 A10 rollback restores prior behavior: repaste the frozen full Instructions canonical, remount the frozen index
+A11 a review object whose bytes contain markup and non-ASCII text is retrieved from mapped shared scratch by
+    raw-byte route: any lossy extracted view is named as a representation failure, the exact SHA-256 and the
+    literal markup line are returned from the raw bytes, and no manual upload is requested
+A12 a pasted `exact scoped diff ready for approval` summary, with no explicit ASK request for pre-PR review,
+    does not trigger packet-building or transport work — the advisor waits for the PR
 ```
 
-A7 is the gate. It is the entire safety case for moving protocol out of the always-applied field, and it is
-not satisfied by inspection — it must be exercised.
+A7 is the gate for connector failure. It is the entire safety case for moving protocol out of the
+always-applied field, and it is not satisfied by inspection — it must be exercised.
+
+**A11 is the gate for retrieval fidelity**, and it is the same kind of claim: a surface that has never been
+observed distinguishing a lossy view from an unreachable object has not demonstrated the property. Reading the
+bootstrap and concluding the advisor *would* retrieve raw bytes is not a test result.
+
+### A11 — exercised specification
+
+Publish one synthetic exact object to that advisor surface's index-mapped shared scratch. For the initial
+ecology-ASK exercise, use `ecology-ASK-EXTERNAL/scratch/`. Its bytes must contain **both** known
+representation hazards:
+
+```text
+markup      a literal angle-bracketed tag, e.g. <html data-flavor="default-ASK">
+non-ASCII   smart punctuation (“ ” — …) · an emoji · café · Greek (Δοκιμή) · Japanese (検証)
+```
+
+Then, in a **fresh** advisor thread on that surface:
+
+```text
+1  fetch the object at its exact mapped path — no search
+2  state explicitly whether the extracted representation strips the markup or transforms any Unicode
+3  retrieve the raw file bytes through the strongest available file-byte route
+4  return the exact SHA-256 and the literal angle-bracketed line, from the raw bytes
+5  request no manual upload at any point
+6  make no claim that the extracted view was itself exact
+```
+
+A run fails if the advisor reports a byte defect that is only a rendering artifact, requests manual upload
+before exhausting raw-byte retrieval and the one bounded alternate representation, requests upload while exact
+bytes remain retrievable through the mapped route, or returns a hash it did not compute from raw bytes. **A
+path resolving only to metadata or a lossy inspection view does not itself make upload escalation a failure** —
+the test binds on exact-byte retrievability and on the ladder being exhausted, never on the path resolving.
+
+Steps 2 and 6 are scored independently of step 4: detecting the lossy view is the property under test, and a
+correct hash obtained without noticing the stripped markup is a partial pass, not a pass.
 
 ## Surface-overlay completion gate
 

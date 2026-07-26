@@ -606,10 +606,10 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "### Advisor-Readable Review Objects",
-   "failure_mode": "exact-byte advisor review forced through manual operator upload because the review object stayed in unreadable session-local scratch; a single review object truncated by a connector so the patch could not be reviewed completely; a review object overwritten in place after its hash was reported; a wall-bound or secret payload copied into shared scratch or a manual upload; or a proposal-only transport write inferred authority over the canonical, a snapshot, or a companion artifact",
+   "failure_mode": "exact-byte advisor review forced through manual operator upload because the review object stayed in unreadable session-local scratch; an extracted or normalized inspection representation truncated or transformed and mistaken for the underlying object, or used to diagnose a byte defect without raw-byte retrieval; a review object overwritten in place after its hash was reported; a wall-bound or secret payload copied into shared scratch or a manual upload; a proposal-only transport write inferred authority over the canonical, a snapshot, or a companion artifact; a pasted exact-diff summary treated as an implicit pre-PR advisor-review request; a pre-PR object reported ready for advisor review while it remains session-local; connector text extraction mistaken for raw-file retrieval; a lossy representation mistaken for path unreachability; ASK used as a file courier while exact bytes remain retrievable through the authorized mapped route; or serial repackaging around a representation defect",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": ["#176 / bdece1091940637459bf856910a1d1d46275ee2a (pre-PR publication condition; raw-bytes-vs-representation retrieval ladder; no-courier boundary)"],
    "explicit_exclusions": [],
    "proposed_by": null,
    "activated_by": "#168 / 256c9253e10f0cd32b30656b2a7f84615ca0b6ca"

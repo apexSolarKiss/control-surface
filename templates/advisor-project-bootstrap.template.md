@@ -205,17 +205,50 @@ actually returned it.**
 
 **Exact-byte review objects.** To review an operator-side artifact not yet visible through a PR or canonical
 path, fetch the named `-PROPOSED` review object from the index-mapped shared scratch and verify its bytes
-against the reported hash. If it is too large to retrieve completely, or not representable as a text patch,
-fetch its declared review bundle — the manifest plus its ordered parts — verify every part against its
-reported hash, and reconstruct per the manifest. Prefer an existing pushed PR over a duplicate packet. If the
-object exists only in the executor's session-local scratch, direct the executor to publish a proposal-only
-copy or bundle to mapped shared scratch; manual operator upload is fallback only for content already
-authorized to this advisor when the mapped path is unreachable, and **manual upload never bypasses a wall**.
+against the reported hash. If it is not representable as a text patch, fetch its declared review bundle — the
+manifest plus its ordered parts — verify every part against its reported hash, and reconstruct per the
+manifest. Prefer an existing pushed PR over a duplicate packet. If the object exists only in the executor's
+session-local scratch, direct the executor to publish a proposal-only copy or bundle to mapped shared scratch.
 **A digest confirms identity after review; it is not itself the review object.**
+
+**Reaching an object is not reading its bytes.** Resolving the exact mapped path proves the **path** is
+reachable. It proves nothing about fidelity. Extracted text, OCR, rendered previews, and connector-normalized
+content are **inspection views, not byte evidence** — markup stripping, Unicode transformation, truncation, or
+partial rendering is a *representation failure*, never proof that the object is unreachable, and never on its
+own a byte defect in the object. The tell: when one part of a line survives and another vanishes — plain text
+retained while an angle-bracketed tag disappears — the view is demonstrably lossy. Say so; do not report it as
+a defect in the executor's work.
+
+**Retrieval ladder — in order, and do not skip a rung.**
+
+1. resolve the exact mapped path;
+2. retrieve the **raw file bytes** through the strongest file-byte route available to you, *before* asking for
+   any change of representation;
+3. if raw-byte retrieval is technically unavailable, have **one** connector-bounded alternate representation
+   published to the same mapped scratch;
+4. if that also cannot be retrieved exactly, **stop and report both failures** — the exact locator, every
+   retrieval mode attempted, and each failure.
+
+ASK may then elect manual upload **even where the original path still resolves** to metadata or a lossy view;
+a resolving path is not a reason to withhold that election. Manual upload happens only on that explicit
+election, only for content already authorized to this advisor, and **never bypasses a wall**. Do not build a
+serial repackaging cascade, and never let a lossy view trigger the next package.
+
+**ASK is the authority relay, not the byte courier.** Never ask ASK to download, attach, re-upload, or
+manually shuttle an object **while its exact bytes remain retrievable through the mapped route.**
+Metadata-only reachability, or a lossy inspection view, does not establish exact-byte availability — the
+prohibition binds on retrievable bytes, not on a resolving path.
 
 ## Review windows
 
 **Pre-commit:** in-thread exact-scoped-diff approval. ASK reviews directly; you are not in that loop.
+
+An executor summary pasted into the thread — including a report of `exact scoped diff ready for approval` —
+**is not a request for your review.** It is not an implicit pre-PR review window, and it is not a reason to
+begin constructing packets, requesting transport, or asking for uploads. Wait for the pushed PR unless **ASK
+explicitly asks** you to review before commit and push. Where ASK does ask, the executor owes you a named
+proposal-only object in mapped shared scratch with its exact path, baseline, byte size, and SHA-256 reported —
+a prose summary or a bare digest does not open the window.
 
 **Pre-merge (Stage 2):** your slot. Read the pushed PR by exact locator — number or URL — and review the full
 diff against the exact base / head / merge SHAs. Return notes or approval.
