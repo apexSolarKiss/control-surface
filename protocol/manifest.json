@@ -1119,7 +1119,7 @@
    ],
    "carrier_mode": "profile",
    "source_anchor": "protocol/profiles/advisor-project-surface.md",
-   "failure_mode": "operative advisor protocol placed in a size-capped always-applied field, where each addition is paid for by compressing an existing requirement at install time with no record of what was dropped; and requirement loss propagating as a birth defect into surfaces instantiated afterwards",
+   "failure_mode": "an advisor deployment architecture documented without an applicability carrier, so a repo can appear protocol-conformant while ignoring it; operative advisor protocol placed in a size-capped always-applied field, where additions are paid for by compressing existing requirements without a disposition record; and requirement loss propagating as a birth defect into later surfaces",
    "active_holds": [],
    "status": "active",
    "amended_by": [],

@@ -122,8 +122,10 @@ in [`protocol/manifest.json`](../protocol/manifest.json) as `advisor-project-sur
 
 ```text
 owner        docs/advisor-project-surface-architecture.md   registry · placement · tests · gate
-carrier      protocol/profiles/advisor-project-surface.md   the compact distributable obligation
-bound        control-surface · asset-pipeline-ASK · urban-observatory
+carrier      protocol/profiles/advisor-project-surface.md   compact distributable obligation
+applies_to   control-surface · asset-pipeline-ASK · urban-observatory
+live binding each repo is bound only when its AGENTS.md resolves the profile;
+             installed state is recorded in the operator ledger
 generated    templates/advisor-project-{bootstrap,instructions}.template.md · _INDEX-project.template.md
 ```
 
@@ -152,8 +154,8 @@ and canonicals are fetched live.
 
 Sharing the invariant does not merge authority, widen a wall, make either implementation the owner of the
 other, or require one bootstrap payload to cross surfaces. This document does not govern personal-context
-Projects, and it is not amended by changes to the personal ADR; the two implementations are reconciled by ASK
-as apex, not by either side reading the other.
+Projects, and it is not amended by changes to the personal ADR. Reciprocal owner references record the shared
+invariant, but neither implementation governs or mutates the other. ASK, as apex, adjudicates any divergence.
 
 ---
 
