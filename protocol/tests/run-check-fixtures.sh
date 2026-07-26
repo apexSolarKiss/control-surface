@@ -61,7 +61,7 @@ entry(){ # name surface — control-surface routes to the REAL owner root (dogfo
 }
 surf_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo separately-operated;; *) echo direct-core;; esac; }
 pin_of(){ case "$1" in control-surface) echo self-resolving-owner-root;; *) echo "$OWNER_PIN";; esac; }
-profs_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo "-";; *) echo "core-ecology";; esac; }
+profs_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo "advisor-project-surface";; *) echo "core-ecology";; esac; }
 grant_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo y;; *) echo n;; esac; }
 
 # ---- build the ecology: control-surface = the REAL owner root (validated below); synthetic consumers for the rest ----
@@ -214,6 +214,12 @@ build_consumer method-ASK core-ecology n direct-core "$OWNER_PIN"
 record "POS direct-core installs required core-ecology" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
 build_consumer method-ASK "core-ecology architecture-uncertain" n direct-core "$OWNER_PIN"
 record "POS multi-profile: core-ecology + architecture-uncertain" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
+# B5b: a SEPARATELY-OPERATED consumer bound by a profile. advisor-project-surface is the first profile whose
+# applies_to crosses the direct-core boundary, so required-completeness had never been exercised for AP/UO.
+build_consumer asset-pipeline-ASK - y separately-operated "$OWNER_PIN"
+record "NEG separately-operated omits required advisor-project-surface" 1 "missing required profile advisor-project-surface" mkwave asset-pipeline-ASK separately-operated
+build_consumer asset-pipeline-ASK advisor-project-surface y separately-operated "$OWNER_PIN"
+record "POS separately-operated carries advisor-project-surface" 0 "ALL CHECKS PASSED" mkwave asset-pipeline-ASK separately-operated
 
 # ---- OPTIONAL: real workspace map (path-driven, off by default) ----
 if [ -n "${REAL_ECOLOGY_MAP:-}" ] && [ -f "${REAL_ECOLOGY_MAP}" ]; then
