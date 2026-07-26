@@ -93,7 +93,7 @@ manifest_class(){ jq -r --arg c "$1" '.consumers[$c].operating_surface_class // 
 
 assert_local(){
   require_deps
-  for f in "$SHARED" "$MANIFEST" "$SCHEMA" "$ROOTAGENTS" "$TEMPLATE" "$FRAGMENT" "$OVERLAY" "$IDXTEMPLATE" "$PROFDIR/core-ecology.md" "$PROFDIR/architecture-uncertain.md"; do
+  for f in "$SHARED" "$MANIFEST" "$SCHEMA" "$ROOTAGENTS" "$TEMPLATE" "$FRAGMENT" "$OVERLAY" "$IDXTEMPLATE" "$PROFDIR/core-ecology.md" "$PROFDIR/architecture-uncertain.md" "$PROFDIR/advisor-project-surface.md"; do
     [ -f "$f" ] || FAIL "missing owner file: ${f#$ROOT/}"; done
   [ "$fail" -eq 0 ] || return
   # 1 root shared-block parity
@@ -130,7 +130,9 @@ assert_local(){
   extract "<!-- BEGIN profile-body: architecture-uncertain -->" "<!-- END profile-body: architecture-uncertain -->" < "$PROFDIR/architecture-uncertain.md" > /tmp/_pb.$$
   extract "<!-- BEGIN profile-body: architecture-uncertain -->" "<!-- END profile-body: architecture-uncertain -->" < "$OVERLAY" > /tmp/_ob.$$
   { [ -s /tmp/_pb.$$ ] && diff -q /tmp/_pb.$$ /tmp/_ob.$$ >/dev/null; } && OKAY "architecture-uncertain profile-body == overlay" || FAIL "architecture-uncertain profile/overlay drift"; rm -f /tmp/_pb.$$ /tmp/_ob.$$
-  grep -q "<!-- BEGIN profile-body: core-ecology -->" "$PROFDIR/core-ecology.md" && grep -q "<!-- END profile-body: core-ecology -->" "$PROFDIR/core-ecology.md" && OKAY "core-ecology has a profile-body fence" || FAIL "core-ecology lacks a profile-body fence"
+  # every non-held profile rule's owner file carries a closed profile-body fence (generic: no per-profile edit)
+  for p in $(jq -r '.rules[]|select(.scope_class=="profile" and .status!="held")|.profile' "$MANIFEST" | sort -u); do
+    grep -q "<!-- BEGIN profile-body: $p -->" "$PROFDIR/$p.md" && grep -q "<!-- END profile-body: $p -->" "$PROFDIR/$p.md" && OKAY "$p has a profile-body fence" || FAIL "$p lacks a profile-body fence"; done
   # 8 template marker surfaces + carrier-metadata + payload-free
   for m in "<!-- BEGIN shared: AGENTS.shared.md -->" "<!-- BEGIN profiles -->" "<!-- BEGIN grant" "<!-- BEGIN local-delta -->" "<!-- BEGIN carrier-metadata -->"; do
     grep -q "$m" "$TEMPLATE" && OKAY "template has surface: $m" || FAIL "template missing surface: $m"; done

@@ -1101,6 +1101,36 @@
    "activated_by": null
   },
   {
+   "rule_id": "advisor-project-surface-deployment",
+   "scope_class": "profile",
+   "profile": "advisor-project-surface",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [
+    "control-surface",
+    "asset-pipeline-ASK",
+    "urban-observatory"
+   ],
+   "explicit_exclusions": [
+    "method-ASK",
+    "design-system-ASK",
+    "ASK",
+    "personal-context-system"
+   ],
+   "carrier_mode": "profile",
+   "source_anchor": "protocol/profiles/advisor-project-surface.md",
+   "failure_mode": "an advisor deployment architecture documented without an applicability carrier, so a repo can appear protocol-conformant while ignoring it; operative advisor protocol placed in a size-capped always-applied field, where additions are paid for by compressing existing requirements without a disposition record; and requirement loss propagating as a birth defect into later surfaces",
+   "active_holds": [],
+   "status": "active",
+   "amended_by": [
+    "#174 / 8a7e022b3be61f36a0449aff192311f6e238eb5d",
+    "#174 / 7db29001941e3de18c6a6fc4907f55b168acb04b"
+   ],
+   "note": "Semantic owner is docs/advisor-project-surface-architecture.md (registry, placement contract, acceptance tests, overlay-completion gate); this profile carries only the compact deployment obligation. applies_to tracks which repos home a hosted advisor Project, NOT tier or operating-surface class -- which is why it binds two separately-operated consumers. Excluded repos home no repo-advisor Project; a repo that stands one up adopts the profile then. Personal-context Projects implement the same invariant under the personal ADR + PCS scaffold across the wall. Role-specific -TMK surfaces remain outside this profile; their deployment is separately owned, and no migration or conformance is inferred by symmetry.",
+   "proposed_by": null,
+   "activated_by": "#174 / cb4a0c4d08128bf8c20651613dbb742c259609b5"
+  },
+  {
    "rule_id": "memory-reconciliation-follows-durable-landing",
    "scope_class": "candidate",
    "authority_owner": "control-surface",

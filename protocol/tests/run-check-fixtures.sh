@@ -61,7 +61,7 @@ entry(){ # name surface — control-surface routes to the REAL owner root (dogfo
 }
 surf_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo separately-operated;; *) echo direct-core;; esac; }
 pin_of(){ case "$1" in control-surface) echo self-resolving-owner-root;; *) echo "$OWNER_PIN";; esac; }
-profs_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo "-";; *) echo "core-ecology";; esac; }
+profs_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo "advisor-project-surface";; *) echo "core-ecology";; esac; }
 grant_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo y;; *) echo n;; esac; }
 
 # ---- build the ecology: control-surface = the REAL owner root (validated below); synthetic consumers for the rest ----
@@ -116,8 +116,10 @@ d=$(owner_copy L3d); perl -0pi -e 's/^### Shared execution-protocol architecture
 d=$(owner_copy L3e); perl -0pi -e 's{apexSolarKiss/control-surface/prompts/cross-repo-propagation-wave\.md}{}' "$d/templates/_INDEX-project.template.md"; record "NEG index template loses a protocol locator" 1 "index template missing locator(s)" runlocal "$d"
 d=$(owner_copy L3f); perl -0pi -e 's/serial-delegated//g' "$d/prompts/cross-repo-propagation-wave.md"; record "NEG runbook loses an execution-topology token" 1 "execution-topology token(s) missing" runlocal "$d"
 d=$(owner_copy L3g); perl -0pi -e 's/subagent_capability_check//g' "$d/prompts/cross-repo-propagation-wave.md"; record "NEG runbook loses the subagent-capability-check token" 1 "execution-topology token(s) missing" runlocal "$d"
-d=$(owner_copy L3h); perl -0pi -e 's/reported hash//g' "$d/templates/advisor-project-instructions.template.md"; record "NEG advisor-PI loses the reported-hash clause" 1 "advisor-retrieval-contract clause(s) missing" runlocal "$d"
-d=$(owner_copy L3i); perl -0pi -e 's/manual upload never bypasses a wall//g' "$d/templates/advisor-project-instructions.template.md"; record "NEG advisor-PI loses the wall sentence" 1 "advisor-retrieval-contract clause(s) missing" runlocal "$d"
+# L3h/L3i target the BOOTSTRAP: these clauses MOVED there when #172 thinned the PI to the pre-retrieval floor.
+# Mutating the PI template proved nothing once check 11 stopped reading it — the negative fixtures passed vacuously.
+d=$(owner_copy L3h); perl -0pi -e 's/reported hash//g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses the reported-hash clause" 1 "advisor-retrieval-contract clause(s) missing" runlocal "$d"
+d=$(owner_copy L3i); perl -0pi -e 's/manual upload never bypasses a wall//g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses the wall sentence" 1 "advisor-retrieval-contract clause(s) missing" runlocal "$d"
 d=$(owner_copy L3j); perl -0pi -e 's/parent-direct-exception//g' "$d/prompts/cross-repo-propagation-wave.md"; record "NEG runbook loses parent-direct-exception mode" 1 "execution-topology token(s) missing" runlocal "$d"
 d=$(owner_copy L4); perl -0pi -e "s/(BEGIN profile-body: architecture-uncertain -->)/\$1\nINJECT/" "$d/protocol/profiles/architecture-uncertain.md"; record "NEG profile/overlay drift" 1 "architecture-uncertain profile/overlay drift" runlocal "$d"
 d=$(owner_copy L5); perl -0pi -e "s/<!-- PROFILE BLOCKS ARE INSERTED HERE BY THE PROPAGATION WAVE -->/<!-- BEGIN profile: core-ecology -->/" "$d/templates/AGENTS.template.md"; record "NEG template carries installed-looking profile" 1 "installed-looking profile marker" runlocal "$d"
@@ -212,6 +214,12 @@ build_consumer method-ASK core-ecology n direct-core "$OWNER_PIN"
 record "POS direct-core installs required core-ecology" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
 build_consumer method-ASK "core-ecology architecture-uncertain" n direct-core "$OWNER_PIN"
 record "POS multi-profile: core-ecology + architecture-uncertain" 0 "ALL CHECKS PASSED" mkwave method-ASK direct-core
+# B5b: a SEPARATELY-OPERATED consumer bound by a profile. advisor-project-surface is the first profile whose
+# applies_to crosses the direct-core boundary, so required-completeness had never been exercised for AP/UO.
+build_consumer asset-pipeline-ASK - y separately-operated "$OWNER_PIN"
+record "NEG separately-operated omits required advisor-project-surface" 1 "missing required profile advisor-project-surface" mkwave asset-pipeline-ASK separately-operated
+build_consumer asset-pipeline-ASK advisor-project-surface y separately-operated "$OWNER_PIN"
+record "POS separately-operated carries advisor-project-surface" 0 "ALL CHECKS PASSED" mkwave asset-pipeline-ASK separately-operated
 
 # ---- OPTIONAL: real workspace map (path-driven, off by default) ----
 if [ -n "${REAL_ECOLOGY_MAP:-}" ] && [ -f "${REAL_ECOLOGY_MAP}" ]; then
