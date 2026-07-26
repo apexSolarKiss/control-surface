@@ -197,7 +197,8 @@
    "amended_by": [
     "#154 / 2f38427 (operating-surface boundary; 'unconsumed ingestion queue')",
     "#169 / b4a3793 (pre-ingestion -SUPERSEDED disposition; immutable-body/current-disposition invariant)",
-    "#177 / 7bdd0757dc701b5bbec760e908d3bf9b9780018f (four-event model; queue exit on recipient-side ingestion; logical multi-location queue; route-on-approval)"
+    "#177 / 7bdd0757dc701b5bbec760e908d3bf9b9780018f (four-event model; queue exit on recipient-side ingestion; logical multi-location queue; route-on-approval)",
+    "#177 / 70842f933adc7e126d8bb64157777deebd9c5b4e (route-on-approval/feed-later contract; LIFE-4c; registry arithmetic; complete failure-mode classes; bootstrap + manifest guards)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
