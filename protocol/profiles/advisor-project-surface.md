@@ -1,0 +1,22 @@
+# Profile — advisor-project-surface
+
+**Applies to:** `control-surface · asset-pipeline-ASK · urban-observatory` (the repos that currently home a hosted advisor Project).
+**Explicit exclusions:** `method-ASK · design-system-ASK · ASK · personal-context-system` — not because the invariant is wrong for them, but because they home no repo-advisor Project of their own. A repo that later stands one up adopts this profile then; do not pre-install it.
+**Not covered:** personal-context Projects and `-TMK` surfaces. They implement the same bootstrap-only invariant under the personal ADR and the PCS scaffold, on the other side of the wall. Shared invariant, separate owner — see the architecture doc's §Binding and cross-surface relation.
+
+*Owner explanation above is metadata and is NOT carried into a consumer. A consumer that adopts this profile carries only the fenced distributable body below, wrapped in `<!-- BEGIN profile: advisor-project-surface -->` / `<!-- END profile: advisor-project-surface -->` at byte parity.*
+
+<!-- BEGIN profile-body: advisor-project-surface -->
+## Advisor Project surface deployment
+
+- A hosted advisor Project for this repo is deployed **bootstrap-only**. The always-applied Instructions field carries only the pre-retrieval safety floor — what must bind before any fetch, and must still hold when every fetch fails. One mounted bootstrap carries the operative advisor contract and the exact live-index locator. The index and the canonicals are fetched live at the locators those carriers declare.
+- **Do not place operative advisor protocol in the Instructions field.** A size-capped, always-applied carrier cannot grow: past its ceiling, each addition is paid for by compressing an existing requirement — a preservation judgment made at install time, under space pressure, with no record of what was dropped.
+- **A requirement may leave a carrier only with a recorded disposition:** `MOVED` (naming the exact surviving carrier), `REVISED`, `RETIRED`, or `NOT-APPLICABLE`. `DROP-AS-DUPLICATE` without a named surviving carrier is deletion, not deduplication. A requirement no carrier holds and no disposition retired is unowned; unowned count must be zero. **The surface-overlay completion gate runs before a carrier is generated, not after it is installed** — an unowned requirement found at install time has already shipped.
+- **One standing mount per surface.** Do not mount a shared core plus a separate overlay — two mounts is another synchronization seam, and it makes connector-failure behavior harder to reason about. Share at the authoring layer; be self-contained at the runtime layer.
+- **Maintenance consequence.** An ordinary protocol change updates the bootstrap and remounts it. An ordinary index change updates the index canonical and remounts nothing. The Instructions field is repasted only when the invocation architecture itself changes.
+- **Generating a carrier is not conformance.** A surface is conformant only after the applicable acceptance tests pass, and they must be *exercised* rather than inspected — reading a carrier and concluding it would behave correctly is not a test result. **A7, connector-failure behavior, is the gate:** a surface that has never been observed failing safely has not demonstrated the property the thin floor exists to guarantee.
+- **Project UI mutation is ASK-owned.** Mounting or unmounting a Source, repasting the Instructions field, and changing Project settings are ASK's operations. The executor prepares exact carriers, installation steps, and rollback pairs; it does not perform the Project mutation. An advisor surface never mutates its own Project settings — that boundary is why the advisor is non-writing at all.
+- Requirements true only of one surface live in that surface's generated bootstrap, never in a shared body. **A surface that must deviate from the owner records an explicit disposition against the owner registry**; undocumented local divergence is drift, and it is indistinguishable from the compression this profile exists to prevent.
+
+Owner: `control-surface/docs/advisor-project-surface-architecture.md` — the normative requirement registry, placement contract, acceptance tests, and surface-overlay completion gate. Carriers are generated from `control-surface/templates/advisor-project-bootstrap.template.md`, `advisor-project-instructions.template.md`, and `_INDEX-project.template.md`. This profile binds the deployment shape; it does not restate the registry.
+<!-- END profile-body: advisor-project-surface -->

@@ -1101,6 +1101,33 @@
    "activated_by": null
   },
   {
+   "rule_id": "advisor-project-surface-deployment",
+   "scope_class": "profile",
+   "profile": "advisor-project-surface",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [
+    "control-surface",
+    "asset-pipeline-ASK",
+    "urban-observatory"
+   ],
+   "explicit_exclusions": [
+    "method-ASK",
+    "design-system-ASK",
+    "ASK",
+    "personal-context-system"
+   ],
+   "carrier_mode": "profile",
+   "source_anchor": "protocol/profiles/advisor-project-surface.md",
+   "failure_mode": "operative advisor protocol placed in a size-capped always-applied field, where each addition is paid for by compressing an existing requirement at install time with no record of what was dropped; and requirement loss propagating as a birth defect into surfaces instantiated afterwards",
+   "active_holds": [],
+   "status": "candidate",
+   "amended_by": [],
+   "note": "Semantic owner is docs/advisor-project-surface-architecture.md (registry, placement contract, acceptance tests, overlay-completion gate); this profile carries only the compact deployment obligation. applies_to tracks which repos home a hosted advisor Project, NOT tier or operating-surface class -- which is why it binds two separately-operated consumers. Excluded repos home no repo-advisor Project; a repo that stands one up adopts the profile then. Personal-context Projects and -TMK surfaces implement the same invariant under the personal ADR + PCS scaffold across the wall; shared invariant, separate owner, no merged authority.",
+   "proposed_by": "advisor ruling 1 (repo-advisor binding unit) relayed by ASK 2026-07-26",
+   "activated_by": null
+  },
+  {
    "rule_id": "memory-reconciliation-follows-durable-landing",
    "scope_class": "candidate",
    "authority_owner": "control-surface",

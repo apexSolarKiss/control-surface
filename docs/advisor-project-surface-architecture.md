@@ -113,6 +113,48 @@ _vN snapshot          the exact historical bytes
 Every bootstrap revision produces a semantic coverage delta in its **review record**. Prior deltas stay in
 snapshots and review history; they are never concatenated into the live entry point.
 
+## Binding and cross-surface relation
+
+This document is the **owner**. Owning a rule does not bind anyone to it — a consumer is bound only by a
+carrier it actually resolves. The binding carrier is the `advisor-project-surface` profile
+([`protocol/profiles/advisor-project-surface.md`](../protocol/profiles/advisor-project-surface.md), registered
+in [`protocol/manifest.json`](../protocol/manifest.json) as `advisor-project-surface-deployment`).
+
+```text
+owner        docs/advisor-project-surface-architecture.md   registry · placement · tests · gate
+carrier      protocol/profiles/advisor-project-surface.md   the compact distributable obligation
+bound        control-surface · asset-pipeline-ASK · urban-observatory
+generated    templates/advisor-project-{bootstrap,instructions}.template.md · _INDEX-project.template.md
+```
+
+The profile carries the **deployment shape** — bootstrap-only placement, the anti-loss invariant, the single
+standing mount, the maintenance consequence. It deliberately does not restate the 69-ID registry or the full
+bootstrap contract; those stay here, fetched at this path, and a consumer's carrier grows by one section
+rather than by this document's length.
+
+**Applicability follows the Project, not the tier.** A repo is in `applies_to` because it homes a hosted
+advisor Project — not because it is important, upstream, or directly operated. `method-ASK`,
+`design-system-ASK`, `ASK`, and `personal-context-system` are excluded on that test alone; a repo that later
+stands up an advisor Project adopts the profile then. The exclusion is a statement about deployment, never
+about whether the invariant is correct.
+
+Because `check.sh` derives required profiles from `applies_to`, a repo added to that list **fails its carrier
+check until it resolves the profile.** That gap is the intended fail-closed signal, not a defect: the interval
+between registering applicability and resolving the carrier is exactly the interval in which a consumer
+believes it is covered and is not.
+
+**Cross-surface relation.** Bootstrap-only connector deployment is a cross-surface architecture invariant, and
+this is not its only implementation. Personal-context Projects implement the same invariant under the personal
+ADR and the PCS scaffold; repo-advisor Projects implement it here, under this architecture and the
+`advisor-project-surface` profile. In both, the always-applied field carries only the pre-retrieval safety
+floor, one mounted bootstrap carries the operative contract and the exact live-index locator, and the index
+and canonicals are fetched live.
+
+Sharing the invariant does not merge authority, widen a wall, make either implementation the owner of the
+other, or require one bootstrap payload to cross surfaces. This document does not govern personal-context
+Projects, and it is not amended by changes to the personal ADR; the two implementations are reconciled by ASK
+as apex, not by either side reading the other.
+
 ---
 
 ## Normative requirement registry
