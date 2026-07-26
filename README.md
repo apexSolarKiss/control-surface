@@ -87,7 +87,7 @@ To start a new ASK project from this protocol repo, beginning from zero:
 
 10. Once bootstrap begins, the new repo's `AGENTS.md` governs execution.
 
-New projects run the adversarial-collaboration operating model described below. The retired split-execution model is not an option for new projects.
+New projects run the adversarial-collaboration operating model described below.
 
 For deeper context on the three phases (Instantiation → Bootstrap → Operational), see [`docs/project-instantiation-workflow.md`](docs/project-instantiation-workflow.md).
 
@@ -216,7 +216,7 @@ Templates in `templates/` are copyable starters. They are not live for this repo
 For a new ASK project:
 
 - Identify the project purpose, repo name, and initial structure.
-- The operating model is adversarial collaboration (ASK apex + advisor surface + execution surface). Model A is retired and is not an option.
+- Use the adversarial-collaboration operating model: ASK apex + advisor surface + execution surface.
 - Copy [`templates/AGENTS.template.md`](templates/AGENTS.template.md) into the new repo as `AGENTS.md` and adapt project-specific defaults.
 - Copy [`templates/grounding-note.template.md`](templates/grounding-note.template.md) into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads.
 - Optionally copy [`templates/architecture.template.md`](templates/architecture.template.md) into the new repo as `docs/architecture.md`.
@@ -232,14 +232,10 @@ For a new ASK project:
 The control-surface design is anchored to a short execution-protocol subset of the broader ASK workflow / method article line. The full chronological article index lives upstream in [`method-ASK/docs/articles.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/articles.md).
 
 - [*Beyond Vibe Coding: Constraining LLMs*](https://atomicspacekitten.substack.com/p/beyond-vibe-coding-constraining-llms) — the case for constrained LLMs and explicit rules; substrate for the discipline this repo operationalizes.
-- [*Lessons from the First Prototype Phase*](https://atomicspacekitten.substack.com/p/lessons-from-the-first-prototype) — the structural retrospective written when the split-execution model was retired; why the protocol's compensating rules exist.
+- [*Lessons from the First Prototype Phase*](https://atomicspacekitten.substack.com/p/lessons-from-the-first-prototype) — the structural retrospective that sharpened the protocol's constraints, review surfaces, and evidence discipline.
 - [*Adversarial Collaboration*](https://atomicspacekitten.substack.com/p/adversarial-collaboration) — the within-session multi-mind layer; the pattern behind this repo's two review windows and per-PR cadence.
 - [*From Conversation to Control Surface*](https://atomicspacekitten.substack.com/p/from-conversation-to-control-surface) — project inception from messy AI-mediated exploration; the recovered intent → validated constraint → repo sequence.
 - [*Three Agents Got Into an Argument // The Repo Won*](https://atomicspacekitten.substack.com/p/three-agents-got-into-an-argument) — the repo-as-arbiter operating rule: artifact-owning surface gets the final read on current file contents.
-
-## Historical provenance
-
-Retired Model-A artifacts — the external control-surface document, the ChatGPT-side and Codex-side startup prompts, and the mazeASK worked example — remain in the repository and its git history as frozen provenance under retired-status headers; they are not a current prompt, example, or operating path.
 
 ## License
 
