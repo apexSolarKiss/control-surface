@@ -76,7 +76,7 @@ Status classes: **root canonical** · **candidate / intake** · **working index*
 - The four repo canonicals are fetched from **GitHub / local git**, not Dropbox.
 - Instantiate the ledger row **only** where this advisor surface is authorized to read that operator-side path. Omit the row rather than naming a path the surface cannot resolve.
 - Manifest is normative; the ledger is live state. Do not read either as the other.
-- This stays a **map**: mount the index, not copies of these files.
+- This stays a **map**: fetch this index live at the bootstrap-declared locator; do not mount copies of the mapped files as current sources.
 
 ## Wall + search-hygiene rules
 

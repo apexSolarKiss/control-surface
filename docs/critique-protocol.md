@@ -11,9 +11,9 @@ There are two distinct kinds of prompt, and conflating them is a launch misfire:
 
 A critique takes a read-and-assess prompt **directly**. The read-reliably setup either is already true by construction (a filesystem executor) or is installed **once at the project level** (a connector advisor) — never re-pasted per invocation ahead of the critique prompt.
 
-## Advisor bootstrap lives in the GPT Project's Instructions
+## Advisor bootstrap lives at the Project level
 
-A GPT advisor surface is bootstrapped at the **Project level**, not by pasting an advisor prompt into each thread. The Project mounts one standing Source — that surface's **bootstrap** — and its Instructions field carries only the thin pre-retrieval floor. The advisor role + fail-closed read-path discipline is installed once at the Project-Instructions level; `templates/advisor-project-instructions.template.md` is the copyable master for that text.
+A GPT advisor surface is bootstrapped through two Project-level carriers: the **mounted surface bootstrap**, which carries the complete advisor contract, and the **thin Project Instructions floor**, which carries only the authority, wall, exact-source, and bootstrap-failure rules that must bind before any retrieval succeeds. Neither is pasted per thread. `templates/advisor-project-bootstrap.template.md` is the copyable master for the contract; `templates/advisor-project-instructions.template.md` for the floor.
 
 What the Project's **Sources** mount is the surface **bootstrap** — one standing Markdown file carrying the advisor contract and the exact locator for the live source index. The index itself (`templates/_INDEX-project.template.md`) is **fetched at that locator, not mounted**, and the canonicals are fetched at the locators the index declares. Deployment contract: [`advisor-project-surface-architecture.md`](advisor-project-surface-architecture.md).
 
