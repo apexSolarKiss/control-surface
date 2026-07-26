@@ -196,6 +196,17 @@ assert_local(){
   grep -qF -- 'read-path discipline is installed once at the Project-Instructions level' "$CRITDOC" && carrmiss="$carrmiss critique:{STALE carrier-assignment}"
   grep -qF -- 'advisor bootstrap §Verification' "$INSTDOC" || carrmiss="$carrmiss instantiation:{verification-pointer-moved}"
   grep -qF -- 'advisor-PI §Verification' "$INSTDOC" && carrmiss="$carrmiss instantiation:{STALE advisor-PI-verification-pointer}"
+  # 13b the critique protocol governs a SECOND deployment surface (the fresh mirror Project) and the ordinary
+  #     Sources posture. Its heading can read correctly while its body still teaches a mounted index or assigns
+  #     the full contract to the Instructions field — assert the corrected body, not just the heading.
+  for t in 'same mounted surface bootstrap' 'same thin Project Instructions floor' 'mount **only the surface bootstrap**' 'temporary, task-specific fallback'; do
+    grep -qF -- "$t" "$CRITDOC" || carrmiss="$carrmiss critique:{$t}"; done
+  for t in 'The Project Instructions carry the advisor bootstrap' 'repointed as the Project-Instructions master' 'should normally mount a **source index / path map**' 'mounted Sources are for bootstrap / source-index' 'identical mounted Sources + Project Instructions'; do
+    grep -qF -- "$t" "$CRITDOC" && carrmiss="$carrmiss critique:{STALE $t}"; done
+  # 13c the shared bootstrap template must stay surface-neutral and must not re-assert a blanket that the
+  #     reconstructed DISAGREE-3 rule revises.
+  grep -qF -- 'methodology question is closed externally' "$APBOOT" && carrmiss="$carrmiss bootstrap:{STALE surface-specific method-owner claim}"
+  grep -qF -- 'compiling next-step prompts' "$APBOOT" && carrmiss="$carrmiss bootstrap:{STALE blanket next-step-prompt ban (revised by DISAGREE-3)}"
   [ -z "$carrmiss" ] && OKAY "advisor-surface carrier conformance (no active carrier teaches the retired mounted-index shape)" || FAIL "advisor-surface carrier conformance:$carrmiss"
   # 14 advisor-surface anti-loss recovery — the lifecycle subrequirements recovered in the registry must actually be
   #    carried by the bootstrap, or the registry claims coverage the generated carrier does not provide.

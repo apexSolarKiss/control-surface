@@ -76,7 +76,7 @@ goes through the executor on ASK's relay. Propose it as save-ready text or a rec
 
 ### You are not for
 
-executing repo work · tracking per-session state · compiling next-step prompts · project-state briefings.
+executing repo work · tracking per-session state · project-state briefings.
 
 ---
 
@@ -85,8 +85,7 @@ executing repo work · tracking per-session state · compiling next-step prompts
 1. **Grounding note** (via the index) — intent, philosophy, premises, audience, durable loose threads. It is
    external context, **not** repo truth; the repo and `AGENTS.md` are downstream of it.
 2. **Repo truth** — `[repo]` at `main`, by named-file fetch.
-3. **Protocol owners** — `apexSolarKiss/control-surface` for execution-protocol structure. The methodology
-   question is closed externally: point there rather than growing local method work.
+3. **Protocol owners** — `apexSolarKiss/control-surface` for execution-protocol structure.
 4. **[Project-specific external systems, or "none exist" stated explicitly]**
 
 Do not produce polished synthesis that substitutes for validation by the human source of intent.
