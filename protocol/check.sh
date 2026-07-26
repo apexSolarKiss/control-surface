@@ -15,6 +15,8 @@ ROOTAGENTS="$ROOT/AGENTS.md"; TEMPLATE="$ROOT/templates/AGENTS.template.md"; FRA
 PROFDIR="$ROOT/protocol/profiles"; OVERLAY="$ROOT/templates/overlays/architecture-uncertain-rules.template.md"
 IDXTEMPLATE="$ROOT/templates/_INDEX-project.template.md"
 APITEMPLATE="$ROOT/templates/advisor-project-instructions.template.md"; INSTDOC="$ROOT/docs/project-instantiation-workflow.md"
+APBOOT="$ROOT/templates/advisor-project-bootstrap.template.md"; APARCH="$ROOT/docs/advisor-project-surface-architecture.md"
+INSTPROMPT="$ROOT/prompts/project-instantiation-initial-prompt.md"; CRITDOC="$ROOT/docs/critique-protocol.md"
 # immutable activated_by grammar (ERE): '#<PR> / <hex>[ (note)]' | '<hex>[ (note)]' | 'legacy: <text>'
 PROV_RE='^(#[0-9]+ / [0-9a-f]{7,40}( \(.*\))?|[0-9a-f]{7,40}( \(.*\))?|legacy: .+)$'
 fail=0
@@ -155,15 +157,67 @@ assert_local(){
     { grep -qF "$tok" "$ROOTAGENTS" && grep -qF "$tok" "$RUNBOOK"; } || topomiss="$topomiss $tok"; done
   [ -z "$topomiss" ] && OKAY "execution-topology receipt documented in local delta + runbook" || FAIL "execution-topology token(s) missing from local delta and/or runbook:$topomiss"
   # 11 advisor-retrieval-contract conformance — CLAUSE-SPECIFIC. A generic token that occurs in baseline read-path prose
-  #    (e.g. "fallback only") must not satisfy this: verify the exact-review paragraph in the advisor PI, the bundle role
-  #    in the _INDEX scratch row, and the exact-review route in the instantiation doc, each by exact phrase.
+  #    (e.g. "fallback only") must not satisfy this: verify the exact-review paragraph in the advisor BOOTSTRAP (the
+  #    operative contract; MOVED there from the advisor-PI template when the PI was thinned to the pre-retrieval floor
+  #    — see docs/advisor-project-surface-architecture.md §Placement contract), the bundle role in the _INDEX scratch
+  #    row, and the exact-review route in the instantiation doc, each by exact phrase.
   local advmiss="" ph
   local apiphr=('**Exact-byte review objects.**' 'named `-PROPOSED` review object' 'review bundle' 'reported hash' 'manual upload never bypasses a wall')
-  for ph in "${apiphr[@]}"; do grep -qF -- "$ph" "$APITEMPLATE" || advmiss="$advmiss advisor-PI:{$ph}"; done
+  for ph in "${apiphr[@]}"; do grep -qF -- "$ph" "$APBOOT" || advmiss="$advmiss advisor-bootstrap:{$ph}"; done
   grep -qF -- '`-PROPOSED` review objects/bundles' "$IDXTEMPLATE" || advmiss="$advmiss _INDEX:{bundle-role}"
   local instphr=('for exact-byte advisor review' 'mapped shared scratch' 'manual operator upload is fallback only')
   for ph in "${instphr[@]}"; do grep -qF -- "$ph" "$INSTDOC" || advmiss="$advmiss instantiation:{$ph}"; done
-  [ -z "$advmiss" ] && OKAY "advisor-retrieval-contract clauses present (advisor-PI + _INDEX + instantiation)" || FAIL "advisor-retrieval-contract clause(s) missing:$advmiss"
+  [ -z "$advmiss" ] && OKAY "advisor-retrieval-contract clauses present (advisor-bootstrap + _INDEX + instantiation)" || FAIL "advisor-retrieval-contract clause(s) missing:$advmiss"
+  # 12 advisor-surface deployment architecture — the PI template must carry ONLY the pre-retrieval floor, the bootstrap
+  #    template must exist and declare the index locator, and the registry must own the placement contract.
+  local depmiss="" t
+  [ -f "$APBOOT" ] || depmiss="$depmiss missing:advisor-project-bootstrap.template.md"
+  [ -f "$APARCH" ] || depmiss="$depmiss missing:advisor-project-surface-architecture.md"
+  grep -qF -- 'INDEX_CANONICAL_LOCATOR' "$APBOOT" || depmiss="$depmiss bootstrap:{index-locator}"
+  for t in 'PI-FLOOR' 'BOOTSTRAP' 'INDEX' 'SURFACE-OVERLAY'; do
+    grep -qF -- "$t" "$APARCH" || depmiss="$depmiss architecture:{$t}"; done
+  grep -qF -- 'is not deduplication' "$APARCH" || depmiss="$depmiss architecture:{anti-loss-invariant}"
+  for t in 'thin pre-bootstrap floor' 'single standing' 'Do not add operative protocol to this field'; do
+    grep -qF -- "$t" "$APITEMPLATE" || depmiss="$depmiss advisor-PI:{$t}"; done
+  grep -qF -- 'fetched, not mounted' "$IDXTEMPLATE" || depmiss="$depmiss _INDEX:{live-fetch-posture}"
+  [ -z "$depmiss" ] && OKAY "advisor-surface deployment architecture present (floor + bootstrap + live-fetched index + registry)" || FAIL "advisor-surface deployment clause(s) missing:$depmiss"
+  # 13 advisor-surface carrier conformance — NEGATIVE assertions. The deployment architecture can be present in the
+  #    owner docs while an active carrier still teaches the retired mounted-index shape; that combination is exactly
+  #    what a reader follows. Assert the corrected posture AND the absence of the superseded instruction.
+  local carrmiss=""
+  grep -qF -- 'single standing Markdown Source' "$INSTPROMPT" || carrmiss="$carrmiss instantiation-prompt:{bootstrap-single-standing-source}"
+  grep -qF -- "live-fetched at the bootstrap's exact locator" "$INSTPROMPT" || carrmiss="$carrmiss instantiation-prompt:{index-live-fetched}"
+  grep -qF -- "mounted as the advisor Project's primary Source" "$INSTPROMPT" && carrmiss="$carrmiss instantiation-prompt:{STALE mounted-primary-Source}"
+  grep -qF -- 'fetched, not mounted' "$IDXTEMPLATE" || carrmiss="$carrmiss _INDEX:{live-fetch-posture}"
+  grep -qF -- 'mount the index, not copies' "$IDXTEMPLATE" && carrmiss="$carrmiss _INDEX:{STALE mount-the-index}"
+  grep -qF -- 'Advisor bootstrap lives at the Project level' "$CRITDOC" || carrmiss="$carrmiss critique:{project-level-heading}"
+  grep -qF -- 'thin Project Instructions floor' "$CRITDOC" || carrmiss="$carrmiss critique:{thin-floor-named}"
+  grep -qF -- "Advisor bootstrap lives in the GPT Project's Instructions" "$CRITDOC" && carrmiss="$carrmiss critique:{STALE instructions-heading}"
+  grep -qF -- 'read-path discipline is installed once at the Project-Instructions level' "$CRITDOC" && carrmiss="$carrmiss critique:{STALE carrier-assignment}"
+  grep -qF -- 'advisor bootstrap §Verification' "$INSTDOC" || carrmiss="$carrmiss instantiation:{verification-pointer-moved}"
+  grep -qF -- 'advisor-PI §Verification' "$INSTDOC" && carrmiss="$carrmiss instantiation:{STALE advisor-PI-verification-pointer}"
+  # 13b the critique protocol governs a SECOND deployment surface (the fresh mirror Project) and the ordinary
+  #     Sources posture. Its heading can read correctly while its body still teaches a mounted index or assigns
+  #     the full contract to the Instructions field — assert the corrected body, not just the heading.
+  for t in 'same mounted surface bootstrap' 'same thin Project Instructions floor' 'mount **only the surface bootstrap**' 'temporary, task-specific fallback'; do
+    grep -qF -- "$t" "$CRITDOC" || carrmiss="$carrmiss critique:{$t}"; done
+  for t in 'The Project Instructions carry the advisor bootstrap' 'repointed as the Project-Instructions master' 'should normally mount a **source index / path map**' 'mounted Sources are for bootstrap / source-index' 'identical mounted Sources + Project Instructions'; do
+    grep -qF -- "$t" "$CRITDOC" && carrmiss="$carrmiss critique:{STALE $t}"; done
+  # 13c the shared bootstrap template must stay surface-neutral and must not re-assert a blanket that the
+  #     reconstructed DISAGREE-3 rule revises.
+  grep -qF -- 'methodology question is closed externally' "$APBOOT" && carrmiss="$carrmiss bootstrap:{STALE surface-specific method-owner claim}"
+  grep -qF -- 'compiling next-step prompts' "$APBOOT" && carrmiss="$carrmiss bootstrap:{STALE blanket next-step-prompt ban (revised by DISAGREE-3)}"
+  [ -z "$carrmiss" ] && OKAY "advisor-surface carrier conformance (no active carrier teaches the retired mounted-index shape)" || FAIL "advisor-surface carrier conformance:$carrmiss"
+  # 14 advisor-surface anti-loss recovery — the lifecycle subrequirements recovered in the registry must actually be
+  #    carried by the bootstrap, or the registry claims coverage the generated carrier does not provide.
+  local recmiss="" t
+  for t in 'routing-time historical evidence' 'Do not restore a receipt annotation' 'role marker is retained' 'route a separate handoff'; do
+    grep -qF -- "$t" "$APBOOT" || recmiss="$recmiss bootstrap:{$t}"; done
+  for t in 'LIFE-4a' 'LIFE-5a' 'LIFE-5b' 'LIFE-5c' 'Surface-overlay completion gate'; do
+    grep -qF -- "$t" "$APARCH" || recmiss="$recmiss architecture:{$t}"; done
+  grep -qF -- 'Orientation is on request, not by default' "$APBOOT" || recmiss="$recmiss bootstrap:{startup-orientation-gated}"
+  grep -qF -- 'no character limit' "$APBOOT" && recmiss="$recmiss bootstrap:{STALE no-character-limit}"
+  [ -z "$recmiss" ] && OKAY "advisor-surface anti-loss recovery carried (lifecycle subrequirements + overlay gate + startup posture)" || FAIL "advisor-surface recovery clause(s) missing:$recmiss"
 }
 
 validate_consumer(){
