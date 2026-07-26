@@ -1,6 +1,8 @@
 # _INDEX-\<project> // GPT Source Index (template)
 
-This is a copyable master for a project's **source index / path map** — the file a GPT (or Claude-in-chat) advisor Project mounts as its **primary Project Source**. Adapt it per project. The template lives in the protocol repo.
+This is a copyable master for a project's **source index / path map** — the retrieval map an advisor surface fetches **live** at the exact locator its mounted bootstrap declares. Adapt it per project. The template lives in the protocol repo.
+
+**Mount posture.** In healthy connector mode this file is **not mounted**. The advisor Project's single standing Markdown Source is that surface's bootstrap (`templates/advisor-project-bootstrap.template.md`); the bootstrap carries this index's exact locator and fetches it live, so an ordinary index revision needs no remount. Mount a copy only as connector-failure fallback, and retire it when live access returns. The placement contract is owned by [`docs/advisor-project-surface-architecture.md`](../docs/advisor-project-surface-architecture.md).
 
 **Instantiate as** (angle brackets resolve to real names — do not keep them in the actual filename):
 
@@ -20,7 +22,9 @@ Keep this file generic when adapting: fill the tables with the project's own can
 
 ## A map, not a mirror
 
-Mount **this index** into the advisor Project's Sources — **not** copies of the canonicals themselves. The canonicals stay live in Dropbox; the advisor fetches the current file at its path when a Dropbox connector is available. Mounted canonical copies, if any remain, are **fallback only** (connector-failure resilience) — never the live truth. This removes the mount-refresh burden: canonicals stay current at their Dropbox path, and this index is a slow-aging map, not a churny mirror.
+This index maps canonicals — it does not carry copies of them. The canonicals stay live in Dropbox; the advisor fetches the current file at its exact path. Mounted or uploaded copies of canonicals, if any remain, are **fallback only** (connector-failure resilience) — never the live truth.
+
+The same rule now applies to this file itself. It is **fetched, not mounted**: the mounted bootstrap declares its exact locator, and the advisor retrieves the current version each thread. That removes the last mount-refresh obligation — an ordinary path or status change here reaches every advisor surface with no UI operation at all.
 
 ## Read-path hierarchy
 

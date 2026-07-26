@@ -15,6 +15,7 @@ ROOTAGENTS="$ROOT/AGENTS.md"; TEMPLATE="$ROOT/templates/AGENTS.template.md"; FRA
 PROFDIR="$ROOT/protocol/profiles"; OVERLAY="$ROOT/templates/overlays/architecture-uncertain-rules.template.md"
 IDXTEMPLATE="$ROOT/templates/_INDEX-project.template.md"
 APITEMPLATE="$ROOT/templates/advisor-project-instructions.template.md"; INSTDOC="$ROOT/docs/project-instantiation-workflow.md"
+APBOOT="$ROOT/templates/advisor-project-bootstrap.template.md"; APARCH="$ROOT/docs/advisor-project-surface-architecture.md"
 # immutable activated_by grammar (ERE): '#<PR> / <hex>[ (note)]' | '<hex>[ (note)]' | 'legacy: <text>'
 PROV_RE='^(#[0-9]+ / [0-9a-f]{7,40}( \(.*\))?|[0-9a-f]{7,40}( \(.*\))?|legacy: .+)$'
 fail=0
@@ -155,15 +156,30 @@ assert_local(){
     { grep -qF "$tok" "$ROOTAGENTS" && grep -qF "$tok" "$RUNBOOK"; } || topomiss="$topomiss $tok"; done
   [ -z "$topomiss" ] && OKAY "execution-topology receipt documented in local delta + runbook" || FAIL "execution-topology token(s) missing from local delta and/or runbook:$topomiss"
   # 11 advisor-retrieval-contract conformance — CLAUSE-SPECIFIC. A generic token that occurs in baseline read-path prose
-  #    (e.g. "fallback only") must not satisfy this: verify the exact-review paragraph in the advisor PI, the bundle role
-  #    in the _INDEX scratch row, and the exact-review route in the instantiation doc, each by exact phrase.
+  #    (e.g. "fallback only") must not satisfy this: verify the exact-review paragraph in the advisor BOOTSTRAP (the
+  #    operative contract; MOVED there from the advisor-PI template when the PI was thinned to the pre-retrieval floor
+  #    — see docs/advisor-project-surface-architecture.md §Placement contract), the bundle role in the _INDEX scratch
+  #    row, and the exact-review route in the instantiation doc, each by exact phrase.
   local advmiss="" ph
   local apiphr=('**Exact-byte review objects.**' 'named `-PROPOSED` review object' 'review bundle' 'reported hash' 'manual upload never bypasses a wall')
-  for ph in "${apiphr[@]}"; do grep -qF -- "$ph" "$APITEMPLATE" || advmiss="$advmiss advisor-PI:{$ph}"; done
+  for ph in "${apiphr[@]}"; do grep -qF -- "$ph" "$APBOOT" || advmiss="$advmiss advisor-bootstrap:{$ph}"; done
   grep -qF -- '`-PROPOSED` review objects/bundles' "$IDXTEMPLATE" || advmiss="$advmiss _INDEX:{bundle-role}"
   local instphr=('for exact-byte advisor review' 'mapped shared scratch' 'manual operator upload is fallback only')
   for ph in "${instphr[@]}"; do grep -qF -- "$ph" "$INSTDOC" || advmiss="$advmiss instantiation:{$ph}"; done
-  [ -z "$advmiss" ] && OKAY "advisor-retrieval-contract clauses present (advisor-PI + _INDEX + instantiation)" || FAIL "advisor-retrieval-contract clause(s) missing:$advmiss"
+  [ -z "$advmiss" ] && OKAY "advisor-retrieval-contract clauses present (advisor-bootstrap + _INDEX + instantiation)" || FAIL "advisor-retrieval-contract clause(s) missing:$advmiss"
+  # 12 advisor-surface deployment architecture — the PI template must carry ONLY the pre-retrieval floor, the bootstrap
+  #    template must exist and declare the index locator, and the registry must own the placement contract.
+  local depmiss="" t
+  [ -f "$APBOOT" ] || depmiss="$depmiss missing:advisor-project-bootstrap.template.md"
+  [ -f "$APARCH" ] || depmiss="$depmiss missing:advisor-project-surface-architecture.md"
+  grep -qF -- 'INDEX_CANONICAL_LOCATOR' "$APBOOT" || depmiss="$depmiss bootstrap:{index-locator}"
+  for t in 'PI-FLOOR' 'BOOTSTRAP' 'INDEX' 'SURFACE-OVERLAY'; do
+    grep -qF -- "$t" "$APARCH" || depmiss="$depmiss architecture:{$t}"; done
+  grep -qF -- 'is not deduplication' "$APARCH" || depmiss="$depmiss architecture:{anti-loss-invariant}"
+  for t in 'thin pre-bootstrap floor' 'single standing' 'Do not add operative protocol to this field'; do
+    grep -qF -- "$t" "$APITEMPLATE" || depmiss="$depmiss advisor-PI:{$t}"; done
+  grep -qF -- 'fetched, not mounted' "$IDXTEMPLATE" || depmiss="$depmiss _INDEX:{live-fetch-posture}"
+  [ -z "$depmiss" ] && OKAY "advisor-surface deployment architecture present (floor + bootstrap + live-fetched index + registry)" || FAIL "advisor-surface deployment clause(s) missing:$depmiss"
 }
 
 validate_consumer(){

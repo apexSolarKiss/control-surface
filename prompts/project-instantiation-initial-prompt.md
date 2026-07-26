@@ -70,7 +70,7 @@ That prompt should include:
 - initial repo structure
 - which executor is attached as the repo's execution surface
 - which templates from `templates/` will be adopted
-- whether an external advisor surface is planned and, if so, **both advisor-surface artifacts**: the adapted `templates/advisor-project-instructions.template.md` installed once into the advisor Project's Instructions, and the source-index map `<project>-EXTERNAL/_INDEX-<project>.md` (from `templates/_INDEX-project.template.md`) mounted as the advisor Project's primary Source — the instructions point at the mounted index as the first read
+- whether an external advisor surface is planned and, if so, **all three advisor-surface artifacts**: the generated surface bootstrap (`templates/advisor-project-bootstrap.template.md`), the thin Instructions floor (`templates/advisor-project-instructions.template.md`) installed once into the advisor Project's Instructions, and the source-index map `<project>-EXTERNAL/_INDEX-<project>.md` (from `templates/_INDEX-project.template.md`) mounted as the advisor Project's primary Source — the instructions point at the mounted index as the first read
 - where the external grounding note will live (path outside the repo)
 - which repo-local docs should be created first after repo creation
 - the learning disposition for each persistent claim instantiation surfaced — visible repo owner · grounding note · operator ledger · no retention · or a private-persistent candidate pending separate ASK authorization. Report dispositions; do not prescribe a list of private-memory files to create.

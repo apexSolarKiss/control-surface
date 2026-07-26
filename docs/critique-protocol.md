@@ -13,9 +13,9 @@ A critique takes a read-and-assess prompt **directly**. The read-reliably setup 
 
 ## Advisor bootstrap lives in the GPT Project's Instructions
 
-A GPT advisor surface is bootstrapped by the **GPT Project's Instructions**, not by pasting an advisor prompt into each thread. The advisor role + fail-closed read-path discipline is installed once at the Project-Instructions level; `templates/advisor-project-instructions.template.md` is the copyable master for that text.
+A GPT advisor surface is bootstrapped at the **Project level**, not by pasting an advisor prompt into each thread. The Project mounts one standing Source — that surface's **bootstrap** — and its Instructions field carries only the thin pre-retrieval floor. The advisor role + fail-closed read-path discipline is installed once at the Project-Instructions level; `templates/advisor-project-instructions.template.md` is the copyable master for that text.
 
-What the Project's **Sources** mount is a **source index / path map**, not copies of the canonicals — `templates/_INDEX-project.template.md` is the reusable master for that map (instantiated as `<project>-EXTERNAL/_INDEX-<project>.md`). The index lists the canonical Dropbox paths, their status classes, and the wall rules; the advisor reads it first, then fetches canonicals live from Dropbox by exact path (mounted copies are fallback only). This is the concrete "mount a map, not a mirror" form the advisor read-path discipline assumes.
+What the Project's **Sources** mount is the surface **bootstrap** — one standing Markdown file carrying the advisor contract and the exact locator for the live source index. The index itself (`templates/_INDEX-project.template.md`) is **fetched at that locator, not mounted**, and the canonicals are fetched at the locators the index declares. Deployment contract: [`advisor-project-surface-architecture.md`](advisor-project-surface-architecture.md).
 
 **Why once at the project level, not per thread:** re-pasting the advisor prompt into a Project that already holds a prior version in its thread history makes the model *review the revision* instead of *adopt the role* — a launch misfire that Project Instructions sidestep. The advisor discipline (role + fail-closed connector read-path) is the durable asset; this is a relocation of *where* it lives, not a change to *what* it says.
 
@@ -61,5 +61,6 @@ So the rule is: **the connector advisor fetches the package source directly when
 - `prompts/repo-critique-initial-prompt.md` · `prompts/ecology-critique-initial-prompt.md` — what to read and assess (single repo · whole ecology).
 - `prompts/repo-critique-synthesis-prompt.md` · `prompts/ecology-critique-synthesis-prompt.md` — fold a second independent critique into an advisory plan.
 - `prompts/repo-critique-execution-prompt.md` · `prompts/ecology-critique-execution-prompt.md` — hand the plan back to the execution surface for scoped implementation.
-- `templates/advisor-project-instructions.template.md` — the advisor bootstrap master installed once into a GPT Project's Instructions.
+- `templates/advisor-project-bootstrap.template.md` — the full advisor contract, mounted once per advisor Project.
+- `templates/advisor-project-instructions.template.md` — the thin pre-bootstrap floor installed in the Project Instructions field.
 - `prompts/claude-code-initial-prompt.md` — the working-session bootstrap (distinct from critique instantiation).
