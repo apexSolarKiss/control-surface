@@ -163,12 +163,24 @@ assert_local(){
   #    operative contract; MOVED there from the advisor-PI template when the PI was thinned to the pre-retrieval floor
   #    — see docs/advisor-project-surface-architecture.md §Placement contract), the bundle role in the _INDEX scratch
   #    row, and the exact-review route in the instantiation doc, each by exact phrase.
+  #    The transport-discipline clauses (#176) are guarded here too: an amendment that removes the pre-PR
+  #    condition, the raw-byte rung, the exact-byte no-courier criterion, or the one-alternate cap must FAIL,
+  #    not pass silently. Each phrase below is load-bearing; do not relax one to a generic token.
   local advmiss="" ph
-  local apiphr=('**Exact-byte review objects.**' 'named `-PROPOSED` review object' 'review bundle' 'reported hash' 'manual upload never bypasses a wall')
+  local apiphr=('**Exact-byte review objects.**' 'named `-PROPOSED` review object' 'review bundle' 'reported hash' 'manual upload never bypasses a wall' \
+                'is not a request for your review' 'raw file bytes' 'exact bytes remain retrievable' 'connector-bounded alternate representation' 'stop and report both failures')
   for ph in "${apiphr[@]}"; do grep -qF -- "$ph" "$APBOOT" || advmiss="$advmiss advisor-bootstrap:{$ph}"; done
   grep -qF -- '`-PROPOSED` review objects/bundles' "$IDXTEMPLATE" || advmiss="$advmiss _INDEX:{bundle-role}"
-  local instphr=('for exact-byte advisor review' 'mapped shared scratch' 'manual operator upload is fallback only')
+  local instphr=('for exact-byte advisor review' 'mapped shared scratch' 'manual operator upload is fallback only' \
+                 'only on explicit ASK request' 'exact path → raw bytes → one bounded alternate representation' 'not exact-byte availability')
   for ph in "${instphr[@]}"; do grep -qF -- "$ph" "$INSTDOC" || advmiss="$advmiss instantiation:{$ph}"; done
+  # shared-canonical + resolved-root transport clauses — the rule text itself, not only its downstream carriers
+  local sharedphr=('**Review-window routing.**' '**Pre-PR publication condition.**' '**Object reachability is distinct from representation quality.**' \
+                   '**Retrieval order.**' '**ASK is the authority relay, not the byte courier.**' '**Bounded fallback.**' 'exact bytes remain retrievable through the authorized mapped route')
+  for ph in "${sharedphr[@]}"; do
+    grep -qF -- "$ph" "$SHARED"    || advmiss="$advmiss shared:{$ph}"
+    grep -qF -- "$ph" "$ROOTAGENTS" || advmiss="$advmiss root-carrier:{$ph}"
+  done
   [ -z "$advmiss" ] && OKAY "advisor-retrieval-contract clauses present (advisor-bootstrap + _INDEX + instantiation)" || FAIL "advisor-retrieval-contract clause(s) missing:$advmiss"
   # 12 advisor-surface deployment architecture — the PI template must carry ONLY the pre-retrieval floor, the bootstrap
   #    template must exist and declare the index locator, and the registry must own the placement contract.

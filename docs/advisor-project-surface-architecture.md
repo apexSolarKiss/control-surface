@@ -409,10 +409,14 @@ Then, in a **fresh** advisor thread on that surface:
 6  make no claim that the extracted view was itself exact
 ```
 
-A run fails if the advisor reports a byte defect that is only a rendering artifact, escalates to upload while
-the mapped path still resolves, or returns a hash it did not compute from raw bytes. Steps 2 and 6 are scored
-independently of step 4: detecting the lossy view is the property under test, and a correct hash obtained
-without noticing the stripped markup is a partial pass, not a pass.
+A run fails if the advisor reports a byte defect that is only a rendering artifact, requests manual upload
+before exhausting raw-byte retrieval and the one bounded alternate representation, requests upload while exact
+bytes remain retrievable through the mapped route, or returns a hash it did not compute from raw bytes. **A
+path resolving only to metadata or a lossy inspection view does not itself make upload escalation a failure** —
+the test binds on exact-byte retrievability and on the ladder being exhausted, never on the path resolving.
+
+Steps 2 and 6 are scored independently of step 4: detecting the lossy view is the property under test, and a
+correct hash obtained without noticing the stripped markup is a partial pass, not a pass.
 
 ## Surface-overlay completion gate
 
