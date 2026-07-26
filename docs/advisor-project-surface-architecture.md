@@ -130,7 +130,7 @@ generated    templates/advisor-project-{bootstrap,instructions}.template.md · _
 ```
 
 The profile carries the **deployment shape** — bootstrap-only placement, the anti-loss invariant, the single
-standing mount, the maintenance consequence. It deliberately does not restate the 69-ID registry or the full
+standing mount, the maintenance consequence. It deliberately does not restate the full requirement registry or the full
 bootstrap contract; those stay here, fetched at this path, and a consumer's carrier grows by one section
 rather than by this document's length.
 
