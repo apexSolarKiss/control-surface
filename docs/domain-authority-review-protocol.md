@@ -24,7 +24,7 @@ review mode  ≠  return mode  ≠  authority
 ```
 
 - **Review mode** — how the review is conducted: lightweight gut-check, bounded decision, guided decision interview, guided artifact review. Extensible examples, not a closed taxonomy.
-- **Return mode** — how the result travels: direct operator relay, structured handoff, or provisional (nothing operative travels yet).
+- **Return mode** — how the result travels: direct operator relay, structured handoff, or provisional (nothing operative travels yet). Return mode is semantic. Where it requires an artifact to be physically written somewhere, that write is a separately declared grant (§Return transport), never an implication of the mode.
 - **Authority** — the binding scope of the judgment: advisory, delegated-binding within a named scope, or apex-level where the same person also owns the project intent.
 
 Do not bind one review mode to one mandatory return mode, and do not infer authority from either.
@@ -46,13 +46,49 @@ Do not bind one review mode to one mandatory return mode, and do not infer autho
 8. **Exact-wording preservation.** Where a decision's exact wording is load-bearing (a ratified formulation, a named constraint), it travels verbatim; the relay does not paraphrase it into approximation.
 9. **Advisor / generated-thread non-authorization.** A review surface — an advisor connector or a generated thread — elicits and preserves judgment; it cannot supply the answer or self-authorize. Capability is not authorization; every write goes through the executor on the operator's relay (`AGENTS.md` carries the git-workflow relay; [`docs/critique-protocol.md`](critique-protocol.md) carries the advisor read-path discipline).
 10. **Routing.** Every review names its return recipient, its execution target, and its closure / recourse route.
+11. **Return transport is a declared grant, not an implication.** A return mode describes how judgment travels; it never authorizes a write. Where a return produces a physical artifact, the provider, the one exact destination, the confirmation trigger, the collision behavior, and the receipt are declared before first use — and the grant is create-only and transport-only (§Return transport).
+
+## Return transport
+
+Naming a return recipient (invariant 10) says who the result is *for*. It does not say who may write what, where. When a return mode requires a physical artifact — a file created on a surface the reviewer or their tooling can reach — that write is a **separate, explicitly declared grant**.
+
+A return-transport grant is bounded to create-only, and names before first use:
+
+```text
+provider              the connector, service, or surface performing the write
+destination           one exact inbox path — not a folder tree, not a search result
+admissible payload    the confirmed return body, and nothing else
+confirmation trigger  what must be true before the write is permitted
+collision behavior    target exists >> stop and ask
+receipt               path, byte size, and provider file ID where one exists
+fallback              what happens when the provider is unavailable
+```
+
+Outside the grant, always:
+
+```text
+overwrite · update · rename · move · delete
+create a folder · create a shared or public link
+write anywhere but the exact destination
+attach, strip, or alter a lifecycle marker after the write
+report a failed write as saved
+```
+
+**The grant is transport only.** It confers no ingestion, absorption, adoption, implementation, publication, or closure authority. It does not soften invariant 9: a surface permitted to create a return artifact still cannot supply the judgment or self-authorize its content. A project that runs its returns by direct operator relay needs no grant at all — declaring `none` is the expected answer, not a gap.
+
+**Two boundaries this section does not cross.**
+
+- **Marker and queue lifecycle.** What a lifecycle marker means, when it attaches, how an item moves through and exits an intake queue, and what evidence proves ingestion are owned elsewhere ([method-ASK](https://github.com/apexSolarKiss/method-ASK) `docs/source-of-intent.md`; `AGENTS.md` §Inbound Handoff TBI Marker). This section owns only who may create which file, where. The two answer different questions and must not be merged into one rule.
+- **Reviewer format and package shape.** A declared destination, a collision rule, and a receipt are *authorization* mechanics, and they are what this section adds. A closed field taxonomy, a universal package shape, and universal artifact classes remain **held** (§The review profile) until a second implemented instance earns them.
+
+**Open.** Whether a standing profile may pre-authorize an entire *class* of returns, rather than requiring per-artifact approval of the recipient-facing substance, is unsettled. Until it is settled, a standing grant authorizes the **route**; it does not authorize the **substance** of any particular return.
 
 ## The review profile
 
 A project instantiates `templates/domain-authority-review-profile.template.md`. The profile splits by aging rate:
 
-- **Standing (slow-aging) fields** — project apex / decision owner, architect-operator, the domain authority and its named domain, authority scope, internal / external relationship, confidentiality / disclosure posture, authorized evidence access, return recipient, execution target, closure / recourse route, and any local package / marker conventions. These change rarely.
-- **Per-review (fast-aging) stage contract** — the current lifecycle / method stage, the fixed target or question, the decisions open in this review, the commitments held or out of scope, the review mode, the expected return mode, exact-wording requirements, and what evidence is supplied versus unavailable. These are set per review request.
+- **Standing (slow-aging) fields** — project apex / decision owner, architect-operator, the domain authority and its named domain, authority scope, internal / external relationship, confidentiality / disclosure posture, authorized evidence access, return recipient, execution target, closure / recourse route, the return-transport grant or its explicit absence, and any local package / marker conventions. These change rarely.
+- **Per-review (fast-aging) stage contract** — the current lifecycle / method stage, the fixed target or question, the decisions open in this review, the commitments held or out of scope, the review mode, the expected return mode, whether this return requires a transport write, exact-wording requirements, and what evidence is supplied versus unavailable. These are set per review request.
 
 The profile is a **minimum, explicitly extensible contract.** Add the fields a project needs; do not freeze the schema. Held until a second implemented project/profile instance pressure-tests the contract: a closed field taxonomy, a universal package shape, universal artifact classes, and any reviewer-role-design formula (for example a fixed "system owns completeness / expert owns judgment" split) or input-firmness taxonomy not already grounded in method doctrine.
 
