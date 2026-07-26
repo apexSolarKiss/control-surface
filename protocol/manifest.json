@@ -1123,7 +1123,8 @@
    "active_holds": [],
    "status": "active",
    "amended_by": [
-    "#174 / 8a7e022b3be61f36a0449aff192311f6e238eb5d"
+    "#174 / 8a7e022b3be61f36a0449aff192311f6e238eb5d",
+    "#174 / 7db29001941e3de18c6a6fc4907f55b168acb04b"
    ],
    "note": "Semantic owner is docs/advisor-project-surface-architecture.md (registry, placement contract, acceptance tests, overlay-completion gate); this profile carries only the compact deployment obligation. applies_to tracks which repos home a hosted advisor Project, NOT tier or operating-surface class -- which is why it binds two separately-operated consumers. Excluded repos home no repo-advisor Project; a repo that stands one up adopts the profile then. Personal-context Projects implement the same invariant under the personal ADR + PCS scaffold across the wall. Role-specific -TMK surfaces remain outside this profile; their deployment is separately owned, and no migration or conformance is inferred by symmetry.",
    "proposed_by": null,
