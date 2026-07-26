@@ -136,9 +136,25 @@ For external context, read the grounding note. Then read whatever templates, pro
 ## Inbound Handoff TBI Marker
 <!-- rule-id: inbound-tbi-marker -->
 
-When a routed handoff memo in a shared intake carries the `-TBI.md` suffix, treat the suffix as ASK ingestion-state only: a received handoff awaiting ingestion, not a statement about absorption. When ASK feeds that memo into the active surface, the first recipient-side action is to rename the file in place to remove `-TBI`; do not edit the memo body. Then classify the memo. When classification produces a durable action, hold, rejection, or route, record the required closure in scratch. Copy + suffix do not authorize implementation.
+When a routed handoff memo in a shared intake carries the `-TBI.md` suffix, treat the suffix as ASK ingestion-state only: a received handoff awaiting ingestion, not a statement about absorption. When the recipient active surface takes that memo up, its first action is to rename the file in place to remove `-TBI`; do not edit the memo body. Then classify the memo. When classification produces a durable action, hold, rejection, or route, record the required closure in scratch. Copy + suffix do not authorize implementation.
 
-`-TBI` marks material that ASK has saved but has not yet fed into the operating surface responsible for ingesting it. It is an unconsumed ingestion-queue marker — not a repo-ownership marker and not a pending-action marker. That is why the suffix is struck **on ingestion** rather than at absorption: the item leaves the queue when it is fed in.
+**Route on approval; feed/ingest later.** Once ASK approves a recipient-facing handoff memo's substance, the origin routes the recipient `-TBI` copy immediately unless ASK explicitly directs that routing itself be held. Routing is complete when the exact copy exists at the declared intake path. Routing is not feeding or ingestion: it places the artifact in ASK's logical unconsumed feed queue, and ASK separately decides when to feed it into the recipient's active surface. Do not defer routing until the recipient is ready, its workload clears, or a later operator pass. This timing rule expands no write authority: use a declared ingress aperture where one exists; otherwise return the exact recipient artifact to ASK immediately for routing.
+
+**Four events, not two.** A cross-surface handoff passes through four distinct events, each with its own actor and its own evidence:
+
+```text
+routing     the origin makes material durably available in the recipient's intake
+            — candidate availability, nothing more
+feeding     ASK hands the material to the recipient's active surface — the operator-side act
+ingestion   the recipient surface takes it up, evidenced by striking `-TBI` — the recipient-side act
+absorption  the recipient classifies and records any required durable disposition
+```
+
+Collapsing any adjacent pair is the failure this rule corrects. **Feeding and ingestion are paired but not atomic:** feeding is ASK's act, ingestion is the recipient's, and a feed can fail, be deferred, or be superseded before the recipient acts. Feeding therefore expresses the *intent* to have the material ingested and is never itself ingestion evidence — **queue exit occurs on recipient-side ingestion, not on the feed attempt.** Ingestion is likewise not absorption, and absorption is not implementation authority.
+
+`-TBI` marks material that ASK has saved but that the operating surface responsible for ingesting it has not yet taken up. It is an unconsumed ingestion-queue marker — not a repo-ownership marker and not a pending-action marker. That is why the suffix is struck **on ingestion** rather than at absorption: the item leaves the queue when the recipient takes it up, not when ASK feeds it in. A memo that has been fed but not yet taken up is still queued, and its marker is telling the truth.
+
+**The queue is logical, not a folder.** The unconsumed feed queue may occupy more than one physical location — an ASK-side staging area, an origin's scratch space, a transit surface, and the recipient's declared intake path. The `-TBI` marker attaches when the artifact **enters the queue**, wherever that is; relocation *within* the queue is not a lifecycle event and neither applies nor re-applies a marker. Arriving in the intake folder is a move within the queue, not an entry into it and not an exit from it.
 
 Pre-ingestion supersession — removing `-TBI` is not the only way an active handoff leaves the unconsumed queue. Before ingestion, ASK may instead retire it by replacing `-TBI` with `-SUPERSEDED`. The `-SUPERSEDED` artifact itself was never ingested and never absorbed, carries no pending work, and remains in the intake only as lineage — typically beside an active successor, which carries its own `-TBI`. Active queue membership therefore has two exits: `-TBI` removed with no replacement marker means **ingested**; `-TBI` replaced by `-SUPERSEDED` means **retired before ingestion, unconsumed**. Neither disposition authorizes implementation, and a `-SUPERSEDED` artifact is not ingested, reactivated, or renamed off merely because it remains physically present in the intake folder.
 
