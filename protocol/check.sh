@@ -227,7 +227,7 @@ assert_local(){
   local recmiss="" t
   for t in 'routing-time historical evidence' 'Do not restore a receipt annotation' 'role marker is retained' 'route a separate handoff'; do
     grep -qF -- "$t" "$APBOOT" || recmiss="$recmiss bootstrap:{$t}"; done
-  for t in 'LIFE-4a' 'LIFE-4b' 'LIFE-5a' 'LIFE-5b' 'LIFE-5c' 'Surface-overlay completion gate'; do
+  for t in 'LIFE-4a' 'LIFE-4b' 'LIFE-4c' 'LIFE-5a' 'LIFE-5b' 'LIFE-5c' 'Surface-overlay completion gate'; do
     grep -qF -- "$t" "$APARCH" || recmiss="$recmiss architecture:{$t}"; done
   grep -qF -- 'Orientation is on request, not by default' "$APBOOT" || recmiss="$recmiss bootstrap:{startup-orientation-gated}"
   grep -qF -- 'no character limit' "$APBOOT" && recmiss="$recmiss bootstrap:{STALE no-character-limit}"
@@ -237,14 +237,34 @@ assert_local(){
   #    carrier still attributes queue exit to the feed attempt. The rule is only conformant when both halves hold:
   #    stating the four events while a stale "leaves the queue when it is fed in" survives elsewhere is the defect.
   local fevmiss="" ph
-  local fevphr=('**Four events, not two.**' '**Route on approval.**' 'queue exit occurs on recipient-side ingestion, not on the feed attempt' \
-                'paired but not atomic' '**The queue is logical, not a folder.**' 'relocation *within* the queue is not a lifecycle event' \
-                'absorption is not implementation authority')
+  local fevphr=('**Four events, not two.**' '**Route on approval; feed/ingest later.**' \
+                'queue exit occurs on recipient-side ingestion, not on the feed attempt' 'paired but not atomic' \
+                '**The queue is logical, not a folder.**' 'relocation *within* the queue is not a lifecycle event' \
+                'absorption is not implementation authority' 'ASK separately decides when to feed it' \
+                'expands no write authority')
   for ph in "${fevphr[@]}"; do
     grep -qF -- "$ph" "$SHARED"     || fevmiss="$fevmiss shared:{$ph}"
     grep -qF -- "$ph" "$ROOTAGENTS" || fevmiss="$fevmiss root-carrier:{$ph}"
   done
-  grep -qF -- 'Four events, not two.' "$APBOOT" || fevmiss="$fevmiss bootstrap:{four-event model}"
+  # the GENERATED advisor carrier must carry the operative sentences, not merely the headings — a bootstrap that
+  # keeps "Four events, not two." while losing the obligations under it is the silent-weakening failure mode.
+  local bootphr=('Four events, not two.' 'Route on approval; feed/ingest later.' \
+                 'queue exit occurs on recipient-side ingestion, never on the feed attempt' \
+                 'intent to ingest is not evidence of completed ingestion' \
+                 'relocation within the queue is not a lifecycle event' \
+                 'ASK separately controls when to feed the routed artifact' \
+                 'grants no new write authority')
+  # the bootstrap template is hard-wrapped, so an operative sentence spans line breaks; flatten before matching or
+  # a line-based fixed-string test silently fails on prose that is present and correct.
+  local bootflat; bootflat=$(tr '\n' ' ' < "$APBOOT" | tr -s ' ')
+  for ph in "${bootphr[@]}"; do
+    printf '%s' "$bootflat" | grep -qF -- "$ph" || fevmiss="$fevmiss bootstrap:{$ph}"; done
+  # the manifest failure_mode must name the full class set this rule compensates for
+  for ph in 'routing collapsed into feeding' 'feeding collapsed into ingestion' \
+            'ingestion misread as automatic absorption or normative adoption' \
+            'ASK deprived of asynchronous routed-vs-fed queue control' \
+            'route-on-approval misread as cross-wall write authority'; do
+    jq -r '.rules[]|select(.rule_id=="inbound-tbi-marker")|.failure_mode' "$MANIFEST" | grep -qF -- "$ph" || fevmiss="$fevmiss manifest:{$ph}"; done
   local stale
   for stale in 'the item leaves the queue when it is fed in' 'has not yet fed into the operating surface' 'When ASK feeds that memo into the active surface'; do
     grep -rqF -- "$stale" "$SHARED" "$ROOTAGENTS" "$APBOOT" "$PROFDIR" && fevmiss="$fevmiss STALE-feed-exit:{$stale}"; done

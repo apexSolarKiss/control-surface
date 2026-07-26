@@ -171,6 +171,12 @@ no pending work, lineage only. The received body is **byte-immutable**; the file
 disposition, and any closure or current-status record must agree with it rather than rewrite the body. If a
 `-TBI` target is renamed, superseded, or gone, route a **new** memo; never update the old one.
 
+**Route on approval; feed/ingest later.** Once ASK approves recipient-facing handoff substance, route the
+recipient `-TBI` copy immediately unless routing itself is explicitly held. Routing is not feeding or
+ingestion; ASK separately controls when to feed the routed artifact. This timing rule grants no new write
+authority: use a declared ingress path or return the exact artifact to ASK or the executor immediately for
+routing.
+
 **Four events, not two.** Routing makes material available in the intake · feeding is ASK handing it to an
 active surface · ingestion is the recipient taking it up, evidenced by striking `-TBI` · absorption is the
 later classification. Feeding and ingestion are paired but **not atomic** — queue exit occurs on

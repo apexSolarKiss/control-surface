@@ -229,7 +229,8 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | LIFE-3 | Filename conventions: dated scratch names · `Title vN.md` frozen · canonical-unversioned edits in place then a byte-identical `_vN` snapshot. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | LIFE-4 | `-TBI` active intake · unmarked ingested · `-SUPERSEDED` retired-unconsumed; the received body is byte-immutable and the filename marker carries current disposition. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | LIFE-4a | A sender-authored in-body status is **routing-time historical evidence**. Current status, receipt annotation, and successor linkage never enter the received body — they live in the filename marker and any separate current-status or lineage record. Do not restore a received-file receipt annotation. | shared protocol | BOOTSTRAP | RESTORE | ABSENT | subrequirement of the owner rule, not carried by LIFE-4 alone |
-| LIFE-4b | A handoff passes through **four** events — routing · feeding · ingestion · absorption — each with its own actor and its own evidence. Feeding and ingestion are paired but **not atomic**: queue exit occurs on recipient-side ingestion, never on the feed attempt, and intent to ingest is not evidence of completed ingestion. The feed queue is **logical** and may span locations; relocation within it is not a lifecycle event. | shared protocol | BOOTSTRAP | RESTORE | ABSENT | subrequirement of the owner rule; conforms `method-ASK#148` |
+| LIFE-4b | A handoff passes through **four** events — routing · feeding · ingestion · absorption — each with its own actor and its own evidence. Feeding and ingestion are paired but **not atomic**: queue exit occurs on recipient-side ingestion, never on the feed attempt, and intent to ingest is not evidence of completed ingestion. The feed queue is **logical** and may span locations; relocation within it is not a lifecycle event. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | new doctrine conforming `method-ASK#148`; created after the 2026-07-25 audit, so no deployment was observed |
+| LIFE-4c | Approved recipient-facing handoff substance routes immediately unless routing itself is explicitly held. Routing ≠ feeding/ingestion; ASK separately controls feed timing. The timing rule grants **no new write authority** — use a declared ingress aperture, or return the exact artifact for routing. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | separable from LIFE-4b: one is the event model, this is the routing-timing obligation |
 | LIFE-5 | `-PTX` is an artifact-role marker; `_vN` indexes the transcript artifact; neither confers lifecycle state or authority; PTX progression is ASK-owned. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | LIFE-5a | The `-PTX` role marker is **retained** throughout any version lineage. The PTX files are themselves the lineage; they receive no separate canonical-plus-snapshot chain. | shared protocol | BOOTSTRAP | RESTORE | ABSENT | |
 | LIFE-5b | A PTX is **not** a handoff, approval, execution instruction, or ingestion-state marker. Do not absorb one as project truth without classification. | shared protocol | BOOTSTRAP | RESTORE | ABSENT | |
@@ -318,18 +319,18 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 ## Coverage report — this revision
 
 ```text
-registry IDs                       72   = 65 shared + 6 surface overlays + 1 retired shared requirement
+registry IDs                       74   = 67 shared + 6 surface overlays + 1 retired shared requirement
 
 placement (shared IDs; co-homed IDs counted in each declared home)
   PI-FLOOR                         10
-  BOOTSTRAP                        63
+  BOOTSTRAP                        65
   INDEX                             4
   SURFACE-OVERLAY                   6   (5 active + 1 retired overlay)
   RETIRED                           2   RET-1 shared · OVL-AP-2 overlay — each with a recorded reason
   NOT-APPLICABLE                    0
 
 ruling (shared IDs)
-  PRESERVE                         52
+  PRESERVE                         54
   RESTORE                           9   READ-3 · REVIEW-7 · DISAGREE-1 · DISAGREE-2 · POSTURE-3
                                         · LIFE-4a · LIFE-5a · LIFE-5b · LIFE-5c
   REVISE                            4   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2
@@ -343,9 +344,10 @@ deployed presence at the 2026-07-25 audit (shared IDs)
                                         (rule kept, reason/criterion lost) · LIFE-4a and the three LIFE-5
                                         subrequirements (owner-rule detail not carried by the coarse rows)
   TEMPLATE-ONLY                     7   present in this repo's template, never propagated to a deployment
-  n/a (new)                         5   START-1 · FAIL-1 — created by this architecture ·
-                                        REVIEW-9 · REVIEW-10 · REVIEW-11 — created after the
-                                        2026-07-25 audit, so no deployment was observed for them
+  n/a (new)                         7   START-1 · FAIL-1 — created by this architecture ·
+                                        REVIEW-9 · REVIEW-10 · REVIEW-11 · LIFE-4b · LIFE-4c —
+                                        created after the 2026-07-25 audit, so no deployment
+                                        was observed for them
 
 unresolved                          0
 unowned                             0
