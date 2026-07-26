@@ -2,7 +2,7 @@
 
 **Applies to:** `control-surface · asset-pipeline-ASK · urban-observatory` (the repos that currently home a hosted advisor Project).
 **Explicit exclusions:** `method-ASK · design-system-ASK · ASK · personal-context-system` — not because the invariant is wrong for them, but because they home no repo-advisor Project of their own. A repo that later stands one up adopts this profile then; do not pre-install it.
-**Not covered:** personal-context Projects and `-TMK` surfaces. They implement the same bootstrap-only invariant under the personal ADR and the PCS scaffold, on the other side of the wall. Shared invariant, separate owner — see the architecture doc's §Binding and cross-surface relation.
+**Not covered:** personal-context Projects and role-specific `-TMK` advisor surfaces. Personal-context Projects implement the same bootstrap-only invariant under the personal ADR and PCS scaffold, on the other side of the wall. Role-specific `-TMK` surfaces are separately owned; no bootstrap-only conformance or migration is inferred by symmetry.
 
 *Owner explanation above is metadata and is NOT carried into a consumer. A consumer that adopts this profile carries only the fenced distributable body below, wrapped in `<!-- BEGIN profile: advisor-project-surface -->` / `<!-- END profile: advisor-project-surface -->` at byte parity.*
 
