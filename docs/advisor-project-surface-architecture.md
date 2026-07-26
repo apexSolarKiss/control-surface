@@ -390,7 +390,8 @@ bootstrap and concluding the advisor *would* retrieve raw bytes is not a test re
 
 ### A11 — exercised specification
 
-Publish one synthetic exact object to mapped ecology shared scratch. Its bytes must contain **both** known
+Publish one synthetic exact object to that advisor surface's index-mapped shared scratch. For the initial
+ecology-ASK exercise, use `ecology-ASK-EXTERNAL/scratch/`. Its bytes must contain **both** known
 representation hazards:
 
 ```text
