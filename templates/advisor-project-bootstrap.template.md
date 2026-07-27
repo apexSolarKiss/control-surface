@@ -144,7 +144,11 @@ reusable-learning disposition, grants, or cross-repo propagation:
 3. read `control-surface/protocol/AGENTS.shared.md` — the shared body in force;
 4. read `control-surface/protocol/manifest.json` — the normative registry, **not** live state;
 5. read the applicable repo's current resolved `AGENTS.md`;
-6. fetch the live protocol-consumer ledger where the index maps an authorized path; otherwise state that live
+6. **verify — do not assume — the executor's carrier delivery**: where the executor receives that resolved
+   `AGENTS.md` through a runtime adapter, read the current adapter/import state. Reading `AGENTS.md`
+   establishes what the carrier *says*; it does not establish that the executor *loads* it. These are separate
+   facts and a conformance claim needs both;
+7. fetch the live protocol-consumer ledger where the index maps an authorized path; otherwise state that live
    propagation state is unavailable and do not infer it.
 
 Never substitute memory, a hand copy, or a local paraphrase for owner placement and live propagation state.
