@@ -101,7 +101,7 @@ ASK projects run an **adversarial-collaboration operating model** — an ASK-ape
 
 In the current stack a GPT advisor fills the advisor role and Claude Code fills the execution role. Model identity is operational, not architectural.
 
-The friction at the advisor/executor boundary is deliberate: differently situated adversarial challenge helps catch hallucination, confabulation, and drift before they land. The surfaces are correlated, not independent; named canonicals and exact repo state arbitrate factual disagreement, while ASK adjudicates source-of-intent and authorization questions. Much of what this protocol requires — the plan, the structured change summary, the exact scoped diff, the pushed PR — exists so that boundary has something precise to work on.
+The friction at the advisor/executor boundary is deliberate: differently situated adversarial challenge mitigates the risk that hallucination, confabulation, or drift will persist into landed work. The surfaces are correlated, not independent; named canonicals and exact repo state arbitrate factual disagreement, while ASK adjudicates source-of-intent and authorization questions. Much of what this protocol requires — the plan, the structured change summary, the exact scoped diff, the pushed PR — exists so that boundary has something precise to work on.
 
 **Direct execution** is the bounded variant: ASK drives the executor without an advisor pass where a separate pass would not materially reduce uncertainty. It is a proportional path within the same model, not a separate model.
 
