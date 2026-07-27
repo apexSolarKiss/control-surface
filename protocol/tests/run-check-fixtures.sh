@@ -151,6 +151,17 @@ d=$(owner_copy L3aa); perl -0pi -e 's/grants no new write\s+authority/grants bro
 d=$(owner_copy L3ab); perl -0pi -e 's/ASK separately controls when to feed the routed artifact//g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses ASK's separate feed-timing control" 1 "four-event lifecycle clause(s) missing or stale" runlocal "$d"
 d=$(owner_copy L3ac); perl -0pi -e 's/LIFE-4c/LIFE-4y/g' "$d/docs/advisor-project-surface-architecture.md"; record "NEG registry loses the LIFE-4c route-on-approval row" 1 "advisor-surface recovery clause(s) missing" runlocal "$d"
 d=$(owner_copy L3ad); perl -0pi -e 's/routing collapsed into feeding; //g' "$d/protocol/manifest.json"; record "NEG manifest failure_mode loses the routing-collapsed-into-feeding class" 1 "four-event lifecycle clause(s) missing or stale" runlocal "$d"
+
+# L3ae..L3ag guard PROTO-3 executor-carrier delivery. This requirement was a real owner-registry OMISSION: it
+# shipped in a deployed Instructions field, was absent from PROTO-1, and was therefore silently dropped when a
+# bootstrap was generated from the incomplete registry. Both halves are guarded — the registry row AND the
+# generated carrier — because either alone reproduces the original loss.
+d=$(owner_copy L3ae); perl -0pi -e 's/PROTO-3/PROTO-9/g' "$d/docs/advisor-project-surface-architecture.md"; record "NEG registry loses the PROTO-3 row" 1 "advisor-surface recovery clause(s) missing" runlocal "$d"
+d=$(owner_copy L3af); perl -0pi -e 's/Executor-carrier delivery//g' "$d/docs/advisor-project-surface-architecture.md"; record "NEG registry loses the PROTO-3 requirement text" 1 "advisor-surface recovery clause(s) missing" runlocal "$d"
+# Anchor the mutation on an ASCII-only substring: perl's `.` matches one BYTE, so it cannot span the em dashes
+# in "verify — do not assume —". A dot-wildcard pattern silently fails to substitute and the fixture then proves
+# nothing. Mutating "the executor's carrier delivery" defeats check.sh's flattened bootstrap assertion.
+d=$(owner_copy L3ag); perl -0pi -e "s/the executor's carrier delivery/the adapter/g" "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses the PROTO-3 carrier-delivery step" 1 "advisor-surface recovery clause(s) missing" runlocal "$d"
 d=$(owner_copy L4); perl -0pi -e "s/(BEGIN profile-body: architecture-uncertain -->)/\$1\nINJECT/" "$d/protocol/profiles/architecture-uncertain.md"; record "NEG profile/overlay drift" 1 "architecture-uncertain profile/overlay drift" runlocal "$d"
 d=$(owner_copy L5); perl -0pi -e "s/<!-- PROFILE BLOCKS ARE INSERTED HERE BY THE PROPAGATION WAVE -->/<!-- BEGIN profile: core-ecology -->/" "$d/templates/AGENTS.template.md"; record "NEG template carries installed-looking profile" 1 "installed-looking profile marker" runlocal "$d"
 d=$(owner_copy L6); perl -0pi -e "s/\\A/X\n/" "$d/protocol/fragments/standing-upstream-conformance-grant.md"; record "NEG grant fragment not body-only" 1 "fragment not body-only" runlocal "$d"

@@ -219,6 +219,7 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 |---|---|---|---|---|---|---|
 | PROTO-1 | For rule-placement, `AGENTS.md`/`CLAUDE.md`, private-memory, reusable-learning, grant, or propagation questions: read the protocol owner model, shared body, manifest, the repo's resolved `AGENTS.md`, and the live consumer ledger. | shared protocol | BOOTSTRAP | PRESERVE | FULL | absorbs retired RET-1 |
 | PROTO-2 | Never substitute memory, hand copies, or local paraphrase for owner placement and live propagation state. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
+| PROTO-3 | **Executor-carrier delivery.** Where a repo's executor receives the resolved `AGENTS.md` carrier through a runtime adapter, verify the current adapter/import state. Reading `AGENTS.md` establishes carrier *contents*; it does not establish that the executor *loads* those contents. | shared protocol | BOOTSTRAP | PRESERVE | FULL | separate fact from PROTO-1, not a subrequirement of it: PROTO-1 proves what the carrier says, PROTO-3 proves the executor receives it. Registry omission found 2026-07-26 — the clause was deployed in AP's pre-migration field, absent from PROTO-1, and therefore dropped when AP's bootstrap was generated from the incomplete registry |
 
 ### LIFE — artifact lifecycle
 
@@ -319,25 +320,25 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 ## Coverage report — this revision
 
 ```text
-registry IDs                       74   = 67 shared + 6 surface overlays + 1 retired shared requirement
+registry IDs                       75   = 68 shared + 6 surface overlays + 1 retired shared requirement
 
 placement (shared IDs; co-homed IDs counted in each declared home)
   PI-FLOOR                         10
-  BOOTSTRAP                        65
+  BOOTSTRAP                        66
   INDEX                             4
   SURFACE-OVERLAY                   6   (5 active + 1 retired overlay)
   RETIRED                           2   RET-1 shared · OVL-AP-2 overlay — each with a recorded reason
   NOT-APPLICABLE                    0
 
 ruling (shared IDs)
-  PRESERVE                         54
+  PRESERVE                         55
   RESTORE                           9   READ-3 · REVIEW-7 · DISAGREE-1 · DISAGREE-2 · POSTURE-3
                                         · LIFE-4a · LIFE-5a · LIFE-5b · LIFE-5c
   REVISE                            4   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2
   restored as surface overlay       2   OVL-AP-1 · OVL-ECO-2
 
 deployed presence at the 2026-07-25 audit (shared IDs)
-  FULL                             38
+  FULL                             39
   PARTIAL                           5   includes REVIEW-2, whose deployed form conflates path
                                         resolution with exact retrieval
   ABSENT                           10   the four wholly-absent requirements · REVIEW-7 and POSTURE-3

@@ -227,8 +227,15 @@ assert_local(){
   local recmiss="" t
   for t in 'routing-time historical evidence' 'Do not restore a receipt annotation' 'role marker is retained' 'route a separate handoff'; do
     grep -qF -- "$t" "$APBOOT" || recmiss="$recmiss bootstrap:{$t}"; done
-  for t in 'LIFE-4a' 'LIFE-4b' 'LIFE-4c' 'LIFE-5a' 'LIFE-5b' 'LIFE-5c' 'Surface-overlay completion gate'; do
+  for t in 'LIFE-4a' 'LIFE-4b' 'LIFE-4c' 'LIFE-5a' 'LIFE-5b' 'LIFE-5c' 'PROTO-3' 'Surface-overlay completion gate'; do
     grep -qF -- "$t" "$APARCH" || recmiss="$recmiss architecture:{$t}"; done
+  # PROTO-3 executor-carrier delivery — the registry row and the generated carrier must BOTH hold it. This was a
+  # real owner-registry omission: the clause shipped in a deployed field, was absent from PROTO-1, and was
+  # therefore dropped when a bootstrap was generated from the incomplete registry.
+  grep -qF -- 'Executor-carrier delivery' "$APARCH" || recmiss="$recmiss architecture:{PROTO-3 requirement text}"
+  bootflat_p3=$(tr '\n' ' ' < "$APBOOT" | tr -s ' ')
+  printf '%s' "$bootflat_p3" | grep -qF -- 'verify — do not assume — the executor' || recmiss="$recmiss bootstrap:{PROTO-3 carrier-delivery step}"
+  printf '%s' "$bootflat_p3" | grep -qF -- 'it does not establish that the executor *loads* it' || recmiss="$recmiss bootstrap:{PROTO-3 contents-vs-loads distinction}"
   grep -qF -- 'Orientation is on request, not by default' "$APBOOT" || recmiss="$recmiss bootstrap:{startup-orientation-gated}"
   grep -qF -- 'no character limit' "$APBOOT" && recmiss="$recmiss bootstrap:{STALE no-character-limit}"
   [ -z "$recmiss" ] && OKAY "advisor-surface anti-loss recovery carried (lifecycle subrequirements + overlay gate + startup posture)" || FAIL "advisor-surface recovery clause(s) missing:$recmiss"
