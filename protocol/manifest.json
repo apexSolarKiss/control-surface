@@ -200,7 +200,8 @@
     "#177 / 7bdd0757dc701b5bbec760e908d3bf9b9780018f (four-event model; queue exit on recipient-side ingestion; logical multi-location queue; route-on-approval)",
     "#177 / 70842f933adc7e126d8bb64157777deebd9c5b4e (route-on-approval/feed-later contract; LIFE-4c; registry arithmetic; complete failure-mode classes; bootstrap + manifest guards)",
     "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (routed-instance lifecycle: -TBI as ASK\u2019s outstanding feed obligation; -TBI \u2192 -ingested; phase-split supersession -supersededA / -supersededP; disposition \u2260 absorption; disposition record + terminal rename one bounded operation; by-value/by-reference feeding; relay envelope governs force and scope; declared structural carriers; marker grammar; prospective-only)",
-    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: metadata-only reachability vs lossy-view failure classes separated; addressee-marker stacking class narrowed now that -PTX never stacks at all)"
+    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: metadata-only reachability vs lossy-view failure classes separated; addressee-marker stacking class narrowed now that -PTX never stacks at all)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: -TBI restated as the terminal outstanding-feed-obligation overlay; role+prior-state precondition and fail-closed stop; already-read recovery demoting terminal -TBI alone; cancellation bounds; recipient-surface read semantics; handoff vs active-context boundary split; PTX no-stacking prohibition withdrawn and now rejected as stale)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -231,7 +232,8 @@
     "#147 / db91c0b",
     "#169 / b4a3793 (cross-axis line acknowledges the -SUPERSEDED pre-ingestion exit)",
     "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (cross-axis line: -ingested and -supersededA exits; the role marker precedes the terminal lifecycle suffix)",
-    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: -PTX never combines with -TBI, -ingested, or a terminal disposition suffix; no-stacking + addressee-ordering failure classes added)"
+    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: -PTX never combines with -TBI, -ingested, or a terminal disposition suffix; no-stacking + addressee-ordering failure classes added)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: the no-stacking prohibition is WITHDRAWN -- -PTX-TBI is valid and resolution preserves the role marker and _vN; failure classes narrowed to PTX-specific consequences, addressee ordering left to inbound-tbi-marker)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -258,7 +260,8 @@
    "active_holds": [],
    "status": "active",
    "amended_by": [
-    "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (routing destination restated as the recipient intent inbox at its live declared path, intent-INbox/ as target convention; recipient owns post-ingestion disposition)"
+    "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (routing destination restated as the recipient intent inbox at its live declared path, intent-INbox/ as target convention; recipient owns post-ingestion disposition)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: same-operating-surface branch scoped to -TBI AS A HANDOFF MARKER; the orthogonal feed overlay remains available for a same-surface re-feed)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -1065,7 +1068,8 @@
    "status": "active",
    "amended_by": [
     "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (shared intake becomes the live _INDEX/_LAYOUT-declared intent inbox; -TBI to -ingested; -supersededA lineage; disposition record in the same bounded operation as the terminal rename)",
-    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: operative OPEN/FROZEN/PARTIAL-HOLD semantics added; antecedent narrowed so the CURRENT mapped intake stays required pre-cutover)"
+    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: operative OPEN/FROZEN/PARTIAL-HOLD semantics added; antecedent narrowed so the CURRENT mapped intake stays required pre-cutover)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: fresh-handoff vs removal-only resolution branches; _STATE.md exceptions are exact filenames or explicitly NONE, and a post-activation unreachable or malformed carrier fails closed; hard repo-boundary reset restated as no cross-surface handoff)"
    ],
    "note": "personal-context-system = applicable-no-carrier (no root AGENTS.md), NOT an exclusion; see PCS carrier disposition in the ledger",
    "proposed_by": null,
@@ -1137,7 +1141,8 @@
     "#174 / 8a7e022b3be61f36a0449aff192311f6e238eb5d",
     "#174 / 7db29001941e3de18c6a6fc4907f55b168acb04b",
     "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (registry gains LIFE-4d/4e/4f/4g/4h; bootstrap + index templates gain the routed-instance state machine, feed semantics, marker grammar, and the declared-structural-carrier contract incl. intent-INbox/_STATE.md)",
-    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: LIFE-4g operative state semantics + LIFE-4h PTX-axis split; bootstrap and index carriers conformed)"
+    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: LIFE-4g operative state semantics + LIFE-4h PTX-axis split; bootstrap and index carriers conformed)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: LIFE-4 and LIFE-4h revised, LIFE-4i/4j/4k added for recipient-surface read semantics, already-read recovery, and cancellation; bootstrap template carries all three; coverage counts recounted from the live table)"
    ],
    "note": "Semantic owner is docs/advisor-project-surface-architecture.md (registry, placement contract, acceptance tests, overlay-completion gate); this profile carries only the compact deployment obligation. applies_to tracks which repos home a hosted advisor Project, NOT tier or operating-surface class -- which is why it binds two separately-operated consumers. Excluded repos home no repo-advisor Project; a repo that stands one up adopts the profile then. Personal-context Projects implement the same invariant under the personal ADR + PCS scaffold across the wall. Role-specific -TMK surfaces remain outside this profile; their deployment is separately owned, and no migration or conformance is inferred by symmetry.",
    "proposed_by": null,
