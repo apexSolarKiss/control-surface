@@ -184,6 +184,19 @@ d=$(owner_copy L3ao); perl -0pi -e 's/Disposition is not absorption, and the rec
 # declaration bound there reopens the wildcard on the deployment side even if the shared body still states it.
 d=$(owner_copy L3ap); perl -0pi -e 's/a leading `_` alone confers nothing//g' "$d/templates/_INDEX-project.template.md"; record "NEG index template loses the structural-declaration bound" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
 d=$(owner_copy L3aq); perl -0pi -e 's/disposition collapsed into absorption; //g' "$d/protocol/manifest.json"; record "NEG manifest failure_mode loses the disposition-collapsed-into-absorption class" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
+
+# L3ar..L3av guard the Stage-2 coherence corrections. Two of these protect against a defect the FIRST draft of
+# this unit actually shipped: a marker-grammar sentence saying `-PTX` "precedes the lifecycle suffix" while the
+# same shared body forbade stacking `-PTX` with `-TBI` two paragraphs later. A passing test suite proved nothing
+# there, because the assertion encoded the contradiction. Both halves are now guarded.
+d=$(owner_copy L3ar); for f in protocol/AGENTS.shared.md AGENTS.md; do perl -0pi -e 's/never combines with `-TBI`, `-ingested`, or any terminal disposition suffix//g' "$d/$f"; done; record "NEG carriers lose the PTX no-stacking rule" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
+# Reintroducing the contradictory grammar must FAIL even though every other clause is intact.
+d=$(owner_copy L3as); for f in protocol/AGENTS.shared.md AGENTS.md; do perl -0pi -e 's/An \*\*addressee\*\* marker \(`-4ASK`, `-4TMK`\) precedes it/A role or addressee marker (`-PTX`, `-4ASK`, `-4TMK`) precedes it/g' "$d/$f"; done; record "NEG PTX-plus-lifecycle stacking grammar reintroduced" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
+d=$(owner_copy L3at); perl -0pi -e 's/a -PTX role marker stacked with -TBI, -ingested, or a terminal disposition suffix; //g' "$d/protocol/manifest.json"; record "NEG ptx-marker failure_mode loses the no-stacking class" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
+# The ingestion-evidence boundary: content read IS ingestion. A carrier that inserts a step between them
+# reintroduces the "fed but somehow not ingested after reading it" gap the four-event model closed.
+d=$(owner_copy L3au); perl -0pi -e 's/Successful content read into active context \*is\* ingestion/Fetched \x{2260} read into context \x{2260} ingested/g' "$d/templates/_INDEX-project.template.md"; record "NEG index template breaks content-read = ingestion" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
+d=$(owner_copy L3av); perl -0pi -e 's/no routed artifact ingested unless its exact filename is an exception//g' "$d/templates/_INDEX-project.template.md"; record "NEG index template loses operative FROZEN semantics" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
 d=$(owner_copy L4); perl -0pi -e "s/(BEGIN profile-body: architecture-uncertain -->)/\$1\nINJECT/" "$d/protocol/profiles/architecture-uncertain.md"; record "NEG profile/overlay drift" 1 "architecture-uncertain profile/overlay drift" runlocal "$d"
 d=$(owner_copy L5); perl -0pi -e "s/<!-- PROFILE BLOCKS ARE INSERTED HERE BY THE PROPAGATION WAVE -->/<!-- BEGIN profile: core-ecology -->/" "$d/templates/AGENTS.template.md"; record "NEG template carries installed-looking profile" 1 "installed-looking profile marker" runlocal "$d"
 d=$(owner_copy L6); perl -0pi -e "s/\\A/X\n/" "$d/protocol/fragments/standing-upstream-conformance-grant.md"; record "NEG grant fragment not body-only" 1 "fragment not body-only" runlocal "$d"

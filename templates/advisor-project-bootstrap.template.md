@@ -208,11 +208,13 @@ to metadata, has not produced ingestion. A lossy or normalized view may constitu
 fidelity claim; where the omitted portion could affect classification, obtain an adequate representation first.
 **The relay envelope governs operative force and scope:** a feed does not adopt every claim in its payload.
 
-**Marker grammar.** The lifecycle suffix is always the final token before `.md`; a role or addressee marker
-(`-PTX`, `-4ASK`, `-4TMK`) precedes it and is never stacked after it. Ordinary disposition words are lower-case;
-supersession uses the lower-case `superseded` stem plus the ruled uppercase phase qualifier `A` or `P`. **The
-grammar is prospective** — historical filenames keep the conventions in force when they were created and are
-never normalized to match it.
+**Marker grammar.** The lifecycle suffix is always the final token before `.md`; an **addressee** marker
+(`-4ASK`, `-4TMK`) precedes it and is never stacked after it. `-PTX` sits on a **separate axis**: it is an
+artifact-role marker and **never combines with `-TBI`, `-ingested`, or any terminal disposition suffix** —
+route a separate handoff instead of stacking the two. Ordinary disposition words are lower-case; supersession
+uses the lower-case `superseded` stem plus the ruled uppercase phase qualifier `A` or `P`. **The grammar is
+prospective** — historical filenames keep the conventions in force when they were created and are never
+normalized to match it.
 
 **Structural artifacts in a declared intent inbox.** An artifact inside a declared intent inbox is exempt from
 the routed-instance lifecycle **only when the surface's current structural contract explicitly names it as
@@ -221,7 +223,12 @@ declares *before* ingesting a routed artifact. Structural artifacts take no life
 from routed-artifact queue counts. Once a surface adopts the separated `intent-INbox/` plane,
 `intent-INbox/_STATE.md` is its standard current inbox-state carrier: updated in place, unsuffixed, excluded
 from queue counts, and read immediately before ingestion. It records `OPEN`, `FROZEN`, or `PARTIAL-HOLD` plus
-exact scope, exceptions, the ASK authorization locator, effective time, and a review trigger. Before a surface's
+exact scope, exceptions, the ASK authorization locator, effective time, and a review trigger. The states are
+operative, not descriptive — **`OPEN`**: no additional inbox hold, ordinary governed ingestion may proceed ·
+**`FROZEN`**: no routed artifact may be ingested unless its exact filename is listed as an exception ·
+**`PARTIAL-HOLD`**: artifacts inside the named held scope may not be ingested unless their exact filenames are
+exceptions, while artifacts outside that scope remain governed normally. Exceptions are **exact filenames or
+explicitly `NONE`** — a scope description is not an exception. Before a surface's
 current `_LAYOUT` declares that plane and `_STATE.md` active, **absence of the file is not nonconformance** and
 the current mapped index/path contract remains operative. Once declared active, an unreachable or malformed
 `_STATE.md` **fails closed for ingestion**.

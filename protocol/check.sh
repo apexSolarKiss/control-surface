@@ -261,6 +261,8 @@ assert_local(){
                 '**The relay envelope governs force and scope.**' \
                 'A leading `_` alone confers no exemption' \
                 'The lifecycle suffix is always the final token before `.md`' \
+                'never combines with `-TBI`, `-ingested`, or any terminal disposition suffix' \
+                'never stacked with a handoff lifecycle suffix at all' \
                 '**This lifecycle grammar is prospective.**')
   for ph in "${fevphr[@]}"; do
     grep -qF -- "$ph" "$SHARED"     || fevmiss="$fevmiss shared:{$ph}"
@@ -280,7 +282,9 @@ assert_local(){
                  'path resolves ≠ content read ≠ exact-byte identity proven' \
                  'The relay envelope governs operative force and scope' \
                  'a leading `_` alone confers no exemption' \
-                 'fails closed for ingestion')
+                 'fails closed for ingestion' \
+                 'never combines with `-TBI`, `-ingested`, or any terminal disposition suffix' \
+                 'no routed artifact may be ingested unless its exact filename is listed as an exception')
   # the bootstrap template is hard-wrapped, so an operative sentence spans line breaks; flatten before matching or
   # a line-based fixed-string test silently fails on prose that is present and correct.
   local bootflat; bootflat=$(tr '\n' ' ' < "$APBOOT" | tr -s ' ')
@@ -291,7 +295,10 @@ assert_local(){
   local idxflat; idxflat=$(tr '\n' ' ' < "$IDXTEMPLATE" | tr -s ' ')
   for ph in 'intent-INbox/_STATE.md' 'structural — **not routed intent**' \
             'a leading `_` alone confers nothing' \
-            'the live path above governs until this surface'; do
+            'the live path above governs until this surface' \
+            'Successful content read into active context *is* ingestion' \
+            'no routed artifact ingested unless its exact filename is an exception' \
+            'exact filenames or explicitly `NONE`'; do
     printf '%s' "$idxflat" | grep -qF -- "$ph" || fevmiss="$fevmiss index-template:{$ph}"; done
   # the manifest failure_mode must name the full class set this rule compensates for
   for ph in 'routing collapsed into feeding' 'feeding collapsed into ingestion' \
@@ -302,15 +309,21 @@ assert_local(){
             'disposition collapsed into absorption' \
             'a terminal disposition applied without a durable disposition record in the same bounded operation' \
             'an artifact treated as structural because its name begins with an underscore' \
-            'historical filenames normalized to the prospective grammar'; do
+            'historical filenames normalized to the prospective grammar' \
+            'metadata-only reachability reported as content read'; do
     jq -r '.rules[]|select(.rule_id=="inbound-tbi-marker")|.failure_mode' "$MANIFEST" | grep -qF -- "$ph" || fevmiss="$fevmiss manifest:{$ph}"; done
+  for ph in 'a -PTX role marker stacked with -TBI, -ingested, or a terminal disposition suffix' \
+            'an addressee marker placed after the terminal lifecycle suffix'; do
+    jq -r '.rules[]|select(.rule_id=="ptx-marker")|.failure_mode' "$MANIFEST" | grep -qF -- "$ph" || fevmiss="$fevmiss manifest-ptx:{$ph}"; done
   # NEGATIVE: no governed carrier may still teach the outgoing model. `-SUPERSEDED` is checked as a whole word so
   # the lower-case `-supersededA` / `-supersededP` tokens do not trip it.
   local stale
   for stale in 'the item leaves the queue when it is fed in' 'has not yet fed into the operating surface' \
                'When ASK feeds that memo into the active surface' \
                'takes it up' 'taken up' 'unmarked ingested' 'rename the file in place to remove' \
-               'absorption is the later classification'; do
+               'absorption is the later classification' \
+               'read into context ≠ ingested' \
+               '(`-PTX`, `-4ASK`, `-4TMK`) precedes'; do
     grep -rqF -- "$stale" "$SHARED" "$ROOTAGENTS" "$APBOOT" "$IDXTEMPLATE" "$PROFDIR" && fevmiss="$fevmiss STALE:{$stale}"; done
   grep -rqE -- '-SUPERSEDED([^A-Za-z]|$)' "$SHARED" "$ROOTAGENTS" "$APBOOT" "$IDXTEMPLATE" "$PROFDIR" && fevmiss="$fevmiss STALE:{-SUPERSEDED}"
   [ -z "$fevmiss" ] && OKAY "routed-instance lifecycle carried (routing/feeding/ingestion/disposition · -TBI→-ingested · phase-split supersession · record+rename coupling · declared structural carriers; no outgoing-model residue)" || FAIL "routed-instance lifecycle clause(s) missing or stale:$fevmiss"

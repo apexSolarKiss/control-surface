@@ -33,15 +33,17 @@ To start a new ASK project from this protocol repo, beginning from zero:
    <project-name>-EXTERNAL/
      <project-name>_grounding-note.md   # canonical durable context (root)
      scratch/                            # _vN snapshots + iteration
-     intent-carriers/                    # standing + invocable operative carriers
-       ZZZ/                              #   superseded carrier generations (lineage)
+     intent-carriers/                    # standing + invocable carrier canonicals (unversioned)
+       ZZZ/                              #   frozen _vN snapshots + retired / historical carrier lineage
      intent-INbox/                       # inbound routed handoffs, under the filename lifecycle
        _STATE.md                         #   structural inbox state — not routed intent
    ```
 
    Root is the default durable-context layer of an `*-EXTERNAL` surface; named semantic or structural layers (`scratch/`, `intent-carriers/`, `intent-INbox/`) override it only where explicitly defined.
 
-   The two intent planes are **not** interchangeable. `intent-carriers/` holds carriers the project *invokes or deploys* — adapted prompts, deployed instruction canonicals — under canonical `_vN` lineage with superseded generations in `ZZZ/`. `intent-INbox/` holds *addressed routed instances* arriving from another operating surface, each under the filename lifecycle (`-TBI` → `-ingested` → a terminal disposition suffix, or `-supersededA` before ingestion). A standing carrier never takes a handoff lifecycle suffix; a routed instance never becomes a carrier by being ingested.
+   The two intent planes are **not** interchangeable. `intent-carriers/` holds carriers the project *invokes or deploys* — adapted prompts, deployed instruction canonicals — under **canonical lineage**: the unversioned current canonical mirrors the latest accepted `_vN`, and `ZZZ/` holds the frozen `_vN` snapshots plus retired or historical carrier variants. **A prior `_vN` is historical, not superseded** — ordinary version succession is revision, and carrier families are revised, retired, or replaced. Existing legacy filenames containing `SUPERSEDED` are preserved unchanged and acquire no prospective routed-instance meaning.
+
+   `intent-INbox/` holds *addressed routed instances* arriving from another operating surface, each under the filename lifecycle (`-TBI` → `-ingested` → a terminal disposition suffix, or `-supersededA` before ingestion). Prospective supersession belongs to that plane only. A standing carrier never takes a handoff lifecycle suffix; a routed instance never becomes a carrier by being ingested.
 
    `intent-INbox/_STATE.md` is **structural, not routed intent**: no lifecycle suffix, excluded from queue counts, updated in place, and read immediately before ingestion. A structural artifact is exempt only where the surface's structural contract **names** it — a leading `_` alone confers no exemption.
 

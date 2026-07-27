@@ -171,7 +171,7 @@ The recipient's **first lifecycle mutation after successful content read** — b
 
 **Closure and the terminal rename are one bounded operation.** Every transition from `-ingested` to a terminal disposition suffix requires a durable disposition record made in the same operation — a dated scratch memo or an appended terminal section in an explicitly maintained program or status record; do not create an artifact solely to satisfy form. A rename is not a disposition record, and a record without the rename leaves the filename lying. `-supersededA` is the one exit needing no absorption closure, because no recipient absorption occurred — but it still requires an explicit lineage or current-status record naming the successor.
 
-**Marker grammar.** The lifecycle suffix is always the final token before `.md`. A role or addressee marker (`-PTX`, `-4ASK`, `-4TMK`) precedes it and is never stacked after it. Ordinary disposition words are lower-case; supersession uses the lower-case `superseded` stem plus the ruled uppercase phase qualifier `A` or `P`.
+**Marker grammar.** The lifecycle suffix is always the final token before `.md`. An **addressee** marker (`-4ASK`, `-4TMK`) precedes it and is never stacked after it. `-PTX` is different: it is an **artifact-role** marker on a separate axis, and it **never combines with `-TBI`, `-ingested`, or any terminal disposition suffix** — if a transcript creates work for another surface, route a separate handoff rather than stacking the two. Ordinary disposition words are lower-case; supersession uses the lower-case `superseded` stem plus the ruled uppercase phase qualifier `A` or `P`.
 
 **Structural artifacts inside a declared intent inbox.** Within a declared intent inbox, an artifact is exempt from the routed-instance lifecycle **only when the surface's current structural contract explicitly names it as structural. A leading `_` alone confers no exemption.** Before ingesting a routed artifact, the recipient surface reads and honors any current inbox-state carrier that contract declares. Structural artifacts take no handoff lifecycle suffix and are excluded from routed-artifact queue counts.
 
@@ -216,7 +216,7 @@ YYYY-MM-DD_<surface-or-subject>_<topic>-PTX.md
 YYYY-MM-DD_<surface-or-subject>_<topic>-PTX_vN.md
 ```
 
-`-TBI`, `-PTX`, and `_vN` do not share an axis: `-TBI` is a lifecycle state — replaced by `-ingested` on ingestion, or by `-supersededA` on pre-ingestion retirement; `-PTX` is an artifact role, and the role marker is retained throughout any version lineage and precedes any lifecycle suffix; `_vN` is an optional version index for the transcript artifact. Neither `-PTX` nor `_vN` confers state, authority, or canonical status.
+`-TBI`, `-PTX`, and `_vN` do not share an axis: `-TBI` is a lifecycle state — replaced by `-ingested` on ingestion, or by `-supersededA` on pre-ingestion retirement; `-PTX` is an artifact role, retained throughout any version lineage and **never stacked with a handoff lifecycle suffix at all**; `_vN` is an optional version index for the transcript artifact. Neither `-PTX` nor `_vN` confers state, authority, or canonical status.
 
 ---
 

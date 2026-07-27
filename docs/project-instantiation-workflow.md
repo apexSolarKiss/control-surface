@@ -36,13 +36,15 @@ During bootstrap:
   <project-name>-EXTERNAL/
     <project-name>_grounding-note.md   # canonical durable context (root)
     scratch/                            # _vN snapshots + iteration
-    intent-carriers/                    # standing + invocable operative carriers
-      ZZZ/                              #   superseded carrier generations (lineage)
+    intent-carriers/                    # standing + invocable carrier canonicals (unversioned)
+      ZZZ/                              #   frozen _vN snapshots + retired / historical carrier lineage
     intent-INbox/                       # inbound routed handoffs, under the filename lifecycle
       _STATE.md                         #   structural inbox state — not routed intent
   ```
 
-  A newly instantiated `_STATE.md` begins as `OPEN`. Its schema and the structural-exemption contract are owned by `docs/advisor-project-surface-architecture.md` (LIFE-4g) and stated operationally in `templates/advisor-project-bootstrap.template.md` and `templates/_INDEX-project.template.md` — do not restate them here. Adapted prompts and other invocable carriers go in `intent-carriers/`; routed handoffs from another operating surface go in `intent-INbox/`, and never the reverse.
+  A newly instantiated `_STATE.md` begins as `OPEN` — no additional inbox hold, ordinary governed ingestion may proceed. Its full schema and the structural-exemption contract are owned by `docs/advisor-project-surface-architecture.md` (LIFE-4g) and stated operationally in `templates/advisor-project-bootstrap.template.md` and `templates/_INDEX-project.template.md` — do not restate them here.
+
+  In `intent-carriers/`, the unversioned current canonical mirrors the latest accepted `_vN`; `ZZZ/` holds the frozen `_vN` snapshots and any retired or historical carrier variants. **A prior `_vN` is historical, not superseded** — carrier families are revised, retired, or replaced, and existing legacy filenames are preserved unchanged. Adapted prompts and other invocable carriers go in `intent-carriers/`; routed handoffs from another operating surface go in `intent-INbox/`, and never the reverse.
 - copy `templates/AGENTS.template.md` into the repo as `AGENTS.md` — the payload-free shell — and adapt its project-specific defaults (the local delta)
 - resolve the shared execution protocol into that `AGENTS.md`: insert the shared body from `protocol/AGENTS.shared.md` verbatim between the shell's `BEGIN`/`END` shared markers, so each consumer resolves the block locally inside its own already-required `AGENTS.md` rather than holding a separate copy; then add the applicable `protocol/profiles/*.md` and any opt-in `protocol/fragments/*.md` (e.g. `protocol/fragments/standing-upstream-conformance-grant.md`). `protocol/manifest.json` is the normative registry of these pieces, and `protocol/check.sh` validates the resolved `AGENTS.md` locally (a deterministic local validator, not CI)
 - copy `templates/grounding-note.template.md` into the external grounding-note location and fill in intent, audience, philosophy, foundational premises, and durable loose threads
