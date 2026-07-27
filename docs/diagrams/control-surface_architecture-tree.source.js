@@ -6,7 +6,7 @@
    v7 (2026-07-27): routed-instance lifecycle. The shared intake node becomes the intent
    inbox at each surface's live _INDEX-declared path, with intent-INbox/ named as the governed
    target convention rather than a claim about current operator storage. Its children carry the
-   corrected state machine (-TBI = feed still owed → -ingested → terminal disposition), the
+   corrected state machine (-TBI = orthogonal feed overlay; fresh handoff -> -ingested -> terminal disposition), the
    phase-split supersession (-supersededA pre-ingestion / -supersededP post-ingestion), and the
    structural _STATE.md carrier that takes no lifecycle suffix. Content-only; render held
    render-v18; companion .html stamp re-synced.
@@ -136,8 +136,8 @@ window.TREE_D01 = {
           { label: 'control-surface_protocol-consumer-ledger.md', note: 'execution-protocol live STATE plane — installed carriers · grant adoption · visibility · propagation (owned here; the normative rule body + registry live in protocol/ — AGENTS.shared.md + manifest.json)' },
           { label: 'design-system-ASK_consumer-ledger.md', note: 'design-system VISUAL propagation state — exact vendored pins + render obligations' },
         ]},
-        { label: 'intent inbox — live path per _INDEX · target convention intent-INbox/', note: 'shared ecology INBOUND intake · genuinely inbound material only — NOT a core-repo routing bus (core-to-core changes cross repo boundaries directly, no -TBI). Governed target architecture; each surface keeps its current mapped path until its cutover is recorded', children: [
-          { label: 'routed handoffs · -TBI = feed still owed → -ingested → terminal disposition' },
+        { label: 'intent inbox — live path per _INDEX · target convention intent-INbox/', note: 'shared ecology INBOUND intake · genuinely inbound material only — NOT a core-repo routing bus (core-to-core changes cross repo boundaries directly, no -TBI as a handoff marker). Governed target architecture; each surface keeps its current mapped path until its cutover is recorded', children: [
+          { label: 'routed handoffs · -TBI = feed owed (orthogonal overlay) → -ingested → terminal disposition' },
           { label: '-supersededA = retired before ingestion · -supersededP = ingested, then displaced' },
           { label: '_STATE.md = structural inbox state · no lifecycle suffix · read before ingestion (post-cutover)' },
           { label: 'received records from separately-operated or walled surfaces' },
@@ -199,7 +199,7 @@ window.TREE_D01 = {
         { label: 'downstream classifies candidate content by layer' },
         { label: 'downstream proposes absorption from its own active project surface' },
         { label: 'candidate source-of-intent + substantive project judgment remain recipient-owned', note: 'the recipient classifies + absorbs from its own active surface' },
-        { label: 'bounded GREEN DS / protocol maintenance may propagate DIRECTLY', note: 'under a consumer-local or ASK-scoped grant — no -TBI for deterministic conformance' },
+        { label: 'bounded GREEN DS / protocol maintenance may propagate DIRECTLY', note: 'under a consumer-local or ASK-scoped grant — no -TBI handoff for deterministic conformance' },
         { label: 'execution jurisdiction does not transfer artifact ownership', note: 'acting in a repo under a grant is not owning its source-of-intent' },
       ],
     },

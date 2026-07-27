@@ -252,7 +252,10 @@ assert_local(){
                 '**The queue is logical, not a folder.**' 'relocation *within* the queue is not a lifecycle event' \
                 'disposition is not implementation authority' 'ASK separately decides when to feed it' \
                 'expands no write authority' \
-                'unconsumed feed-queue marker' \
+                'terminal outstanding-feed-obligation overlay' \
+                'the current feed obligation remains unsatisfied' \
+                'It says nothing about earlier successful feeds or prior ingestion history' \
+                '**The overlay is orthogonal, not a lifecycle step.**' \
                 'the rename records it, it does not cause it' \
                 'ASK-side PRE-ingestion retirement disposition' \
                 '**Disposition is not absorption.**' \
@@ -260,9 +263,31 @@ assert_local(){
                 'a bare exact path addressed to an active surface is a feed' \
                 '**The relay envelope governs force and scope.**' \
                 'A leading `_` alone confers no exemption' \
-                'The lifecycle suffix is always the final token before `.md`' \
-                'never combines with `-TBI`, `-ingested`, or any terminal disposition suffix' \
-                'never stacked with a handoff lifecycle suffix at all' \
+                '**Resolving the feed-obligation overlay.**' \
+                'by the intended active recipient surface, under ASK' \
+                'verified fresh routed handoff awaiting first ingestion' \
+                'remove only -TBI; the underlying role and durable disposition survive unchanged' \
+                'role or prior state unresolved' \
+                '**An unresolved role or prior state is a stop condition**' \
+                'the discriminator is the fresh-awaiting-first-ingestion **state**, not the artifact class' \
+                '**Truth preservation and contractual locators.**' \
+                '**Already-read recovery.**' \
+                'Record the successful read and the unresolved-role/state exception' \
+                'treat **terminal `-TBI` alone** as temporarily non-authoritative feed-obligation evidence' \
+                'the underlying artifact identity and any truthful durable-state marker remain authoritative' \
+                '**Canceled feed obligation.**' \
+                'it is **not** ingestion, **not** a disposition, and **not** a `decline`' \
+                'only where the underlying artifact already has an independently complete identity or durable state' \
+                '**A fresh routed handoff may never become bare and unmarked this way**' \
+                'A source-side inspection — reading a governing record, verifying bytes, or consulting an inspection copy — does not satisfy it' \
+                'preserve the original untouched and feed an addressed copy' \
+                'Terminal `-TBI` is always the final token before `.md`' \
+                'topic-PTX-TBI.md        →  topic-PTX.md        role survives resolution' \
+                'A `-PTX` **may** carry the overlay' \
+                '**Two boundaries, not one.**' \
+                'cross-surface handoff boundary   crossed when material moves between separately' \
+                'ordinary active-context ingestion occurs' \
+                'It does not create a separate cross-surface handoff boundary' \
                 '**This lifecycle grammar is prospective.**')
   for ph in "${fevphr[@]}"; do
     grep -qF -- "$ph" "$SHARED"     || fevmiss="$fevmiss shared:{$ph}"
@@ -276,14 +301,23 @@ assert_local(){
                  'relocation within the queue is not a lifecycle event' \
                  'ASK separately controls when to feed the routed artifact' \
                  'grants no new write authority' \
-                 'unconsumed feed-queue marker' \
+                 'terminal outstanding-feed-obligation overlay' \
                  'Disposition is not absorption, and the record is not optional' \
                  'same bounded operation' \
                  'path resolves ≠ content read ≠ exact-byte identity proven' \
                  'The relay envelope governs operative force and scope' \
                  'a leading `_` alone confers no exemption' \
                  'fails closed for ingestion' \
-                 'never combines with `-TBI`, `-ingested`, or any terminal disposition suffix' \
+                 'a -PTX may carry the terminal -TBI overlay' \
+                 'fresh routed handoff awaiting first ingestion' \
+                 'remove only -TBI' \
+                 'governed role and prior lifecycle state' \
+                 'read into the intended active recipient surface under ASK' \
+                 'does not satisfy the feed' \
+                 'record the successful read and the unresolved-role/state exception' \
+                 'Demote **terminal -TBI only**, not the whole filename' \
+                 'only where the underlying artifact already has an independently complete identity or durable state' \
+                 'A fresh routed handoff may not become bare through cancellation' \
                  'no routed artifact may be ingested unless its exact filename is listed as an exception')
   # the bootstrap template is hard-wrapped, so an operative sentence spans line breaks; flatten before matching or
   # a line-based fixed-string test silently fails on prose that is present and correct.
@@ -310,10 +344,16 @@ assert_local(){
             'a terminal disposition applied without a durable disposition record in the same bounded operation' \
             'an artifact treated as structural because its name begins with an underscore' \
             'historical filenames normalized to the prospective grammar' \
-            'metadata-only reachability reported as content read'; do
+            'metadata-only reachability reported as content read' \
+            'treated as satisfying the current feed obligation' \
+            'resolved without recording the successful read and the unresolved-role/state exception' \
+            'the whole filename demoted as non-authoritative when only terminal -TBI is stale' \
+            'cancellation misread as ingestion, decline, or disposition' \
+            'silently becoming bare and unmarked through cancellation'; do
     jq -r '.rules[]|select(.rule_id=="inbound-tbi-marker")|.failure_mode' "$MANIFEST" | grep -qF -- "$ph" || fevmiss="$fevmiss manifest:{$ph}"; done
-  for ph in 'a -PTX role marker stacked with -TBI, -ingested, or a terminal disposition suffix' \
-            'an addressee marker placed after the terminal lifecycle suffix'; do
+  for ph in 'a -PTX treated as ineligible for the terminal -TBI feed overlay' \
+            'overlay resolution destroying the -PTX role marker or its _vN index' \
+            'a fed -PTX misread as a routed handoff, an authority, or project truth'; do
     jq -r '.rules[]|select(.rule_id=="ptx-marker")|.failure_mode' "$MANIFEST" | grep -qF -- "$ph" || fevmiss="$fevmiss manifest-ptx:{$ph}"; done
   # NEGATIVE: no governed carrier may still teach the outgoing model. `-SUPERSEDED` is checked as a whole word so
   # the lower-case `-supersededA` / `-supersededP` tokens do not trip it.
@@ -323,6 +363,11 @@ assert_local(){
                'takes it up' 'taken up' 'unmarked ingested' 'rename the file in place to remove' \
                'absorption is the later classification' \
                'read into context ≠ ingested' \
+               'never combines with `-TBI`, `-ingested`, or any terminal disposition suffix' \
+               'never stacked with a handoff lifecycle suffix at all' \
+               'unconsumed feed-queue marker' \
+               'unconsumed feed queue' \
+               'rather than stacking `-PTX` with `-TBI`' \
                '(`-PTX`, `-4ASK`, `-4TMK`) precedes'; do
     grep -rqF -- "$stale" "$SHARED" "$ROOTAGENTS" "$APBOOT" "$IDXTEMPLATE" "$PROFDIR" && fevmiss="$fevmiss STALE:{$stale}"; done
   grep -rqE -- '-SUPERSEDED([^A-Za-z]|$)' "$SHARED" "$ROOTAGENTS" "$APBOOT" "$IDXTEMPLATE" "$PROFDIR" && fevmiss="$fevmiss STALE:{-SUPERSEDED}"

@@ -169,9 +169,13 @@ version in this thread.
 as `vN+1`, never edit in place · canonical-unversioned notes edit in place, then save a byte-identical `_vN`
 snapshot.
 
-**Handoff lifecycle.** `-TBI` is human ASK's **unconsumed feed-queue marker**: this exact artifact still needs
-a successful feed into an active recipient-project thread. It is not a recipient obligation and says nothing
-about disposition. The state machine is `-TBI` → `-ingested` on content read; `-TBI` → `-supersededA` for an
+**Handoff lifecycle.** `-TBI` is human ASK's **terminal outstanding-feed-obligation overlay**: this exact
+artifact still needs a successful feed into an active recipient-project thread. It is not a recipient
+obligation, says nothing about disposition, and is **not** evidence the artifact was never ingested before —
+it states only that the *current* feed obligation is unsatisfied. It is orthogonal to what the artifact is:
+it may sit above a fresh routed handoff, a provenance transcript, an ordinary report, a canonical carrier, or
+an artifact already carrying a durable disposition. For a **fresh routed handoff awaiting first ingestion**
+the state machine is `-TBI` → `-ingested` on content read; `-TBI` → `-supersededA` for an
 ASK-side **pre-ingestion** retirement disposition; and `-ingested` → a terminal disposition suffix
 (`-absorbed` · `-held` · `-declined` · `-withdrawn` · `-routed` · `-no-route` · `-closed` · `-supersededP`).
 `-supersededA` was never ingested or absorbed and carries no pending work — lineage only; `-supersededP` *was*
@@ -208,10 +212,38 @@ to metadata, has not produced ingestion. A lossy or normalized view may constitu
 fidelity claim; where the omitted portion could affect classification, obtain an adequate representation first.
 **The relay envelope governs operative force and scope:** a feed does not adopt every claim in its payload.
 
-**Marker grammar.** The lifecycle suffix is always the final token before `.md`; an **addressee** marker
-(`-4ASK`, `-4TMK`) precedes it and is never stacked after it. `-PTX` sits on a **separate axis**: it is an
-artifact-role marker and **never combines with `-TBI`, `-ingested`, or any terminal disposition suffix** —
-route a separate handoff instead of stacking the two. Ordinary disposition words are lower-case; supersession
+**Resolving the overlay.** A successful content read of the marked payload, by the intended active recipient
+surface, under ASK's feed satisfies the current feed obligation; a source-side inspection does not. The
+filename then resolves once **governed role and prior lifecycle state** are established — establish both
+before feeding, and where either is unresolved **stop before feeding** rather than guessing. A verified fresh
+routed handoff awaiting first ingestion becomes `-ingested`; for anything else **remove only -TBI**, leaving
+the underlying role and durable disposition unchanged. The discriminator is the *state*, not the artifact
+class: `topic-absorbed-TBI.md → topic-absorbed.md` is a routed instance whose first ingestion is already
+behind it. Resolving in place is valid only where the underlying filename stays true and no contractual
+locator breaks — never feed a historical `-supersededA` original as the payload, and never rename a
+fixed-path carrier to carry the flag.
+
+**Only the intended recipient surface's read satisfies the obligation.** The current feed obligation is
+satisfied only when the marked payload is read into the intended active recipient surface under ASK's feed.
+A source-side inspection, byte verification, governing-record read, or inspection-copy read may supply
+identification or verification evidence, but does not satisfy the feed.
+
+**Already-read recovery.** If an unidentified `-TBI` artifact was nevertheless read into the intended
+recipient surface, record the successful read and the unresolved-role/state exception. Demote **terminal
+-TBI only**, not the whole filename — the underlying artifact identity and any truthful durable-state marker
+remain authoritative — and resolve the overlay immediately once role and prior state are established. This is
+bounded error recovery, not a second normal path.
+
+**Canceled feed obligation.** ASK may remove terminal `-TBI` without a content read, but **only where the
+underlying artifact already has an independently complete identity or durable state**. Cancellation is not
+ingestion, not a decline, and not a disposition. **A fresh routed handoff may not become bare through
+cancellation** — it still requires an explicit pre-ingestion disposition.
+
+**Marker grammar.** Terminal `-TBI` is always the final token before `.md`; the lifecycle suffix is last
+within the underlying filename, and an **addressee** marker (`-4ASK`, `-4TMK`) precedes it and is never
+stacked after it. `-PTX` sits on a **separate axis** as an artifact-role marker, so **a -PTX may carry the
+terminal -TBI overlay** — `topic-PTX-TBI.md` is a transcript with a feed owed, not a routed handoff, and
+resolving the overlay returns it to `topic-PTX.md` with its role intact. Ordinary disposition words are lower-case; supersession
 uses the lower-case `superseded` stem plus the ruled uppercase phase qualifier `A` or `P`. **The grammar is
 prospective** — historical filenames keep the conventions in force when they were created and are never
 normalized to match it.
@@ -247,8 +279,8 @@ nothing.
 The `-PTX` **role marker is retained** throughout any version lineage. **The PTX files are themselves the
 lineage** — they receive no separate canonical-plus-snapshot chain. A PTX is **not** a handoff, an approval, an
 execution instruction, or an ingestion-state marker; do not absorb one as project truth without classification.
-If a PTX creates work for another surface, **route a separate handoff** rather than stacking `-PTX` with
-`-TBI`.
+If a PTX creates work for another surface, **route a separate handoff** for that work — the overlay flags a
+feed, it does not convert the transcript into a routed handoff.
 
 **Classify before acting.** Scratch may hold operator hand-assembled provenance records — short dated names,
 dialogue-marker transcripts, `v0`/`vN` files. Do not assume model drafts. Classify the artifact role before
