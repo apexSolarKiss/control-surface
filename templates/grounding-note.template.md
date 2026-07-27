@@ -106,7 +106,7 @@ Do not refresh for routine repo chronology, recent PR activity, or session-speci
 
 ## Inbound Handoff TBI Marker
 
-This project follows `method-ASK/docs/source-of-intent.md` §Inbound handoff TBI marker. Inbound handoff memos arriving in this project's external `sources of intent/` may carry a `-TBI.md` suffix as an ASK ingestion-state marker (to be ingested, not absorbed). The repo-local execution form lives in `AGENTS.md` §Inbound Handoff TBI Marker.
+This project follows `method-ASK/docs/source-of-intent.md` §Inbound handoff TBI marker. Inbound handoff memos arriving in this project's external intent inbox — at the exact live path its `_INDEX` declares — may carry a `-TBI.md` suffix, ASK's unconsumed feed-queue marker (a feed is still owed; not a statement about disposition). The repo-local execution form, including the full state machine, lives in `AGENTS.md` §Inbound Handoff TBI Marker.
 
 `[Optional: if this project has a domain-authority review surface that is grounded on this grounding note and pointed at the repo but lacks write access to the project's external folder, name the read-only-origin variant here. urban-observatory provides a worked example of this pattern in its grounding note.]`
 

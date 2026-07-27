@@ -33,10 +33,19 @@ To start a new ASK project from this protocol repo, beginning from zero:
    <project-name>-EXTERNAL/
      <project-name>_grounding-note.md   # canonical durable context (root)
      scratch/                            # _vN snapshots + iteration
-     sources of intent/                  # inbound -TBI handoffs + received records
+     intent-carriers/                    # standing + invocable operative carriers
+       ZZZ/                              #   superseded carrier generations (lineage)
+     intent-INbox/                       # inbound routed handoffs, under the filename lifecycle
+       _STATE.md                         #   structural inbox state — not routed intent
    ```
 
-   Root is the default durable-context layer of an `*-EXTERNAL` surface; named semantic or structural layers (`scratch/`, `sources of intent/`) override it only where explicitly defined.
+   Root is the default durable-context layer of an `*-EXTERNAL` surface; named semantic or structural layers (`scratch/`, `intent-carriers/`, `intent-INbox/`) override it only where explicitly defined.
+
+   The two intent planes are **not** interchangeable. `intent-carriers/` holds carriers the project *invokes or deploys* — adapted prompts, deployed instruction canonicals — under canonical `_vN` lineage with superseded generations in `ZZZ/`. `intent-INbox/` holds *addressed routed instances* arriving from another operating surface, each under the filename lifecycle (`-TBI` → `-ingested` → a terminal disposition suffix, or `-supersededA` before ingestion). A standing carrier never takes a handoff lifecycle suffix; a routed instance never becomes a carrier by being ingested.
+
+   `intent-INbox/_STATE.md` is **structural, not routed intent**: no lifecycle suffix, excluded from queue counts, updated in place, and read immediately before ingestion. A structural artifact is exempt only where the surface's structural contract **names** it — a leading `_` alone confers no exemption.
+
+   **This tree is the target convention.** A surface that has not yet recorded its cutover keeps its current mapped intake path, and its `_INDEX` remains the operative locator until then; the absence of `intent-INbox/_STATE.md` before cutover is not nonconformance.
 
 4. Instantiate the grounding note from [`templates/grounding-note.template.md`](templates/grounding-note.template.md). The canonical durable-context note lives at the `*-EXTERNAL` **root**; its versioned snapshots live in `scratch/`:
 
@@ -62,7 +71,7 @@ To start a new ASK project from this protocol repo, beginning from zero:
 8. (Optional) When an external advisor surface is used:
    - Create the source index from [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md) as `<project-name>-EXTERNAL/_INDEX-<project-name>.md` (or `_INDEX-<project-name>-<role>.md` per advisor role). It is **fetched live**, not mounted.
    - Generate the surface bootstrap from [`templates/advisor-project-bootstrap.template.md`](templates/advisor-project-bootstrap.template.md) and mount it as the advisor Project's **single standing Source**; adapt [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) — the thin pre-bootstrap floor — and install it once into the Project Instructions. Placement contract: [`docs/advisor-project-surface-architecture.md`](docs/advisor-project-surface-architecture.md).
-9. (Optional) When the project will use the advisor / nudge / critique surfaces, adapt the protocol repo's reusable nudge and critique prompts into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/`:
+9. (Optional) When the project will use the advisor / nudge / critique surfaces, adapt the protocol repo's reusable nudge and critique prompts into project-flavored operator-side copies in `<project-name>-EXTERNAL/intent-carriers/` — an adapted prompt is an **invocable carrier**, not a routed handoff, so it never lands in `intent-INbox/` and never takes a lifecycle suffix:
 
    ```text
    prompts/repo-nudge-prompt.md              → <project-name>_repo-nudge-prompt.md
@@ -192,6 +201,7 @@ Templates in `templates/` are copyable starters. They are not live for this repo
 - [`prompts/ecology-critique-initial-prompt.md`](prompts/ecology-critique-initial-prompt.md) — open-ended fresh-context critique across the ASK system-building ecology (`control-surface`, [`method-ASK`](https://github.com/apexSolarKiss/method-ASK), [`design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK), downstream repos / grounding notes)
 - [`prompts/ecology-critique-synthesis-prompt.md`](prompts/ecology-critique-synthesis-prompt.md) — fold another independent ecology critique into the one just produced and make an advisory plan
 - [`prompts/ecology-critique-execution-prompt.md`](prompts/ecology-critique-execution-prompt.md) — hand the ecology advisory synthesis back to the execution surface for per-repo scoped implementation, stopping at exact scoped diff (execution pass)
+- [`prompts/cross-repo-propagation-wave.md`](prompts/cross-repo-propagation-wave.md) — coordinator runbook for a multi-consumer propagation wave: phase contract, subagent evidence-packet schema, and the two typed profiles (design-system vendor propagation · execution-protocol carrier propagation)
 
 ### Examples
 
@@ -225,7 +235,7 @@ For a new ASK project:
 - Identify protected paths, constraints, and required verification steps in the new repo's `AGENTS.md`.
 - Use [`prompts/claude-code-initial-prompt.md`](prompts/claude-code-initial-prompt.md) to attach Claude Code after the repo exists.
 - Optionally generate a surface bootstrap from [`templates/advisor-project-bootstrap.template.md`](templates/advisor-project-bootstrap.template.md), install the thin floor from [`templates/advisor-project-instructions.template.md`](templates/advisor-project-instructions.template.md) into the advisor Project Instructions, and create the live-fetched source index from [`templates/_INDEX-project.template.md`](templates/_INDEX-project.template.md).
-- Optionally adapt the protocol repo's nudge prompt ([`prompts/repo-nudge-prompt.md`](prompts/repo-nudge-prompt.md)) and critique-cycle prompts ([`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md), [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md), [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md)) into project-flavored operator-side copies in `<project-name>-EXTERNAL/sources of intent/` when those surfaces will be used.
+- Optionally adapt the protocol repo's nudge prompt ([`prompts/repo-nudge-prompt.md`](prompts/repo-nudge-prompt.md)) and critique-cycle prompts ([`prompts/repo-critique-initial-prompt.md`](prompts/repo-critique-initial-prompt.md), [`prompts/repo-critique-synthesis-prompt.md`](prompts/repo-critique-synthesis-prompt.md), [`prompts/repo-critique-execution-prompt.md`](prompts/repo-critique-execution-prompt.md)) into project-flavored operator-side copies in `<project-name>-EXTERNAL/intent-carriers/` when those surfaces will be used.
 
 ## Background Reading
 

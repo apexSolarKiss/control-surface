@@ -122,29 +122,66 @@ For external context, read the grounding note. Then read whatever templates, pro
 ## Inbound Handoff TBI Marker
 <!-- rule-id: inbound-tbi-marker -->
 
-When a routed handoff memo in a shared intake carries the `-TBI.md` suffix, treat the suffix as ASK ingestion-state only: a received handoff awaiting ingestion, not a statement about absorption. When the recipient active surface takes that memo up, its first action is to rename the file in place to remove `-TBI`; do not edit the memo body. Then classify the memo. When classification produces a durable action, hold, rejection, or route, record the required closure in scratch. Copy + suffix do not authorize implementation.
+`-TBI` is human ASK's **unconsumed feed-queue marker**. It answers one operator question from a directory listing: *does this exact artifact still need to be fed into an active recipient-project thread?* It means a successful feed is still owed — either none has occurred, or a prior feed did not result in ingestion. It is not a statement about disposition, repo ownership, or pending repo work. Copy + suffix do not authorize implementation.
 
 **Route on approval; feed/ingest later.** Once ASK approves a recipient-facing handoff memo's substance, the origin routes the recipient `-TBI` copy immediately unless ASK explicitly directs that routing itself be held. Routing is complete when the exact copy exists at the declared intake path. Routing is not feeding or ingestion: it places the artifact in ASK's logical unconsumed feed queue, and ASK separately decides when to feed it into the recipient's active surface. Do not defer routing until the recipient is ready, its workload clears, or a later operator pass. This timing rule expands no write authority: use a declared ingress aperture where one exists; otherwise return the exact recipient artifact to ASK immediately for routing.
 
-**Four events, not two.** A cross-surface handoff passes through four distinct events, each with its own actor and its own evidence:
+**Four events, not two.** The full ingest-and-classify path distinguishes four distinct events, each with its own actor and its own evidence:
 
 ```text
 routing     the origin makes material durably available in the recipient's intake
             — candidate availability, nothing more
 feeding     ASK hands the material to the recipient's active surface — the operator-side act
-ingestion   the recipient surface takes it up, evidenced by striking `-TBI` — the recipient-side act
-absorption  the recipient classifies and records any required durable disposition
+ingestion   the recipient surface reads the exact artifact into active context —
+            the resulting state when a feed succeeds, recorded by renaming
+            `-TBI` to `-ingested`
+disposition the recipient classifies the material and records the resulting durable
+            disposition — absorption is one of them, not the name for all of them
 ```
 
-Collapsing any adjacent pair is the failure this rule corrects. **Feeding and ingestion are paired but not atomic:** feeding is ASK's act, ingestion is the recipient's, and a feed can fail, be deferred, or be superseded before the recipient acts. Feeding therefore expresses the *intent* to have the material ingested and is never itself ingestion evidence — **queue exit occurs on recipient-side ingestion, not on the feed attempt.** Ingestion is likewise not absorption, and absorption is not implementation authority.
+A routed artifact may instead exit before ingestion through `-supersededA`, either before feeding or after a feed that did not result in ingestion; the four-event path is what an artifact traverses when it *is* ingested and classified, not an inevitability of routing. Collapsing any adjacent pair of the four is the failure this rule corrects.
 
-`-TBI` marks material that ASK has saved but that the operating surface responsible for ingesting it has not yet taken up. It is an unconsumed ingestion-queue marker — not a repo-ownership marker and not a pending-action marker. That is why the suffix is struck **on ingestion** rather than at absorption: the item leaves the queue when the recipient takes it up, not when ASK feeds it in. A memo that has been fed but not yet taken up is still queued, and its marker is telling the truth.
+**Feeding and ingestion are paired but not atomic.** Feeding is ASK's act; ingestion is the recipient-side state that results when the feed succeeds. **Ingestion is not a proactive election by the surface** — the surface does not decide to ingest, it ingests because it was fed. A feed can fail, be deferred, or be superseded before the recipient acts. Feeding therefore expresses the *intent* to have the material ingested and is never itself ingestion evidence — **queue exit occurs on recipient-side ingestion, not on the feed attempt.** Ingestion is likewise not disposition, and disposition is not implementation authority.
+
+**Feeding by value or by reference.** ASK feeds either by attaching or pasting the content, or by supplying the exact path, which the recipient then resolves through a connector or by reading the filesystem. Both are valid feeds; a bare exact path addressed to an active surface is a feed. Ingestion still requires the recipient to retrieve and read the artifact:
+
+```text
+path resolves    ≠ content read
+content read     ≠ exact-byte identity proven
+```
+
+A failed retrieval, or a path resolving only to metadata, has not produced ingestion. A lossy or normalized view may constitute content read under a bounded fidelity claim; where the omitted portion could affect classification, obtain an adequate representation first.
+
+**The relay envelope governs force and scope.** Feeding is a relay that carries an external payload, and the envelope — not the payload — determines whether the recipient is to read, classify, review, execute, hold, or otherwise act. Mere inclusion of an artifact does not make every proposition inside it operative intent.
+
+**The state machine.**
+
+```text
+-TBI  →  -ingested                 ingested — content read into active context;
+                                   the rename records it, it does not cause it
+-TBI  →  -supersededA              ASK-side PRE-ingestion retirement disposition:
+                                   retired before ingestion, never consumed
+-ingested  →  terminal disposition -absorbed · -held · -declined · -withdrawn ·
+                                   -routed · -no-route · -closed · -supersededP
+```
+
+The recipient's **first lifecycle mutation after successful content read** — before any classification work begins — is the in-place rename from `-TBI` to `-ingested`. Rename only; it records nothing about what was later absorbed, held, declined, routed, or superseded.
+
+**Disposition is not absorption.** Absorption is one possible disposition; `-held`, `-declined`, `-withdrawn`, `-routed`, `-no-route`, `-closed`, and `-supersededP` record different outcomes. ASK may retire an artifact before ingestion; the recipient owns **post-ingestion** disposition.
+
+**Closure and the terminal rename are one bounded operation.** Every transition from `-ingested` to a terminal disposition suffix requires a durable disposition record made in the same operation — a dated scratch memo or an appended terminal section in an explicitly maintained program or status record; do not create an artifact solely to satisfy form. A rename is not a disposition record, and a record without the rename leaves the filename lying. `-supersededA` is the one exit needing no absorption closure, because no recipient absorption occurred — but it still requires an explicit lineage or current-status record naming the successor.
+
+**Marker grammar.** The lifecycle suffix is always the final token before `.md`. A role or addressee marker (`-PTX`, `-4ASK`, `-4TMK`) precedes it and is never stacked after it. Ordinary disposition words are lower-case; supersession uses the lower-case `superseded` stem plus the ruled uppercase phase qualifier `A` or `P`.
+
+**Structural artifacts inside a declared intent inbox.** Within a declared intent inbox, an artifact is exempt from the routed-instance lifecycle **only when the surface's current structural contract explicitly names it as structural. A leading `_` alone confers no exemption.** Before ingesting a routed artifact, the recipient surface reads and honors any current inbox-state carrier that contract declares. Structural artifacts take no handoff lifecycle suffix and are excluded from routed-artifact queue counts.
+
+**This lifecycle grammar is prospective.** Historical filenames retain the conventions in force when they were created and are not normalized; legacy tokens do not acquire the meanings defined here.
 
 **The queue is logical, not a folder.** The unconsumed feed queue may occupy more than one physical location — an ASK-side staging area, an origin's scratch space, a transit surface, and the recipient's declared intake path. The `-TBI` marker attaches when the artifact **enters the queue**, wherever that is; relocation *within* the queue is not a lifecycle event and neither applies nor re-applies a marker. Arriving in the intake folder is a move within the queue, not an entry into it and not an exit from it.
 
-Pre-ingestion supersession — removing `-TBI` is not the only way an active handoff leaves the unconsumed queue. Before ingestion, ASK may instead retire it by replacing `-TBI` with `-SUPERSEDED`. The `-SUPERSEDED` artifact itself was never ingested and never absorbed, carries no pending work, and remains in the intake only as lineage — typically beside an active successor, which carries its own `-TBI`. Active queue membership therefore has two exits: `-TBI` removed with no replacement marker means **ingested**; `-TBI` replaced by `-SUPERSEDED` means **retired before ingestion, unconsumed**. Neither disposition authorizes implementation, and a `-SUPERSEDED` artifact is not ingested, reactivated, or renamed off merely because it remains physically present in the intake folder.
+**Supersession has two phases, and the marker encodes which.** Ingestion is not the only exit from the unconsumed feed queue. At any point before ingestion — including after a feed the recipient surface never ingested — ASK may instead retire the artifact as `-supersededA`. A `-supersededA` artifact was never ingested and never absorbed; it carries no pending work and remains in the intake only as lineage, typically beside an active successor carrying its own `-TBI`. A `-supersededP` artifact *was* ingested — its lineage records that the recipient read it before a successor displaced it, which is a materially different history and is why the phase is encoded rather than flattened. Neither disposition authorizes implementation, and neither is reactivated, re-ingested, or renamed off merely because the file remains physically present in the intake.
 
-Historical body versus current disposition — a received handoff body is byte-immutable: it is not edited on ingestion or on pre-ingestion supersession. A sender-authored in-body status line records the routing-time state and remains historical evidence; it is not rewritten because the recipient later ingested or superseded the artifact. Current lifecycle disposition is carried by the filename marker (`-TBI` active-intake · unmarked ingested · `-SUPERSEDED` retired-unconsumed). Any recipient/ASK closure or separately maintained current-status record, when present, is also current disposition evidence; every such current carrier must agree with the filename marker and with every other current carrier. An immutable body's historical routing-status string is not required to match a later recipient disposition; successor linkage belongs in a closure or explicit lineage record, never in a post-receipt edit to the received body.
+**Historical body versus current disposition.** A received handoff body is byte-immutable: it is not edited on ingestion, on supersession, or at closure. A sender-authored in-body status line records the routing-time state and stays historical evidence; it is not rewritten because the recipient later ingested or superseded the artifact. Current lifecycle disposition is carried by the filename marker (`-TBI` active-intake · `-ingested` read-but-not-closed · terminal disposition suffix · `-supersededA` retired-unconsumed · `-supersededP` ingested-then-displaced). Any recipient/ASK disposition record or separately maintained current-status record, when present, is also current disposition evidence; every such current carrier must agree with the filename marker and with every other current carrier. An immutable body's historical routing-status string is not required to match a later recipient disposition; successor linkage belongs in a disposition or explicit lineage record, never in a post-receipt edit to the received body.
 
 **Do not create a `-TBI` addressed to a surface the acting surface already operates.** Moving between repos inside one operating surface is a hard repo-boundary reset — read that repo's grounding note and `AGENTS.md`, verify live state, work under its own branch, diff, review, and merge gates — not an ingestion event. A handoff addressed back to the surface that authored it tracks nothing: the destination operating surface already has the material, so no ingestion boundary was crossed.
 
@@ -179,7 +216,7 @@ YYYY-MM-DD_<surface-or-subject>_<topic>-PTX.md
 YYYY-MM-DD_<surface-or-subject>_<topic>-PTX_vN.md
 ```
 
-`-TBI`, `-PTX`, and `_vN` do not share an axis: `-TBI` is a lifecycle state — struck on ingestion, or replaced by `-SUPERSEDED` on pre-ingestion retirement; `-PTX` is an artifact role, and the role marker is retained throughout any version lineage; `_vN` is an optional version index for the transcript artifact. Neither `-PTX` nor `_vN` confers state, authority, or canonical status.
+`-TBI`, `-PTX`, and `_vN` do not share an axis: `-TBI` is a lifecycle state — replaced by `-ingested` on ingestion, or by `-supersededA` on pre-ingestion retirement; `-PTX` is an artifact role, and the role marker is retained throughout any version lineage and precedes any lifecycle suffix; `_vN` is an optional version index for the transcript artifact. Neither `-PTX` nor `_vN` confers state, authority, or canonical status.
 
 ---
 
@@ -189,7 +226,7 @@ YYYY-MM-DD_<surface-or-subject>_<topic>-PTX_vN.md
 Before choosing direct operation or `-TBI` routing, first establish whether the material crosses an operating-surface boundary at all. Only then classify the change's authority and the surface's write jurisdiction.
 
 - **Destination inside the same operating surface** → **no `-TBI`, under any authority class.** Change repo context through a hard repo-boundary reset and operate the owning repo directly under its own gates. Answer this test first; a `yes` disposes of the routing question on its own, and the authority and jurisdiction tests below never run.
-- **Candidate source-of-intent, project-specific direction, or other material whose recipient must classify** → preserve the origin record, route a recipient copy through `sources of intent/` with `-TBI`, and let the recipient surface own ingestion and absorption. This branch presumes the recipient is a *different* operating surface; recipient-owned classification inside one surface is a hat swap, not a handoff.
+- **Candidate source-of-intent, project-specific direction, or other material whose recipient must classify** → preserve the origin record, route a recipient copy into the recipient's intent inbox — at the exact live path that surface's index declares, `intent-INbox/` being the target convention — with `-TBI`, and let the recipient surface own ingestion and post-ingestion disposition. This branch presumes the recipient is a *different* operating surface; recipient-owned classification inside one surface is a hat swap, not a handoff.
 - **ASK-authorized conformance to a protocol owned upstream** → propagate directly only where the active surface has write jurisdiction over the consumer. Apply the change through the consumer repo's own branch, diff, PR, review, and merge gates. Do not create a `-TBI` handoff merely to carry an already-authoritative protocol update.
 - **No direct write jurisdiction** → route to the owning surface even when the upstream protocol is authoritative. Protocol ownership does not pierce a wall, create a grant, or bypass a surface boundary.
 

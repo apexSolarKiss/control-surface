@@ -29,7 +29,7 @@ The same rule now applies to this file itself. It is **fetched, not mounted**: t
 ## Read-path hierarchy
 
 - **Repo truth** → GitHub / local git (authoritative; unchanged).
-- **Operator-side canonicals** (`*-EXTERNAL/` root notes · trackers · `scratch/` · `sources of intent/`) → the **Dropbox connector by exact path**, when available (preferred live read path).
+- **Operator-side canonicals** (`*-EXTERNAL/` root notes · trackers · `scratch/` · the surface's current intent inbox) → the **Dropbox connector by exact path**, when available (preferred live read path).
 - **Uploads / mounted copies** → fallback only, when the connector is absent or a file is unreachable.
 - **Web** → public external sources only.
 
@@ -53,7 +53,8 @@ List only the paths this surface is authorized to read. Give each a **status cla
 | \<project> grounding note | `S/<project>-EXTERNAL/<project>_grounding-note.md` | root canonical |
 | \<project> article / domain tracker | `S/<project>-EXTERNAL/<project>-articles.md` | root canonical *(example — delete if N/A)* |
 | working index / corpus-state | `S/<project>-EXTERNAL/scratch/…_<project>_<index>.md` | working index *(resolve-latest by glob, not a pinned date)* |
-| sources of intent (intake) | `S/<project>-EXTERNAL/sources of intent/` | candidate / ingestion — the **filename lifecycle marker** carries current disposition (`-TBI` active queue · unmarked ingested · `-SUPERSEDED` retired before ingestion); the folder alone does not establish queue membership |
+| intent inbox (intake) | `S/<project>-EXTERNAL/<the surface's current live intake path>` | candidate / ingestion — the **filename lifecycle marker** carries current disposition (`-TBI` active queue · `-ingested` read-but-not-closed · terminal disposition suffix · `-supersededA` retired before ingestion · `-supersededP` ingested-then-displaced); the folder alone does not establish queue membership. Post-cutover convention is `intent-INbox/`; **the live path above governs until this surface's cutover is recorded** |
+| inbox state *(post-cutover only)* | `S/<project>-EXTERNAL/intent-INbox/_STATE.md` | structural — **not routed intent**: no lifecycle suffix, excluded from queue counts, updated in place, read immediately before ingestion (`OPEN` · `FROZEN` · `PARTIAL-HOLD` + scope, exceptions, ASK authorization locator, effective time, review trigger). A structural artifact is exempt only where this contract **names** it — a leading `_` alone confers nothing. Before cutover its absence is not nonconformance; once declared active, unreachable or malformed state **fails closed for ingestion** |
 | scratch | `S/<project>-EXTERNAL/scratch/` | fetch **named** artifacts only (`-PROPOSED` review objects/bundles, `_vN` snapshots, absorption/closure memos) |
 
 Status classes: **root canonical** · **candidate / intake** · **working index** · **scratch / snapshot** · **reference-only** (available cross-domain context the project has *not* absorbed — consult if a task needs it; not this project's doctrine). The shared-protocol rows below additionally use **owner canonical** · **normative registry** · **coordinator canonical**.
@@ -83,6 +84,6 @@ Status classes: **root canonical** · **candidate / intake** · **working index*
 - Fetch only the paths named here, by ASK, by a grounding note, or by the active task.
 - **Prefer fetch-by-exact-path; reserve keyword/connector search for genuine discovery.** A broad connector search surfaces *filenames* from private / archive trees (a directory-listing leak) even where content reads are blocked — it can expose a private filename manifest. Default to the exact paths above; use search only to discover something not already mapped.
 - Any `P/` (`inheritable/`) or other personal-side paths named above are **the only** authorized personal-side paths. **Do not browse the personal root or any other private personal path** — `inheritable/` is wall-safe; the rest is not. On a cross-user surface, **never** point into another user's private namespace (a cross-namespace path resolves to *not-found*, which is the wall behaving correctly — read the user's own twin instead).
-- **Fetched ≠ absorbed / canonicalized / promoted.** Header + path govern status (scratch stays scratch, `-TBI` stays TBI, a root canonical is canonical only in its owning surface).
+- **Fetched ≠ read into context ≠ ingested ≠ absorbed / canonicalized / promoted.** Header + path govern status (scratch stays scratch, `-TBI` stays `-TBI` until a recipient surface actually reads it, a root canonical is canonical only in its owning surface). A resolving path is not a content read, and a content read is not proof of exact bytes.
 - Connector access is **read / verify only — capability is not authorization.** A connector may expose write actions (a GitHub connector: commit / branch / open-close-merge PR / comment / auto-merge; a Dropbox connector: file save / move / routing); **none are authorized on an advisor surface.** Use connectors only to fetch named files, read exact PRs / diffs / state, and verify relayed claims; every write routes through the executor on the operator's relay (see the advisor Project Instructions §Connector boundary).
 - If a path is unreachable, say so and stop — never substitute a weaker source while calling it verified.

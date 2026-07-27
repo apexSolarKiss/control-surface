@@ -228,10 +228,15 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | LIFE-1 | Explicit lifecycle verbs; never `cut` for an artifact operation. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | LIFE-2 | Fetch current state before proposing a new version; tie the version to what was actually saved. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | LIFE-3 | Filename conventions: dated scratch names · `Title vN.md` frozen · canonical-unversioned edits in place then a byte-identical `_vN` snapshot. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
-| LIFE-4 | `-TBI` active intake · unmarked ingested · `-SUPERSEDED` retired-unconsumed; the received body is byte-immutable and the filename marker carries current disposition. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
+| LIFE-4 | `-TBI` is ASK's **unconsumed feed-queue marker** — a feed is still owed, not a statement about disposition. The received body is byte-immutable and the filename marker carries current disposition. | shared protocol | BOOTSTRAP | REVISE | FULL | revised from the outgoing `unmarked ingested` / `-SUPERSEDED` model; the state machine moves to LIFE-4d |
 | LIFE-4a | A sender-authored in-body status is **routing-time historical evidence**. Current status, receipt annotation, and successor linkage never enter the received body — they live in the filename marker and any separate current-status or lineage record. Do not restore a received-file receipt annotation. | shared protocol | BOOTSTRAP | RESTORE | ABSENT | subrequirement of the owner rule, not carried by LIFE-4 alone |
-| LIFE-4b | A handoff passes through **four** events — routing · feeding · ingestion · absorption — each with its own actor and its own evidence. Feeding and ingestion are paired but **not atomic**: queue exit occurs on recipient-side ingestion, never on the feed attempt, and intent to ingest is not evidence of completed ingestion. The feed queue is **logical** and may span locations; relocation within it is not a lifecycle event. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | new doctrine conforming `method-ASK#148`; created after the 2026-07-25 audit, so no deployment was observed |
+| LIFE-4b | The full ingest-and-classify path distinguishes **four** events — routing · feeding · ingestion · **disposition** — each with its own actor and its own evidence. A routed artifact may instead exit before ingestion as `-supersededA`, so the four-event path is not an inevitability of routing. Feeding and ingestion are paired but **not atomic**: queue exit occurs on recipient-side ingestion, never on the feed attempt, and intent to ingest is not evidence of completed ingestion. The feed queue is **logical** and may span locations; relocation within it is not a lifecycle event. | shared protocol | BOOTSTRAP | REVISE | n/a (new) | fourth event revised from `absorption` to `disposition` conforming `method-ASK#150`; absorption is one disposition, not the generic name |
 | LIFE-4c | Approved recipient-facing handoff substance routes immediately unless routing itself is explicitly held. Routing ≠ feeding/ingestion; ASK separately controls feed timing. The timing rule grants **no new write authority** — use a declared ingress aperture, or return the exact artifact for routing. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | separable from LIFE-4b: one is the event model, this is the routing-timing obligation |
+| LIFE-4d | **State machine.** `-TBI` → `-ingested` on content read (the rename records ingestion, it does not cause it) · `-TBI` → `-supersededA` for an ASK-side **pre-ingestion** retirement disposition · `-ingested` → a terminal disposition suffix (`-absorbed` · `-held` · `-declined` · `-withdrawn` · `-routed` · `-no-route` · `-closed` · `-supersededP`). `-supersededA` was never ingested; `-supersededP` was — the phase is encoded, never flattened. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | separable from LIFE-4: one is what the marker *means*, this is the set of legal transitions |
+| LIFE-4e | **Feed semantics.** ASK feeds **by value** (attach/paste) or **by reference** (an exact path the surface resolves); both are feeds. But `path resolves ≠ content read ≠ exact-byte identity proven` — a failed retrieval, or a path resolving only to metadata, has not produced ingestion. A lossy view may be content read under a bounded fidelity claim; where the omission could affect classification, obtain an adequate representation first. The **relay envelope** governs operative force and scope: a feed does not adopt every claim in its payload. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | separable from LIFE-4b: the event model does not state how a feed is delivered or what it authorizes |
+| LIFE-4f | **Closure coupling.** Every transition from `-ingested` to a terminal suffix requires a durable **disposition record** made in the **same bounded operation** as the rename — a rename alone asserts a disposition no record supports; a record alone leaves the filename lying. **Disposition ≠ absorption:** absorption is one possible disposition. `-supersededA` needs no absorption closure (none occurred) but still requires an explicit lineage or current-status record naming the successor. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | the loss-prone limb: a carrier can state the state machine while dropping the record obligation entirely |
+| LIFE-4g | **Structural state.** Inside a declared intent inbox, an artifact is exempt from the routed-instance lifecycle **only where the surface's current structural contract explicitly names it as structural — a leading `_` alone confers no exemption.** Read and honor any declared inbox-state carrier *before* ingesting. Structural artifacts take no lifecycle suffix and are excluded from routed-artifact queue counts. Post-cutover, `intent-INbox/_STATE.md` is the standard carrier: updated in place, unsuffixed, read immediately before ingestion, recording `OPEN` · `FROZEN` · `PARTIAL-HOLD` plus scope, exceptions, ASK authorization locator, effective time, review trigger. Pre-cutover **absence is not nonconformance**; post-activation an unreachable or malformed state **fails closed for ingestion**. | shared protocol | BOOTSTRAP + INDEX | PRESERVE | n/a (new) | co-homed: the bootstrap states the obligation, the index declares the surface's live path and its structural rows |
+| LIFE-4h | **Grammar and historical boundary.** The lifecycle suffix is always the final token before `.md`; a role or addressee marker (`-PTX`, `-4ASK`, `-4TMK`) precedes it and is never stacked after it. Ordinary disposition words are lower-case; supersession uses the lower-case `superseded` stem plus the ruled uppercase phase qualifier `A` or `P`. The grammar is **prospective** — historical filenames keep the conventions in force when they were created and are never normalized to match it. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | separable: grammar and the no-normalization boundary are independently droppable from a carrier that states the transitions |
 | LIFE-5 | `-PTX` is an artifact-role marker; `_vN` indexes the transcript artifact; neither confers lifecycle state or authority; PTX progression is ASK-owned. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | LIFE-5a | The `-PTX` role marker is **retained** throughout any version lineage. The PTX files are themselves the lineage; they receive no separate canonical-plus-snapshot chain. | shared protocol | BOOTSTRAP | RESTORE | ABSENT | |
 | LIFE-5b | A PTX is **not** a handoff, approval, execution instruction, or ingestion-state marker. Do not absorb one as project truth without classification. | shared protocol | BOOTSTRAP | RESTORE | ABSENT | |
@@ -320,21 +325,22 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 ## Coverage report — this revision
 
 ```text
-registry IDs                       75   = 68 shared + 6 surface overlays + 1 retired shared requirement
+registry IDs                       80   = 73 shared + 6 surface overlays + 1 retired shared requirement
 
 placement (shared IDs; co-homed IDs counted in each declared home)
   PI-FLOOR                         10
-  BOOTSTRAP                        66
-  INDEX                             4
+  BOOTSTRAP                        71
+  INDEX                             5
   SURFACE-OVERLAY                   6   (5 active + 1 retired overlay)
   RETIRED                           2   RET-1 shared · OVL-AP-2 overlay — each with a recorded reason
   NOT-APPLICABLE                    0
 
 ruling (shared IDs)
-  PRESERVE                         55
+  PRESERVE                         58
   RESTORE                           9   READ-3 · REVIEW-7 · DISAGREE-1 · DISAGREE-2 · POSTURE-3
                                         · LIFE-4a · LIFE-5a · LIFE-5b · LIFE-5c
-  REVISE                            4   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2
+  REVISE                            6   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2
+                                        · LIFE-4 · LIFE-4b — the routed-instance lifecycle
   restored as surface overlay       2   OVL-AP-1 · OVL-ECO-2
 
 deployed presence at the 2026-07-25 audit (shared IDs)
@@ -345,8 +351,9 @@ deployed presence at the 2026-07-25 audit (shared IDs)
                                         (rule kept, reason/criterion lost) · LIFE-4a and the three LIFE-5
                                         subrequirements (owner-rule detail not carried by the coarse rows)
   TEMPLATE-ONLY                     7   present in this repo's template, never propagated to a deployment
-  n/a (new)                         7   START-1 · FAIL-1 — created by this architecture ·
-                                        REVIEW-9 · REVIEW-10 · REVIEW-11 · LIFE-4b · LIFE-4c —
+  n/a (new)                        12   START-1 · FAIL-1 — created by this architecture ·
+                                        REVIEW-9 · REVIEW-10 · REVIEW-11 · LIFE-4b · LIFE-4c ·
+                                        LIFE-4d · LIFE-4e · LIFE-4f · LIFE-4g · LIFE-4h —
                                         created after the 2026-07-25 audit, so no deployment
                                         was observed for them
 

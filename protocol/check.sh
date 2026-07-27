@@ -240,15 +240,28 @@ assert_local(){
   grep -qF -- 'no character limit' "$APBOOT" && recmiss="$recmiss bootstrap:{STALE no-character-limit}"
   [ -z "$recmiss" ] && OKAY "advisor-surface anti-loss recovery carried (lifecycle subrequirements + overlay gate + startup posture)" || FAIL "advisor-surface recovery clause(s) missing:$recmiss"
 
-  # 15 four-event handoff lifecycle — POSITIVE clauses in both shared-core carriers, plus NEGATIVE assertions that no
-  #    carrier still attributes queue exit to the feed attempt. The rule is only conformant when both halves hold:
-  #    stating the four events while a stale "leaves the queue when it is fed in" survives elsewhere is the defect.
+  # 15 routed-instance lifecycle — POSITIVE clauses in both shared-core carriers, plus NEGATIVE assertions that no
+  #    carrier still teaches the outgoing model. The rule is only conformant when both halves hold: stating the
+  #    state machine while a stale "leaves the queue when it is fed in" or "-SUPERSEDED" survives elsewhere is
+  #    the defect. This check proves CARRIER COVERAGE and stale-semantic rejection only. Whether a real FROZEN
+  #    `_STATE.md` actually blocks a live ingestion is an exercised acceptance test at each surface cutover
+  #    (Units 5-6), never inferred from a phrase being present here.
   local fevmiss="" ph
   local fevphr=('**Four events, not two.**' '**Route on approval; feed/ingest later.**' \
                 'queue exit occurs on recipient-side ingestion, not on the feed attempt' 'paired but not atomic' \
                 '**The queue is logical, not a folder.**' 'relocation *within* the queue is not a lifecycle event' \
-                'absorption is not implementation authority' 'ASK separately decides when to feed it' \
-                'expands no write authority')
+                'disposition is not implementation authority' 'ASK separately decides when to feed it' \
+                'expands no write authority' \
+                'unconsumed feed-queue marker' \
+                'the rename records it, it does not cause it' \
+                'ASK-side PRE-ingestion retirement disposition' \
+                '**Disposition is not absorption.**' \
+                'Closure and the terminal rename are one bounded operation' \
+                'a bare exact path addressed to an active surface is a feed' \
+                '**The relay envelope governs force and scope.**' \
+                'A leading `_` alone confers no exemption' \
+                'The lifecycle suffix is always the final token before `.md`' \
+                '**This lifecycle grammar is prospective.**')
   for ph in "${fevphr[@]}"; do
     grep -qF -- "$ph" "$SHARED"     || fevmiss="$fevmiss shared:{$ph}"
     grep -qF -- "$ph" "$ROOTAGENTS" || fevmiss="$fevmiss root-carrier:{$ph}"
@@ -260,22 +273,47 @@ assert_local(){
                  'intent to ingest is not evidence of completed ingestion' \
                  'relocation within the queue is not a lifecycle event' \
                  'ASK separately controls when to feed the routed artifact' \
-                 'grants no new write authority')
+                 'grants no new write authority' \
+                 'unconsumed feed-queue marker' \
+                 'Disposition is not absorption, and the record is not optional' \
+                 'same bounded operation' \
+                 'path resolves ≠ content read ≠ exact-byte identity proven' \
+                 'The relay envelope governs operative force and scope' \
+                 'a leading `_` alone confers no exemption' \
+                 'fails closed for ingestion')
   # the bootstrap template is hard-wrapped, so an operative sentence spans line breaks; flatten before matching or
   # a line-based fixed-string test silently fails on prose that is present and correct.
   local bootflat; bootflat=$(tr '\n' ' ' < "$APBOOT" | tr -s ' ')
   for ph in "${bootphr[@]}"; do
     printf '%s' "$bootflat" | grep -qF -- "$ph" || fevmiss="$fevmiss bootstrap:{$ph}"; done
+  # the index template declares the surface's live intake path AND the structural rows — a carrier that names
+  # _STATE.md without the "declaration confers the exemption, not the underscore" bound reopens the wildcard.
+  local idxflat; idxflat=$(tr '\n' ' ' < "$IDXTEMPLATE" | tr -s ' ')
+  for ph in 'intent-INbox/_STATE.md' 'structural — **not routed intent**' \
+            'a leading `_` alone confers nothing' \
+            'the live path above governs until this surface'; do
+    printf '%s' "$idxflat" | grep -qF -- "$ph" || fevmiss="$fevmiss index-template:{$ph}"; done
   # the manifest failure_mode must name the full class set this rule compensates for
   for ph in 'routing collapsed into feeding' 'feeding collapsed into ingestion' \
-            'ingestion misread as automatic absorption or normative adoption' \
+            'ingestion misread as automatic disposition, absorption, or normative adoption' \
             'ASK deprived of asynchronous routed-vs-fed queue control' \
-            'route-on-approval misread as cross-wall write authority'; do
+            'route-on-approval misread as cross-wall write authority' \
+            'a by-reference feed treated as ingestion on path resolution alone' \
+            'disposition collapsed into absorption' \
+            'a terminal disposition applied without a durable disposition record in the same bounded operation' \
+            'an artifact treated as structural because its name begins with an underscore' \
+            'historical filenames normalized to the prospective grammar'; do
     jq -r '.rules[]|select(.rule_id=="inbound-tbi-marker")|.failure_mode' "$MANIFEST" | grep -qF -- "$ph" || fevmiss="$fevmiss manifest:{$ph}"; done
+  # NEGATIVE: no governed carrier may still teach the outgoing model. `-SUPERSEDED` is checked as a whole word so
+  # the lower-case `-supersededA` / `-supersededP` tokens do not trip it.
   local stale
-  for stale in 'the item leaves the queue when it is fed in' 'has not yet fed into the operating surface' 'When ASK feeds that memo into the active surface'; do
-    grep -rqF -- "$stale" "$SHARED" "$ROOTAGENTS" "$APBOOT" "$PROFDIR" && fevmiss="$fevmiss STALE-feed-exit:{$stale}"; done
-  [ -z "$fevmiss" ] && OKAY "four-event handoff lifecycle carried (routing/feeding/ingestion/absorption + logical queue; no feed-exit residue)" || FAIL "four-event lifecycle clause(s) missing or stale:$fevmiss"
+  for stale in 'the item leaves the queue when it is fed in' 'has not yet fed into the operating surface' \
+               'When ASK feeds that memo into the active surface' \
+               'takes it up' 'taken up' 'unmarked ingested' 'rename the file in place to remove' \
+               'absorption is the later classification'; do
+    grep -rqF -- "$stale" "$SHARED" "$ROOTAGENTS" "$APBOOT" "$IDXTEMPLATE" "$PROFDIR" && fevmiss="$fevmiss STALE:{$stale}"; done
+  grep -rqE -- '-SUPERSEDED([^A-Za-z]|$)' "$SHARED" "$ROOTAGENTS" "$APBOOT" "$IDXTEMPLATE" "$PROFDIR" && fevmiss="$fevmiss STALE:{-SUPERSEDED}"
+  [ -z "$fevmiss" ] && OKAY "routed-instance lifecycle carried (routing/feeding/ingestion/disposition · -TBI→-ingested · phase-split supersession · record+rename coupling · declared structural carriers; no outgoing-model residue)" || FAIL "routed-instance lifecycle clause(s) missing or stale:$fevmiss"
 }
 
 validate_consumer(){
