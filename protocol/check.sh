@@ -367,6 +367,9 @@ assert_local(){
             'a -TBI used as a handoff marker inside one operating surface' \
             'terminal -TBI treated as disposition evidence or forced to agree with a disposition record'; do
     jq -r '.rules[]|select(.rule_id=="inbound-tbi-marker")|.failure_mode' "$MANIFEST" | grep -qF -- "$ph" || fevmiss="$fevmiss manifest:{$ph}"; done
+  jq -r '.rules[]|select(.rule_id=="inbound-tbi-ecology-intake")|.failure_mode' "$MANIFEST" \
+    | grep -qF -- 'same-surface overlay eligibility erased by treating all -TBI use as cross-surface handoff marking' \
+    || fevmiss="$fevmiss manifest-eco:{same-surface overlay eligibility}"
   for ph in 'a -PTX treated as ineligible for the terminal -TBI feed overlay' \
             'overlay resolution destroying the -PTX role marker or its _vN index' \
             'a fed -PTX misread as a routed handoff, an authority, or project truth'; do
@@ -382,6 +385,20 @@ assert_local(){
     grep -qF -- "$ph" "$APARCH" || fevmiss="$fevmiss advisor-registry:{$ph}"; done
   for stale in 'do not stack `-PTX` with `-TBI`' 'never combines with `-TBI`'; do
     grep -qF -- "$stale" "$APARCH" && fevmiss="$fevmiss STALE-registry:{$stale}"; done
+
+  # the core-ecology profile is DISTRIBUTABLE: its body propagates verbatim into method-ASK, design-system-ASK,
+  # and ASK. Byte parity between the owner profile and the resolved root proves only that the two AGREE -- it
+  # cannot tell agreement from shared defect, so the qualifier needs its own semantic assertion on both copies.
+  local ecoprof="$PROFDIR/core-ecology.md"
+  for ph in 'The **handoff-marker use** of `-TBI` applies to material crossing between separately-operated or walled surfaces.' \
+            'The orthogonal terminal overlay may also be applied to an eligible same-surface artifact or addressed copy under the preceding rule.'; do
+    grep -qF -- "$ph" "$ecoprof"    || fevmiss="$fevmiss core-ecology-profile:{$ph}"
+    grep -qF -- "$ph" "$ROOTAGENTS" || fevmiss="$fevmiss root-profile-block:{$ph}"; done
+  # the corrected sentence CONTAINS the old one as a substring, so the stale pattern is anchored on the preceding
+  # clause, which survives only in the unqualified form.
+  for stale in 'in it. `-TBI` applies to material crossing between separately-operated or walled surfaces.'; do
+    grep -qF -- "$stale" "$ecoprof"    && fevmiss="$fevmiss STALE-eco-profile:{$stale}"
+    grep -qF -- "$stale" "$ROOTAGENTS" && fevmiss="$fevmiss STALE-root-profile:{$stale}"; done
 
   # NEGATIVE: no governed carrier may still teach the outgoing model. `-SUPERSEDED` is checked as a whole word so
   # the lower-case `-supersededA` / `-supersededP` tokens do not trip it.

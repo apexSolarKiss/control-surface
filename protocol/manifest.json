@@ -1064,7 +1064,7 @@
    ],
    "carrier_mode": "profile",
    "source_anchor": "protocol/profiles/core-ecology.md",
-   "failure_mode": "cross-surface intake specifics applied to separately-operated consumers",
+   "failure_mode": "cross-surface intake specifics applied to separately-operated consumers; same-surface overlay eligibility erased by treating all -TBI use as cross-surface handoff marking",
    "active_holds": [],
    "status": "active",
    "amended_by": [
