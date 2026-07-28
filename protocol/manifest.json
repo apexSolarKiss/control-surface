@@ -191,14 +191,18 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Inbound Handoff TBI Marker",
-   "failure_mode": "a routed handoff read as an execution authorization; a -TBI created inside one operating surface; pre-ingestion supersession misread as ingestion; -SUPERSEDED lineage treated as queue-active or pending; a superseded artifact reactivated because it remains in intake; an immutable historical sender status mistaken for current recipient state; disagreement among current disposition carriers \u2014 the filename marker and any present closure or maintained-status record; parent-folder residency mistaken for queue membership; successor linkage implemented by editing the received body; an approved recipient-facing handoff held at origin instead of routed into ASK's queue; routing collapsed into feeding; feeding collapsed into ingestion; ingestion inferred from a feed attempt alone; a fed-but-not-yet-taken-up memo read as ingested; ingestion misread as automatic absorption or normative adoption; ASK deprived of asynchronous routed-vs-fed queue control; queue-internal relocation treated as a lifecycle event; route-on-approval misread as cross-wall write authority",
+   "failure_mode": "a routed handoff read as an execution authorization; a -TBI used as a handoff marker inside one operating surface; pre-ingestion supersession misread as ingestion; -supersededA lineage treated as queue-active or pending; a superseded artifact reactivated because it remains in intake; an immutable historical sender status mistaken for current recipient state; disagreement among current disposition carriers \u2014 the UNDERLYING DURABLE-STATE marker and any present closure or maintained-status record; terminal -TBI treated as disposition evidence or forced to agree with a disposition record; parent-folder residency mistaken for queue membership; successor linkage implemented by editing the received body; an approved recipient-facing handoff held at origin instead of routed into ASK's queue; routing collapsed into feeding; feeding collapsed into ingestion; ingestion inferred from a feed attempt alone; a fed-but-not-yet-ingested memo read as ingested; ingestion misread as automatic disposition, absorption, or normative adoption; ASK deprived of asynchronous routed-vs-fed queue control; queue-internal relocation treated as a lifecycle event; route-on-approval misread as cross-wall write authority; -TBI read as a recipient obligation rather than ASK's outstanding feed obligation; -TBI read as evidence the artifact was never ingested before; the overlay modeled as a step inside the routed-instance state machine; overlay resolution branched on artifact class rather than fresh-awaiting-first-ingestion state; a previously ingested or dispositioned routed instance renamed to -ingested a second time; an underlying role or durable disposition destroyed by resolving the overlay; a marked artifact fed before its governed role and prior lifecycle state were established; an unresolved role or prior state resolved by removal as a default; a source-side inspection treated as satisfying the feed obligation; a historical -supersededA original fed as the recipient-side payload; a fixed-path contractual carrier renamed to carry the overlay; same-surface movement read as barring an ordinary active-context ingestion event; a source-side inspection, byte verification, governing-record read, or inspection-copy read treated as satisfying the current feed obligation; an already-read ambiguous artifact resolved without recording the successful read and the unresolved-role/state exception; the whole filename demoted as non-authoritative when only terminal -TBI is stale; cancellation misread as ingestion, decline, or disposition; cancellation applied where the underlying artifact has no independently complete identity or durable state; a fresh routed handoff silently becoming bare and unmarked through cancellation instead of an explicit pre-ingestion disposition; a by-reference feed treated as ingestion on path resolution alone; metadata-only reachability reported as content read; a lossy or normalized inspection view treated as exact-byte evidence, or accepted as adequate without a bounded-fidelity and omission-materiality check; disposition collapsed into absorption; a terminal disposition applied without a durable disposition record in the same bounded operation; -supersededP flattened into -supersededA, erasing that the artifact was ingested; an artifact treated as structural because its name begins with an underscore; a declared inbox-state carrier ignored before ingestion; an addressee marker stacked after the terminal lifecycle suffix; historical filenames normalized to the prospective grammar",
    "active_holds": [],
    "status": "active",
    "amended_by": [
     "#154 / 2f38427 (operating-surface boundary; 'unconsumed ingestion queue')",
     "#169 / b4a3793 (pre-ingestion -SUPERSEDED disposition; immutable-body/current-disposition invariant)",
     "#177 / 7bdd0757dc701b5bbec760e908d3bf9b9780018f (four-event model; queue exit on recipient-side ingestion; logical multi-location queue; route-on-approval)",
-    "#177 / 70842f933adc7e126d8bb64157777deebd9c5b4e (route-on-approval/feed-later contract; LIFE-4c; registry arithmetic; complete failure-mode classes; bootstrap + manifest guards)"
+    "#177 / 70842f933adc7e126d8bb64157777deebd9c5b4e (route-on-approval/feed-later contract; LIFE-4c; registry arithmetic; complete failure-mode classes; bootstrap + manifest guards)",
+    "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (routed-instance lifecycle: -TBI as ASK\u2019s outstanding feed obligation; -TBI \u2192 -ingested; phase-split supersession -supersededA / -supersededP; disposition \u2260 absorption; disposition record + terminal rename one bounded operation; by-value/by-reference feeding; relay envelope governs force and scope; declared structural carriers; marker grammar; prospective-only)",
+    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: metadata-only reachability vs lossy-view failure classes separated; addressee-marker stacking class narrowed now that -PTX never stacks at all)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: -TBI restated as the terminal outstanding-feed-obligation overlay; role+prior-state precondition and fail-closed stop; already-read recovery demoting terminal -TBI alone; cancellation bounds; recipient-surface read semantics; handoff vs active-context boundary split; PTX no-stacking prohibition withdrawn and now rejected as stale)",
+    "#180 / 6da9c71e9133215c4ba842b7e3d166e127b5dc4f (Stage-2: two-axis current-evidence model -- underlying filename carries role + primary durable-state marker, terminal -TBI is independent feed-obligation evidence excluded from the disposition-agreement check, disposition/lineage record agrees with the durable-state marker; supersession summary scoped to the fresh-handoff state; same-surface failure class narrowed to -TBI used AS A HANDOFF MARKER)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -221,13 +225,16 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Provenance Transcript PTX Marker",
-   "failure_mode": "a provenance transcript absorbed as project truth or advanced as a canonical/handoff",
+   "failure_mode": "a provenance transcript absorbed as project truth or advanced as a canonical/handoff; a -PTX treated as ineligible for the terminal -TBI feed overlay; overlay resolution destroying the -PTX role marker or its _vN index; a fed -PTX misread as a routed handoff, an authority, or project truth",
    "active_holds": [],
    "status": "active",
    "amended_by": [
     "#145 / 9c8e043",
     "#147 / db91c0b",
-    "#169 / b4a3793 (cross-axis line acknowledges the -SUPERSEDED pre-ingestion exit)"
+    "#169 / b4a3793 (cross-axis line acknowledges the -SUPERSEDED pre-ingestion exit)",
+    "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (cross-axis line: -ingested and -supersededA exits; the role marker precedes the terminal lifecycle suffix)",
+    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: -PTX never combines with -TBI, -ingested, or a terminal disposition suffix; no-stacking + addressee-ordering failure classes added)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: the no-stacking prohibition is WITHDRAWN -- -PTX-TBI is valid and resolution preserves the role marker and _vN; failure classes narrowed to PTX-specific consequences, addressee ordering left to inbound-tbi-marker)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -253,7 +260,10 @@
    "failure_mode": "protocol ownership mistaken for write jurisdiction across a surface boundary",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": [
+    "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (routing destination restated as the recipient intent inbox at its live declared path, intent-INbox/ as target convention; recipient owns post-ingestion disposition)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: same-operating-surface branch scoped to -TBI AS A HANDOFF MARKER; the orthogonal feed overlay remains available for a same-surface re-feed)"
+   ],
    "explicit_exclusions": [],
    "proposed_by": null,
    "activated_by": "#143 / bf0ee72"
@@ -1054,10 +1064,15 @@
    ],
    "carrier_mode": "profile",
    "source_anchor": "protocol/profiles/core-ecology.md",
-   "failure_mode": "cross-surface intake specifics applied to separately-operated consumers",
+   "failure_mode": "cross-surface intake specifics applied to separately-operated consumers; same-surface overlay eligibility erased by treating all -TBI use as cross-surface handoff marking",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": [
+    "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (shared intake becomes the live _INDEX/_LAYOUT-declared intent inbox; -TBI to -ingested; -supersededA lineage; disposition record in the same bounded operation as the terminal rename)",
+    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: operative OPEN/FROZEN/PARTIAL-HOLD semantics added; antecedent narrowed so the CURRENT mapped intake stays required pre-cutover)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: fresh-handoff vs removal-only resolution branches; _STATE.md exceptions are exact filenames or explicitly NONE, and a post-activation unreachable or malformed carrier fails closed; hard repo-boundary reset restated as no cross-surface handoff)",
+    "#180 / f676b160759be008b755997514395aa53087708e (Stage-2: the profile's closing sentence scoped to the HANDOFF-MARKER use of -TBI, restating same-surface overlay eligibility; the unqualified cross-surface-only form would have propagated verbatim into method-ASK, design-system-ASK, and ASK; new failure class plus semantic guards on both the owner profile and the resolved root block, since byte parity cannot distinguish agreement from shared defect)"
+   ],
    "note": "personal-context-system = applicable-no-carrier (no root AGENTS.md), NOT an exclusion; see PCS carrier disposition in the ledger",
    "proposed_by": null,
    "activated_by": "#154 / 2f38427"
@@ -1126,7 +1141,11 @@
    "status": "active",
    "amended_by": [
     "#174 / 8a7e022b3be61f36a0449aff192311f6e238eb5d",
-    "#174 / 7db29001941e3de18c6a6fc4907f55b168acb04b"
+    "#174 / 7db29001941e3de18c6a6fc4907f55b168acb04b",
+    "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (registry gains LIFE-4d/4e/4f/4g/4h; bootstrap + index templates gain the routed-instance state machine, feed semantics, marker grammar, and the declared-structural-carrier contract incl. intent-INbox/_STATE.md)",
+    "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: LIFE-4g operative state semantics + LIFE-4h PTX-axis split; bootstrap and index carriers conformed)",
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: LIFE-4 and LIFE-4h revised, LIFE-4i/4j/4k added for recipient-surface read semantics, already-read recovery, and cancellation; bootstrap template carries all three; coverage counts recounted from the live table)",
+    "#180 / 6da9c71e9133215c4ba842b7e3d166e127b5dc4f (Stage-2: LIFE-5c revised -- the withdrawn PTX no-stacking half retired, substantive-work routing and overlay eligibility retained; LIFE-4b and LIFE-4d scoped to the fresh-awaiting-first-ingestion state with the removal-only branch stated; bootstrap four-event summary and route-a-new-memo instruction narrowed; index/bootstrap conformed to the two-axis evidence model; the registry's row SUBSTANCE is now guarded, token presence having proved insufficient)"
    ],
    "note": "Semantic owner is docs/advisor-project-surface-architecture.md (registry, placement contract, acceptance tests, overlay-completion gate); this profile carries only the compact deployment obligation. applies_to tracks which repos home a hosted advisor Project, NOT tier or operating-surface class -- which is why it binds two separately-operated consumers. Excluded repos home no repo-advisor Project; a repo that stands one up adopts the profile then. Personal-context Projects implement the same invariant under the personal ADR + PCS scaffold across the wall. Role-specific -TMK surfaces remain outside this profile; their deployment is separately owned, and no migration or conformance is inferred by symmetry.",
    "proposed_by": null,

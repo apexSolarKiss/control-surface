@@ -240,15 +240,61 @@ assert_local(){
   grep -qF -- 'no character limit' "$APBOOT" && recmiss="$recmiss bootstrap:{STALE no-character-limit}"
   [ -z "$recmiss" ] && OKAY "advisor-surface anti-loss recovery carried (lifecycle subrequirements + overlay gate + startup posture)" || FAIL "advisor-surface recovery clause(s) missing:$recmiss"
 
-  # 15 four-event handoff lifecycle — POSITIVE clauses in both shared-core carriers, plus NEGATIVE assertions that no
-  #    carrier still attributes queue exit to the feed attempt. The rule is only conformant when both halves hold:
-  #    stating the four events while a stale "leaves the queue when it is fed in" survives elsewhere is the defect.
+  # 15 routed-instance lifecycle — POSITIVE clauses in both shared-core carriers, plus NEGATIVE assertions that no
+  #    carrier still teaches the outgoing model. The rule is only conformant when both halves hold: stating the
+  #    state machine while a stale "leaves the queue when it is fed in" or "-SUPERSEDED" survives elsewhere is
+  #    the defect. This check proves CARRIER COVERAGE and stale-semantic rejection only. Whether a real FROZEN
+  #    `_STATE.md` actually blocks a live ingestion is an exercised acceptance test at each surface cutover
+  #    (Units 5-6), never inferred from a phrase being present here.
   local fevmiss="" ph
   local fevphr=('**Four events, not two.**' '**Route on approval; feed/ingest later.**' \
                 'queue exit occurs on recipient-side ingestion, not on the feed attempt' 'paired but not atomic' \
                 '**The queue is logical, not a folder.**' 'relocation *within* the queue is not a lifecycle event' \
-                'absorption is not implementation authority' 'ASK separately decides when to feed it' \
-                'expands no write authority')
+                'disposition is not implementation authority' 'ASK separately decides when to feed it' \
+                'expands no write authority' \
+                'terminal outstanding-feed-obligation overlay' \
+                'the current feed obligation remains unsatisfied' \
+                'It says nothing about earlier successful feeds or prior ingestion history' \
+                '**The overlay is orthogonal, not a lifecycle step.**' \
+                'the rename records it, it does not cause it' \
+                'ASK-side PRE-ingestion retirement disposition' \
+                '**Disposition is not absorption.**' \
+                'Closure and the terminal rename are one bounded operation' \
+                'a bare exact path addressed to an active surface is a feed' \
+                '**The relay envelope governs force and scope.**' \
+                'A leading `_` alone confers no exemption' \
+                '**Resolving the feed-obligation overlay.**' \
+                'by the intended active recipient surface, under ASK' \
+                'verified fresh routed handoff awaiting first ingestion' \
+                'remove only -TBI; the underlying role and durable disposition survive unchanged' \
+                'role or prior state unresolved' \
+                '**An unresolved role or prior state is a stop condition**' \
+                'the discriminator is the fresh-awaiting-first-ingestion **state**, not the artifact class' \
+                '**Truth preservation and contractual locators.**' \
+                '**Already-read recovery.**' \
+                'Record the successful read and the unresolved-role/state exception' \
+                'treat **terminal `-TBI` alone** as temporarily non-authoritative feed-obligation evidence' \
+                'the underlying artifact identity and any truthful durable-state marker remain authoritative' \
+                '**Canceled feed obligation.**' \
+                'terminal -TBI             INDEPENDENT, FASTER-AGING evidence of ASK' \
+                'Not a disposition; excluded from the' \
+                'must agree with the' \
+                'UNDERLYING DURABLE-STATE MARKER, never with terminal -TBI' \
+                'Terminal `-TBI` neither participates in nor overrides that check' \
+                'This applies to a **fresh routed handoff awaiting first ingestion**; anything not currently in that state exits the queue by overlay removal or cancellation' \
+                'it is **not** ingestion, **not** a disposition, and **not** a `decline`' \
+                'only where the underlying artifact already has an independently complete identity or durable state' \
+                '**A fresh routed handoff may never become bare and unmarked this way**' \
+                'A source-side inspection — reading a governing record, verifying bytes, or consulting an inspection copy — does not satisfy it' \
+                'preserve the original untouched and feed an addressed copy' \
+                'Terminal `-TBI` is always the final token before `.md`' \
+                'topic-PTX-TBI.md        →  topic-PTX.md        role survives resolution' \
+                'A `-PTX` **may** carry the overlay' \
+                '**Two boundaries, not one.**' \
+                'cross-surface handoff boundary   crossed when material moves between separately' \
+                'ordinary active-context ingestion occurs' \
+                'It does not create a separate cross-surface handoff boundary' \
+                '**This lifecycle grammar is prospective.**')
   for ph in "${fevphr[@]}"; do
     grep -qF -- "$ph" "$SHARED"     || fevmiss="$fevmiss shared:{$ph}"
     grep -qF -- "$ph" "$ROOTAGENTS" || fevmiss="$fevmiss root-carrier:{$ph}"
@@ -260,22 +306,117 @@ assert_local(){
                  'intent to ingest is not evidence of completed ingestion' \
                  'relocation within the queue is not a lifecycle event' \
                  'ASK separately controls when to feed the routed artifact' \
-                 'grants no new write authority')
+                 'grants no new write authority' \
+                 'terminal outstanding-feed-obligation overlay' \
+                 'Disposition is not absorption, and the record is not optional' \
+                 'same bounded operation' \
+                 'path resolves ≠ content read ≠ exact-byte identity proven' \
+                 'The relay envelope governs operative force and scope' \
+                 'a leading `_` alone confers no exemption' \
+                 'fails closed for ingestion' \
+                 'a -PTX may carry the terminal -TBI overlay' \
+                 'fresh routed handoff awaiting first ingestion' \
+                 'remove only -TBI' \
+                 'governed role and prior lifecycle state' \
+                 'read into the intended active recipient surface under ASK' \
+                 'does not satisfy the feed' \
+                 'record the successful read and the unresolved-role/state exception' \
+                 'Demote **terminal -TBI only**, not the whole filename' \
+                 'only where the underlying artifact already has an independently complete identity or durable state' \
+                 'A fresh routed handoff may not become bare through cancellation' \
+                 'terminal `-TBI` is independent, faster-aging evidence of ASK' \
+                 'excluded from the disposition-agreement check' \
+                 'must agree with the **underlying durable-state marker**, never with terminal `-TBI`' \
+                 'This path belongs to a **fresh routed handoff awaiting first ingestion**' \
+                 'That instruction governs a **fresh routed-handoff recipient copy**' \
+                 'no routed artifact may be ingested unless its exact filename is listed as an exception')
   # the bootstrap template is hard-wrapped, so an operative sentence spans line breaks; flatten before matching or
   # a line-based fixed-string test silently fails on prose that is present and correct.
   local bootflat; bootflat=$(tr '\n' ' ' < "$APBOOT" | tr -s ' ')
   for ph in "${bootphr[@]}"; do
     printf '%s' "$bootflat" | grep -qF -- "$ph" || fevmiss="$fevmiss bootstrap:{$ph}"; done
+  # the index template declares the surface's live intake path AND the structural rows — a carrier that names
+  # _STATE.md without the "declaration confers the exemption, not the underscore" bound reopens the wildcard.
+  local idxflat; idxflat=$(tr '\n' ' ' < "$IDXTEMPLATE" | tr -s ' ')
+  for ph in 'intent-INbox/_STATE.md' 'structural — **not routed intent**' \
+            'a leading `_` alone confers nothing' \
+            'the live path above governs until this surface' \
+            'Successful content read into active context *is* ingestion' \
+            'no routed artifact ingested unless its exact filename is an exception' \
+            'exact filenames or explicitly `NONE`' \
+            'terminal `-TBI` is independent feed-obligation evidence' \
+            'excluded from the disposition-agreement check' \
+            'must agree with the **underlying durable-state marker**, never with terminal `-TBI`'; do
+    printf '%s' "$idxflat" | grep -qF -- "$ph" || fevmiss="$fevmiss index-template:{$ph}"; done
   # the manifest failure_mode must name the full class set this rule compensates for
   for ph in 'routing collapsed into feeding' 'feeding collapsed into ingestion' \
-            'ingestion misread as automatic absorption or normative adoption' \
+            'ingestion misread as automatic disposition, absorption, or normative adoption' \
             'ASK deprived of asynchronous routed-vs-fed queue control' \
-            'route-on-approval misread as cross-wall write authority'; do
+            'route-on-approval misread as cross-wall write authority' \
+            'a by-reference feed treated as ingestion on path resolution alone' \
+            'disposition collapsed into absorption' \
+            'a terminal disposition applied without a durable disposition record in the same bounded operation' \
+            'an artifact treated as structural because its name begins with an underscore' \
+            'historical filenames normalized to the prospective grammar' \
+            'metadata-only reachability reported as content read' \
+            'treated as satisfying the current feed obligation' \
+            'resolved without recording the successful read and the unresolved-role/state exception' \
+            'the whole filename demoted as non-authoritative when only terminal -TBI is stale' \
+            'cancellation misread as ingestion, decline, or disposition' \
+            'silently becoming bare and unmarked through cancellation' \
+            'a -TBI used as a handoff marker inside one operating surface' \
+            'terminal -TBI treated as disposition evidence or forced to agree with a disposition record'; do
     jq -r '.rules[]|select(.rule_id=="inbound-tbi-marker")|.failure_mode' "$MANIFEST" | grep -qF -- "$ph" || fevmiss="$fevmiss manifest:{$ph}"; done
+  jq -r '.rules[]|select(.rule_id=="inbound-tbi-ecology-intake")|.failure_mode' "$MANIFEST" \
+    | grep -qF -- 'same-surface overlay eligibility erased by treating all -TBI use as cross-surface handoff marking' \
+    || fevmiss="$fevmiss manifest-eco:{same-surface overlay eligibility}"
+  for ph in 'a -PTX treated as ineligible for the terminal -TBI feed overlay' \
+            'overlay resolution destroying the -PTX role marker or its _vN index' \
+            'a fed -PTX misread as a routed handoff, an authority, or project truth'; do
+    jq -r '.rules[]|select(.rule_id=="ptx-marker")|.failure_mode' "$MANIFEST" | grep -qF -- "$ph" || fevmiss="$fevmiss manifest-ptx:{$ph}"; done
+  # the advisor-architecture registry is the SEMANTIC SOURCE the bootstrap is generated from, so a stale row
+  # there can reintroduce a withdrawn rule at the next regeneration even while every generated carrier is
+  # correct. Assert the ROW'S SUBSTANCE — a `LIFE-5c` token existing proves nothing about what it says.
+  for ph in 'the PTX artifact itself **may carry terminal `-TBI`**' \
+            'resolving the overlay preserves `-PTX` and `_vN` and creates no handoff, authority, or project truth' \
+            'The full **first-ingest-and-classify path for a fresh routed handoff awaiting first ingestion**' \
+            '**State machine — scoped to the fresh-handoff state.**' \
+            'the only transition is removal of terminal `-TBI`'; do
+    grep -qF -- "$ph" "$APARCH" || fevmiss="$fevmiss advisor-registry:{$ph}"; done
+  for stale in 'do not stack `-PTX` with `-TBI`' 'never combines with `-TBI`'; do
+    grep -qF -- "$stale" "$APARCH" && fevmiss="$fevmiss STALE-registry:{$stale}"; done
+
+  # the core-ecology profile is DISTRIBUTABLE: its body propagates verbatim into method-ASK, design-system-ASK,
+  # and ASK. Byte parity between the owner profile and the resolved root proves only that the two AGREE -- it
+  # cannot tell agreement from shared defect, so the qualifier needs its own semantic assertion on both copies.
+  local ecoprof="$PROFDIR/core-ecology.md"
+  for ph in 'The **handoff-marker use** of `-TBI` applies to material crossing between separately-operated or walled surfaces.' \
+            'The orthogonal terminal overlay may also be applied to an eligible same-surface artifact or addressed copy under the preceding rule.'; do
+    grep -qF -- "$ph" "$ecoprof"    || fevmiss="$fevmiss core-ecology-profile:{$ph}"
+    grep -qF -- "$ph" "$ROOTAGENTS" || fevmiss="$fevmiss root-profile-block:{$ph}"; done
+  # the corrected sentence CONTAINS the old one as a substring, so the stale pattern is anchored on the preceding
+  # clause, which survives only in the unqualified form.
+  for stale in 'in it. `-TBI` applies to material crossing between separately-operated or walled surfaces.'; do
+    grep -qF -- "$stale" "$ecoprof"    && fevmiss="$fevmiss STALE-eco-profile:{$stale}"
+    grep -qF -- "$stale" "$ROOTAGENTS" && fevmiss="$fevmiss STALE-root-profile:{$stale}"; done
+
+  # NEGATIVE: no governed carrier may still teach the outgoing model. `-SUPERSEDED` is checked as a whole word so
+  # the lower-case `-supersededA` / `-supersededP` tokens do not trip it.
   local stale
-  for stale in 'the item leaves the queue when it is fed in' 'has not yet fed into the operating surface' 'When ASK feeds that memo into the active surface'; do
-    grep -rqF -- "$stale" "$SHARED" "$ROOTAGENTS" "$APBOOT" "$PROFDIR" && fevmiss="$fevmiss STALE-feed-exit:{$stale}"; done
-  [ -z "$fevmiss" ] && OKAY "four-event handoff lifecycle carried (routing/feeding/ingestion/absorption + logical queue; no feed-exit residue)" || FAIL "four-event lifecycle clause(s) missing or stale:$fevmiss"
+  for stale in 'the item leaves the queue when it is fed in' 'has not yet fed into the operating surface' \
+               'When ASK feeds that memo into the active surface' \
+               'takes it up' 'taken up' 'unmarked ingested' 'rename the file in place to remove' \
+               'absorption is the later classification' \
+               'read into context ≠ ingested' \
+               'never combines with `-TBI`, `-ingested`, or any terminal disposition suffix' \
+               'never stacked with a handoff lifecycle suffix at all' \
+               'unconsumed feed-queue marker' \
+               'unconsumed feed queue' \
+               'rather than stacking `-PTX` with `-TBI`' \
+               '(`-PTX`, `-4ASK`, `-4TMK`) precedes'; do
+    grep -rqF -- "$stale" "$SHARED" "$ROOTAGENTS" "$APBOOT" "$IDXTEMPLATE" "$PROFDIR" && fevmiss="$fevmiss STALE:{$stale}"; done
+  grep -rqE -- '-SUPERSEDED([^A-Za-z]|$)' "$SHARED" "$ROOTAGENTS" "$APBOOT" "$IDXTEMPLATE" "$PROFDIR" && fevmiss="$fevmiss STALE:{-SUPERSEDED}"
+  [ -z "$fevmiss" ] && OKAY "routed-instance lifecycle carried (routing/feeding/ingestion/disposition · -TBI→-ingested · phase-split supersession · record+rename coupling · declared structural carriers; no outgoing-model residue)" || FAIL "routed-instance lifecycle clause(s) missing or stale:$fevmiss"
 }
 
 validate_consumer(){

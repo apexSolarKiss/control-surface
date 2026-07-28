@@ -116,9 +116,9 @@ Distinguish "fetched via connector" from "verified against repo or git."
 
 ## Wall and authorized surface
 
-Read only paths the index names or ASK names explicitly for a task. Prefer `*-EXTERNAL/`, `scratch/`,
-`sources of intent/`, and declared root canonicals. **Never browse private personal roots** unless ASK names
-the exact path.
+Read only paths the index names or ASK names explicitly for a task. Prefer `*-EXTERNAL/`, `scratch/`, the
+surface's intent inbox and carrier planes, and declared root canonicals. **Never browse private personal
+roots** unless ASK names the exact path.
 
 **Path authorization is not content authorization.** A mapped path authorizes a route, not every payload that
 could travel it — **manual upload never bypasses a wall**. If the path or the payload is outside your
@@ -169,11 +169,33 @@ version in this thread.
 as `vN+1`, never edit in place · canonical-unversioned notes edit in place, then save a byte-identical `_vN`
 snapshot.
 
-**Handoff lifecycle.** `-TBI` marks active, unconsumed intake. Removing `-TBI` with no replacement means
-**ingested**; replacing it with `-SUPERSEDED` means **retired before ingestion** — never ingested or absorbed,
-no pending work, lineage only. The received body is **byte-immutable**; the filename marker carries current
-disposition, and any closure or current-status record must agree with it rather than rewrite the body. If a
-`-TBI` target is renamed, superseded, or gone, route a **new** memo; never update the old one.
+**Handoff lifecycle.** `-TBI` is human ASK's **terminal outstanding-feed-obligation overlay**: this exact
+artifact still needs a successful feed into an active recipient-project thread. It is not a recipient
+obligation, says nothing about disposition, and is **not** evidence the artifact was never ingested before —
+it states only that the *current* feed obligation is unsatisfied. It is orthogonal to what the artifact is:
+it may sit above a fresh routed handoff, a provenance transcript, an ordinary report, a canonical carrier, or
+an artifact already carrying a durable disposition. For a **fresh routed handoff awaiting first ingestion**
+the state machine is `-TBI` → `-ingested` on content read; `-TBI` → `-supersededA` for an
+ASK-side **pre-ingestion** retirement disposition; and `-ingested` → a terminal disposition suffix
+(`-absorbed` · `-held` · `-declined` · `-withdrawn` · `-routed` · `-no-route` · `-closed` · `-supersededP`).
+`-supersededA` was never ingested or absorbed and carries no pending work — lineage only; `-supersededP` *was*
+ingested before a successor displaced it, which is why the phase is encoded rather than flattened. The received
+body is **byte-immutable**. Current evidence sits on **two axes**: the **underlying filename** carries
+artifact role plus the primary durable-state marker, while **terminal `-TBI` is independent, faster-aging
+evidence of ASK's outstanding feed obligation — not a disposition, and excluded from the
+disposition-agreement check**. Any disposition or lineage record is secondary current evidence and must agree
+with the **underlying durable-state marker**, never with terminal `-TBI`, and never by rewriting the body.
+`topic-absorbed-TBI.md` says two true things at once: disposition *absorbed*, feed obligation *outstanding*. If a `-TBI` target is renamed,
+superseded, or gone, route a **new** memo; never update the old one. That instruction governs a **fresh
+routed-handoff recipient copy**. It does not bar ASK from later applying a *new* terminal `-TBI` overlay to an
+independently complete PTX, report, or dispositioned artifact when a fresh feed obligation arises, provided
+the truth-preservation and contractual-locator constraints still hold.
+
+**Disposition is not absorption, and the record is not optional.** Absorption is one possible disposition.
+Every transition from `-ingested` to a terminal suffix requires a durable disposition record made in the **same
+bounded operation** as the rename — a rename alone asserts a disposition no record supports, and a record alone
+leaves the filename lying. `-supersededA` needs no absorption closure, since no recipient absorption occurred,
+but it still requires an explicit lineage or current-status record naming the successor.
 
 **Route on approval; feed/ingest later.** Once ASK approves recipient-facing handoff substance, route the
 recipient `-TBI` copy immediately unless routing itself is explicitly held. Routing is not feeding or
@@ -182,15 +204,78 @@ authority: use a declared ingress path or return the exact artifact to ASK or th
 routing.
 
 **Four events, not two.** Routing makes material available in the intake · feeding is ASK handing it to an
-active surface · ingestion is the recipient taking it up, evidenced by striking `-TBI` · absorption is the
-later classification. Feeding and ingestion are paired but **not atomic** — queue exit occurs on
+active surface · ingestion is the recipient-side state when a feed succeeds, recorded by renaming `-TBI` to
+`-ingested` · disposition is the later recipient-owned classification. This path belongs to a **fresh routed
+handoff awaiting first ingestion**; such a handoff may instead exit before ingestion as `-supersededA`, so the
+four-event path is what a fresh handoff traverses when it *is* ingested, not an inevitability of routing.
+Anything not currently in that state never enters the path — its overlay is simply removed. Feeding and ingestion are paired but **not atomic** — queue exit occurs on
 recipient-side ingestion, never on the feed attempt, and intent to ingest is not evidence of completed
 ingestion. The feed queue is **logical**: it may span an ASK-side staging area, an origin scratch, a transit
 surface, and the intake path, and relocation within the queue is not a lifecycle event.
 
+**Feeding is by value or by reference.** ASK feeds by attaching or pasting content, or by supplying the exact
+path the surface then resolves. Both are feeds; a bare exact path addressed to an active surface is a feed.
+But `path resolves ≠ content read ≠ exact-byte identity proven` — a failed retrieval, or a path resolving only
+to metadata, has not produced ingestion. A lossy or normalized view may constitute content read under a bounded
+fidelity claim; where the omitted portion could affect classification, obtain an adequate representation first.
+**The relay envelope governs operative force and scope:** a feed does not adopt every claim in its payload.
+
+**Resolving the overlay.** A successful content read of the marked payload, by the intended active recipient
+surface, under ASK's feed satisfies the current feed obligation; a source-side inspection does not. The
+filename then resolves once **governed role and prior lifecycle state** are established — establish both
+before feeding, and where either is unresolved **stop before feeding** rather than guessing. A verified fresh
+routed handoff awaiting first ingestion becomes `-ingested`; for anything else **remove only -TBI**, leaving
+the underlying role and durable disposition unchanged. The discriminator is the *state*, not the artifact
+class: `topic-absorbed-TBI.md → topic-absorbed.md` is a routed instance whose first ingestion is already
+behind it. Resolving in place is valid only where the underlying filename stays true and no contractual
+locator breaks — never feed a historical `-supersededA` original as the payload, and never rename a
+fixed-path carrier to carry the flag.
+
+**Only the intended recipient surface's read satisfies the obligation.** The current feed obligation is
+satisfied only when the marked payload is read into the intended active recipient surface under ASK's feed.
+A source-side inspection, byte verification, governing-record read, or inspection-copy read may supply
+identification or verification evidence, but does not satisfy the feed.
+
+**Already-read recovery.** If an unidentified `-TBI` artifact was nevertheless read into the intended
+recipient surface, record the successful read and the unresolved-role/state exception. Demote **terminal
+-TBI only**, not the whole filename — the underlying artifact identity and any truthful durable-state marker
+remain authoritative — and resolve the overlay immediately once role and prior state are established. This is
+bounded error recovery, not a second normal path.
+
+**Canceled feed obligation.** ASK may remove terminal `-TBI` without a content read, but **only where the
+underlying artifact already has an independently complete identity or durable state**. Cancellation is not
+ingestion, not a decline, and not a disposition. **A fresh routed handoff may not become bare through
+cancellation** — it still requires an explicit pre-ingestion disposition.
+
+**Marker grammar.** Terminal `-TBI` is always the final token before `.md`; the lifecycle suffix is last
+within the underlying filename, and an **addressee** marker (`-4ASK`, `-4TMK`) precedes it and is never
+stacked after it. `-PTX` sits on a **separate axis** as an artifact-role marker, so **a -PTX may carry the
+terminal -TBI overlay** — `topic-PTX-TBI.md` is a transcript with a feed owed, not a routed handoff, and
+resolving the overlay returns it to `topic-PTX.md` with its role intact. Ordinary disposition words are lower-case; supersession
+uses the lower-case `superseded` stem plus the ruled uppercase phase qualifier `A` or `P`. **The grammar is
+prospective** — historical filenames keep the conventions in force when they were created and are never
+normalized to match it.
+
+**Structural artifacts in a declared intent inbox.** An artifact inside a declared intent inbox is exempt from
+the routed-instance lifecycle **only when the surface's current structural contract explicitly names it as
+structural — a leading `_` alone confers no exemption.** Read and honor any inbox-state carrier that contract
+declares *before* ingesting a routed artifact. Structural artifacts take no lifecycle suffix and are excluded
+from routed-artifact queue counts. Once a surface adopts the separated `intent-INbox/` plane,
+`intent-INbox/_STATE.md` is its standard current inbox-state carrier: updated in place, unsuffixed, excluded
+from queue counts, and read immediately before ingestion. It records `OPEN`, `FROZEN`, or `PARTIAL-HOLD` plus
+exact scope, exceptions, the ASK authorization locator, effective time, and a review trigger. The states are
+operative, not descriptive — **`OPEN`**: no additional inbox hold, ordinary governed ingestion may proceed ·
+**`FROZEN`**: no routed artifact may be ingested unless its exact filename is listed as an exception ·
+**`PARTIAL-HOLD`**: artifacts inside the named held scope may not be ingested unless their exact filenames are
+exceptions, while artifacts outside that scope remain governed normally. Exceptions are **exact filenames or
+explicitly `NONE`** — a scope description is not an exception. Before a surface's
+current `_LAYOUT` declares that plane and `_STATE.md` active, **absence of the file is not nonconformance** and
+the current mapped index/path contract remains operative. Once declared active, an unreachable or malformed
+`_STATE.md` **fails closed for ingestion**.
+
 A **sender-authored in-body status is routing-time historical evidence.** Current status, receipt annotation,
 and successor linkage never enter the received body — they live in the filename marker and in any separate
-current-status or lineage record. Do not restore a receipt annotation to a received file.
+disposition, current-status, or lineage record. Do not restore a receipt annotation to a received file.
 
 **Provenance transcripts.** `-PTX.md` or `-PTX_vN.md` marks an ASK-assembled Provenance Transcript. The
 optional `_vN` indexes the transcript artifact; `_v0` is not draft-zero. Neither `-PTX` nor `_vN` confers
@@ -202,8 +287,8 @@ nothing.
 The `-PTX` **role marker is retained** throughout any version lineage. **The PTX files are themselves the
 lineage** — they receive no separate canonical-plus-snapshot chain. A PTX is **not** a handoff, an approval, an
 execution instruction, or an ingestion-state marker; do not absorb one as project truth without classification.
-If a PTX creates work for another surface, **route a separate handoff** rather than stacking `-PTX` with
-`-TBI`.
+If a PTX creates work for another surface, **route a separate handoff** for that work — the overlay flags a
+feed, it does not convert the transcript into a routed handoff.
 
 **Classify before acting.** Scratch may hold operator hand-assembled provenance records — short dated names,
 dialogue-marker transcripts, `v0`/`vN` files. Do not assume model drafts. Classify the artifact role before
