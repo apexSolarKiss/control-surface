@@ -35,7 +35,7 @@ Alongside the project repos, [`apexSolarKiss/design-system-ASK`](https://github.
 
 The [control-surface](../README.md) repo owns the execution-protocol layer. The methodology layer lives upstream in `method-ASK`.
 
-An illustrative tree of this architecture and its operator-side ecology is at [`docs/diagrams/control-surface_architecture-tree.html`](diagrams/control-surface_architecture-tree.html). The diagram is illustrative; repo prose is source truth.
+An illustrative tree of this architecture and its operator-side ecology is at [`docs/diagrams/control-surface_architecture-tree.html`](diagrams/control-surface_architecture-tree.html). The routed-instance lifecycle owned by §Inbound Handoff TBI Marker has its own standalone figure at [`docs/diagrams/control-surface_intent-inbox-lifecycle.html`](diagrams/control-surface_intent-inbox-lifecycle.html) — the architecture tree carries an intent-inbox group because the tree must show the plane exists, which is a different job. Both diagrams are illustrative; repo prose is source truth.
 
 ## Source-of-Truth Split
 

@@ -35,6 +35,11 @@ Because that fit can land below the engine's ordinary zoom-out floor on a constr
 README.md                                       this file
 control-surface_architecture-tree.html          renders TREE_D01
 control-surface_architecture-tree.source.js     TREE_D01 data
+control-surface_intent-inbox-lifecycle.html          renders TREE_D08
+control-surface_intent-inbox-lifecycle.source.js     TREE_D08 data (source-v1) — the routed-instance
+                                                     lifecycle as a standalone figure: four events,
+                                                     state-keyed resolution, the state machine, closure
+                                                     coupling, the two evidence axes, and _STATE.md
 diagrams-fit.js                                 DS-owned shared fit support; loads
                                                 immediately BEFORE the engine
 diagrams-static-H-engine.js                     layout + pan/zoom engine
