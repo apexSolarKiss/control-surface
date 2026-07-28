@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>control-surface // intent-INbox routed-instance lifecycle</title>
-<meta name="description" content="Illustrative standalone figure for the routed-instance lifecycle owned by protocol/AGENTS.shared.md §Inbound Handoff TBI Marker, for apexSolarKiss/control-surface. Repo prose is source truth.">
+<meta name="description" content="Illustrative standalone figure for the routed-instance lifecycle. Overlay, events, resolution, state machine, closure, evidence axes and queue are owned by protocol/AGENTS.shared.md §Inbound Handoff TBI Marker; the concrete _STATE.md state vocabulary is owned by docs/advisor-project-surface-architecture.md and the deployed advisor-surface state-carrier contract. Repo prose is source truth.">
 <meta name="generator" content="conforms to apexSolarKiss/design-system-ASK Tier 1 + Tier 2 by reference at generation time">
 <!-- design-system-ASK foundations — local mirror (Tier 1 + Tier 2), no CDN. See _dsa-tokens/MANIFEST.md -->
 <link rel="stylesheet" href="./_dsa-tokens/colors_and_type.css">
@@ -37,18 +37,18 @@
     <div class="corner-tick br"></div>
 
     <div class="legend glass">
-      <div class="h"><span>Legend</span><span class="fig">3 states</span></div>
+      <div class="h"><span>Reading the map</span><span class="fig">3 axes</span></div>
       <div class="row">
         <div class="sw"><div class="box-solid"></div></div>
-        <div><span class="lbl">earned</span><span class="sub">live today</span></div>
+        <div><span class="lbl">feed overlay</span><span class="sub">terminal -TBI · independent, faster-aging</span></div>
       </div>
       <div class="row">
-        <div class="sw"><div class="box-dashed"></div></div>
-        <div><span class="lbl">held</span><span class="sub">not yet authorized</span></div>
+        <div class="sw"><div class="box-solid"></div></div>
+        <div><span class="lbl">durable state</span><span class="sub">-ingested · disposition · supersession phase</span></div>
       </div>
       <div class="row">
-        <div class="sw"><span class="legacy-txt">legacy</span></div>
-        <div><span class="lbl">legacy</span><span class="sub">retired Model A generation</span></div>
+        <div class="sw"><div class="box-solid"></div></div>
+        <div><span class="lbl">structural state</span><span class="sub">_STATE.md governs whether ingestion proceeds</span></div>
       </div>
     </div>
 

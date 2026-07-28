@@ -18,7 +18,20 @@
    The grammar is prospective. Historical filenames retain the conventions in force when
    they were created; legacy tokens do not acquire these meanings.
 
-   Repo prose is source truth: protocol/AGENTS.shared.md §Inbound Handoff TBI Marker. */
+   Source truth is TWO levels, and the figure draws both:
+
+     protocol/AGENTS.shared.md §Inbound Handoff TBI Marker
+       the terminal overlay · the four events · state-keyed resolution · the routed-instance
+       state machine · closure coupling · the two evidence axes · the logical queue
+
+     docs/advisor-project-surface-architecture.md and the deployed advisor-surface
+     state-carrier contract
+       the concrete _STATE.md vocabulary — OPEN / FROZEN / PARTIAL-HOLD, the exact-filename
+       exception grammar, activation, and fail-closed behavior
+
+   The shared rule requires a structural state carrier and its obligations; it does not by
+   itself define that carrier's state values. Attribution, not scope: the _STATE.md content
+   belongs in this figure. */
 
 window.TREE_D08 = {
   kind: 'root',
