@@ -180,9 +180,16 @@ ASK-side **pre-ingestion** retirement disposition; and `-ingested` → a termina
 (`-absorbed` · `-held` · `-declined` · `-withdrawn` · `-routed` · `-no-route` · `-closed` · `-supersededP`).
 `-supersededA` was never ingested or absorbed and carries no pending work — lineage only; `-supersededP` *was*
 ingested before a successor displaced it, which is why the phase is encoded rather than flattened. The received
-body is **byte-immutable**; the filename marker carries current disposition, and any disposition or
-current-status record must agree with it rather than rewrite the body. If a `-TBI` target is renamed,
-superseded, or gone, route a **new** memo; never update the old one.
+body is **byte-immutable**. Current evidence sits on **two axes**: the **underlying filename** carries
+artifact role plus the primary durable-state marker, while **terminal `-TBI` is independent, faster-aging
+evidence of ASK's outstanding feed obligation — not a disposition, and excluded from the
+disposition-agreement check**. Any disposition or lineage record is secondary current evidence and must agree
+with the **underlying durable-state marker**, never with terminal `-TBI`, and never by rewriting the body.
+`topic-absorbed-TBI.md` says two true things at once: disposition *absorbed*, feed obligation *outstanding*. If a `-TBI` target is renamed,
+superseded, or gone, route a **new** memo; never update the old one. That instruction governs a **fresh
+routed-handoff recipient copy**. It does not bar ASK from later applying a *new* terminal `-TBI` overlay to an
+independently complete PTX, report, or dispositioned artifact when a fresh feed obligation arises, provided
+the truth-preservation and contractual-locator constraints still hold.
 
 **Disposition is not absorption, and the record is not optional.** Absorption is one possible disposition.
 Every transition from `-ingested` to a terminal suffix requires a durable disposition record made in the **same
@@ -198,9 +205,10 @@ routing.
 
 **Four events, not two.** Routing makes material available in the intake · feeding is ASK handing it to an
 active surface · ingestion is the recipient-side state when a feed succeeds, recorded by renaming `-TBI` to
-`-ingested` · disposition is the later recipient-owned classification. A routed artifact may instead exit
-before ingestion as `-supersededA`, so the four-event path is what an ingested artifact traverses, not an
-inevitability of routing. Feeding and ingestion are paired but **not atomic** — queue exit occurs on
+`-ingested` · disposition is the later recipient-owned classification. This path belongs to a **fresh routed
+handoff awaiting first ingestion**; such a handoff may instead exit before ingestion as `-supersededA`, so the
+four-event path is what a fresh handoff traverses when it *is* ingested, not an inevitability of routing.
+Anything not currently in that state never enters the path — its overlay is simply removed. Feeding and ingestion are paired but **not atomic** — queue exit occurs on
 recipient-side ingestion, never on the feed attempt, and intent to ingest is not evidence of completed
 ingestion. The feed queue is **logical**: it may span an ASK-side staging area, an origin scratch, a transit
 surface, and the intake path, and relocation within the queue is not a lifecycle event.

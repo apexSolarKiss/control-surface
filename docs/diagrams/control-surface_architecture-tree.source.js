@@ -137,7 +137,7 @@ window.TREE_D01 = {
           { label: 'design-system-ASK_consumer-ledger.md', note: 'design-system VISUAL propagation state — exact vendored pins + render obligations' },
         ]},
         { label: 'intent inbox — live path per _INDEX · target convention intent-INbox/', note: 'shared ecology INBOUND intake · genuinely inbound material only — NOT a core-repo routing bus (core-to-core changes cross repo boundaries directly, no -TBI as a handoff marker). Governed target architecture; each surface keeps its current mapped path until its cutover is recorded', children: [
-          { label: 'routed handoffs · -TBI = feed owed (orthogonal overlay) → -ingested → terminal disposition' },
+          { label: 'fresh routed handoff awaiting first ingestion · -TBI → -ingested → terminal disposition', note: 'the -TBI overlay is orthogonal and may sit above any artifact; anything NOT in the fresh-awaiting-first-ingestion state has the overlay REMOVED ONLY, underlying role and durable state unchanged' },
           { label: '-supersededA = retired before ingestion · -supersededP = ingested, then displaced' },
           { label: '_STATE.md = structural inbox state · no lifecycle suffix · read before ingestion (post-cutover)' },
           { label: 'received records from separately-operated or walled surfaces' },
