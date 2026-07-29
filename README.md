@@ -86,7 +86,10 @@ To start a new ASK project from this protocol repo, beginning from zero:
 
    Distinct from this copy-and-adapt flow: a new repo also **resolves** the shared protocol carrier ([`protocol/AGENTS.shared.md`](protocol/AGENTS.shared.md)) locally into its own `AGENTS.md` between the `BEGIN`/`END` shared markers. The shared core is resolved in place, not copied-and-adapted like a prompt or template starter.
 
-   System-wide ecology critique prompts live separately at the ecology level only — they are not adapted into downstream-project operator-side copies:
+   System-wide ecology critique prompts are the **ecology-level flavor** of the reusable critique family. The repo
+   files below remain the canonical reusable sources; ASK invokes one deployed ecology-level operator-carrier
+   family from the ecology surface's `intent-carriers/`. They are not adapted into downstream-project
+   operator-side copies:
 
    ```text
    prompts/ecology-critique-initial-prompt.md
