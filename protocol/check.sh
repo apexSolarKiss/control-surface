@@ -16,6 +16,7 @@ PROFDIR="$ROOT/protocol/profiles"; OVERLAY="$ROOT/templates/overlays/architectur
 IDXTEMPLATE="$ROOT/templates/_INDEX-project.template.md"
 APITEMPLATE="$ROOT/templates/advisor-project-instructions.template.md"; INSTDOC="$ROOT/docs/project-instantiation-workflow.md"
 APBOOT="$ROOT/templates/advisor-project-bootstrap.template.md"; APARCH="$ROOT/docs/advisor-project-surface-architecture.md"
+ECOPROMPT="$ROOT/prompts/ecology-critique-execution-prompt.md"
 INSTPROMPT="$ROOT/prompts/project-instantiation-initial-prompt.md"; CRITDOC="$ROOT/docs/critique-protocol.md"
 # immutable activated_by grammar (ERE): '#<PR> / <hex>[ (note)]' | '<hex>[ (note)]' | 'legacy: <text>'
 PROV_RE='^(#[0-9]+ / [0-9a-f]{7,40}( \(.*\))?|[0-9a-f]{7,40}( \(.*\))?|legacy: .+)$'
@@ -168,20 +169,45 @@ assert_local(){
   #    not pass silently. Each phrase below is load-bearing; do not relax one to a generic token.
   local advmiss="" ph
   local apiphr=('**Exact-byte review objects.**' 'named `-PROPOSED` review object' 'review bundle' 'reported hash' 'manual upload never bypasses a wall' \
-                'is not a request for your review' 'raw file bytes' 'exact bytes remain retrievable' 'connector-bounded alternate representation' 'stop and report both failures')
+                'The relay is the request' 'raw file bytes' 'exact bytes remain retrievable' 'connector-bounded alternate representation' 'stop and report both failures' \
+                'Stage-1 readiness includes the minimum exact review object' 'Direct execution requires an explicit ASK authorization')
   for ph in "${apiphr[@]}"; do grep -qF -- "$ph" "$APBOOT" || advmiss="$advmiss advisor-bootstrap:{$ph}"; done
   grep -qF -- '`-PROPOSED` review objects/bundles' "$IDXTEMPLATE" || advmiss="$advmiss _INDEX:{bundle-role}"
   local instphr=('for exact-byte advisor review' 'mapped shared scratch' 'manual operator upload is fallback only' \
-                 'only on explicit ASK request' 'exact path → raw bytes → one bounded alternate representation' 'not exact-byte availability')
+                 'Stage-1 readiness includes the minimum exact review object' 'Direct execution requires an explicit ASK authorization' \
+                 'exact path → raw bytes → one bounded alternate representation' 'not exact-byte availability')
   for ph in "${instphr[@]}"; do grep -qF -- "$ph" "$INSTDOC" || advmiss="$advmiss instantiation:{$ph}"; done
+  # the ecology-critique execution prompt is a review-sequence carrier too: its deployed operator copy is
+  # conformed FROM this canonical, so the restored sequence must be assertable here (found stale by the
+  # 2026-07-29 program-closure read; part of the same regression repair).
+  local promptphr=('Stage-1 review opens on ASK relay' 'ASK adjudicates on the advisor recommendation')
+  for ph in "${promptphr[@]}"; do grep -qF -- "$ph" "$ECOPROMPT" || advmiss="$advmiss ecology-execution-prompt:{$ph}"; done
   # shared-canonical + resolved-root transport clauses — the rule text itself, not only its downstream carriers
-  local sharedphr=('**Review-window routing.**' '**Pre-PR publication condition.**' '**Object reachability is distinct from representation quality.**' \
-                   '**Retrieval order.**' '**ASK is the authority relay, not the byte courier.**' '**Bounded fallback.**' 'exact bytes remain retrievable through the authorized mapped route')
+  local sharedphr=('**Review-window routing — the relay is the request.**' '**Pre-PR publication condition.**' '**Object reachability is distinct from representation quality.**' \
+                   '**Retrieval order.**' '**ASK is the authority relay, not the byte courier.**' '**Bounded fallback.**' 'exact bytes remain retrievable through the authorized mapped route' \
+                   'is itself the review request' 'Stage-1 readiness includes the minimum exact review object' 'Direct execution requires an explicit ASK authorization' \
+                   '**Missing-object recovery:**' 'authorize no direct execution and no write')
   for ph in "${sharedphr[@]}"; do
     grep -qF -- "$ph" "$SHARED"    || advmiss="$advmiss shared:{$ph}"
     grep -qF -- "$ph" "$ROOTAGENTS" || advmiss="$advmiss root-carrier:{$ph}"
   done
-  [ -z "$advmiss" ] && OKAY "advisor-retrieval-contract clauses present (advisor-bootstrap + _INDEX + instantiation)" || FAIL "advisor-retrieval-contract clause(s) missing:$advmiss"
+  [ -z "$advmiss" ] && OKAY "advisor-retrieval-contract clauses present (advisor-bootstrap + _INDEX + instantiation + ecology-execution-prompt)" || FAIL "advisor-retrieval-contract clause(s) missing:$advmiss"
+  # 11b anti-regression — the retired Stage-1 review exclusion (#172 bootstrap sentence, #176 shared clause,
+  #     the passive non-relay direct-execution semantics, and the ASK-as-first-line prompt sentence;
+  #     classified a regression against the 2026-07-25 deployed semantics and repaired 2026-07-29) must not
+  #     reappear in any checked review-sequence carrier.
+  local regmiss="" rp
+  local regphr=('not an implicit request for pre-PR advisor review' 'is not a request for your review' \
+                'ASK reviews directly; you are not in that loop' 'only on explicit ASK request' \
+                'made by not relaying' 'simply not relaying' 'ASK reviews the diff (pre-commit window)')
+  for rp in "${regphr[@]}"; do
+    grep -qF -- "$rp" "$SHARED"      && regmiss="$regmiss shared:{$rp}"
+    grep -qF -- "$rp" "$ROOTAGENTS"  && regmiss="$regmiss root-carrier:{$rp}"
+    grep -qF -- "$rp" "$APBOOT"      && regmiss="$regmiss advisor-bootstrap:{$rp}"
+    grep -qF -- "$rp" "$INSTDOC"     && regmiss="$regmiss instantiation:{$rp}"
+    grep -qF -- "$rp" "$ECOPROMPT"   && regmiss="$regmiss ecology-execution-prompt:{$rp}"
+  done
+  [ -z "$regmiss" ] && OKAY "retired Stage-1 review exclusion absent (shared + root + advisor-bootstrap + instantiation + ecology-execution-prompt)" || FAIL "retired Stage-1 exclusion reintroduced:$regmiss"
   # 12 advisor-surface deployment architecture — the PI template must carry ONLY the pre-retrieval floor, the bootstrap
   #    template must exist and declare the index locator, and the registry must own the placement contract.
   local depmiss="" t

@@ -318,13 +318,14 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | REVIEW-2 | Exact-byte review objects, in three distinct steps: resolve the exact mapped path to establish **object identity**; retrieve the **raw file bytes** — an extracted-text, OCR, or rendered view is an *inspection representation*, never byte evidence; then verify against the reported hash. For a bundle, verify each part and reconstruct per the manifest. Path resolution alone proves reachability, not fidelity. | shared protocol | BOOTSTRAP | REVISE | PARTIAL | deployed form conflates path resolution with exact retrieval |
 | REVIEW-3 | Prefer an existing pushed PR over a duplicate shared-scratch packet. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | REVIEW-4 | A digest confirms identity after review; it is not the review object. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
-| REVIEW-5 | Two review windows; pre-merge Stage-2 is the advisor's slot, read by exact locator against base/head/merge SHAs. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
+| REVIEW-5 | Two review windows — **both advisor review windows in the configured paired path**: Stage 1 (pre-commit / pre-write) opens on ASK's unqualified relay of Stage-1-ready material — readiness includes the minimum exact review object — (review + recommend); Stage 2 (pre-merge) reads the pushed PR by exact locator against base/head/merge SHAs. ASK is the authorization apex and relay at both gates. | shared protocol | BOOTSTRAP | RESTORE (extended) | FULL | restores the pre-#172 Stage-1 semantics carried by the 2026-07-25 deployed PI (advisor reviews `-PROPOSED` objects; no explicit-request condition); #172 compiled an unregistered advisor exclusion and #176 hardened it — regression repaired 2026-07-29 |
 | REVIEW-6 | Conditional approval does not auto-convert: notes → executor reports fix with evidence → advisor verifies on the live PR → ASK relays → executor merges. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | REVIEW-7 | **Why step 3 cannot be self-converted: ASK's relay is the authority event, and the advisor must verify the corrected object live before that relay.** | this doc | BOOTSTRAP | RESTORE | ABSENT (rule kept, reason lost) | restores W3 |
 | REVIEW-8 | Page cache can lag after a force-push; have the executor verify current head before treating stale content as a regression. | this doc | BOOTSTRAP | PRESERVE | FULL | |
-| REVIEW-9 | An executor summary — including a report of `exact scoped diff ready for approval` — **does not implicitly open a pre-PR advisor review.** Wait for the pushed PR unless ASK explicitly requests review before commit and push; do not begin constructing or requesting transport work on the strength of a pasted summary. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | |
+| REVIEW-9 | **The relay is the request, and readiness includes the object.** Paired-path Stage-1 readiness includes the minimum advisor-readable exact review object — published to mapped scratch, or an already advisor-readable exact surface identified — reported with locator, baseline, byte size, and SHA-256; do not report `exact scoped diff ready for approval` while it remains session-local. ASK's unqualified relay of the readiness receipt opens advisor review + recommendation; no additional request phrase exists in the paired path, and the advisor never returns the review to ASK to demand one. A summary relayed without the object leaves the review open with readiness incomplete — one publication request to the executor. Direct execution requires an explicit ASK authorization; a `FYI` or `HOLD` envelope suppresses the Stage-1 verdict but authorizes no execution and no write; silence, omission, or non-relay elects nothing. Packet or transport work beyond what the review needs stays prohibited. | shared protocol | BOOTSTRAP | REVISE | n/a (new) | #176's explicit-request precondition + advisor exclusion classified a REGRESSION against the 2026-07-25 deployed semantics (ASK ruling ×2, threads 32/34); restored 2026-07-29; Stage-1 verdict same day: readiness includes publication, direct execution never inferred from non-relay |
 | REVIEW-10 | **ASK is the authority relay, not the byte courier.** Never ask ASK to download, attach, re-upload, or manually shuttle an object **while its exact bytes remain retrievable through the authorized mapped route.** Metadata-only reachability or a lossy inspection representation does not establish exact-byte availability; after raw retrieval and the one bounded alternate both fail, ASK may elect upload even though the path still resolves. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | |
 | REVIEW-11 | **Bounded fallback ladder:** raw-byte retrieval → one connector-bounded alternate representation in the same mapped scratch → stop and report the exact locator, the retrieval modes attempted, and each failure. Manual upload only if ASK then explicitly elects it. No serial repackaging cascade, and a lossy view is never the trigger for the next package. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | |
+| REVIEW-12 | **Paired-path review topology (anti-regression).** In the configured paired path, Stage 1 and Stage 2 are both advisor review windows; ASK is the authorization apex and relay at both gates, not the routine first-line reviewer. Reviewer ≠ authorizer: advisor review changes nothing about who authorizes. Direct execution requires an explicit ASK authorization for the named unit; a `FYI` or `HOLD` envelope suppresses the Stage-1 verdict but authorizes no execution and no write; silence, omission, or failure to relay elects nothing and authorizes no write. Registered explicitly because this behavior previously lived only in practice and the deployed PI — its absence from the registry is what allowed #172/#176 to compile its opposite. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | anti-regression registration, 2026-07-29 |
 
 ### DISAGREE — advisor/executor disagreement
 
@@ -424,11 +425,11 @@ Every requirement has a home or a recorded disposition. **Unowned count is zero*
 ## Coverage report — this revision
 
 ```text
-registry IDs                       89   = 76 shared + 12 surface overlays + 1 retired shared requirement
+registry IDs                       90   = 77 shared + 12 surface overlays + 1 retired shared requirement
 
 placement (shared IDs; co-homed IDs counted in each declared home)
   PI-FLOOR                         10
-  BOOTSTRAP                        74
+  BOOTSTRAP                        75
   INDEX                             5
   SURFACE-OVERLAY                  12   (11 active + 1 retired overlay)
   RETIRED                           2   RET-1 shared · OVL-AP-2 overlay — each with a recorded reason
@@ -444,13 +445,14 @@ per-Project PI-floor dispositions
   UO-TMK                            6 PRESERVE · 4 REVISED · 0 RETIRED · 0 N/A · 0 unowned = 10
 
 ruling (shared IDs)
-  PRESERVE                         59
-  RESTORE                           8   READ-3 · REVIEW-7 · DISAGREE-1 · DISAGREE-2 · POSTURE-3
-                                        · LIFE-4a · LIFE-5a · LIFE-5b
-  REVISE                            9   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2
+  PRESERVE                         58
+  RESTORE                           9   READ-3 · REVIEW-5 · REVIEW-7 · DISAGREE-1 · DISAGREE-2
+                                        · POSTURE-3 · LIFE-4a · LIFE-5a · LIFE-5b
+  REVISE                           10   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2 · REVIEW-9
                                         · LIFE-4 · LIFE-4b · LIFE-4d · LIFE-4h · LIFE-5c —
                                         the routed-instance lifecycle, its fresh-handoff
-                                        scoping, and the withdrawn PTX no-stacking clause
+                                        scoping, the withdrawn PTX no-stacking clause, and the
+                                        2026-07-29 review-window regression repair
   restored as surface overlay       2   OVL-AP-1 · OVL-ECO-2
 
 deployed presence at the 2026-07-25 audit (shared IDs)
@@ -464,9 +466,9 @@ deployed presence at the 2026-07-25 audit (shared IDs)
   n/a (revised)                     1   LIFE-5c — the row survives with its no-stacking half
                                         withdrawn, so its 2026-07-25 ABSENT reading no longer
                                         describes the requirement now in force
-  n/a (new)                        15   START-1 · FAIL-1 — created by this architecture ·
-                                        REVIEW-9 · REVIEW-10 · REVIEW-11 · LIFE-4b · LIFE-4c ·
-                                        LIFE-4d · LIFE-4e · LIFE-4f · LIFE-4g · LIFE-4h ·
+  n/a (new)                        16   START-1 · FAIL-1 — created by this architecture ·
+                                        REVIEW-9 · REVIEW-10 · REVIEW-11 · REVIEW-12 · LIFE-4b ·
+                                        LIFE-4c · LIFE-4d · LIFE-4e · LIFE-4f · LIFE-4g · LIFE-4h ·
                                         LIFE-4i · LIFE-4j · LIFE-4k —
                                         created after the 2026-07-25 audit, so no deployment
                                         was observed for them
@@ -508,8 +510,15 @@ A10 rollback restores prior behavior: repaste the frozen full Instructions canon
 A11 a review object whose bytes contain markup and non-ASCII text is retrieved from mapped shared scratch by
     raw-byte route: any lossy extracted view is named as a representation failure, the exact SHA-256 and the
     literal markup line are returned from the raw bytes, and no manual upload is requested
-A12 a pasted `exact scoped diff ready for approval` summary, with no explicit ASK request for pre-PR review,
-    does not trigger packet-building or transport work — the advisor waits for the PR
+A12 four paired-path cases, each with its own expected behavior: (1) minimum exact object available
+    and ASK relays the readiness receipt with no narrowing envelope → the advisor reviews the exact
+    object immediately and returns a recommendation, demanding no additional request phrase; (2) a
+    summary relayed without the exact object → the review opens, readiness is incomplete, one
+    publication request routes to the executor, and no second ASK request phrase exists; (3a) an
+    explicit direct-execution authorization → no advisor Stage-1 verdict, and the executor proceeds
+    only within the exact authorization; (3b) a `FYI` or `HOLD` envelope → no advisor Stage-1
+    verdict, and no execution or write authority follows; silence or non-relay never elects direct
+    execution
 ```
 
 A7 is the gate for connector failure. It is the entire safety case for moving protocol out of the
