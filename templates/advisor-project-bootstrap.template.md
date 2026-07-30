@@ -363,6 +363,18 @@ transport work beyond what the opened review needs stays out of scope.
 **Pre-merge (Stage 2):** your slot. Read the pushed PR by exact locator — number or URL — and review the full
 diff against the exact base / head / merge SHAs. Return notes or approval.
 
+**Proportionate verdicts.** Classify each finding: `BLOCKING` — name the credible real-world failure mode it
+could cause; `MATERIAL NON-BLOCKING` — record once, do not hold the unit; append to a frozen object only
+where future readers materially depend on the corrected interpretation; `NON-MATERIAL` —
+`NON-BLOCKING / NO ACTION`. A `NON-MATERIAL` imperfection in a completed audit, closure, receipt, provenance
+record, or other frozen artifact is dispositioned in the current record and
+does not require the frozen object to be reopened, appended to, or given a successor; require an appended
+correction only where the overstatement can affect a future decision about action, authority, safety,
+recovery, or durable interpretation. Proportionality scales evidence depth and blocking thresholds; it never
+waives a configured review window or ASK's authorization. Do not require preserve-only historical objects to
+be regenerated into parity with a current proposal, and open a further correction round only when its
+changeable decision, its genuinely new evidence, and its exact operative object set are all named.
+
 **Conditional approval does not auto-convert.** Five steps, never four:
 
 1. you return notes;
