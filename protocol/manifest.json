@@ -138,12 +138,13 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Private-Memory Write Gate",
-   "failure_mode": "an executor mutates a private persistent surface \u2014 auto memory, subagent memory, or a private instruction file \u2014 as an unannounced side effect of an approved task, so durable protocol enters an unreviewed surface",
+   "failure_mode": "an executor mutates a private persistent surface \u2014 auto memory, subagent memory, or a private instruction file \u2014 as an unannounced side effect of an approved task, so durable protocol enters an unreviewed surface; a denied or unauthorized optional private-persistent mutation treated as a stop condition for otherwise independent authorized work",
    "active_holds": [],
    "status": "active",
    "amended_by": [
     "#166 / 612fc8c",
-    "#166 / dee8d89"
+    "#166 / dee8d89",
+    "#186 / cf539e35df0c0d9a218bf8096075ac2e3bd92e25 (TBI amendment: denial stops the mutation, not unrelated work — bounded continuation, dependency-only stop, pre-flight stops preserved)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -166,10 +167,12 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Required Reading Before Meaningful Work",
-   "failure_mode": "meaningful work begun without reading repo-local truth or grounding note",
+   "failure_mode": "meaningful work begun without reading repo-local truth or grounding note; a governing source named only as future work after producing the output it governs; a declared read order silently replaced by the agent's sufficiency judgment; an unavailable source falsely reported as reviewed",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": [
+    "#186 / cf539e35df0c0d9a218bf8096075ac2e3bd92e25 (TBI amendment: named-but-unread governing source is a defect; declared read order is not a cost-benefit input)"
+   ],
    "explicit_exclusions": [],
    "proposed_by": null,
    "activated_by": "#30 / 362d847"

@@ -112,6 +112,8 @@ Specifically prohibited without the authorization above:
 
 Do not bypass the gate through Bash, Python, Node, another subprocess, a helper agent, or an alternate write tool. Subagents, census agents, staging agents, and read-only workers never perform private persistent mutations; they return the candidate learning and proposed disposition to the parent coordinator.
 
+**Denial stops the mutation, not unrelated work.** When ASK denies, withholds, or has not supplied authorization for a private persistent mutation, do not retry it through another tool or surface. Omit that mutation and continue the unrelated task to the extent the task remains independently authorized and technically possible. Stop the broader task only when its completion actually depends on the prohibited mutation, and state that dependency explicitly. This narrows only the response to the denied mutation itself; every pre-flight coverage requirement and stop condition of this gate is unaffected.
+
 Before memory-bearing work, confirm that the required ask rules are active and that every governed private persistent path — including the effective auto-memory root and every loaded private instruction import — is covered. Missing rules, unmatched rules, or an uncovered governed path are stop conditions.
 
 Do not perform private persistent-context maintenance in a mode that disables the runtime's safety checks. This is defense in depth: explicit ask rules currently still apply in that mode, but the gate must not depend on one product carve-out while other checks are disabled.
@@ -130,6 +132,10 @@ Before any meaningful repo work, read:
 - the repo-local Required Reads and architecture docs that delta names.
 
 For external context, read the grounding note. Then read whatever templates, prompts, examples, milestones, or findings are relevant to the task.
+
+**A named-but-unread governing source is a defect, not a caveat.** Retrieve it before producing the governed output. If the active authority explicitly waives the read or the source is technically unavailable, state that fact, the reason, and the resulting limit in the same turn.
+
+**A declared read order is not a cost-benefit input.** Skip it only on explicit waiver or unavoidable unavailability. Never silently substitute a live sufficiency judgment or close by proposing the required read as future work.
 
 ---
 

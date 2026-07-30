@@ -237,6 +237,26 @@ assert_local(){
   grep -qF -- 'REVIEW-13' "$APARCH" || tdmiss="$tdmiss architecture:{REVIEW-13}"
   grep -qF -- 'does not reopen, append to, or generate a successor for a frozen object' "$APARCH" || tdmiss="$tdmiss architecture:{frozen-record-threshold}"
   [ -z "$tdmiss" ] && OKAY "throughput-discipline clauses present (shared + root + advisor-bootstrap + registry)" || FAIL "throughput-discipline clause(s) missing:$tdmiss"
+  # 11d TBI-amendment clauses — the P2-2 denial-scope (Private-Memory Write Gate) and retrieval-obligation
+  #     (Required Reading) amendments. Same two-grain discipline as 11c: headline anchors plus the operative
+  #     sentences a surviving headline could otherwise orphan. A loss of any single guarded phrase fails alone.
+  local tamiss=""
+  local tashared=('**Denial stops the mutation, not unrelated work.**' 'do not retry it through another tool or surface' \
+                  'continue the unrelated task to the extent the task remains independently authorized and technically possible' \
+                  'Stop the broader task only when its completion actually depends on the prohibited mutation' \
+                  'state that dependency explicitly' \
+                  'every pre-flight coverage requirement and stop condition of this gate is unaffected' \
+                  '**A named-but-unread governing source is a defect, not a caveat.**' 'Retrieve it before producing the governed output' \
+                  'If the active authority explicitly waives the read or the source is technically unavailable' \
+                  'state that fact, the reason, and the resulting limit in the same turn' \
+                  '**A declared read order is not a cost-benefit input.**' \
+                  'Skip it only on explicit waiver or unavoidable unavailability' \
+                  'Never silently substitute a live sufficiency judgment or close by proposing the required read as future work')
+  for tp in "${tashared[@]}"; do
+    grep -qF -- "$tp" "$SHARED"     || tamiss="$tamiss shared:{$tp}"
+    grep -qF -- "$tp" "$ROOTAGENTS" || tamiss="$tamiss root-carrier:{$tp}"
+  done
+  [ -z "$tamiss" ] && OKAY "denial-scope + retrieval-obligation clauses present (shared + root)" || FAIL "denial-scope/retrieval-obligation clause(s) missing:$tamiss"
   # 12 advisor-surface deployment architecture — the PI template must carry ONLY the pre-retrieval floor, the bootstrap
   #    template must exist and declare the index locator, and the registry must own the placement contract.
   local depmiss="" t
