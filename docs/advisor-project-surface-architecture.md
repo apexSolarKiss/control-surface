@@ -326,6 +326,7 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | REVIEW-10 | **ASK is the authority relay, not the byte courier.** Never ask ASK to download, attach, re-upload, or manually shuttle an object **while its exact bytes remain retrievable through the authorized mapped route.** Metadata-only reachability or a lossy inspection representation does not establish exact-byte availability; after raw retrieval and the one bounded alternate both fail, ASK may elect upload even though the path still resolves. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | |
 | REVIEW-11 | **Bounded fallback ladder:** raw-byte retrieval → one connector-bounded alternate representation in the same mapped scratch → stop and report the exact locator, the retrieval modes attempted, and each failure. Manual upload only if ASK then explicitly elects it. No serial repackaging cascade, and a lossy view is never the trigger for the next package. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | |
 | REVIEW-12 | **Paired-path review topology (anti-regression).** In the configured paired path, Stage 1 and Stage 2 are both advisor review windows; ASK is the authorization apex and relay at both gates, not the routine first-line reviewer. Reviewer ≠ authorizer: advisor review changes nothing about who authorizes. Direct execution requires an explicit ASK authorization for the named unit; a `FYI` or `HOLD` envelope suppresses the Stage-1 verdict but authorizes no execution and no write; silence, omission, or failure to relay elects nothing and authorizes no write. Registered explicitly because this behavior previously lived only in practice and the deployed PI — its absence from the registry is what allowed #172/#176 to compile its opposite. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | anti-regression registration, 2026-07-29 |
+| REVIEW-13 | **Proportionate verdicts.** Classify each finding `BLOCKING` (name the credible real-world failure mode) · `MATERIAL NON-BLOCKING` (record once, do not hold the unit; append to a frozen object only where future readers materially depend on the corrected interpretation) · `NON-MATERIAL` (`NON-BLOCKING / NO ACTION` — it does not reopen, append to, or generate a successor for a frozen object; a frozen record earns an appended correction only where its overstatement can affect a future decision about action, authority, safety, recovery, or durable interpretation). Proportionality scales evidence depth and blocking thresholds; it never waives a configured review window or ASK's authorization. No regeneration of preserve-only historical objects into current parity; a further correction round opens only with its changeable decision, its new evidence, and its exact operative object set all named. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | Issue-B deployment to the advisor conduct surface, 2026-07-30 |
 
 ### DISAGREE — advisor/executor disagreement
 
@@ -425,11 +426,11 @@ Every requirement has a home or a recorded disposition. **Unowned count is zero*
 ## Coverage report — this revision
 
 ```text
-registry IDs                       90   = 77 shared + 12 surface overlays + 1 retired shared requirement
+registry IDs                       91   = 78 shared + 12 surface overlays + 1 retired shared requirement
 
 placement (shared IDs; co-homed IDs counted in each declared home)
   PI-FLOOR                         10
-  BOOTSTRAP                        75
+  BOOTSTRAP                        76
   INDEX                             5
   SURFACE-OVERLAY                  12   (11 active + 1 retired overlay)
   RETIRED                           2   RET-1 shared · OVL-AP-2 overlay — each with a recorded reason
@@ -445,7 +446,7 @@ per-Project PI-floor dispositions
   UO-TMK                            6 PRESERVE · 4 REVISED · 0 RETIRED · 0 N/A · 0 unowned = 10
 
 ruling (shared IDs)
-  PRESERVE                         58
+  PRESERVE                         59
   RESTORE                           9   READ-3 · REVIEW-5 · REVIEW-7 · DISAGREE-1 · DISAGREE-2
                                         · POSTURE-3 · LIFE-4a · LIFE-5a · LIFE-5b
   REVISE                           10   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2 · REVIEW-9
@@ -466,10 +467,10 @@ deployed presence at the 2026-07-25 audit (shared IDs)
   n/a (revised)                     1   LIFE-5c — the row survives with its no-stacking half
                                         withdrawn, so its 2026-07-25 ABSENT reading no longer
                                         describes the requirement now in force
-  n/a (new)                        16   START-1 · FAIL-1 — created by this architecture ·
-                                        REVIEW-9 · REVIEW-10 · REVIEW-11 · REVIEW-12 · LIFE-4b ·
-                                        LIFE-4c · LIFE-4d · LIFE-4e · LIFE-4f · LIFE-4g · LIFE-4h ·
-                                        LIFE-4i · LIFE-4j · LIFE-4k —
+  n/a (new)                        17   START-1 · FAIL-1 — created by this architecture ·
+                                        REVIEW-9 · REVIEW-10 · REVIEW-11 · REVIEW-12 · REVIEW-13 ·
+                                        LIFE-4b · LIFE-4c · LIFE-4d · LIFE-4e · LIFE-4f · LIFE-4g ·
+                                        LIFE-4h · LIFE-4i · LIFE-4j · LIFE-4k —
                                         created after the 2026-07-25 audit, so no deployment
                                         was observed for them
 

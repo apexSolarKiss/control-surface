@@ -208,6 +208,35 @@ assert_local(){
     grep -qF -- "$rp" "$ECOPROMPT"   && regmiss="$regmiss ecology-execution-prompt:{$rp}"
   done
   [ -z "$regmiss" ] && OKAY "retired Stage-1 review exclusion absent (shared + root + advisor-bootstrap + instantiation + ecology-execution-prompt)" || FAIL "retired Stage-1 exclusion reintroduced:$regmiss"
+  # 11c throughput discipline — the P2-1 proportionality/termination (Issue B) and executor-preflight (Issue C)
+  #     obligations. Guarded at two grains: section HEADLINE anchors plus SUBSTANTIVE phrases from each
+  #     obligation a surviving headline could otherwise orphan (the no-waiver gate list, the named-failure-mode
+  #     blocking criterion, the frozen-record no-reopen threshold, the rework re-anchor, the partition
+  #     non-regeneration bound, the universal parent cold read, the checker-demonstration rule, the readiness
+  #     receipt and its fields). Every obligation is guarded at substantive grain; not every bold heading is
+  #     itself guarded. A loss of any single guarded phrase fails alone.
+  local tdmiss="" tp
+  local tdshared=('reversibility × blast radius × cost of error × decision relevance' '**Proportionality never waives a gate.**' \
+                  'MATERIAL NON-BLOCKING' 'name the credible failure mode and correct it before proceeding' \
+                  'does not reopen, append to, or generate a successor for the frozen object' \
+                  '**Correction loops terminate.**' 'the round does not open' \
+                  '**Partition every multi-object package by role.**' '**Executor preflight — read the finished object before handing it off.**' \
+                  'reload the final bytes from disk and perform one end-to-end parent cold read of the deliverable and its surrounding frame' \
+                  'never the delta alone' \
+                  '**The parent verifies every internal finding**' 'internal-clean never replaces the external advisor' \
+                  'never waives an ASK-owned authorization gate' 're-anchor to the current live owner or baseline' \
+                  'never regenerated or forced into semantic parity' 'must demonstrate one real negative or control case' \
+                  '**Readiness receipt.**' 'parent semantic self-review: COMPLETE' \
+                  'internal adversarial preflight: PERFORMED | NOT TRIGGERED | UNAVAILABLE')
+  for tp in "${tdshared[@]}"; do
+    grep -qF -- "$tp" "$SHARED"     || tdmiss="$tdmiss shared:{$tp}"
+    grep -qF -- "$tp" "$ROOTAGENTS" || tdmiss="$tdmiss root-carrier:{$tp}"
+  done
+  for tp in '**Proportionate verdicts.**' 'MATERIAL NON-BLOCKING' 'does not require the frozen object to be reopened'; do
+    grep -qF -- "$tp" "$APBOOT" || tdmiss="$tdmiss advisor-bootstrap:{$tp}"; done
+  grep -qF -- 'REVIEW-13' "$APARCH" || tdmiss="$tdmiss architecture:{REVIEW-13}"
+  grep -qF -- 'does not reopen, append to, or generate a successor for a frozen object' "$APARCH" || tdmiss="$tdmiss architecture:{frozen-record-threshold}"
+  [ -z "$tdmiss" ] && OKAY "throughput-discipline clauses present (shared + root + advisor-bootstrap + registry)" || FAIL "throughput-discipline clause(s) missing:$tdmiss"
   # 12 advisor-surface deployment architecture — the PI template must carry ONLY the pre-retrieval floor, the bootstrap
   #    template must exist and declare the index locator, and the registry must own the placement contract.
   local depmiss="" t
