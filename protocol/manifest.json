@@ -138,7 +138,7 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Private-Memory Write Gate",
-   "failure_mode": "an executor mutates a private persistent surface \u2014 auto memory, subagent memory, or a private instruction file \u2014 as an unannounced side effect of an approved task, so durable protocol enters an unreviewed surface",
+   "failure_mode": "an executor mutates a private persistent surface \u2014 auto memory, subagent memory, or a private instruction file \u2014 as an unannounced side effect of an approved task, so durable protocol enters an unreviewed surface; a denied or unauthorized optional private-persistent mutation treated as a stop condition for otherwise independent authorized work",
    "active_holds": [],
    "status": "active",
    "amended_by": [
@@ -166,7 +166,7 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Required Reading Before Meaningful Work",
-   "failure_mode": "meaningful work begun without reading repo-local truth or grounding note",
+   "failure_mode": "meaningful work begun without reading repo-local truth or grounding note; a governing source named only as future work after producing the output it governs; a declared read order silently replaced by the agent's sufficiency judgment; an unavailable source falsely reported as reviewed",
    "active_holds": [],
    "status": "active",
    "amended_by": [],
