@@ -2,7 +2,7 @@
 
 This is a copyable master for a project's **source index / path map** — the retrieval map an advisor surface fetches **live** at the exact locator its mounted bootstrap declares. Adapt it per project. The template lives in the protocol repo.
 
-**Mount posture.** In healthy connector mode this file is **not mounted**. The advisor Project's single standing Markdown Source is that surface's bootstrap (`templates/advisor-project-bootstrap.template.md`); the bootstrap carries this index's exact locator and fetches it live, so an ordinary index revision needs no remount. Mount a copy only as connector-failure fallback, and retire it when live access returns. The placement contract is owned by [`docs/advisor-project-surface-architecture.md`](../docs/advisor-project-surface-architecture.md).
+**Mount posture.** In healthy connector mode this file is **not mounted**. The advisor Project's single standing Markdown Source is that surface's bootstrap (`templates/advisor-project-bootstrap.template.md`); the bootstrap carries this index's exact locator and fetches it live, so an ordinary index revision needs no remount. Mount a copy only as connector-failure fallback, and retire it when live access returns. Mounted-source display labels are inspection metadata, not source identity — verify standing-source cardinality and mounted content/version, not the displayed filename. The placement contract is owned by [`docs/advisor-project-surface-architecture.md`](../docs/advisor-project-surface-architecture.md).
 
 **Instantiate as** (angle brackets resolve to real names — do not keep them in the actual filename):
 

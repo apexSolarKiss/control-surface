@@ -257,6 +257,35 @@ assert_local(){
     grep -qF -- "$tp" "$ROOTAGENTS" || tamiss="$tamiss root-carrier:{$tp}"
   done
   [ -z "$tamiss" ] && OKAY "denial-scope + retrieval-obligation clauses present (shared + root)" || FAIL "denial-scope/retrieval-obligation clause(s) missing:$tamiss"
+  # 11e P2-3 aperture + source-identity clauses — the declared-ingress-aperture/relay-sufficiency amendment
+  #     (§Cross-Surface Change Routing, shared + root) and the vendor-neutral mounted-source identity limb
+  #     folded into registry READ-2, deployed to both declared homes (advisor-bootstrap §Retrieval discipline
+  #     + the generic index template's mount posture). Two grains as in 11c/11d: headline anchors plus every
+  #     operative sentence. A loss of any single guarded phrase fails alone.
+  local apmiss=""
+  local apshared=('is sufficient for the scoped placement' 'the relay is the routing grant' \
+                  'asked to authorize the same route again' \
+                  'including a separately operated one — may use the aperture' \
+                  'need not become the byte courier' \
+                  'routing remains distinct from feeding, ingestion, disposition, and implementation authority' \
+                  'the aperture confers nothing beyond the one exact create' \
+                  'material outside the declared payload class')
+  for tp in "${apshared[@]}"; do
+    grep -qF -- "$tp" "$SHARED"     || apmiss="$apmiss shared:{$tp}"
+    grep -qF -- "$tp" "$ROOTAGENTS" || apmiss="$apmiss root-carrier:{$tp}"
+  done
+  local srcid=('**Mounted-source display labels are inspection metadata, not source identity.**' \
+               'does not establish a duplicate local file, multiple standing mounts, or incorrect mounted bytes' \
+               'Verify standing-source cardinality and mounted content/version' \
+               'use exact bytes or hashes where identity is load-bearing' \
+               'possible thread-context staleness, not proof that the current upload failed')
+  for tp in "${srcid[@]}"; do
+    grep -qF -- "$tp" "$APARCH" || apmiss="$apmiss architecture:{$tp}"
+    grep -qF -- "$tp" "$APBOOT" || apmiss="$apmiss advisor-bootstrap:{$tp}"
+  done
+  for tp in 'inspection metadata, not source identity' 'not the displayed filename'; do
+    grep -qF -- "$tp" "$IDXTEMPLATE" || apmiss="$apmiss _INDEX:{$tp}"; done
+  [ -z "$apmiss" ] && OKAY "aperture + source-identity clauses present (shared + root + registry + advisor-bootstrap + index template)" || FAIL "aperture/source-identity clause(s) missing:$apmiss"
   # 12 advisor-surface deployment architecture — the PI template must carry ONLY the pre-retrieval floor, the bootstrap
   #    template must exist and declare the index locator, and the registry must own the placement contract.
   local depmiss="" t

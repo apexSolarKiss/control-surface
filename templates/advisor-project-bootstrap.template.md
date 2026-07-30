@@ -108,6 +108,13 @@ live owner every time.
 
 **Session memory is a stale base** against a live read. Connector fetches show current on-disk state.
 
+**Mounted-source display labels are inspection metadata, not source identity.** A host-added filename
+decoration does not establish a duplicate local file, multiple standing mounts, or incorrect mounted bytes.
+Verify standing-source cardinality and mounted content/version;
+use exact bytes or hashes where identity is load-bearing. An already-running conversation may continue
+surfacing content previously brought into that thread after a remount; treat that as
+possible thread-context staleness, not proof that the current upload failed.
+
 **Never** infer HEAD from commit search. **Never** reconstruct directory state from README prose. A connector
 does not reliably resolve HEAD-by-ref or list trees; do not depend on either.
 

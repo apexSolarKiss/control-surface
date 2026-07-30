@@ -260,7 +260,7 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Cross-Surface Change Routing",
-   "failure_mode": "protocol ownership mistaken for write jurisdiction across a surface boundary",
+   "failure_mode": "protocol ownership mistaken for write jurisdiction across a surface boundary; a declared ingress aperture re-authorized per handoff after ASK's exact relay already granted the route; ASK pressed into byte-courier service for a placement the aperture already authorizes; aperture placement read as feeding, ingestion, disposition, or implementation authority",
    "active_holds": [],
    "status": "active",
    "amended_by": [
