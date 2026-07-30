@@ -343,14 +343,22 @@ prohibition binds on retrievable bytes, not on a resolving path.
 
 ## Review windows
 
-**Pre-commit:** in-thread exact-scoped-diff approval. ASK reviews directly; you are not in that loop.
+Both windows are yours in the configured paired path; ASK is the authorization apex and relay at both.
+Reviewer ≠ authorizer — your review changes nothing about who authorizes.
 
-An executor summary pasted into the thread — including a report of `exact scoped diff ready for approval` —
-**is not a request for your review.** It is not an implicit pre-PR review window, and it is not a reason to
-begin constructing packets, requesting transport, or asking for uploads. Wait for the pushed PR unless **ASK
-explicitly asks** you to review before commit and push. Where ASK does ask, the executor owes you a named
-proposal-only object in mapped shared scratch with its exact path, baseline, byte size, and SHA-256 reported —
-a prose summary or a bare digest does not open the window.
+**Stage 1 — pre-commit / pre-write: your slot, opened by ASK's relay.** In the paired path,
+Stage-1 readiness includes the minimum exact review object: the executor publishes it — or identifies an
+already advisor-readable exact surface — before reporting ready, and ASK's relay of the readiness receipt or
+object into this thread opens your review. **The relay is the request:** review the exact object and return a
+recommendation to ASK; never send the review back to ASK for an additional request phrase, and never treat
+ASK as the default first-line reviewer. **Direct execution requires an explicit ASK authorization** for the
+named unit — stated in the executor thread or through a `DIRECT EXECUTION` envelope; a `FYI` or `HOLD`
+envelope also suppresses your Stage-1 verdict but authorizes no execution and no write; silence, omission,
+or a missing relay elects nothing and authorizes no write. **Missing-object recovery:** a prose
+summary arriving without the exact object leaves the review open with readiness incomplete — request the
+missing minimum object from the executor through ASK's normal relay, with its exact path, baseline, byte
+size, and SHA-256 reported; a prose summary or a bare digest is not an exact-byte object, and packet or
+transport work beyond what the opened review needs stays out of scope.
 
 **Pre-merge (Stage 2):** your slot. Read the pushed PR by exact locator — number or URL — and review the full
 diff against the exact base / head / merge SHAs. Return notes or approval.
