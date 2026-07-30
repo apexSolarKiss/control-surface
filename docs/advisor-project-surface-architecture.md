@@ -140,6 +140,16 @@ advisor Project — not because it is important, upstream, or directly operated.
 stands up an advisor Project adopts the profile then. The exclusion is a statement about deployment, never
 about whether the invariant is correct.
 
+**One repo may home more than one hosted Project, and applicability attaches to the Project's role.**
+`urban-observatory` homes two: an ASK-facing repo-advisor Project, and a separate TMK-facing
+domain-authority review Project. `applies_to` naming the repo binds its **ASK-facing repo-advisor** Project to
+the `advisor-project-surface` profile; it does not assign that role to every hosted Project associated with the
+repo — a second Project remains governed by this semantic owner document without becoming an
+`advisor-project-surface` profile consumer. A second Project with a
+different audience and a different authority topology is governed by its own overlay plus the protocol that
+owns its review class — see §Hosted domain-authority review variant. **Audit each hosted Project
+independently**; a requirement absent from one because its role does not carry it is not a gap in the other.
+
 Because `check.sh` derives required profiles from `applies_to`, a repo added to that list **fails its carrier
 check until it resolves the profile.** That gap is the intended fail-closed signal, not a defect: the interval
 between registering applicability and resolving the carrier is exactly the interval in which a consumer
@@ -156,6 +166,58 @@ Sharing the invariant does not merge authority, widen a wall, make either implem
 other, or require one bootstrap payload to cross surfaces. This document does not govern personal-context
 Projects, and it is not amended by changes to the personal ADR. Reciprocal owner references record the shared
 invariant, but neither implementation governs or mutates the other. ASK, as apex, adjudicates any divergence.
+
+## Hosted domain-authority review variant
+
+A hosted Project may exist to carry a **domain authority's** judgment rather than to advise the operator. It
+uses the same deployment shape as a repo-advisor Project — thin Instructions floor, one mounted bootstrap,
+live-fetched scoped index, standing canonicals plus an operator-fed review packet — and **not** the repo-advisor
+role. Its authority topology is owned by [`docs/domain-authority-review-protocol.md`](domain-authority-review-protocol.md),
+which operationalizes method-ASK's `docs/governance.md` (domain authority as a bounded instance of delegated
+discretion) and `docs/source-of-intent.md` (stage-aware, claim-level classification of domain-authority
+handoffs).
+
+The distinction is who is in the thread and whose judgment the surface carries:
+
+```text
+repo-advisor Project        ASK is in the thread; the surface challenges the operator's own reasoning
+domain-authority Project    the domain authority is in the thread; ASK operates the surface for them
+```
+
+That inverts several assumptions the shared registry makes. In this variant:
+
+- **ASK operates and configures the Project and feeds the review packets.** The domain authority does not
+  administer the surface, and the surface is not an ASK proxy, a second operator, or an independent project
+  authority.
+- **The domain authority is the human in the thread, and the authority within their named domain.** The surface
+  helps them develop, pressure-test, and articulate judgment. It does not supply the judgment, and synthesis
+  never substitutes for their words where those words are load-bearing.
+- **ASK remains project architect, operator, relay, and the final adoption / authorization / publication /
+  closure authority.** Returned material reaches execution only through ASK's relay.
+- **Review packets are self-contained and carry the per-review stage contract** — current stage, the decisions
+  open, and the commitments held out of scope. The surface follows the packet's orchestration and does not
+  improvise a decision interview from an un-orchestrated flat memo.
+- **Returned claims are classified claim by claim, not adopted whole-artifact.** One handoff may carry a binding
+  domain judgment and a premature implementation proposal at once; the first may bind, the second stays
+  roadmap, scratch, or held architecture until ASK promotes it. **No review advances project stage by
+  implication.**
+- **Expertise confers no project authority.** Implementation architecture, execution, publication, and closure
+  rights are named explicitly or they are absent.
+
+Compactly: *the domain authority owns judgment within the declared aperture; ASK owns what that judgment means
+for the project.*
+
+**The profile instance is separable, and is currently held.** `urban-observatory` is the **first worked
+instance** of the domain-authority review protocol. The manifest's `domain-authority-review-profile` remains
+`status: held` with `applies_to: []`, under `hold-domain-authority-reviewer-format` pending a second
+implemented pressure-test, and its own note says not to create an empty profile file for it yet — so **no
+instantiated profile carrier exists.** The UO-TMK standing fields are therefore recorded in these overlay rows
+and in the live surface carriers, without citing or manufacturing a profile instance. The distinction is
+load-bearing:
+
+```text
+worked instance of the protocol   ≠   installed instance of the held profile
+```
 
 ---
 
@@ -322,21 +384,64 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | OVL-ECO-1 | ecology-ASK | Operation spans multiple ecology surfaces; crossing a repo boundary is a hard repo-boundary reset, not an ingestion event. | PRESERVE |
 | OVL-ECO-2 | ecology-ASK | Downstream repos are **separately operated surfaces with their own advisor Projects**; make no project-specific claim about them without their own grounding context or exact repo evidence. | RESTORE |
 | OVL-AP-2 | asset-pipeline-ASK | Unconditional per-thread probe of live-prototype connectivity at startup. | **RETIRED** — it reduces no decision-relevant uncertainty on a thread that never discusses prototype state (POSTURE-3 applied to itself). The behavior survives task-triggered in OVL-AP-1. |
+| OVL-UO-TMK-1 | urban-observatory · TMK-facing Project | **Role and authority.** TMK is the human in the thread and the planning-domain authority — a first-class source-of-intent input within that domain, not ASK and not an ASK proxy. ASK is project architect, operator, relay, and the final adoption / authorization / publication / closure authority. | NEW — the surface exists and was never censused; §Surface-overlay completion gate applies |
+| OVL-UO-TMK-2 | urban-observatory · TMK-facing Project | **Packet feed and orchestration.** ASK assembles and feeds self-contained `-4TMK` packets; each carries its own cover/bootstrap, questions, order, and return format, and *that* drives the review. Packet files are per-review inputs, never standing index entries. Do not improvise a decision interview from an un-orchestrated flat memo. | NEW |
+| OVL-UO-TMK-3 | urban-observatory · TMK-facing Project | **Intent and stage guardrails.** Every review declares the current stage, the decisions open, and the commitments held out of scope. Returned material is classified claim by claim; no review advances project stage by implication; out-of-stage material is preserved as roadmap / scratch / held architecture rather than adopted or discarded. Domain expertise confers no implementation, execution, publication, or closure authority. | NEW — owned by `docs/domain-authority-review-protocol.md`; recorded here as the surface's binding form |
+| OVL-UO-TMK-4 | urban-observatory · TMK-facing Project | **Return and execution boundary.** The surface returns handoff memos to ASK and cannot promote, publish, authorize, close, or write the repo. Her words are the payload; synthesis supports and never substitutes. One bounded **create-only** return-transport grant exists, governed solely by the mounted bootstrap — available only under the loaded bootstrap, only after TMK confirms exact body, filename, and destination; it ends at file creation plus receipt, and human ASK controls onward routing. | NEW |
+| OVL-UO-TMK-5 | urban-observatory · TMK-facing Project | **Wall and evidence access.** A narrow read surface: the mounted bootstrap, the three standing canonicals its scoped index names, the active packet's files, or a path ASK names for a task. No brand / identity / voice, no source-of-intent masters, no trackers or publishing context, no `personal-ASK` path. The ADR is read from TMK's own `personal-TMK/inheritable/` twin, never Andrew's copy. Prefer fetch-by-exact-path; a broad connector search can leak a private filename manifest. | NEW — preserves the existing v12/v13 fence |
+| OVL-UO-TMK-6 | urban-observatory · TMK-facing Project | **Relation to the ASK-facing UO Project.** Two hosted Projects, different audiences, different authority, separate carriers and indexes. Do not configure, operate, or reason across them. This is the reciprocal of OVL-UO-2. | NEW |
+
+
+### UO-TMK PI-floor disposition
+
+The shared `PI-FLOOR` set was designed for an ASK-facing repo advisor. Four of its ten requirements do not
+transfer unrevised to a domain-authority surface. **Dispositioned explicitly rather than left as apparent
+omissions** — an undispositioned absence is indistinguishable from a defect, which is the whole reason this
+table exists.
+
+| ID | Disposition | Reason |
+|---|---|---|
+| ROLE-1 | PRESERVE | The Project names the one surface it advises. |
+| ROLE-2 | **REVISED** | No repo, canonical, Project-setting, overwrite, update, move, rename, delete, folder-creation, or link-creation authority. The **sole** connector-storage exception is the bootstrap-governed create-only return transport in OVL-UO-TMK-4. Calling the generic requirement PRESERVED while carrying an exception would defeat the purpose of this table. |
+| ROLE-3 | **REVISED** | Repo and project-state writes route through ASK to the executor. The create-only return transport is **not project execution**: it carries one TMK-confirmed memo to ASK and confers no adoption, ingestion, implementation, publication, or closure authority. |
+| MODEL-1 | **REVISED** | The generic advisor–executor operating model is replaced by the ASK-operated domain-authority-review topology (OVL-UO-TMK-1). Stating the adversarial-collaboration advisor/executor role on this surface would misdescribe who is in the thread and whose judgment it carries. |
+| WALL-1 | PRESERVE | Read only what the bootstrap, the scoped index, the active packet, or ASK names. |
+| WALL-3 | PRESERVE | Outside that surface, stop and ask ASK. |
+| REVIEW-1 | **REVISED** | Named-file fetch discipline applies whenever repo truth is consulted, but this surface has **no PR/SHA review or merge-approval role**. The exact-PR-locator clause describes a function it does not perform. |
+| START-1 | PRESERVE | Read the mounted bootstrap before any substantive response. |
+| FAIL-1 | PRESERVE | Missing or unreadable bootstrap: stop and ask ASK; never search, reconstruct, or proceed from memory. |
+| FAIL-3 | PRESERVE | Never claim a file was read unless the connector returned it. |
+
+```text
+PRESERVE  6        REVISED  4        RETIRED  0        NOT-APPLICABLE  0        unowned  0
+total    10        every requirement carries either its original form or a named replacement
+```
+
+Every requirement has a home or a recorded disposition. **Unowned count is zero**, which is the gate.
 
 ---
 
 ## Coverage report — this revision
 
 ```text
-registry IDs                       83   = 76 shared + 6 surface overlays + 1 retired shared requirement
+registry IDs                       89   = 76 shared + 12 surface overlays + 1 retired shared requirement
 
 placement (shared IDs; co-homed IDs counted in each declared home)
   PI-FLOOR                         10
   BOOTSTRAP                        74
   INDEX                             5
-  SURFACE-OVERLAY                   6   (5 active + 1 retired overlay)
+  SURFACE-OVERLAY                  12   (11 active + 1 retired overlay)
   RETIRED                           2   RET-1 shared · OVL-AP-2 overlay — each with a recorded reason
   NOT-APPLICABLE                    0
+
+surface overlays by hosted Project
+  asset-pipeline-ASK                2   OVL-AP-1 active · OVL-AP-2 retired
+  urban-observatory · ASK-facing    2   OVL-UO-1 · OVL-UO-2
+  urban-observatory · TMK-facing    6   OVL-UO-TMK-1..6   NEW this revision
+  ecology-ASK                       2   OVL-ECO-1 · OVL-ECO-2
+
+per-Project PI-floor dispositions
+  UO-TMK                            6 PRESERVE · 4 REVISED · 0 RETIRED · 0 N/A · 0 unowned = 10
 
 ruling (shared IDs)
   PRESERVE                         59
@@ -391,7 +496,13 @@ A6  an ordinary protocol edit is picked up after a bootstrap remount with NO Ins
 A7  with the connector disabled: the exact failed locator is named, a current copy is requested, no broad
     search occurs, no memory reconstruction occurs — AND the write boundary and no-fabrication floor
     still hold
-A8  the Instructions field carries the full PI-FLOOR set and nothing that belongs elsewhere
+A8  the Instructions field carries, for that Project: every PRESERVE requirement in its original form; the
+    exact replacement named by every REVISED disposition; every overlay-specific pre-retrieval floor; and
+    nothing that belongs elsewhere. A NOT-APPLICABLE requirement may be absent only with its recorded
+    surface-specific reason. REVISED is NOT a licence to omit — it requires a named replacement to survive,
+    so a missing preserved requirement, a REVISED requirement whose replacement is absent, or any
+    undispositioned absence is a FAILURE. Where one repo homes multiple hosted Projects, each is tested
+    independently
 A9  wall boundaries are no broader than before migration; no private root is named in any bootstrap
 A10 rollback restores prior behavior: repaste the frozen full Instructions canonical, remount the frozen index
 A11 a review object whose bytes contain markup and non-ASCII text is retrieved from mapped shared scratch by
@@ -454,9 +565,13 @@ RETIRED-with-reason          explicit architectural reason
 NOT-APPLICABLE-with-reason   surface named, reason recorded
 ```
 
-The overlay table above is the disposition record for the three surfaces censused on 2026-07-25. It is not
-presumed complete for a surface not yet censused: running this gate is a precondition of generating that
-surface's bootstrap, not a step after it.
+The overlay table above is the disposition record for the three surfaces censused on 2026-07-25, plus the
+**urban-observatory TMK-facing Project censused 2026-07-29** (OVL-UO-TMK-1..6 and §UO-TMK PI-floor
+disposition). At the 2026-07-29 census the live surface was already substantively configured for this role, and its
+Instructions canonical explicitly declined the ASK-facing repo-advisor profile by symmetry — but this registry had no entry for it, so an audit could see clauses absent
+without being able to tell intent from omission. It is not presumed complete for a surface not yet censused:
+running this gate is a precondition of generating that surface's bootstrap, not a step after it. **Census each
+hosted Project, not each repo.**
 
 ## Generation
 
