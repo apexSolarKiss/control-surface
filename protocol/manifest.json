@@ -260,12 +260,13 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Cross-Surface Change Routing",
-   "failure_mode": "protocol ownership mistaken for write jurisdiction across a surface boundary",
+   "failure_mode": "protocol ownership mistaken for write jurisdiction across a surface boundary; a declared ingress aperture re-authorized per handoff after ASK's exact relay already granted the route; ASK pressed into byte-courier service for a placement the aperture already authorizes; aperture placement read as feeding, ingestion, disposition, or implementation authority",
    "active_holds": [],
    "status": "active",
    "amended_by": [
     "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (routing destination restated as the recipient intent inbox at its live declared path, intent-INbox/ as target convention; recipient owns post-ingestion disposition)",
-    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: same-operating-surface branch scoped to -TBI AS A HANDOFF MARKER; the orthogonal feed overlay remains available for a same-surface re-feed)"
+    "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: same-operating-surface branch scoped to -TBI AS A HANDOFF MARKER; the orthogonal feed overlay remains available for a same-surface re-feed)",
+    "#187 / 963e618557d43bca64c1aad795042d4fd0ea97c9 (aperture clause: declared create-only ingress aperture + ASK's exact relay is sufficient for the scoped placement — no re-authorization, any covered ASK-operated origin, not the byte courier, routing-only, one exact create, payload-class bound)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,

@@ -259,7 +259,7 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | ID | Requirement | Owner | Home | Ruling | Deployed | Notes |
 |---|---|---|---|---|---|---|
 | READ-1 | Fetch by exact locator. Prefer exact-path fetch; reserve search for genuine discovery. | this doc | BOOTSTRAP + INDEX | PRESERVE | FULL | |
-| READ-2 | The live canonical is the source of truth; mounted or uploaded copies are point-in-time fallback and lose authority when live access returns. | this doc | BOOTSTRAP + INDEX | PRESERVE | FULL | |
+| READ-2 | The live canonical is the source of truth; mounted or uploaded copies are point-in-time fallback and lose authority when live access returns. **Mounted-source display labels are inspection metadata, not source identity.** A host-added filename decoration does not establish a duplicate local file, multiple standing mounts, or incorrect mounted bytes. Verify standing-source cardinality and mounted content/version; use exact bytes or hashes where identity is load-bearing. An already-running conversation may continue surfacing content previously brought into that thread after a remount; treat that as possible thread-context staleness, not proof that the current upload failed. | this doc | BOOTSTRAP + INDEX | REVISE (extended) | n/a (revised) | display-label identity limb added 2026-07-30 (P2-3), vendor-neutral; current product-specific display behavior stays in the live ecology index as an explicitly expiring note, never in this slow owner |
 | READ-3 | **Historical chronology in repo prose, chat, or prior sessions is evidence, not current state.** Verify current claims from named live owners. | this doc | BOOTSTRAP | RESTORE (revised) | ABSENT | restores L1; revised from "ignore embedded handoff chronology — verify fresh" |
 | READ-4 | Session memory is a stale base against a live read. | this doc | BOOTSTRAP | PRESERVE | FULL | |
 | READ-5 | Never infer HEAD from commit search. | this doc | BOOTSTRAP | PRESERVE | TEMPLATE-ONLY | |
@@ -446,27 +446,31 @@ per-Project PI-floor dispositions
   UO-TMK                            6 PRESERVE · 4 REVISED · 0 RETIRED · 0 N/A · 0 unowned = 10
 
 ruling (shared IDs)
-  PRESERVE                         59
+  PRESERVE                         58
   RESTORE                           9   READ-3 · REVIEW-5 · REVIEW-7 · DISAGREE-1 · DISAGREE-2
                                         · POSTURE-3 · LIFE-4a · LIFE-5a · LIFE-5b
-  REVISE                           10   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2 · REVIEW-9
-                                        · LIFE-4 · LIFE-4b · LIFE-4d · LIFE-4h · LIFE-5c —
+  REVISE                           11   MODEL-3 · DISAGREE-3 · START-4 · REVIEW-2 · REVIEW-9
+                                        · READ-2 · LIFE-4 · LIFE-4b · LIFE-4d · LIFE-4h · LIFE-5c —
                                         the routed-instance lifecycle, its fresh-handoff
-                                        scoping, the withdrawn PTX no-stacking clause, and the
-                                        2026-07-29 review-window regression repair
+                                        scoping, the withdrawn PTX no-stacking clause, the
+                                        2026-07-29 review-window regression repair, and the
+                                        2026-07-30 mounted-source identity limb (READ-2)
   restored as surface overlay       2   OVL-AP-1 · OVL-ECO-2
 
 deployed presence at the 2026-07-25 audit (shared IDs)
-  FULL                             39
+  FULL                             38
   PARTIAL                           5   includes REVIEW-2, whose deployed form conflates path
                                         resolution with exact retrieval
   ABSENT                            9   the four wholly-absent requirements · REVIEW-7 and POSTURE-3
                                         (rule kept, reason/criterion lost) · LIFE-4a · LIFE-5a · LIFE-5b
                                         (owner-rule detail not carried by the coarse rows)
   TEMPLATE-ONLY                     7   present in this repo's template, never propagated to a deployment
-  n/a (revised)                     1   LIFE-5c — the row survives with its no-stacking half
+  n/a (revised)                     2   LIFE-5c — the row survives with its no-stacking half
                                         withdrawn, so its 2026-07-25 ABSENT reading no longer
-                                        describes the requirement now in force
+                                        describes the requirement now in force · READ-2 — extended
+                                        2026-07-30 with the display-label identity limb, so its
+                                        2026-07-25 FULL reading no longer describes the
+                                        requirement now in force
   n/a (new)                        17   START-1 · FAIL-1 — created by this architecture ·
                                         REVIEW-9 · REVIEW-10 · REVIEW-11 · REVIEW-12 · REVIEW-13 ·
                                         LIFE-4b · LIFE-4c · LIFE-4d · LIFE-4e · LIFE-4f · LIFE-4g ·
