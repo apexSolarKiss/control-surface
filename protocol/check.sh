@@ -310,8 +310,24 @@ assert_local(){
   grep -qF -- 'live only in the operator protocol-consumer ledger' "$r1prof" || r1miss="$r1miss core-ecology:{ledger-owns-PCS-state pointer}"
   grep -qF -- 'no carrier yet' "$r1prof" && r1miss="$r1miss core-ecology:{current PCS carrier-state claim (belongs in the operator ledger)}"
   grep -qF -- 'applicable-no-carrier' "$r1prof" && r1miss="$r1miss core-ecology:{applicable-no-carrier label (belongs in the operator ledger)}"
-  grep -qF -- 'applicable-no-carrier' "$MANIFEST" && r1miss="$r1miss manifest:{applicable-no-carrier label (belongs in the operator ledger)}"
-  grep -qF -- 'lives only in the operator protocol-consumer ledger' "$MANIFEST" || r1miss="$r1miss manifest:{ledger-owns-PCS-state pointer}"
+  # the manifest assertions are scoped to the CURRENT note of the owning rule via jq — whole-file greps
+  # would misfire on truthful amended_by provenance that names the retired label historically. Fail closed
+  # on any lookup failure: missing jq, unparsable manifest, zero or multiple rule matches, missing/empty note.
+  local r1note=""
+  if command -v jq >/dev/null 2>&1; then
+    r1note=$(jq -er '[.rules[] | select(.rule_id == "inbound-tbi-ecology-intake")]
+      | if length != 1 then error("non-unique or missing rule")
+        elif (.[0].note | type) != "string" then error("note missing or non-string")
+        elif (.[0].note | length) == 0 then error("empty note")
+        else .[0].note end' "$MANIFEST" 2>/dev/null) \
+      || { r1note=""; r1miss="$r1miss manifest:{inbound-tbi-ecology-intake note lookup FAILED (fail-closed)}"; }
+  else
+    r1miss="$r1miss manifest:{jq unavailable — note lookup FAILED (fail-closed)}"
+  fi
+  if [ -n "$r1note" ]; then
+    printf '%s' "$r1note" | grep -qF -- 'applicable-no-carrier' && r1miss="$r1miss manifest:{applicable-no-carrier label (belongs in the operator ledger)}"
+    printf '%s' "$r1note" | grep -qF -- 'lives only in the operator protocol-consumer ledger' || r1miss="$r1miss manifest:{ledger-owns-PCS-state pointer}"
+  fi
   [ -z "$r1miss" ] && OKAY "residual-precision corrections held (authorized route + per-hosted-Project topology + state-agnostic PCS metadata)" || FAIL "advisor-carrier residual clause(s) missing or stale:$r1miss"
   # 12 advisor-surface deployment architecture — the PI template must carry ONLY the pre-retrieval floor, the bootstrap
   #    template must exist and declare the index locator, and the registry must own the placement contract.

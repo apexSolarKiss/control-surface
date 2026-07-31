@@ -297,7 +297,25 @@ d=$(owner_copy L3ea); perl -0pi -e 's/live only in the operator protocol-consume
 d=$(owner_copy L3eb); perl -0pi -e 's/retrievable through the authorized mapped route/retrievable through the mapped route/g' "$d/docs/advisor-project-surface-architecture.md"; record "NEG registry acceptance prose drops the authorized qualifier" 1 "architecture:{authorized-mapped-route}" runlocal "$d"
 d=$(owner_copy L3ec); perl -0pi -e 's/retrievable through the authorized mapped route/retrievable through the mapped route/g' "$d/docs/project-instantiation-workflow.md"; record "NEG instantiation workflow drops the authorized qualifier" 1 "instantiation:{authorized-mapped-route}" runlocal "$d"
 d=$(owner_copy L3ed); perl -0pi -e 's/personal-context-system applicability is declared here/personal-context-system = applicable-no-carrier/ or die' "$d/protocol/manifest.json"; record "NEG manifest note regains the applicable-no-carrier state label" 1 "manifest:{applicable-no-carrier label" runlocal "$d"
-d=$(owner_copy L3ee); perl -0pi -e 's/lives only in the operator protocol-consumer ledger/lives in this manifest/ or die' "$d/protocol/manifest.json"; record "NEG manifest note loses the ledger-owns-PCS-state pointer" 1 "manifest:{ledger-owns-PCS-state pointer}" runlocal "$d"
+# the ledger phrase now legitimately occurs TWICE in the manifest (state-agnostic note + truthful amended_by
+# provenance), and amended_by precedes note in the rule object — so this mutation anchors on the note-unique
+# prefix "declared here; its current" (provenance reads "remains declared here while current") to strip the
+# NOTE's phrase specifically. The check is note-scoped via jq, so only the note's loss may trip it.
+d=$(owner_copy L3ee); perl -0pi -e 's/declared here; its current carrier\/hold\/visibility\/propagation state lives only in the operator protocol-consumer ledger/declared here; its state lives in this manifest/ or die' "$d/protocol/manifest.json"; record "NEG manifest note loses the ledger-owns-PCS-state pointer" 1 "manifest:{ledger-owns-PCS-state pointer}" runlocal "$d"
+# POS: truthful amended_by provenance MAY name the retired historical label while the current note stays
+# state-agnostic — the note-scoped check must not misread historical provenance as a current state claim.
+d=$(owner_copy L3eh); python3 -c "
+import json, io, sys
+p = '$d/protocol/manifest.json'
+m = json.load(open(p))
+rs = [r for r in m['rules'] if r.get('rule_id') == 'inbound-tbi-ecology-intake']
+assert len(rs) == 1
+rs[0]['amended_by'].append('#999 / 0000000000000000000000000000000000000000 (historical fixture entry: names the retired applicable-no-carrier label in provenance only)')
+json.dump(m, io.open(p, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+"; record "POS amended_by provenance names the retired label while the note stays state-agnostic" 0 "ALL CHECKS PASSED" runlocal "$d"
+# NEG: the note lookup fails closed — a renamed rule_id yields zero matches and must FAIL, never fall
+# through to a vacuous pass of the note-content assertions.
+d=$(owner_copy L3ei); perl -0pi -e 's/"rule_id": "inbound-tbi-ecology-intake"/"rule_id": "inbound-tbi-ecology-intake-renamed"/ or die' "$d/protocol/manifest.json"; record "NEG note lookup fails closed on a missing rule match" 1 "note lookup FAILED (fail-closed)" runlocal "$d"
 # the subtle umbrella-category error: the row keeps its two-Project inventory (TMK-facing text intact)
 # but re-collapses the role-neutral "hosted Projects" umbrella into "hosted advisor Projects" — which
 # misclassifies UO-TMK (a hosted domain-authority Project, not an advisor Project).
