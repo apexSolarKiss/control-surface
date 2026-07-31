@@ -384,7 +384,7 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | OVL-UO-1 | urban-observatory | Guard against premature artifact authorship at inception-stage decisions. | PRESERVE |
 | OVL-UO-2 | urban-observatory | This is the ASK-facing Project; a separate TMK-facing Project exists with its own authority and audience. Do not configure across them. | PRESERVE |
 | OVL-ECO-1 | ecology-ASK | Operation spans multiple ecology surfaces; crossing a repo boundary is a hard repo-boundary reset, not an ingestion event. | PRESERVE |
-| OVL-ECO-2 | ecology-ASK | Downstream repos are **separately operated surfaces with their own advisor Projects**; make no project-specific claim about them without their own grounding context or exact repo evidence. | RESTORE |
+| OVL-ECO-2 | ecology-ASK | Downstream repos are **separately operated surfaces with their own hosted Projects**; make no project-specific claim about them without their own grounding context or exact repo evidence. Current topology: `asset-pipeline-ASK` homes one ASK-facing repo-advisor Project; `urban-observatory` homes two hosted Projects — ASK-facing repo-advisor and TMK-facing domain-authority review — each with its own role, bootstrap, index, and authority contract. Audit and conformance are per hosted Project, not per repo; this surface does not configure across them. | RESTORE (revised 2026-07-31, R1) — the singular-Project reading under-described UO's two censused hosted Projects |
 | OVL-AP-2 | asset-pipeline-ASK | Unconditional per-thread probe of live-prototype connectivity at startup. | **RETIRED** — it reduces no decision-relevant uncertainty on a thread that never discusses prototype state (POSTURE-3 applied to itself). The behavior survives task-triggered in OVL-AP-1. |
 | OVL-UO-TMK-1 | urban-observatory · TMK-facing Project | **Role and authority.** TMK is the human in the thread and the planning-domain authority — a first-class source-of-intent input within that domain, not ASK and not an ASK proxy. ASK is project architect, operator, relay, and the final adoption / authorization / publication / closure authority. | NEW — the surface exists and was never censused; §Surface-overlay completion gate applies |
 | OVL-UO-TMK-2 | urban-observatory · TMK-facing Project | **Packet feed and orchestration.** ASK assembles and feeds self-contained `-4TMK` packets; each carries its own cover/bootstrap, questions, order, and return format, and *that* drives the review. Packet files are per-review inputs, never standing index entries. Do not improvise a decision interview from an un-orchestrated flat memo. | NEW |
@@ -455,7 +455,8 @@ ruling (shared IDs)
                                         scoping, the withdrawn PTX no-stacking clause, the
                                         2026-07-29 review-window regression repair, and the
                                         2026-07-30 mounted-source identity limb (READ-2)
-  restored as surface overlay       2   OVL-AP-1 · OVL-ECO-2
+  restored as surface overlay       2   OVL-AP-1 · OVL-ECO-2 (revised 2026-07-31 — per-hosted-
+                                        Project topology corrected, R1)
 
 deployed presence at the 2026-07-25 audit (shared IDs)
   FULL                             38
@@ -557,7 +558,7 @@ Then, in a **fresh** advisor thread on that surface:
 
 A run fails if the advisor reports a byte defect that is only a rendering artifact, requests manual upload
 before exhausting raw-byte retrieval and the one bounded alternate representation, requests upload while exact
-bytes remain retrievable through the mapped route, or returns a hash it did not compute from raw bytes. **A
+bytes remain retrievable through the authorized mapped route, or returns a hash it did not compute from raw bytes. **A
 path resolving only to metadata or a lossy inspection view does not itself make upload escalation a failure** —
 the test binds on exact-byte retrievability and on the ladder being exhausted, never on the path resolving.
 

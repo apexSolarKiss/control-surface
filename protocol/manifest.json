@@ -1079,9 +1079,10 @@
     "#180 / 0aed9ec8a6b0bed97c74975330f1cff36a3f715a (shared intake becomes the live _INDEX/_LAYOUT-declared intent inbox; -TBI to -ingested; -supersededA lineage; disposition record in the same bounded operation as the terminal rename)",
     "#180 / 67e81f6c48b331a0688d2b2603f1c7f677a48e56 (Stage-2 coherence: operative OPEN/FROZEN/PARTIAL-HOLD semantics added; antecedent narrowed so the CURRENT mapped intake stays required pre-cutover)",
     "#180 / 650f09fd5602b57372cba37fbba36ef8105df8d5 (conformed to method-ASK 3063441: fresh-handoff vs removal-only resolution branches; _STATE.md exceptions are exact filenames or explicitly NONE, and a post-activation unreachable or malformed carrier fails closed; hard repo-boundary reset restated as no cross-surface handoff)",
-    "#180 / f676b160759be008b755997514395aa53087708e (Stage-2: the profile's closing sentence scoped to the HANDOFF-MARKER use of -TBI, restating same-surface overlay eligibility; the unqualified cross-surface-only form would have propagated verbatim into method-ASK, design-system-ASK, and ASK; new failure class plus semantic guards on both the owner profile and the resolved root block, since byte parity cannot distinguish agreement from shared defect)"
+    "#180 / f676b160759be008b755997514395aa53087708e (Stage-2: the profile's closing sentence scoped to the HANDOFF-MARKER use of -TBI, restating same-surface overlay eligibility; the unqualified cross-surface-only form would have propagated verbatim into method-ASK, design-system-ASK, and ASK; new failure class plus semantic guards on both the owner profile and the resolved root block, since byte parity cannot distinguish agreement from shared defect)",
+    "#188 / 7284a8f19c0140fc61a85bbcd928de88ca3efc6d (state-agnostic PCS applicability note: the fast-aging applicable-no-carrier carrier-state label removed from the rule note; applicability remains declared here while current carrier/hold/visibility/propagation state lives only in the operator protocol-consumer ledger)"
    ],
-   "note": "personal-context-system = applicable-no-carrier (no root AGENTS.md), NOT an exclusion; see PCS carrier disposition in the ledger",
+   "note": "personal-context-system applicability is declared here; its current carrier/hold/visibility/propagation state lives only in the operator protocol-consumer ledger",
    "proposed_by": null,
    "activated_by": "#154 / 2f38427"
   },
