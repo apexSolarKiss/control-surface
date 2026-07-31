@@ -286,6 +286,33 @@ assert_local(){
   for tp in 'inspection metadata, not source identity' 'not the displayed filename'; do
     grep -qF -- "$tp" "$IDXTEMPLATE" || apmiss="$apmiss _INDEX:{$tp}"; done
   [ -z "$apmiss" ] && OKAY "aperture + source-identity clauses present (shared + root + registry + advisor-bootstrap + index template)" || FAIL "aperture/source-identity clause(s) missing:$apmiss"
+  # 11f R1 residual precision — two MATERIAL NON-BLOCKING findings banked at the Phase-2 closure smoke round
+  #     (2026-07-30): the generated-template ARRO sentence must carry the shared body's "authorized" qualifier
+  #     (a resolving route outside the authorized surface must not read as barring an ASK upload election), and
+  #     OVL-ECO-2 must record the per-hosted-Project topology (UO homes two hosted Projects; conformance is per
+  #     hosted Project, not per repo — the registry census precision must also survive). Plus: the core-ecology
+  #     profile's owner metadata stays state-agnostic about PCS carrier state — current carrier/hold/visibility/
+  #     propagation state lives only in the operator ledger, never in a slow profile file. Any single loss fails alone.
+  local r1miss=""
+  local archflat_r1; archflat_r1=$(tr '\n' ' ' < "$APARCH" | tr -s ' ')
+  grep -qF -- 'retrievable through the authorized mapped route' "$APBOOT" || r1miss="$r1miss advisor-bootstrap:{authorized-mapped-route}"
+  grep -qF -- 'retrievable through the mapped route' "$APBOOT" && r1miss="$r1miss advisor-bootstrap:{unqualified mapped-route}"
+  printf '%s' "$archflat_r1" | grep -qF -- 'retrievable through the authorized mapped route' || r1miss="$r1miss architecture:{authorized-mapped-route}"
+  printf '%s' "$archflat_r1" | grep -qF -- 'retrievable through the mapped route' && r1miss="$r1miss architecture:{unqualified mapped-route}"
+  grep -qF -- 'retrievable through the authorized mapped route' "$INSTDOC" || r1miss="$r1miss instantiation:{authorized-mapped-route}"
+  grep -qF -- 'retrievable through the mapped route' "$INSTDOC" && r1miss="$r1miss instantiation:{unqualified mapped-route}"
+  awk '/^\| OVL-ECO-2 /' "$APARCH" | grep -qF -- 'TMK-facing domain-authority review' || r1miss="$r1miss architecture:{OVL-ECO-2 two-UO-hosted-Projects}"
+  awk '/^\| OVL-ECO-2 /' "$APARCH" | grep -qF -- 'per hosted Project, not per repo' || r1miss="$r1miss architecture:{OVL-ECO-2 per-hosted-Project conformance}"
+  awk '/^\| OVL-ECO-2 /' "$APARCH" | grep -qF -- 'separately operated surfaces with their own hosted Projects' || r1miss="$r1miss architecture:{OVL-ECO-2 role-neutral hosted-Projects umbrella}"
+  awk '/^\| OVL-ECO-2 /' "$APARCH" | grep -qF -- 'hosted advisor Projects' && r1miss="$r1miss architecture:{OVL-ECO-2 collapsed advisor-role umbrella (UO-TMK is a hosted Project, not an advisor Project)}"
+  printf '%s' "$archflat_r1" | grep -qF -- 'Census each hosted Project, not each repo' || r1miss="$r1miss architecture:{census-per-hosted-Project}"
+  local r1prof="$PROFDIR/core-ecology.md"
+  grep -qF -- 'live only in the operator protocol-consumer ledger' "$r1prof" || r1miss="$r1miss core-ecology:{ledger-owns-PCS-state pointer}"
+  grep -qF -- 'no carrier yet' "$r1prof" && r1miss="$r1miss core-ecology:{current PCS carrier-state claim (belongs in the operator ledger)}"
+  grep -qF -- 'applicable-no-carrier' "$r1prof" && r1miss="$r1miss core-ecology:{applicable-no-carrier label (belongs in the operator ledger)}"
+  grep -qF -- 'applicable-no-carrier' "$MANIFEST" && r1miss="$r1miss manifest:{applicable-no-carrier label (belongs in the operator ledger)}"
+  grep -qF -- 'lives only in the operator protocol-consumer ledger' "$MANIFEST" || r1miss="$r1miss manifest:{ledger-owns-PCS-state pointer}"
+  [ -z "$r1miss" ] && OKAY "residual-precision corrections held (authorized route + per-hosted-Project topology + state-agnostic PCS metadata)" || FAIL "advisor-carrier residual clause(s) missing or stale:$r1miss"
   # 12 advisor-surface deployment architecture — the PI template must carry ONLY the pre-retrieval floor, the bootstrap
   #    template must exist and declare the index locator, and the registry must own the placement contract.
   local depmiss="" t

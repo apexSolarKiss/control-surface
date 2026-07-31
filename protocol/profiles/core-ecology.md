@@ -2,7 +2,7 @@
 
 **Applies to:** `control-surface · method-ASK · design-system-ASK · personal-context-system · ASK` (the five-repo directly-operated ecology surface).
 **Explicit exclusions:** `asset-pipeline-ASK · urban-observatory` (separately-operated downstream consumers).
-**personal-context-system:** applicable, no carrier yet (no root `AGENTS.md`) — *applicable-no-carrier*, not an exclusion; held outside Wave 1 (see the ledger's PCS disposition).
+**personal-context-system:** applicable to this profile. Current carrier, hold, visibility, and propagation state live only in the operator protocol-consumer ledger.
 
 *Owner explanation above is metadata and is NOT carried into a consumer. A consumer that adopts this profile carries only the fenced distributable body below, wrapped in `<!-- BEGIN profile: core-ecology -->` / `<!-- END profile: core-ecology -->` at byte parity.*
 

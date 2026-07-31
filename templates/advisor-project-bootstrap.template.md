@@ -344,7 +344,7 @@ election, only for content already authorized to this advisor, and **never bypas
 serial repackaging cascade, and never let a lossy view trigger the next package.
 
 **ASK is the authority relay, not the byte courier.** Never ask ASK to download, attach, re-upload, or
-manually shuttle an object **while its exact bytes remain retrievable through the mapped route.**
+manually shuttle an object **while its exact bytes remain retrievable through the authorized mapped route.**
 Metadata-only reachability, or a lossy inspection view, does not establish exact-byte availability — the
 prohibition binds on retrievable bytes, not on a resolving path.
 
