@@ -207,6 +207,7 @@ Templates in `templates/` are copyable starters. They are not live for this repo
 - [`prompts/ecology-critique-synthesis-prompt.md`](prompts/ecology-critique-synthesis-prompt.md) — fold another independent ecology critique into the one just produced and make an advisory plan
 - [`prompts/ecology-critique-execution-prompt.md`](prompts/ecology-critique-execution-prompt.md) — hand the ecology advisory synthesis back to the execution surface for per-repo scoped implementation, stopping at exact scoped diff (execution pass)
 - [`prompts/cross-repo-propagation-wave.md`](prompts/cross-repo-propagation-wave.md) — coordinator runbook for a multi-consumer propagation wave: phase contract, subagent evidence-packet schema, and the two typed profiles (design-system vendor propagation · execution-protocol carrier propagation)
+- [`prompts/convention-aware-version-preflight.md`](prompts/convention-aware-version-preflight.md) — read-only, fail-closed check routine run before an operator-canonical version bump, freeze, or diagram source/render bump: the nine steps, the convention-registry schema, and the evidence boundaries; convention-aware by design, and it never authors corrective prose
 
 ### Examples
 
