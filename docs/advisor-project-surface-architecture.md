@@ -136,8 +136,8 @@ rather than by this document's length.
 
 **Applicability follows the Project, not the tier.** A repo is in `applies_to` because it homes a hosted
 advisor Project — not because it is important, upstream, or directly operated. `method-ASK`,
-`design-system-ASK`, `ASK`, and `personal-context-system` are excluded on that test alone; a repo that later
-stands up an advisor Project adopts the profile then. The exclusion is a statement about deployment, never
+`design-system-ASK`, `ASK`, `personal-context-system`, and `food-science-engine` are excluded on that test
+alone; a repo that later stands up an advisor Project adopts the profile then. The exclusion is a statement about deployment, never
 about whether the invariant is correct.
 
 **One repo may home more than one hosted Project, and applicability attaches to the Project's role.**
