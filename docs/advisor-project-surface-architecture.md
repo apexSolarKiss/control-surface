@@ -392,6 +392,9 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | OVL-UO-TMK-4 | urban-observatory · TMK-facing Project | **Return and execution boundary.** The surface returns handoff memos to ASK and cannot promote, publish, authorize, close, or write the repo. Her words are the payload; synthesis supports and never substitutes. One bounded **create-only** return-transport grant exists, governed solely by the mounted bootstrap — available only under the loaded bootstrap, only after TMK confirms exact body, filename, and destination; it ends at file creation plus receipt, and human ASK controls onward routing. | NEW |
 | OVL-UO-TMK-5 | urban-observatory · TMK-facing Project | **Wall and evidence access.** A narrow read surface: the mounted bootstrap, the three standing canonicals its scoped index names, the active packet's files, or a path ASK names for a task. No brand / identity / voice, no source-of-intent masters, no trackers or publishing context, no `personal-ASK` path. The ADR is read from TMK's own `personal-TMK/inheritable/` twin, never Andrew's copy. Prefer fetch-by-exact-path; a broad connector search can leak a private filename manifest. | NEW — preserves the existing v12/v13 fence |
 | OVL-UO-TMK-6 | urban-observatory · TMK-facing Project | **Relation to the ASK-facing UO Project.** Two hosted Projects, different audiences, different authority, separate carriers and indexes. Do not configure, operate, or reason across them. This is the reciprocal of OVL-UO-2. | NEW |
+| OVL-AP-3 | asset-pipeline-ASK | **Operating-clone evidence.** The GitHub landed default branch is landed public repo truth. Any claim about *local* repo state originates from the surface's declared operating clone and carries that clone's toplevel / origin / working-tree receipt. A **backup clone is never** current repo truth, a build or provenance input, a source for HEAD / branch / status claims, a mutation target, or a fallback; a missing, unreadable, or wrong operating clone **fails closed** rather than resolving to one. Surface-specific: on this surface a stale backup clone is **physically reachable through the Project's own authorized connector**, so the required behavior is to *classify and refuse it as a backup clone* — declining on wall grounds alone is the right outcome for the wrong reason, and returning its state is a failure. The exact machine root and the canonical owner pointer live in this surface's operator-local generated overlay, never in the portable template, the shared protocol body, or any public repo artifact. | NEW — §Surface-overlay completion gate applies |
+| OVL-UO-3 | urban-observatory · ASK-facing Project | **Operating-clone evidence.** The GitHub landed default branch is landed public repo truth. Any claim about *local* repo state originates from the surface's declared operating clone and carries that clone's toplevel / origin / working-tree receipt. A **backup clone is never** current repo truth, a build or provenance input, a source for HEAD / branch / status claims, a mutation target, or a fallback; a missing, unreadable, or wrong operating clone **fails closed** rather than resolving to one. Surface-specific: a relayed local-state claim is evidence only when it originates from the UO operating clone and reports that receipt. The operator-side document surface this Project's index maps is **not itself a clone** and is never read as repo state. The exact machine root and the canonical owner pointer live in this surface's operator-local generated overlay, never in the portable template, the shared protocol body, or any public repo artifact. | NEW — §Surface-overlay completion gate applies |
+| OVL-ECO-3 | ecology-ASK | **Operating-clone evidence.** The GitHub landed default branch is landed public repo truth. Any claim about *local* repo state originates from the surface's declared operating clone and carries that clone's toplevel / origin / working-tree receipt. A **backup clone is never** current repo truth, a build or provenance input, a source for HEAD / branch / status claims, a mutation target, or a fallback; a missing, unreadable, or wrong operating clone **fails closed** rather than resolving to one. Surface-specific: because this surface advises across several repos, cross-surface local-state evidence carries that receipt from **each destination repo's own** operating clone — a receipt from one repo is not evidence about another, which is the evidence-side reciprocal of OVL-ECO-1's hard repo-boundary reset. The exact machine root and the canonical owner pointer live in this surface's operator-local generated overlay, never in the portable template, the shared protocol body, or any public repo artifact. | NEW — §Surface-overlay completion gate applies |
 
 
 ### UO-TMK PI-floor disposition
@@ -426,21 +429,21 @@ Every requirement has a home or a recorded disposition. **Unowned count is zero*
 ## Coverage report — this revision
 
 ```text
-registry IDs                       91   = 78 shared + 12 surface overlays + 1 retired shared requirement
+registry IDs                       94   = 78 shared + 15 surface overlays + 1 retired shared requirement
 
 placement (shared IDs; co-homed IDs counted in each declared home)
   PI-FLOOR                         10
   BOOTSTRAP                        76
   INDEX                             5
-  SURFACE-OVERLAY                  12   (11 active + 1 retired overlay)
+  SURFACE-OVERLAY                  15   (14 active + 1 retired overlay)
   RETIRED                           2   RET-1 shared · OVL-AP-2 overlay — each with a recorded reason
   NOT-APPLICABLE                    0
 
 surface overlays by hosted Project
-  asset-pipeline-ASK                2   OVL-AP-1 active · OVL-AP-2 retired
-  urban-observatory · ASK-facing    2   OVL-UO-1 · OVL-UO-2
-  urban-observatory · TMK-facing    6   OVL-UO-TMK-1..6   NEW this revision
-  ecology-ASK                       2   OVL-ECO-1 · OVL-ECO-2
+  asset-pipeline-ASK                3   OVL-AP-1 active · OVL-AP-2 retired · OVL-AP-3 active
+  urban-observatory · ASK-facing    3   OVL-UO-1 · OVL-UO-2 · OVL-UO-3
+  urban-observatory · TMK-facing    6   OVL-UO-TMK-1..6
+  ecology-ASK                       3   OVL-ECO-1 · OVL-ECO-2 · OVL-ECO-3
 
 per-Project PI-floor dispositions
   UO-TMK                            6 PRESERVE · 4 REVISED · 0 RETIRED · 0 N/A · 0 unowned = 10
