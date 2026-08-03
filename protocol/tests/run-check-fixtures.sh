@@ -61,7 +61,12 @@ entry(){ # name surface — control-surface routes to the REAL owner root (dogfo
 }
 surf_of(){ case "$1" in asset-pipeline-ASK|urban-observatory|food-science-engine) echo separately-operated;; *) echo direct-core;; esac; }
 pin_of(){ case "$1" in control-surface) echo self-resolving-owner-root;; *) echo "$OWNER_PIN";; esac; }
-profs_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo "advisor-project-surface";; food-science-engine) echo "architecture-uncertain";; *) echo "core-ecology";; esac; }
+# FSE-2A registers food-science-engine for one hosted ASK-facing repo-advisor Project ROLE, so the manifest
+# amendment moves it out of advisor-project-surface's explicit_exclusions and into its applies_to. Registration,
+# not Project configuration, is the entry trigger. From that commit forward a RESOLVED FSE carries BOTH its
+# opt-in architecture-uncertain overlay and the now-required advisor-project-surface. The whole-ecology positives
+# above model the CONFORMANT state; the interval state is asserted by B5c below, not here.
+profs_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo "advisor-project-surface";; food-science-engine) echo "architecture-uncertain advisor-project-surface";; *) echo "core-ecology";; esac; }
 grant_of(){ case "$1" in asset-pipeline-ASK|urban-observatory|food-science-engine) echo y;; *) echo n;; esac; }
 
 # ---- build the ecology: control-surface = the REAL owner root (validated below); synthetic consumers for the rest ----
@@ -321,8 +326,12 @@ d=$(owner_copy L3ei); perl -0pi -e 's/"rule_id": "inbound-tbi-ecology-intake"/"r
 # misclassifies UO-TMK (a hosted domain-authority Project, not an advisor Project).
 d=$(owner_copy L3ef); perl -0pi -e 's/^(\| OVL-ECO-2 .*?)hosted Projects\*\*/${1}hosted advisor Projects**/m or die' "$d/docs/advisor-project-surface-architecture.md"; record "NEG OVL-ECO-2 re-collapses the umbrella to advisor-role while keeping the TMK-facing inventory" 1 "architecture:{OVL-ECO-2 collapsed advisor-role umbrella" runlocal "$d"
 # isolate the NEGATIVE guard: keep the role-neutral umbrella intact and reintroduce the advisor-role
-# collapse in the row's topology clause instead — only the forbidden-phrase assertion can catch this.
-d=$(owner_copy L3eg); perl -0pi -e 's/^(\| OVL-ECO-2 .*?)homes two hosted Projects/${1}homes two hosted advisor Projects/m or die' "$d/docs/advisor-project-surface-architecture.md"; record "NEG OVL-ECO-2 topology clause re-collapses to advisor-role while the umbrella stays role-neutral" 1 "architecture:{OVL-ECO-2 collapsed advisor-role umbrella" runlocal "$d"
+# collapse elsewhere in the row — only the forbidden-phrase assertion can catch this. RETARGETED at FSE-2A:
+# the R5 rewrite of OVL-ECO-2 removed the hard-coded "homes two hosted Projects" topology clause this
+# mutation used to anchor on, so it anchors on the enumeration obligation instead. Same isolating intent,
+# same single assertion armed; the umbrella, the TMK-facing literal, and the per-hosted-Project literal
+# all survive the mutation, so only check.sh's forbidden-phrase guard can produce the diagnostic.
+d=$(owner_copy L3eg); perl -0pi -e 's/^(\| OVL-ECO-2 .*?)every active downstream hosted Project by surface/${1}every active downstream hosted advisor Projects by surface/m or die' "$d/docs/advisor-project-surface-architecture.md"; record "NEG OVL-ECO-2 topology clause re-collapses to advisor-role while the umbrella stays role-neutral" 1 "architecture:{OVL-ECO-2 collapsed advisor-role umbrella" runlocal "$d"
 d=$(owner_copy L3ba); for f in protocol/AGENTS.shared.md AGENTS.md; do perl -0pi -e 's/\*\*Truth preservation and contractual locators\.\*\*//g' "$d/$f"; done; record "NEG carriers lose the truth-preservation carve-out" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
 d=$(owner_copy L3bb); perl -0pi -e 's/terminal outstanding-feed-obligation overlay/unconsumed feed-queue marker/g' "$d/protocol/AGENTS.shared.md"; record "NEG outgoing unconsumed-feed-queue framing reintroduced" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
 # the bootstrap template is hard-wrapped, so this sentence spans a line break in the RAW file even though the
@@ -453,6 +462,16 @@ build_consumer asset-pipeline-ASK - y separately-operated "$OWNER_PIN"
 record "NEG separately-operated omits required advisor-project-surface" 1 "missing required profile advisor-project-surface" mkwave asset-pipeline-ASK separately-operated
 build_consumer asset-pipeline-ASK advisor-project-surface y separately-operated "$OWNER_PIN"
 record "POS separately-operated carries advisor-project-surface" 0 "ALL CHECKS PASSED" mkwave asset-pipeline-ASK separately-operated
+# B5c: food-science-engine is the THIRD consumer bound by advisor-project-surface — FSE-2A registers it for one
+# hosted ASK-facing repo-advisor Project ROLE, so the manifest amendment moves FSE out of that profile's
+# explicit_exclusions and into its applies_to; whether a Project is ever configured is operator state and does
+# not affect this. The negative deliberately models the REAL interval carrier rather than a bare shell:
+# FSE installs architecture-uncertain, whose applies_to is EMPTY, so it is opt-in and satisfies no requirement.
+# Same idiom as "NEG opt-in-only omits required core-ecology" — installing SOME profile is not installing THE one.
+build_consumer food-science-engine architecture-uncertain y separately-operated "$OWNER_PIN"
+record "NEG FSE opt-in-only omits required advisor-project-surface" 1 "missing required profile advisor-project-surface" mkwave food-science-engine separately-operated
+build_consumer food-science-engine "architecture-uncertain advisor-project-surface" y separately-operated "$OWNER_PIN"
+record "POS FSE carries architecture-uncertain + advisor-project-surface" 0 "ALL CHECKS PASSED" mkwave food-science-engine separately-operated
 
 # ---- OPTIONAL: real workspace map (path-driven, off by default) ----
 if [ -n "${REAL_ECOLOGY_MAP:-}" ] && [ -f "${REAL_ECOLOGY_MAP}" ]; then
