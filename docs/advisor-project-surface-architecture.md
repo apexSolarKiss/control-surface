@@ -78,6 +78,13 @@ The registry must describe what each carrier actually says.
 | **BOOTSTRAP** | the operative advisor contract | everything else that governs advisor behavior |
 | **INDEX** | where things live, their status class, and wall/search rules | it is a map, not a rule |
 | **SURFACE-OVERLAY** | one project's specifics, carried inside that project's generated bootstrap | it would be wrong on another surface |
+| **PROJECT-CONFIG** | the hosted Project's own **configuration** decisions, recorded in an operator record **outside** the pasted Instructions fence | *does this configure the Project rather than instruct the surface?* It is not mounted runtime protocol, not a source index, and not repo execution policy |
+
+`PROJECT-CONFIG` is the one home that governs the *container* rather than the *contract*. Its contents never
+enter the paste fence, are never mounted, and earn no Instructions repaste or bootstrap remount — a
+configuration record changing does not change what the surface was told. It is a **semantic** home rather than
+a named file: each hosted-Project variant records the same required fields in its own operator configuration
+carrier — see §HOST.
 
 The PI floor is deliberately small. It is not a summary of the bootstrap — it is the subset whose absence
 would make a connector outage into an authority outage.
@@ -372,6 +379,104 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | FAIL-3 | Never claim a file was read unless the connector actually returned it. | this doc | PI-FLOOR + BOOTSTRAP | PRESERVE | FULL | |
 | FAIL-4 | If an exact lookup a task requires is unavailable, say it is unavailable and stop — never substitute a weaker source while calling it verified. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 
+### HOST — hosted-Project configuration
+
+| ID | Requirement | Owner | Home | Ruling | Deployed | Notes |
+|---|---|---|---|---|---|---|
+| HOST-1 | **Every hosted Project instance governed by this architecture carries an explicit memory-scope decision, recorded per instance in an operator configuration record.** The record names the exact hosted Project, the role or function that instance serves, the scope chosen, the rationale tied to that function's continuity or contextual-isolation need, whether a clean-room workflow is required, the decision timing, and a review trigger for a change of role, function, or host capability. | this doc | PROJECT-CONFIG | NEW | n/a (new) | the host does not permit changing this in place; an unrecorded default is a decision made by omission |
+
+**The Project instance is the configuration unit; the role or function is the rationale axis.** Memory scope
+is set on a Project, not on an abstract role, and two instances serving the same broad role may correctly
+differ. `ecology-ASK` and `ecology-ASK-2` are both ASK-facing advisor Projects sharing one Instructions
+carrier, and they intentionally carry different memory scopes because their operational functions differ —
+one is a continuity surface, the other a clean-room instrument. **A role-keyed record would flatten exactly
+the specialization this requirement exists to protect.** Record per instance; explain by function.
+
+**Scope.** HOST-1 governs hosted Project instances covered by this document. Personal-context Projects
+remain governed by the personal ADR and the PCS scaffold, per §Binding and cross-surface relation above;
+**this requirement creates no cross-wall ownership or conformance claim** over them.
+
+**The governed population is every hosted Project instance that uses this deployment shape** — not only the
+instances whose role carries the word *advisor*:
+
+```text
+ASK-facing repo-advisor Project           ASK is in the thread; the surface challenges the operator's
+                                          own reasoning
+
+hosted domain-authority review Project    the domain authority is in the thread; ASK operates the
+                                          surface for them. Same deployment shape, different role —
+                                          see §Hosted domain-authority review variant
+```
+
+The second variant inherits HOST-1 from the shape it deploys, not from its role name. A Project must not
+escape the memory-scope decision because *advisor* is absent from what it does — that omission is exactly how
+an unexamined host default reaches a governed surface. `urban-observatory`'s TMK-facing Project is the first
+worked instance of the variant, so this is a live population, not a reserved one. Personal-context Projects
+are outside the population entirely, per §Scope above.
+
+**`PROJECT-CONFIG` is a semantic deployment home, not one named file.** It fixes *where in the operator plane*
+the decision is recorded — outside the pasted fence, outside the mounted runtime, outside repo execution
+policy. Each variant satisfies it in its own carrier, and the required fields are identical across them:
+
+```text
+repo-advisor Project             the outside-fence §Project configuration record in
+                                 templates/advisor-project-instructions.template.md — the standard
+                                 implementation for this variant, not a universal carrier
+
+domain-authority review Project  that surface's own operator configuration canonical, carrying the
+                                 same required per-instance fields
+```
+
+Only the carrier differs. Treating one template as the sole `PROJECT-CONFIG` carrier would put a governed
+variant outside a requirement that names it — the same defect as narrowing the population itself.
+
+**Memory scope is a function-specific decision, not a universal setting.** A continuity function — one whose
+value comes from accumulated cross-thread context — may choose the host's default scope. A
+contextual-isolation function — one whose value depends on reasoning from a clean context — chooses
+Project-only. **Project-only is not a default to apply everywhere**, and neither choice is conformance by
+itself.
+
+**Project-only alone does not make a new thread fresh.** It bars context from *outside* the Project; chats
+*inside* the same Project may still reach one another. An instance that genuinely requires fresh context
+therefore needs Project-only **and** an empty-Project workflow — each completed thread moved out or removed
+before the next begins. Stating the setting without the workflow does not satisfy the isolation requirement.
+
+**Two timing branches, and they assert different things.** The host does not permit changing memory scope in
+place after a Project is created, so *when* the decision was made is itself part of the record:
+
+```text
+NEW PROJECT INSTANCE       the decision and its record exist BEFORE the Project is created.
+                           decision timing = pre-creation.
+
+EXISTING PROJECT INSTANCE  a current record reconciles the setting already in force, without
+                           recreation. decision timing = post-creation reconciliation. It records
+                           the current scope, rationale, and clean-room workflow, and it must NOT
+                           assert or imply that a creation-time decision occurred.
+```
+
+A current record documents current state; it cannot prove a past decision happened. Collapsing the two
+branches would let a Project created on an unexamined default be retroactively described as conformant —
+which is the precise gap this requirement exists to close.
+
+**Migration cost, not technical necessity.** Recreating a Project to change memory scope is **possible but
+disruptive and may require existing threads to be moved or abandoned**. It is not impossible, and thread
+loss is not inevitable. The reason the decision must be explicit is that an unexamined default becomes
+expensive to revisit — not that it becomes unrevisable.
+
+**This requirement authorizes no Project recreation and no settings change.** Existing Projects whose scope
+was chosen deliberately are **recorded as intentional**, not normalized toward a single value. An intentional
+divergence between two instances serving related roles is specialization, and flattening it would destroy the
+property it was chosen for. Conformance is the presence of an explicit recorded decision, never a particular
+value.
+
+Two adjacent capabilities are commonly conflated with memory scope and are governed separately:
+
+```text
+ChatGPT Library access    the host's own library of files uploaded to or created in ChatGPT
+Dropbox connector access  a separate capability, governed by the named-path wall the bootstrap and
+                          index declare — WALL-1 and WALL-3, not this requirement
+```
+
 ### Retired
 
 | ID | Requirement | Ruling | Reason |
@@ -445,13 +550,16 @@ Every requirement has a home or a recorded disposition. **Unowned count is zero*
 ## Coverage report — this revision
 
 ```text
-registry IDs                      101   = 78 shared + 22 surface overlays + 1 retired shared requirement
+registry IDs                      102   = 79 shared + 22 surface overlays + 1 retired shared requirement
 
 home presence — NOT a disjoint partition. Each line counts the IDs PRESENT in that home; a co-homed ID is
-counted once in EACH of its declared homes, so these lines are not mutually exclusive and do not sum to 101.
+counted once in EACH of its declared homes, so these lines are not mutually exclusive and do not sum to 102.
   PI-FLOOR                         10   shared IDs
   BOOTSTRAP                        76   shared IDs
   INDEX                             5   shared IDs
+  PROJECT-CONFIG                    1   shared ID — HOST-1, the hosted-Project configuration decision.
+                                        Recorded outside the pasted fence; never mounted, and its
+                                        revision earns no repaste and no remount
   SURFACE-OVERLAY                  22   overlay IDs (21 active + 1 retired overlay)
   RETIRED                           2   RET-1 shared · OVL-AP-2 overlay — each with a recorded reason.
                                         OVL-AP-2 is also counted in SURFACE-OVERLAY above; RET-1 carries
@@ -481,6 +589,12 @@ ruling (shared IDs)
                                         scoping, the withdrawn PTX no-stacking clause, the
                                         2026-07-29 review-window regression repair, and the
                                         2026-07-30 mounted-source identity limb (READ-2)
+  NEW                               1   HOST-1 — the hosted-Project memory-scope decision, created by
+                                        this revision rather than recovered from a prior carrier
+  ----                            ---
+  active shared rulings            79   58 + 9 + 11 + 1 — must equal the shared-ID total above.
+                                        `restored as surface overlay` below is NOT one of these
+                                        categories: it counts OVERLAY IDs, which are outside the 79
   restored as surface overlay       2   OVL-AP-1 · OVL-ECO-2 (revised 2026-07-31 — per-hosted-
                                         Project topology corrected, R1; rewritten 2026-08-02 as a
                                         timeless invariant, R5 — current deployed topology now
@@ -501,12 +615,15 @@ deployed presence at the 2026-07-25 audit (shared IDs)
                                         2026-07-30 with the display-label identity limb, so its
                                         2026-07-25 FULL reading no longer describes the
                                         requirement now in force
-  n/a (new)                        17   START-1 · FAIL-1 — created by this architecture ·
+  n/a (new)                        18   START-1 · FAIL-1 — created by this architecture ·
                                         REVIEW-9 · REVIEW-10 · REVIEW-11 · REVIEW-12 · REVIEW-13 ·
                                         LIFE-4b · LIFE-4c · LIFE-4d · LIFE-4e · LIFE-4f · LIFE-4g ·
-                                        LIFE-4h · LIFE-4i · LIFE-4j · LIFE-4k —
+                                        LIFE-4h · LIFE-4i · LIFE-4j · LIFE-4k · HOST-1 —
                                         created after the 2026-07-25 audit, so no deployment
                                         was observed for them
+  ----                            ---
+  deployed-presence total          79   38 + 5 + 9 + 7 + 2 + 18 — must equal the shared-ID total
+                                        above. Every shared ID carries exactly one deployed reading
 
 unresolved                          0
 unowned                             0
@@ -554,6 +671,16 @@ A12 four paired-path cases, each with its own expected behavior: (1) minimum exa
     only within the exact authorization; (3b) a `FYI` or `HOLD` envelope → no advisor Stage-1
     verdict, and no execution or write authority follows; silence or non-relay never elects direct
     execution
+A13 each exact hosted Project INSTANCE has an operator configuration record naming that Project, the
+    role/function it serves, its memory scope, the rationale, and — for a contextual-isolation
+    function — the empty-Project workflow that Project-only alone does not provide. Test each instance
+    independently, on the branch that matches it: a NEW instance passes only if the decision and record
+    existed BEFORE the Project was created (decision timing = pre-creation); an EXISTING instance
+    passes on a current post-creation reconciliation record that states that timing honestly and makes
+    no creation-time claim. No recreation is required and none is inferred, and a particular scope
+    value is never what is being tested. The population is every instance using this deployment shape —
+    ASK-facing repo-advisor and hosted domain-authority review alike — each read from its own
+    PROJECT-CONFIG carrier, which is a semantic home and not one named file
 ```
 
 A7 is the gate for connector failure. It is the entire safety case for moving protocol out of the

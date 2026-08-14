@@ -77,13 +77,59 @@ FAIL-3    never claim a file was read unless the connector returned it
 Each of these must hold **during a connector outage**, when the bootstrap cannot be reached. That is the test
 for membership. Anything that fails the test belongs in the bootstrap.
 
+## Project configuration record
+
+*Operator record. **Nothing here goes in the paste fence**, nothing here is mounted, and revising it earns
+no Instructions repaste and no bootstrap remount. It records how the Project container is configured, not
+what the surface is told.*
+
+**Repeat this block once per exact hosted Project instance** where one operator canonical records more than
+one Project. The instance is the configuration unit; the role or function is the rationale.
+
+**This is the repo-advisor implementation of `PROJECT-CONFIG`, not the universal carrier.** A hosted
+domain-authority review Project uses the same deployment shape and carries the identical per-instance fields
+in its **own operator configuration canonical**. The semantic owner is HOST-1 / A13 either way; only the
+carrier differs.
+
+```text
+hosted Project      [exact Project name]
+role / function     [continuity | contextual isolation | other exact role]
+memory scope        [Default | Project-only]
+rationale           [why THIS instance needs continuity, or needs contextual isolation]
+clean-room workflow [required | not required]
+                    Project-only alone does NOT make a new thread fresh — chats inside the same
+                    Project remain mutually visible. An instance that requires fresh context also
+                    needs each completed thread moved out or removed before the next begins.
+decision timing     [pre-creation | post-creation reconciliation]
+review trigger      [role change | function change | host-capability change]
+```
+
+**For a new Project, decide and record this before the Project is created** — `decision timing =
+pre-creation`. The host does not permit changing memory scope in place. **For a Project that already
+exists**, a current record may reconcile the setting already in force without recreation — `decision timing =
+post-creation reconciliation` — and that record must not claim a creation-time decision occurred.
+
+Recreating a Project to change memory scope is possible but disruptive and may require existing threads to
+be moved or abandoned. There is no universally correct value: a continuity function may choose the host
+default, a contextual-isolation function chooses Project-only. Record the decision and its reason — the
+requirement is that the choice was made explicitly, never that it took a particular value.
+
+ChatGPT Library access is the host's own file library and is a separate setting. Dropbox connector access is
+a separate capability governed by the named-path wall the bootstrap and index declare.
+
+Owner: `docs/advisor-project-surface-architecture.md` — HOST-1, deployment home `PROJECT-CONFIG`,
+acceptance test A13.
+
 ## Installation
 
-1. Generate the surface bootstrap from the bootstrap template plus that surface's overlay.
-2. Mount it as the Project's **single standing Markdown Source**. Remove any mounted `_INDEX` copy — in
+1. Record this exact Project instance's memory scope, role/function, and rationale above — **before
+   creating the Project** for a new instance, or as a labelled post-creation reconciliation for one that
+   already exists.
+2. Generate the surface bootstrap from the bootstrap template plus that surface's overlay.
+3. Mount it as the Project's **single standing Markdown Source**. Remove any mounted `_INDEX` copy — in
    healthy connector mode the index is fetched live, not mounted.
-3. Fill the bracketed parameters above and paste the fence into the Instructions field.
-4. Run the acceptance tests in
+4. Fill the bracketed parameters above and paste the fence into the Instructions field.
+5. Run the acceptance tests in
    [`docs/advisor-project-surface-architecture.md`](../docs/advisor-project-surface-architecture.md)
    §Acceptance tests. **A7 — connector-failure behavior — is the gate**, and it must be exercised, not
    inspected.
