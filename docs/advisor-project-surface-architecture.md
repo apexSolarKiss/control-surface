@@ -268,7 +268,7 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | ID | Requirement | Owner | Home | Ruling | Deployed | Notes |
 |---|---|---|---|---|---|---|
 | READ-1 | Fetch by exact locator. Prefer exact-path fetch; reserve search for genuine discovery. | this doc | BOOTSTRAP + INDEX | PRESERVE | FULL | |
-| READ-2 | The live canonical is the source of truth; mounted or uploaded copies are point-in-time fallback and lose authority when live access returns. **Mounted-source display labels are inspection metadata, not source identity.** A host-added filename decoration does not establish a duplicate local file, multiple standing mounts, or incorrect mounted bytes. Verify standing-source cardinality and mounted content/version; use exact bytes or hashes where identity is load-bearing. An already-running conversation may continue surfacing content previously brought into that thread after a remount; treat that as possible thread-context staleness, not proof that the current upload failed. | this doc | BOOTSTRAP + INDEX | REVISE (extended) | n/a (revised) | display-label identity limb added 2026-07-30 (P2-3), vendor-neutral; current product-specific display behavior stays in the live ecology index as an explicitly expiring note, never in this slow owner |
+| READ-2 | The live canonical is the source of truth; mounted or uploaded copies are point-in-time fallback and lose authority when live access returns. **A mount receipt proves identity from the mounted body, never from a display label, and which fields it can prove depends on which carrier is mounted: three operating modes across two carrier families.** Carrier families: bootstrap-mounted and index-mounted. Operating modes: healthy bootstrap, connector-failure fallback, and A10 rollback. **BOOTSTRAP-MODE RECEIPT** — initial bootstrap mount and ordinary bootstrap remount, in healthy connector mode. It proves three independent facts, and none of them substitutes for another: **(1) standing-source cardinality** — exactly one standing Markdown Source, it is the expected bootstrap, and the index is not mounted; **(2) expected surface identity, read from that mounted bootstrap** — the expected H1 or equivalent declared surface and role, and the exact `INDEX_CANONICAL_LOCATOR` it declares; **(3) intended revision** — the in-body version **AND** one distinguishing clause or equivalent distinguishing content, both required, because a version banner alone can survive on a partially loaded or reconstructed carrier. **CONNECTOR-FAILURE FALLBACK RECEIPT** — a *temporary* posture, **not** a rollback. The thin Instructions field is unchanged, the expected bootstrap stays mounted, and a **current** point-in-time index copy is mounted alongside it while live access is down, so the expected Source set is **bootstrap + fallback index**. The fallback index proves its own identity from its own body — expected index H1 / surface / role plus one distinguishing mapped path or clause — checked in a FRESH thread. **No full Instructions canonical is repasted, no frozen rollback architecture is invoked, and none is inferred.** Retire the fallback copy when live access returns and go back to one-bootstrap healthy mode. Requiring rollback obligations here would turn a resilience measure into an unnecessary architecture migration. **ROLLBACK / MOUNTED-INDEX RECEIPT** — the A10 architecture only, where the **frozen full Instructions canonical is repasted** and the **frozen index** is remounted, so the bootstrap no longer supplies the active architecture. A mounted index is a different carrier: **it does not carry a bootstrap's `INDEX_CANONICAL_LOCATOR` field or a bootstrap version banner**, so demanding them would make rollback unverifiable rather than rigorous. That branch verifies instead: the expected rollback Source set and its cardinality; the exact frozen full Instructions canonical identity; **the exact frozen index identity where byte identity is load-bearing**; and the mounted index's own identity **from the index body** — its expected H1, surface, and role plus one distinguishing surface-specific mapped path or clause. **The modes also differ in which evidence plane carries which fact.** In bootstrap mode and in connector-failure fallback, the mounted-body evidence is read in a FRESH thread and there is no installation-byte obligation, because nothing was repasted. In rollback mode the evidence splits, and **both planes are required**: the expected rollback Source set and cardinality, the exact frozen full Instructions canonical identity, and exact frozen index bytes or a hash where byte identity is load-bearing are **operator-side installation evidence**, established before or during installation and recorded in the receipt — **a fresh thread cannot establish what was pasted into the Instructions field**, so a behavioral pass must never be read as proof of the repasted canonical's bytes. A **FRESH thread then proves** the mounted index's own H1 / surface / role, one distinguishing mapped path or clause, and the restored behavior. In either branch the fresh thread is what rules out thread-context staleness: an already-running conversation may keep surfacing content brought into it before a remount, so a pass there is possible thread-context staleness, not proof that the current upload succeeded. **A wrong-surface carrier mounted at cardinality one is a FAILURE even when its own in-body version is current and its displayed filename looks plausible**, because another surface's valid carrier satisfies count and currency both while carrying the wrong role, wall, and index. **Mounted-source display labels are inspection metadata, not source identity** — supporting evidence for selection and inspection only in either branch, and never sufficient for cardinality, expected identity, or revision. A host-added filename decoration such as a trailing `(N)` establishes neither a duplicate local file, nor multiple standing mounts, nor incorrect mounted bytes. Use exact bytes or hashes only where byte identity is genuinely load-bearing — an ordinary mount receipt is not a hashing ceremony. | this doc | BOOTSTRAP + INDEX | REVISE (extended) | n/a (revised) | display-label identity limb added 2026-07-30 (P2-3), vendor-neutral; **expected-surface-identity and fresh-thread revision limbs added 2026-08-14** after another surface's current bootstrap was mounted on a live Project, passed cardinality and in-body version, and was caught only from the displayed label — the label is not identity, but it was the sole signal of a wrong-surface *selection*, which is why identity now has to be read from the mounted body. **The three-mode split lands in the same revision**: a universal bootstrap-field rule would have made A10 rollback unsatisfiable, since the remounted rollback carrier is the index, which holds neither field. Current product-specific display behavior stays in the live ecology index as an explicitly expiring note, never in this slow owner |
 | READ-3 | **Historical chronology in repo prose, chat, or prior sessions is evidence, not current state.** Verify current claims from named live owners. | this doc | BOOTSTRAP | RESTORE (revised) | ABSENT | restores L1; revised from "ignore embedded handoff chronology — verify fresh" |
 | READ-4 | Session memory is a stale base against a live read. | this doc | BOOTSTRAP | PRESERVE | FULL | |
 | READ-5 | Never infer HEAD from commit search. | this doc | BOOTSTRAP | PRESERVE | TEMPLATE-ONLY | |
@@ -640,16 +640,30 @@ operative form; each such ID is counted in both homes and is listed once in the 
 A migrated Project conforms when all of the following hold.
 
 ```text
-A1  exactly one standing Markdown Source; it is that surface's bootstrap; no mounted index
-A2  a fresh thread reads the bootstrap first and identifies the correct surface and role
+A1  exactly one standing Markdown Source; it is that surface's bootstrap; no mounted index — AND the
+    mounted bootstrap body itself identifies the expected surface and role and declares that surface's
+    exact index locator. Count alone never establishes identity: another surface's current, valid
+    bootstrap satisfies both count and version while carrying the wrong role, wall, and index
+A2  a fresh thread reads the bootstrap first and reports ALL of: the expected H1 / role; the exact
+    declared index locator; the in-body version; AND one distinguishing clause or equivalent
+    distinguishing content. The conjunction is the test — a version banner alone can survive on a
+    partially loaded or reconstructed carrier, so version OR distinguishing content is NOT sufficient
 A3  the bootstrap fetches the current index at its declared exact locator, with no search
 A4  the fetched index reaches the grounding note, repo truth, protocol owner + manifest + live ledger,
     and a named scratch review object
 A5  an ordinary index edit is picked up in a fresh thread with NO remount
-A6  an ordinary protocol edit is picked up after a bootstrap remount with NO Instructions repaste
+A6  an ordinary protocol edit is picked up after a bootstrap remount with NO Instructions repaste — and a
+    FRESH thread proves the same expected surface identity (H1 / role and the same exact surface locator),
+    the intended NEW in-body version, AND one distinguishing clause from that revision. The displayed
+    Source label is supporting evidence only
 A7  with the connector disabled: the exact failed locator is named, a current copy is requested, no broad
     search occurs, no memory reconstruction occurs — AND the write boundary and no-fabrication floor
-    still hold
+    still hold. A7 also owns CONNECTOR-FAILURE FALLBACK acceptance: if that current copy is mounted as a
+    fallback index, the thin Instructions field is unchanged, the expected bootstrap remains mounted, the
+    expected temporary Source set is bootstrap + fallback index, and the fallback index proves its own
+    H1 / surface / role plus one distinguishing mapped path or clause in a FRESH thread. NO A10 rollback
+    and NO full-Instructions repaste is performed or inferred, and the copy is retired when live access
+    returns. Fallback evidence never satisfies A10, and A10 evidence never satisfies A7
 A8  the Instructions field carries, for that Project: every PRESERVE requirement in its original form; the
     exact replacement named by every REVISED disposition; every overlay-specific pre-retrieval floor; and
     nothing that belongs elsewhere. A NOT-APPLICABLE requirement may be absent only with its recorded
@@ -658,7 +672,18 @@ A8  the Instructions field carries, for that Project: every PRESERVE requirement
     undispositioned absence is a FAILURE. Where one repo homes multiple hosted Projects, each is tested
     independently
 A9  wall boundaries are no broader than before migration; no private root is named in any bootstrap
-A10 rollback restores prior behavior: repaste the frozen full Instructions canonical, remount the frozen index
+A10 ROLLBACK ONLY — not connector-failure fallback, which is A7's. Rollback restores the prior
+    architecture: repaste the frozen full Instructions canonical, remount the frozen index, so the
+    bootstrap no longer supplies the active architecture. Tested under READ-2's ROLLBACK / MOUNTED-INDEX
+    branch, on the fields that carrier actually holds, across BOTH evidence planes — both required.
+    OPERATOR-SIDE INSTALLATION EVIDENCE: the expected rollback Source set and cardinality; the exact
+    frozen full Instructions canonical identity; and the exact frozen index identity where byte identity
+    is load-bearing. FRESH-THREAD EVIDENCE: the mounted index's own H1 / surface / role, one
+    distinguishing mapped path or clause, and the restored rollback behavior. A fresh thread NEVER
+    establishes the exact bytes repasted into the Instructions field — that is installation evidence, and
+    a behavioral pass is not a substitute for it. Do NOT require `INDEX_CANONICAL_LOCATOR` or a bootstrap
+    version banner from an index body — an index carries neither, and demanding them makes rollback
+    unverifiable rather than rigorous. The displayed Source label is supporting evidence only
 A11 a review object whose bytes contain markup and non-ASCII text is retrieved from mapped shared scratch by
     raw-byte route: any lossy extracted view is named as a representation failure, the exact SHA-256 and the
     literal markup line are returned from the raw bytes, and no manual upload is requested
