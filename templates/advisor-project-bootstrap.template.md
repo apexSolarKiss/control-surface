@@ -108,12 +108,72 @@ live owner every time.
 
 **Session memory is a stale base** against a live read. Connector fetches show current on-disk state.
 
-**Mounted-source display labels are inspection metadata, not source identity.** A host-added filename
-decoration does not establish a duplicate local file, multiple standing mounts, or incorrect mounted bytes.
-Verify standing-source cardinality and mounted content/version;
-use exact bytes or hashes where identity is load-bearing. An already-running conversation may continue
-surfacing content previously brought into that thread after a remount; treat that as
-possible thread-context staleness, not proof that the current upload failed.
+**A mount receipt proves three independent facts, and none substitutes for another.** This is the
+**bootstrap-mode receipt** — it governs the initial mount and an ordinary remount of *this* bootstrap
+architecture, in healthy connector mode:
+
+```text
+1  standing-source cardinality   exactly one standing Markdown Source in healthy connector mode,
+                                 it is the expected bootstrap, and the index is NOT mounted
+
+2  expected surface identity     read from the MOUNTED BODY: the expected H1 or equivalent declared
+                                 surface and role, plus the exact INDEX_CANONICAL_LOCATOR this
+                                 surface declares
+
+3  intended revision             the in-body version AND one distinguishing clause — both, not
+                                 either. A version banner alone can survive on a partially loaded
+                                 or reconstructed carrier
+```
+
+**A temporary connector-failure fallback is NOT a rollback.** When live access is down and a **current**
+index copy is mounted as fallback, the thin Instructions field is unchanged and this bootstrap stays
+mounted — the expected Source set is simply **bootstrap + fallback index**. That fallback index proves its
+own H1 / surface / role plus one distinguishing mapped path or clause, in a fresh thread. **No full
+Instructions canonical is repasted and no frozen rollback architecture is invoked or inferred.** Retire the
+fallback copy when live access returns.
+
+**Rollback is a different carrier and takes a different receipt.** Under A10 the frozen full Instructions
+canonical is repasted and the frozen **index** is remounted, so this bootstrap no longer supplies the active
+architecture; a mounted index carries neither an `INDEX_CANONICAL_LOCATOR` field nor a bootstrap version
+banner. Verify a rollback under READ-2's **rollback / mounted-index branch** — the expected rollback Source
+set, the exact frozen full Instructions canonical identity, the exact frozen index identity where byte
+identity is load-bearing, and the index's own H1 / surface / role plus one distinguishing mapped path or
+clause. Do not import the bootstrap-only fields above into a rollback check: they are absent by design, and
+demanding them makes rollback unverifiable rather than rigorous.
+
+**A wrong-surface carrier mounted at cardinality one is a FAILURE** even when its own version is current
+and its displayed filename looks plausible — another surface's valid carrier satisfies count and currency
+both while carrying the wrong role, wall, and index locator. Count is not identity, and a current version is
+not the *right* surface's version.
+
+**Two evidence planes, and rollback needs both.** Exact frozen-carrier identity and Source-set cardinality
+are **operator-side installation evidence**, established before or during installation and recorded in the
+receipt. A **FRESH thread** then proves the mounted carrier's in-body identity, its distinguishing content,
+and the restored behavior:
+
+```text
+before / during installation   expected Source set + cardinality · exact frozen full Instructions
+                               canonical identity · exact frozen index bytes or hash where
+                               byte identity is load-bearing · labels supporting-only
+
+after installation, fresh      mounted index H1 / surface / role · one distinguishing mapped path
+thread                         or clause · restored behavior
+```
+
+**A fresh thread cannot establish what was pasted into the Instructions field.** Never read a behavioral
+pass as proof of the repasted canonical's bytes. Bootstrap-mode evidence is unaffected: cardinality,
+expected H1 / role, exact locator, and version AND distinguishing content, all read from the mounted body in
+a fresh thread.
+
+**In either branch the fresh thread is what rules out thread-context staleness.** An already-running
+conversation may keep surfacing content brought into it before a remount, so a pass there is possible
+thread-context staleness, not proof that the current upload succeeded.
+
+**Mounted-source display labels are inspection metadata, not source identity.** They are supporting evidence
+for selection and inspection only, and never sufficient for cardinality, expected identity, or revision. A
+host-added filename decoration such as a trailing `(N)` establishes neither a duplicate local file, nor
+multiple standing mounts, nor incorrect mounted bytes. Use exact bytes or hashes only where byte identity is
+genuinely load-bearing — an ordinary mount receipt is not a hashing ceremony.
 
 **Never** infer HEAD from commit search. **Never** reconstruct directory state from README prose. A connector
 does not reliably resolve HEAD-by-ref or list trees; do not depend on either.

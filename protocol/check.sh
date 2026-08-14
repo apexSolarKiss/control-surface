@@ -274,17 +274,26 @@ assert_local(){
     grep -qF -- "$tp" "$SHARED"     || apmiss="$apmiss shared:{$tp}"
     grep -qF -- "$tp" "$ROOTAGENTS" || apmiss="$apmiss root-carrier:{$tp}"
   done
-  local srcid=('**Mounted-source display labels are inspection metadata, not source identity.**' \
-               'does not establish a duplicate local file, multiple standing mounts, or incorrect mounted bytes' \
-               'Verify standing-source cardinality and mounted content/version' \
-               'use exact bytes or hashes where identity is load-bearing' \
-               'possible thread-context staleness, not proof that the current upload failed')
+  # READ-2 source-identity limbs. Each anchor is the CURRENT canonical phrasing of a limb that must survive
+  # in both the owner registry and the generated bootstrap; R2 (2026-08-14) rewrote the wording and added the
+  # expected-surface-identity limbs guarded at 14f, so these anchors were re-synced rather than dropped.
+  local srcid=('display labels are inspection metadata, not source identity' \
+               'establishes neither a duplicate local file, nor multiple standing mounts, nor incorrect mounted bytes' \
+               'exact bytes or hashes only where byte identity is genuinely load-bearing' \
+               'possible thread-context staleness, not proof that the current upload succeeded')
+  # Matched whitespace-normalized: these clauses are hard-wrapped prose in the generated bootstrap and a
+  # single long table cell in the registry, so a literal-space anchor silently no-ops on one of the two.
+  local nARCH nBOOT nIDX
+  nARCH=$(tr -s '[:space:]' ' ' < "$APARCH"); nBOOT=$(tr -s '[:space:]' ' ' < "$APBOOT")
+  nIDX=$(tr -s '[:space:]' ' ' < "$IDXTEMPLATE")
   for tp in "${srcid[@]}"; do
-    grep -qF -- "$tp" "$APARCH" || apmiss="$apmiss architecture:{$tp}"
-    grep -qF -- "$tp" "$APBOOT" || apmiss="$apmiss advisor-bootstrap:{$tp}"
+    grep -qF -- "$tp" <<<"$nARCH" || apmiss="$apmiss architecture:{$tp}"
+    grep -qF -- "$tp" <<<"$nBOOT" || apmiss="$apmiss advisor-bootstrap:{$tp}"
   done
-  for tp in 'inspection metadata, not source identity' 'not the displayed filename'; do
-    grep -qF -- "$tp" "$IDXTEMPLATE" || apmiss="$apmiss _INDEX:{$tp}"; done
+  grep -qiF -- 'standing-source cardinality' <<<"$nARCH" || apmiss="$apmiss architecture:{standing-source cardinality}"
+  grep -qiF -- 'standing-source cardinality' <<<"$nBOOT" || apmiss="$apmiss advisor-bootstrap:{standing-source cardinality}"
+  for tp in 'inspection metadata, not source identity' 'never sufficient for cardinality, expected identity, or revision'; do
+    grep -qF -- "$tp" <<<"$nIDX" || apmiss="$apmiss _INDEX:{$tp}"; done
   [ -z "$apmiss" ] && OKAY "aperture + source-identity clauses present (shared + root + registry + advisor-bootstrap + index template)" || FAIL "aperture/source-identity clause(s) missing:$apmiss"
   # 11f R1 residual precision — two MATERIAL NON-BLOCKING findings banked at the Phase-2 closure smoke round
   #     (2026-07-30): the generated-template ARRO sentence must carry the shared body's "authorized" qualifier
@@ -496,6 +505,178 @@ assert_local(){
   grep -qF -- 'LIFE-4k · HOST-1' <<<"$hnA" || covmiss="$covmiss {n/a (new) ID list does not name HOST-1}"
   [ "$(covnum 'n/a (new)')" = "18" ] || covmiss="$covmiss {n/a (new) count is not 18}"
   [ -z "$covmiss" ] && OKAY "coverage accounting balances (ruling $rsum + deployed $dsum both = $shid shared IDs; HOST-1 carried as NEW and n/a (new))" || FAIL "coverage accounting defect(s):$covmiss"
+  # 14f READ-2 mount-receipt identity — a mount receipt proves THREE independent facts, and the failure this
+  #     guards is specifically the one that occurred: another surface's CURRENT, VALID bootstrap was mounted on
+  #     a live Project, passed standing-source cardinality AND in-body version, and was caught only from the
+  #     displayed label. Count is not identity, and a current version is not the RIGHT surface's version — so
+  #     expected surface identity has to be read from the mounted body (expected H1/role + the exact
+  #     INDEX_CANONICAL_LOCATOR), and the revision proven in a FRESH thread, because a running thread may keep
+  #     surfacing pre-remount content. Each limb is guarded separately because each is independently droppable
+  #     with its own failure mode; the label limb is guarded in BOTH directions, since elevating a label into
+  #     authoritative identity is as wrong as dropping the supporting-evidence role it does carry.
+  local r2miss="" rz=""
+  grep -cE '^\| READ-2 \|' "$APARCH" | grep -qx 1 || r2miss="$r2miss arch:{READ-2 not present exactly once}"
+  grep -qE '^\| READ-2 \|.*\| BOOTSTRAP \+ INDEX \|' "$APARCH" || r2miss="$r2miss arch:{READ-2 homes are not BOOTSTRAP + INDEX}"
+  # Ruling and Deployed are ADJACENT cells and share one delimiting pipe — no `.*` between them, or the
+  # pattern demands a pipe that was already consumed and can never match.
+  grep -qE '^\| READ-2 \|.*\| REVISE \(extended\) \| n/a \(revised\) \|' "$APARCH" || r2miss="$r2miss arch:{READ-2 ruling/deployed disposition moved}"
+  # The shared facts + fresh-thread + label boundary, in BOTH the owner registry and the generated bootstrap.
+  # SCOPED to the READ-2 row and to the bootstrap's mount-receipt block, never whole-file: both carriers use
+  # "fresh thread" in unrelated places (START-4, A2, A5, the startup-posture rule), so a whole-file match is
+  # satisfied by prose that has nothing to do with a mount receipt — the limb would look guarded and be inert.
+  local r2row r2blk
+  r2row=$(grep -E '^\| READ-2 \|' "$APARCH" | tr -s '[:space:]' ' ')
+  r2blk=$(awk '/A mount receipt proves three independent facts/{f=1} f{print} /hashing ceremony/{if(f) exit}' "$APBOOT" | tr -s '[:space:]' ' ')
+  [ -n "$r2row" ] || r2miss="$r2miss arch:{READ-2 row not extractable}"
+  [ -n "$r2blk" ] || r2miss="$r2miss advisor-bootstrap:{mount-receipt block absent}"
+  for rz in "$r2row" "$r2blk"; do
+    grep -qiF -- 'expected surface identity' <<<"$rz" || r2miss="$r2miss {expected-surface-identity limb}"
+    grep -qF -- 'expected H1' <<<"$rz" || r2miss="$r2miss {expected-H1/role limb}"
+    grep -qF -- 'wrong-surface carrier mounted at cardinality one is a FAILURE' <<<"$rz" || r2miss="$r2miss {count-is-not-identity limb}"
+    grep -qiF -- 'FRESH thread' <<<"$rz" || r2miss="$r2miss {fresh-thread limb}"
+    grep -qF -- 'distinguishing clause' <<<"$rz" || r2miss="$r2miss {intended-revision distinguishing-content limb}"
+    # version and distinguishing content are INDEPENDENT limbs joined by AND — a version banner alone can
+    # survive on a partially loaded carrier, so neither may stand in for the other
+    grep -qiF -- 'in-body version' <<<"$rz" || r2miss="$r2miss {in-body-version limb}"
+    grep -qE -- 'in-body version (\*\*)?AND(\*\*)? one distinguishing clause' <<<"$rz" || r2miss="$r2miss {version-AND-distinguishing conjunction}"
+    grep -qE -- 'in-body version (plus|or) (one )?distinguishing' <<<"$rz" && r2miss="$r2miss {STALE version OR/plus distinguishing (not a conjunction)}"
+    # rollback is a DIFFERENT carrier: an index holds neither bootstrap field, so importing them would make
+    # A10 unverifiable. Both halves are guarded — the branch must exist, and it must not demand those fields.
+    grep -qiF -- 'rollback' <<<"$rz" || r2miss="$r2miss {rollback branch absent}"
+    # "a bootstrap version banner" appears in each carrier solely to state what a mounted INDEX lacks
+    grep -qF -- 'a bootstrap version banner' <<<"$rz" || r2miss="$r2miss {rollback-carrier field-absence limb}"
+    grep -qE -- "index's own (identity|H1)" <<<"$rz" || r2miss="$r2miss {rollback-index own-identity limb}"
+    grep -qF -- 'never sufficient for cardinality, expected identity, or revision' <<<"$rz" || r2miss="$r2miss {label supporting-only limb}"
+    grep -qF -- '`(N)`' <<<"$rz" || r2miss="$r2miss {(N)-decoration limb}"
+    grep -qEi -- 'displayed (file)?name (is|remains) (the )?(authoritative|sufficient|source identity)' <<<"$rz" && r2miss="$r2miss {STALE label elevated to authoritative identity}"
+    grep -qF -- 'cardinality and mounted content/version' <<<"$rz" && r2miss="$r2miss {STALE two-fact receipt (cardinality + version only)}"
+    # ROLLBACK EVIDENCE PLANES — a fresh thread demonstrates the mounted index's body and the restored
+    # behavior; it cannot establish what was pasted into the Instructions field. Collapsing the planes lets a
+    # correct index that behaves correctly certify a wrong or partial Instructions repaste.
+    grep -qiF -- 'operator-side installation evidence' <<<"$rz" || r2miss="$r2miss {operator-installation evidence plane}"
+    grep -qiF -- 'frozen full Instructions canonical identity' <<<"$rz" || r2miss="$r2miss {frozen-Instructions identity limb}"
+    grep -qiF -- 'cannot establish what was pasted into the Instructions field' <<<"$rz" || r2miss="$r2miss {fresh-thread-cannot-prove-Instructions-bytes limb}"
+    grep -qiE -- 'fresh thread[^.]{0,80}(proves|establishes)[^.]{0,60}frozen[^.]{0,25}Instructions' <<<"$rz" && r2miss="$r2miss {STALE fresh thread claimed to prove frozen Instructions bytes}"
+    grep -qiF -- 'exact frozen index identity where byte identity is load-bearing' <<<"$rz" || r2miss="$r2miss {exact frozen-index identity limb}"
+    # THREE modes, not two. A connector-failure fallback keeps the thin Instructions and the mounted
+    # bootstrap and adds a CURRENT index copy; A10 rollback repastes a FROZEN full Instructions canonical
+    # and mounts a FROZEN index. Merging them makes an ordinary outage look like a failed rollback, or
+    # forces an unnecessary architecture migration to satisfy the template.
+    grep -qiF -- 'connector-failure fallback' <<<"$rz" || r2miss="$r2miss {connector-failure fallback mode absent}"
+  done
+  # BRANCH ISOLATION. The fallback obligations below are matched against the FALLBACK CLAUSE ALONE, cut out
+  # of each carrier. Checked across the whole region they are satisfied by the healthy and rollback clauses,
+  # which say "expected H1", "fresh thread" and "distinguishing" too — so the fallback-specific rule could be
+  # deleted outright and the guard would still pass. That is the wrong-surface / stale-second-source state
+  # READ-2 exists to prevent, reached through an outage instead of a remount.
+  local fbrow fbblk
+  fbrow=$(sed -e 's/.*CONNECTOR-FAILURE FALLBACK RECEIPT//' -e 's/ROLLBACK \/ MOUNTED-INDEX RECEIPT.*//' <<<"$r2row")
+  fbblk=$(awk '/A temporary connector-failure fallback is NOT a rollback/{f=1} /^\*\*Rollback is a different carrier/{f=0} f' "$APBOOT" | tr -s '[:space:]' ' ')
+  [ -n "$fbrow" ] || r2miss="$r2miss arch:{fallback clause not extractable}"
+  [ -n "$fbblk" ] || r2miss="$r2miss advisor-bootstrap:{fallback clause not extractable}"
+  for rz in "$fbrow" "$fbblk"; do
+    grep -qiE -- 'thin Instructions( field)? is unchanged' <<<"$rz" || r2miss="$r2miss {fallback thin-Instructions-unchanged limb}"
+    grep -qiE -- '(expected )?bootstrap stays mounted' <<<"$rz" || r2miss="$r2miss {fallback bootstrap-stays-mounted limb}"
+    grep -qiF -- 'bootstrap + fallback index' <<<"$rz" || r2miss="$r2miss {fallback Source-set limb}"
+    grep -qiF -- 'H1 / surface / role' <<<"$rz" || r2miss="$r2miss {fallback own-body identity limb}"
+    grep -qiF -- 'distinguishing mapped path' <<<"$rz" || r2miss="$r2miss {fallback distinguishing-content limb}"
+    grep -qiF -- 'fresh thread' <<<"$rz" || r2miss="$r2miss {fallback fresh-thread limb}"
+    grep -qiF -- 'no full Instructions canonical is repasted' <<<"$rz" || r2miss="$r2miss {fallback no-repaste limb}"
+    grep -qiE -- 'rollback[^.]{0,30}is invoked[^.]{0,30}inferred' <<<"$rz" || r2miss="$r2miss {fallback no-rollback-inference limb}"
+    grep -qiF -- 'retire the fallback' <<<"$rz" || r2miss="$r2miss {fallback retirement limb}"
+  done
+  # POSITIVE, BRANCH-SPECIFIC locator requirements. A bare INDEX_CANONICAL_LOCATOR search is satisfied by the
+  # ROLLBACK sentence saying an index does NOT carry the field — so the operative bootstrap requirement could
+  # be deleted while the explanatory negative kept the token alive and the guard green. Each branch is matched
+  # on its own phrase; the negative field-absence statement is guarded separately in the loop above.
+  grep -qF -- 'and the exact `INDEX_CANONICAL_LOCATOR` it declares' <<<"$r2row" || r2miss="$r2miss arch:{positive bootstrap exact-locator requirement}"
+  grep -qF -- 'plus the exact INDEX_CANONICAL_LOCATOR this' <<<"$r2blk" || r2miss="$r2miss advisor-bootstrap:{positive bootstrap exact-locator requirement}"
+  # acceptance-test receipt obligations
+  # Each acceptance test is checked for its WHOLE receipt obligation, not just its opening phrase: a
+  # partial anchor let A2 keep a weaker OR-form than the requirement it claims to test. SCOPED to the
+  # acceptance block, never whole-file — the READ-2 row states the same rollback evidence in the same
+  # words, so a whole-file match let the owner row satisfy A10's obligation while A10 itself lost it.
+  local nACC; nACC=$(awk '/^A1  exactly one standing Markdown Source/{f=1} f{print} /^```$/{if(f) exit}' "$APARCH" | tr -s '[:space:]' ' ')
+  [ -n "$nACC" ] || r2miss="$r2miss arch:{acceptance block not extractable}"
+  # Per-test sub-blocks. Block-wide matching is not enough: A6 and A10 both end "The displayed Source label
+  # is supporting evidence only", so A6's copy satisfied A10's limb and A10 could lose it silently. Each
+  # test's obligations are matched against ITS OWN entry — the same branch-isolation rule, one level down.
+  local a7blk a10blk
+  a7blk=$(awk '/^A7  with the connector disabled/{f=1} /^A8 /{f=0} f' "$APARCH" | tr -s '[:space:]' ' ')
+  a10blk=$(awk '/^A10 ROLLBACK ONLY/{f=1} /^A11 /{f=0} f' "$APARCH" | tr -s '[:space:]' ' ')
+  [ -n "$a7blk" ] || r2miss="$r2miss arch:{A7 entry not extractable}"
+  [ -n "$a10blk" ] || r2miss="$r2miss arch:{A10 entry not extractable}"
+  grep -qF -- 'A1 exactly one standing Markdown Source' <<<"$nACC" || r2miss="$r2miss arch:{A1 row}"
+  grep -qF -- 'mounted bootstrap body itself identifies the expected surface and role' <<<"$nACC" || r2miss="$r2miss arch:{A1 mounted-body identity obligation}"
+  grep -qF -- "declares that surface's exact index locator" <<<"$nACC" || r2miss="$r2miss arch:{A1 exact-locator obligation}"
+  grep -qF -- 'Count alone never establishes identity' <<<"$nACC" || r2miss="$r2miss arch:{A1 count-is-not-identity obligation}"
+  grep -qF -- 'A2 a fresh thread reads the bootstrap first and reports ALL of' <<<"$nACC" || r2miss="$r2miss arch:{A2 conjunction obligation}"
+  grep -qF -- 'the exact declared index locator; the in-body version; AND one distinguishing clause' <<<"$nACC" || r2miss="$r2miss arch:{A2 locator+version+distinguishing tail}"
+  grep -qF -- 'version OR distinguishing content is NOT sufficient' <<<"$nACC" || r2miss="$r2miss arch:{A2 OR-is-insufficient statement}"
+  grep -qF -- 'FRESH thread proves the same expected surface identity' <<<"$nACC" || r2miss="$r2miss arch:{A6 fresh-thread identity obligation}"
+  grep -qF -- 'H1 / role and the same exact surface locator' <<<"$nACC" || r2miss="$r2miss arch:{A6 same-exact-locator obligation}"
+  grep -qF -- 'the intended NEW in-body version, AND one distinguishing clause from that revision' <<<"$nACC" || r2miss="$r2miss arch:{A6 new-version + distinguishing obligation}"
+  # A7 owns CONNECTOR-FAILURE FALLBACK acceptance; A10 owns ROLLBACK acceptance. Both are matched inside the
+  # acceptance block itself, so equivalent prose in the READ-2 row or either template cannot cover a missing
+  # obligation here — that is exactly how A10 could have silently decayed to a behavioral-only test.
+  grep -qF -- 'A7 also owns CONNECTOR-FAILURE FALLBACK acceptance' <<<"$a7blk" || r2miss="$r2miss arch:{A7 fallback ownership}"
+  grep -qF -- 'the expected temporary Source set is bootstrap + fallback index' <<<"$a7blk" || r2miss="$r2miss arch:{A7 fallback Source-set obligation}"
+  grep -qF -- 'the fallback index proves its own H1 / surface / role plus one distinguishing mapped path' <<<"$a7blk" || r2miss="$r2miss arch:{A7 fallback mounted-index identity obligation}"
+  grep -qF -- 'NO A10 rollback and NO full-Instructions repaste is performed or inferred' <<<"$a7blk" || r2miss="$r2miss arch:{A7 no-rollback-inference obligation}"
+  grep -qF -- 'the thin Instructions field is unchanged, the expected bootstrap remains mounted' <<<"$a7blk" || r2miss="$r2miss arch:{A7 thin-Instructions + bootstrap-mounted obligation}"
+  grep -qF -- 'distinguishing mapped path or clause in a FRESH thread' <<<"$a7blk" || r2miss="$r2miss arch:{A7 fresh-thread obligation}"
+  grep -qF -- 'the copy is retired when live access returns' <<<"$a7blk" || r2miss="$r2miss arch:{A7 fallback retirement obligation}"
+  grep -qF -- 'Fallback evidence never satisfies A10, and A10 evidence never satisfies A7' <<<"$a7blk" || r2miss="$r2miss arch:{A7/A10 non-substitution obligation}"
+  grep -qF -- 'A10 ROLLBACK ONLY' <<<"$a10blk" || r2miss="$r2miss arch:{A10 rollback-only scoping}"
+  grep -qF -- 'across BOTH evidence planes — both required' <<<"$a10blk" || r2miss="$r2miss arch:{A10 both-planes obligation}"
+  grep -qF -- 'OPERATOR-SIDE INSTALLATION EVIDENCE: the expected rollback Source set and cardinality' <<<"$a10blk" || r2miss="$r2miss arch:{A10 operator-installation plane}"
+  grep -qF -- 'the exact frozen full Instructions canonical identity' <<<"$a10blk" || r2miss="$r2miss arch:{A10 frozen-Instructions identity obligation}"
+  grep -qF -- 'the exact frozen index identity where byte identity is load-bearing' <<<"$a10blk" || r2miss="$r2miss arch:{A10 frozen-index identity obligation}"
+  grep -qF -- 'FRESH-THREAD EVIDENCE: the mounted index' <<<"$a10blk" || r2miss="$r2miss arch:{A10 fresh-thread plane}"
+  grep -qF -- 'the restored rollback behavior' <<<"$a10blk" || r2miss="$r2miss arch:{A10 restored-behavior obligation}"
+  grep -qF -- 'A fresh thread NEVER establishes the exact bytes repasted into the Instructions field' <<<"$a10blk" || r2miss="$r2miss arch:{A10 fresh-thread-cannot-prove-Instructions-bytes obligation}"
+  grep -qF -- 'The displayed Source label is supporting evidence only' <<<"$a10blk" || r2miss="$r2miss arch:{A10 label supporting-only obligation}"
+  grep -qiF -- "under READ-2's ROLLBACK / MOUNTED-INDEX branch" <<<"$a10blk" || r2miss="$r2miss arch:{A10 rollback-branch routing}"
+  grep -qF -- "the mounted index's own H1 / surface / role, one distinguishing mapped path" <<<"$nACC" || r2miss="$r2miss arch:{A10 index own-identity obligation}"
+  grep -qF -- 'Do NOT require `INDEX_CANONICAL_LOCATOR` or a bootstrap version banner from an index body' <<<"$nACC" || r2miss="$r2miss arch:{A10 bootstrap-field-exclusion}"
+  # reciprocal INDEX-home rule — scoped to the mount-posture paragraph for the same reason
+  local r2idx; r2idx=$(grep -F -- '**Mount posture.**' "$IDXTEMPLATE" | tr -s '[:space:]' ' ')
+  [ -n "$r2idx" ] || r2miss="$r2miss _INDEX:{mount-posture paragraph absent}"
+  grep -qiF -- 'expected surface identity' <<<"$r2idx" || r2miss="$r2miss _INDEX:{reciprocal expected-identity rule}"
+  # Same defect class as the owner row: the index paragraph names the token in BOTH roles, so the healthy
+  # branch's POSITIVE requirement is matched on its own phrase and the field-absence sentence separately.
+  grep -qF -- 'the exact `INDEX_CANONICAL_LOCATOR` naming *this* index' <<<"$r2idx" || r2miss="$r2miss _INDEX:{healthy-branch positive exact-locator requirement}"
+  grep -qF -- 'in-body version **and** a distinguishing clause' <<<"$r2idx" || r2miss="$r2miss _INDEX:{healthy-branch version AND distinguishing conjunction}"
+  grep -qiF -- 'operator-side installation evidence' <<<"$r2idx" || r2miss="$r2miss _INDEX:{rollback operator-installation evidence plane}"
+  grep -qF -- 'The two modes are different operating states and must not be merged' <<<"$r2idx" || r2miss="$r2miss _INDEX:{fallback-vs-rollback separation}"
+  grep -qiF -- 'Connector-failure fallback (temporary)' <<<"$r2idx" || r2miss="$r2miss _INDEX:{connector-failure fallback clause}"
+  # Same branch-isolation rule: the rollback clause in this very paragraph carries its own H1 / role and
+  # distinguishing-content language, so the fallback limbs are matched against the FALLBACK CLAUSE ALONE.
+  local fbidx; fbidx=$(sed -e 's/.*Connector-failure fallback (temporary)://' -e 's/\*\*A10 rollback (architecture change).*//' <<<"$r2idx")
+  [ -n "$fbidx" ] || r2miss="$r2miss _INDEX:{fallback clause not extractable}"
+  grep -qiE -- 'thin Instructions( field)? is unchanged' <<<"$fbidx" || r2miss="$r2miss _INDEX:{fallback thin-Instructions-unchanged clause}"
+  grep -qiF -- 'bootstrap stays mounted' <<<"$fbidx" || r2miss="$r2miss _INDEX:{fallback bootstrap-stays-mounted clause}"
+  grep -qiF -- 'H1 / surface / role' <<<"$fbidx" || r2miss="$r2miss _INDEX:{fallback own-body identity clause}"
+  grep -qiF -- 'distinguishing mapped path' <<<"$fbidx" || r2miss="$r2miss _INDEX:{fallback distinguishing-content clause}"
+  grep -qiF -- 'fresh thread' <<<"$fbidx" || r2miss="$r2miss _INDEX:{fallback fresh-thread clause}"
+  grep -qiE -- 'retire the copy' <<<"$fbidx" || r2miss="$r2miss _INDEX:{fallback retirement clause}"
+  grep -qF -- 'no full Instructions canonical is repasted and no rollback is invoked or inferred' <<<"$fbidx" || r2miss="$r2miss _INDEX:{fallback no-repaste clause}"
+  grep -qF -- 'the exact frozen index identity where byte identity is load-bearing' <<<"$r2idx" || r2miss="$r2miss _INDEX:{rollback frozen-index identity clause}"
+  grep -qE -- 'Fallback or rollback mounted index' <<<"$r2idx" && r2miss="$r2miss _INDEX:{STALE merged fallback-or-rollback branch}"
+  grep -qF -- 'two branches, not one' <<<"$r2idx" && r2miss="$r2miss _INDEX:{STALE two-branch count}"
+  grep -qiF -- 'cannot establish what was pasted into the Instructions field' <<<"$r2idx" || r2miss="$r2miss _INDEX:{fresh-thread-cannot-prove-Instructions-bytes limb}"
+  grep -qiF -- 'fresh thread' <<<"$r2idx" || r2miss="$r2miss _INDEX:{reciprocal fresh-thread rule}"
+  grep -qF -- 'never sufficient for cardinality, expected identity, or revision' <<<"$r2idx" || r2miss="$r2miss _INDEX:{reciprocal label supporting-only rule}"
+  # the index must state BOTH branches, and must never claim it carries the bootstrap-only fields
+  grep -qF -- 'three operating modes across two carrier families' <<<"$r2idx" || r2miss="$r2miss _INDEX:{three-mode statement}"
+  grep -qF -- 'it holds neither an `INDEX_CANONICAL_LOCATOR` field nor a bootstrap version banner' <<<"$r2idx" || r2miss="$r2miss _INDEX:{index field-absence statement}"
+  grep -qF -- 'own H1 / surface / role plus one distinguishing mapped path' <<<"$r2idx" || r2miss="$r2miss _INDEX:{index own-identity evidence}"
+  # no READ-2 operative text in a carrier that must not hold it
+  for rz in "$SHARED" "$MANIFEST" "$PROFDIR/advisor-project-surface.md" "$APITEMPLATE"; do
+    grep -qiF -- 'expected surface identity' "$rz" && r2miss="$r2miss $(basename "$rz"):{READ-2 operative text leaked}"
+    grep -qF -- 'INDEX_CANONICAL_LOCATOR' "$rz" && r2miss="$r2miss $(basename "$rz"):{index-locator leaked}"
+  done
+  [ -z "$r2miss" ] && OKAY "READ-2 mount-receipt identity owned (three operating modes across two carrier families — healthy bootstrap: cardinality + H1/role + locator + version AND distinguishing content; connector-failure fallback: branch-isolated own-body identity + no repaste + retirement; A10 rollback: operator-installation AND fresh-thread planes; labels supporting-only)" || FAIL "READ-2 mount-identity clause(s) missing:$r2miss"
 
   # 15 routed-instance lifecycle — POSITIVE clauses in both shared-core carriers, plus NEGATIVE assertions that no
   #    carrier still teaches the outgoing model. The rule is only conformant when both halves hold: stating the
