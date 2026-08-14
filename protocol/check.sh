@@ -386,6 +386,116 @@ assert_local(){
   grep -qF -- 'Orientation is on request, not by default' "$APBOOT" || recmiss="$recmiss bootstrap:{startup-orientation-gated}"
   grep -qF -- 'no character limit' "$APBOOT" && recmiss="$recmiss bootstrap:{STALE no-character-limit}"
   [ -z "$recmiss" ] && OKAY "advisor-surface anti-loss recovery carried (lifecycle subrequirements + overlay gate + startup posture)" || FAIL "advisor-surface recovery clause(s) missing:$recmiss"
+  # 14b hosted-Project configuration — HOST-1 keys the decision to each exact Project INSTANCE (role/function
+  #     is the RATIONALE, never the key), lives in its own deployment home (PROJECT-CONFIG, outside the pasted
+  #     fence), and is tested by A13 on two truthful timing branches. Each limb is guarded independently
+  #     because each is independently droppable with a DIFFERENT failure mode: role-keying flattens the
+  #     intentional divergence between two instances serving one role; collapsing the timing branches lets a
+  #     Project created on an unexamined default be described as creation-time conformant; and a MANDATORY
+  #     thread-loss phrasing overstates a migration cost into a technical necessity. Wrap-prone clauses are
+  #     matched whitespace-normalized, because they break across lines in the carriers.
+  local hostmiss="" hnA="" hnT="" hfence="" hz=""
+  hnA=$(tr -s '[:space:]' ' ' < "$APARCH"); hnT=$(tr -s '[:space:]' ' ' < "$APITEMPLATE")
+  grep -qF -- '| HOST-1 |' "$APARCH" || hostmiss="$hostmiss arch:{HOST-1-registry-row}"
+  grep -qF -- '**PROJECT-CONFIG**' "$APARCH" || hostmiss="$hostmiss arch:{PROJECT-CONFIG-placement-home}"
+  grep -qF -- 'A13 each exact hosted Project INSTANCE has an operator configuration record' <<<"$hnA" || hostmiss="$hostmiss arch:{A13-instance-keyed}"
+  grep -qF -- 'The Project instance is the configuration unit; the role or function is the rationale axis.' <<<"$hnA" || hostmiss="$hostmiss arch:{instance-is-the-unit}"
+  grep -qF -- 'A role-keyed record would flatten exactly' <<<"$hnA" || hostmiss="$hostmiss arch:{role-keying-hazard}"
+  grep -qF -- 'this requirement creates no cross-wall ownership or conformance claim' <<<"$hnA" || hostmiss="$hostmiss arch:{personal-context-scope-boundary}"
+  grep -qF -- 'Memory scope is a function-specific decision, not a universal setting.' <<<"$hnA" || hostmiss="$hostmiss arch:{function-specific-not-universal}"
+  grep -qF -- "may choose the host's default scope" <<<"$hnA" || hostmiss="$hostmiss arch:{Default-permitted}"
+  grep -qF -- 'not a default to apply everywhere' <<<"$hnA" || hostmiss="$hostmiss arch:{no-universal-Project-only}"
+  grep -qF -- 'Project-only alone does not make a new thread fresh' <<<"$hnA" || hostmiss="$hostmiss arch:{clean-room-additional-to-scope}"
+  grep -qF -- 'empty-Project workflow' <<<"$hnA" || hostmiss="$hostmiss arch:{empty-Project-workflow}"
+  grep -qF -- 'NEW PROJECT INSTANCE' <<<"$hnA" || hostmiss="$hostmiss arch:{new-instance-branch}"
+  grep -qF -- 'EXISTING PROJECT INSTANCE' <<<"$hnA" || hostmiss="$hostmiss arch:{existing-instance-branch}"
+  grep -qF -- 'decision timing = pre-creation' <<<"$hnA" || hostmiss="$hostmiss arch:{pre-creation-timing}"
+  grep -qF -- 'must NOT assert or imply that a creation-time decision occurred' <<<"$hnA" || hostmiss="$hostmiss arch:{no-retroactive-creation-claim}"
+  grep -qF -- 'ChatGPT Library access' <<<"$hnA" || hostmiss="$hostmiss arch:{Library-distinguished}"
+  grep -qF -- 'Dropbox connector access' <<<"$hnA" || hostmiss="$hostmiss arch:{Dropbox-distinguished}"
+  grep -qF -- 'authorizes no Project recreation and no settings change' <<<"$hnA" || hostmiss="$hostmiss arch:{no-rebuild-authorized}"
+  grep -qF -- 'recorded as intentional' <<<"$hnA" || hostmiss="$hostmiss arch:{no-normalization}"
+  for hz in "$hnA" "$hnT"; do
+    grep -qF -- 'possible but disruptive and may require existing threads to be moved or abandoned' <<<"$hz" || hostmiss="$hostmiss {bounded-migration-form}"
+    grep -qF -- 'must be moved or abandoned' <<<"$hz" && hostmiss="$hostmiss {STALE mandatory-thread-movement}"
+    grep -qF -- 'technically impossible' <<<"$hz" && hostmiss="$hostmiss {STALE recreation-impossible}"
+    grep -qF -- 'destroys history' <<<"$hz" && hostmiss="$hostmiss {STALE rebuild-destroys-history}"
+    grep -qEi -- 'memory (mode|scope) grants' <<<"$hz" && hostmiss="$hostmiss {STALE memory-grants-storage-access}"
+  done
+  grep -qF -- '## Project configuration record' "$APITEMPLATE" || hostmiss="$hostmiss PI-template:{config-record-section}"
+  grep -qF -- 'hosted Project      [exact Project name]' "$APITEMPLATE" || hostmiss="$hostmiss PI-template:{instance-identity-field}"
+  grep -qF -- 'role / function     [continuity | contextual isolation | other exact role]' "$APITEMPLATE" || hostmiss="$hostmiss PI-template:{role-function-field}"
+  grep -qF -- 'memory scope        [Default | Project-only]' "$APITEMPLATE" || hostmiss="$hostmiss PI-template:{scope-field}"
+  grep -qF -- 'clean-room workflow [required | not required]' "$APITEMPLATE" || hostmiss="$hostmiss PI-template:{clean-room-field}"
+  grep -qF -- 'decision timing     [pre-creation | post-creation reconciliation]' "$APITEMPLATE" || hostmiss="$hostmiss PI-template:{decision-timing-field}"
+  grep -qF -- 'review trigger      [role change | function change | host-capability change]' "$APITEMPLATE" || hostmiss="$hostmiss PI-template:{review-trigger-field}"
+  grep -qF -- 'Repeat this block once per exact hosted Project instance' <<<"$hnT" || hostmiss="$hostmiss PI-template:{repeatable-per-instance}"
+  hfence=$(awk '/^## ⬇️/{f=1;next} /^## ⬆️/{f=0} f' "$APITEMPLATE")
+  grep -qiF -- 'memory scope' <<<"$hfence" && hostmiss="$hostmiss PI-template:{config-record INSIDE the paste fence}"
+  for hf in "$SHARED" "$MANIFEST" "$PROFDIR/advisor-project-surface.md" "$APBOOT" "$IDXTEMPLATE"; do
+    grep -qF -- 'HOST-1' "$hf" && hostmiss="$hostmiss $(basename "$hf"):{HOST-1 leaked into a distributable carrier}"
+  done
+  [ -z "$hostmiss" ] && OKAY "hosted-Project configuration owned (HOST-1 per instance + PROJECT-CONFIG home + A13 timing branches + outside-fence record)" || FAIL "hosted-Project configuration clause(s) missing:$hostmiss"
+  # 14c the governed hosted-Project POPULATION — HOST-1 claims every instance using this deployment shape, so
+  #     both operational creation paths must trigger on that same population. A hosted domain-authority review
+  #     Project uses the shape and is NOT a repo-advisor Project; narrowing either trigger back to "advisor
+  #     surface" would let such a Project inherit an unexamined memory default while the registry asserts the
+  #     decision is mandatory. PROJECT-CONFIG is a SEMANTIC home — identical required fields, per-variant
+  #     carrier — so a sole-carrier claim puts a governed variant outside a requirement that names it. The
+  #     creation-path limbs are matched against the EXTRACTED memory-scope step, not the whole file: both docs
+  #     legitimately discuss advisor surfaces elsewhere, and a whole-file match would be untestable. An empty
+  #     extraction fails closed rather than passing vacuously.
+  local hpop="" hwf="" hpr="" hnW="" hnP=""
+  hnW=$(tr -s '[:space:]' ' ' < "$INSTDOC"); hnP=$(tr -s '[:space:]' ' ' < "$INSTPROMPT")
+  grep -qF -- 'hosted domain-authority review Project' <<<"$hnA" || hpop="$hpop arch:{domain-authority-variant-in-governed-population}"
+  grep -qF -- 'ASK-facing repo-advisor and hosted domain-authority review alike' <<<"$hnA" || hpop="$hpop arch:{A13-population}"
+  grep -qF -- 'is a semantic deployment home, not one named file' <<<"$hnA" || hpop="$hpop arch:{PROJECT-CONFIG-semantic-not-one-file}"
+  grep -qF -- "own operator configuration canonical" <<<"$hnA" || hpop="$hpop arch:{per-variant-carrier}"
+  grep -qF -- 'repo-advisor implementation of' <<<"$hnT" || hpop="$hpop PI-template:{repo-advisor-implementation-not-universal}"
+  grep -qF -- 'own operator configuration canonical' <<<"$hnT" || hpop="$hpop PI-template:{other-variant-carrier}"
+  hwf=$(grep -iE -- 'memory[ -]scope' "$INSTDOC" | tr -s '[:space:]' ' ')
+  hpr=$(grep -iE -- 'memory[ -]scope' "$INSTPROMPT" | tr -s '[:space:]' ' ')
+  [ -n "$hwf" ] || hpop="$hpop workflow:{memory-scope-step-absent}"
+  [ -n "$hpr" ] || hpop="$hpop prompt:{memory-scope-output-absent}"
+  grep -qF -- 'repo-advisor Project' <<<"$hwf" || hpop="$hpop workflow:{repo-advisor-variant-named}"
+  grep -qF -- 'domain-authority review Project' <<<"$hwf" || hpop="$hpop workflow:{domain-authority-variant-named}"
+  grep -qF -- 'Personal-context Projects' <<<"$hwf" || hpop="$hpop workflow:{personal-context-boundary}"
+  grep -qEi -- 'if (an|any) (external )?advisor surface is planned' <<<"$hwf" && hpop="$hpop workflow:{STALE advisor-only trigger}"
+  grep -qF -- 'repo-advisor Project' <<<"$hpr" || hpop="$hpop prompt:{repo-advisor-variant-named}"
+  grep -qF -- 'domain-authority review Project' <<<"$hpr" || hpop="$hpop prompt:{domain-authority-variant-named}"
+  grep -qF -- 'Personal-context Projects' <<<"$hpr" || hpop="$hpop prompt:{personal-context-boundary}"
+  grep -qEi -- 'if (an|any) (external )?advisor surface is planned' <<<"$hpr" && hpop="$hpop prompt:{STALE advisor-only trigger}"
+  for hz in "$hnA" "$hnT" "$hnW" "$hnP"; do
+    grep -qEi -- '(is|remains) the (sole|only|single|universal) [^ ]*PROJECT-CONFIG[^ ]* carrier' <<<"$hz" && hpop="$hpop {STALE sole-PROJECT-CONFIG-carrier claim}"
+    grep -qEi -- '(includ(es|ing)|extends? to) [^ ]{0,6}personal-context Project|HOST-1 (also )?governs personal-context|personal-context Projects? (are|is) (also )?governed by this' <<<"$hz" && hpop="$hpop {STALE personal-context pulled into the population}"
+  done
+  [ -z "$hpop" ] && OKAY "hosted-Project population covered (repo-advisor + domain-authority review in both creation paths; PROJECT-CONFIG semantic, per-variant carrier)" || FAIL "hosted-Project population clause(s) missing:$hpop"
+  # 14e coverage accounting — the report is the anti-loss ledger, so a new shared requirement must land on
+  #     EVERY accounting axis, not only the total. Shipping HOST-1 while the ruling and deployed-presence axes
+  #     still classify 78 would make one file assert 79 active shared IDs, 78 classified by ruling, 78
+  #     classified by deployment, and 0 unowned — claims that cannot all be true. Both axes are RECOMPUTED
+  #     from the report's own category counts and compared against the declared shared-ID figure, so a future
+  #     count that stops summing fails on arithmetic rather than on a missing token. `restored as surface
+  #     overlay` is deliberately EXCLUDED: it counts OVERLAY IDs, which sit outside the shared total.
+  local covmiss="" shid="" rsum=0 dsum=0 cv=""
+  covnum(){ awk -v lbl="  $1" 'index($0,lbl)==1 { r=substr($0,length(lbl)+1); if (match(r,/^ +[0-9]+/)) { v=substr(r,RSTART,RLENGTH); gsub(/ /,"",v); print v+0; exit } }' "$APARCH"; }
+  shid=$(grep -oE '=[[:space:]]*[0-9]+ shared' "$APARCH" | head -1 | grep -oE '[0-9]+')
+  [ -n "$shid" ] || covmiss="$covmiss {shared-ID figure unreadable}"
+  for cv in PRESERVE RESTORE REVISE NEW; do
+    local n; n=$(covnum "$cv"); [ -n "$n" ] || { covmiss="$covmiss {ruling axis missing $cv}"; n=0; }; rsum=$((rsum+n))
+  done
+  for cv in FULL PARTIAL ABSENT TEMPLATE-ONLY "n/a (revised)" "n/a (new)"; do
+    local n; n=$(covnum "$cv"); [ -n "$n" ] || { covmiss="$covmiss {deployed axis missing $cv}"; n=0; }; dsum=$((dsum+n))
+  done
+  [ -n "$shid" ] && [ "$rsum" = "$shid" ] || covmiss="$covmiss {ruling axis sums to $rsum, shared IDs $shid}"
+  [ -n "$shid" ] && [ "$dsum" = "$shid" ] || covmiss="$covmiss {deployed axis sums to $dsum, shared IDs $shid}"
+  [ "$(covnum 'active shared rulings')" = "$rsum" ] || covmiss="$covmiss {declared active-shared-rulings total disagrees with the recomputed $rsum}"
+  [ "$(covnum 'deployed-presence total')" = "$dsum" ] || covmiss="$covmiss {declared deployed-presence total disagrees with the recomputed $dsum}"
+  [ "$(covnum NEW)" = "1" ] || covmiss="$covmiss {NEW ruling count is not 1}"
+  grep -qF -- 'NEW 1 HOST-1' <<<"$hnA" || covmiss="$covmiss {NEW ruling row does not name HOST-1}"
+  grep -qF -- 'LIFE-4k · HOST-1' <<<"$hnA" || covmiss="$covmiss {n/a (new) ID list does not name HOST-1}"
+  [ "$(covnum 'n/a (new)')" = "18" ] || covmiss="$covmiss {n/a (new) count is not 18}"
+  [ -z "$covmiss" ] && OKAY "coverage accounting balances (ruling $rsum + deployed $dsum both = $shid shared IDs; HOST-1 carried as NEW and n/a (new))" || FAIL "coverage accounting defect(s):$covmiss"
 
   # 15 routed-instance lifecycle — POSITIVE clauses in both shared-core carriers, plus NEGATIVE assertions that no
   #    carrier still teaches the outgoing model. The rule is only conformant when both halves hold: stating the
