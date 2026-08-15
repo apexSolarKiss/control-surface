@@ -1067,6 +1067,28 @@
    "activated_by": "#160 / 51339c2"
   },
   {
+   "rule_id": "inter-session-coordination",
+   "scope_class": "coordinator",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [
+    "control-surface"
+   ],
+   "carrier_mode": "referenced",
+   "profile": null,
+   "replicated_into_consumers": false,
+   "source_anchor": "control-surface/AGENTS.md#inter-session-coordination + prompts/inter-session-coordination.md",
+   "referenced_by": [],
+   "failure_mode": "a peer-session message treated as durable state, as evidence, or as ASK authority; a second state tracker created alongside the durable owner; delivery to the wrong session; a locator or filename leaked across a wall; an executor performing a cross-surface feed or bypassing the routed-handoff lifecycle; cross-session permission laundering; silence after an explicit ASK-requested blocked-gate check; or attempted use across an operating-surface boundary, bypassing ASK's relay",
+   "active_holds": [],
+   "status": "active",
+   "amended_by": [],
+   "explicit_exclusions": [],
+   "proposed_by": null,
+   "activated_by": "#196 / 4aa696df0822bf0f19e8ca76be9347e1c68dd662",
+   "note": "V1 transport boundary is same-machine only; cross-machine and web transport await a separate ASK ruling. referenced_by is empty BY CENSUS at introduction — no consumer references this coordinator yet. Status is candidate ONLY in the pre-PR content commit, and MUST be flipped to active before merge: a candidate row must never merge beside an operative AGENTS rule. Repo CONVENTION - not a check.sh constraint - is that a coordinator row's activated_by names its PR as '#<PR> / <content SHA>'; check.sh would also accept a bare content SHA, as scaffold rows carry. The pre-merge two-commit activation procedure for this row is recorded in its PR, not here."
+  },
+  {
    "rule_id": "standing-upstream-conformance-grant",
    "scope_class": "opt-in-grant",
    "authority_owner": "control-surface (fragment text) + each consumer (opt-in decision)",

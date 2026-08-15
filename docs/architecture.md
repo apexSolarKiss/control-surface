@@ -84,6 +84,8 @@ ASK project work routinely involves multiple writer-capable sessions: parallel e
 
 The single-writer-per-branch rule encoded in `AGENTS.md` handles this. Operators must verify state freshly when picking up a branch, treat the working tree as authoritative over their own memory, and stop on suspected concurrent mutation.
 
+Those sessions sometimes need to coordinate mid-task — one clears a gate another is blocked on, or reports that an explicitly checked gate is still blocked. That is a within-surface concern; coordination across an operating-surface boundary stays with ASK's relay. [`prompts/inter-session-coordination.md`](../prompts/inter-session-coordination.md) is the coordinator runbook for that case. For a **transition** event, the evidence object and the durable owner land first. For an explicitly checked gate that is **still blocked**, the notice points at the existing source actually checked and creates no durable write, no new artifact, and no polling obligation — reporting that nothing changed is not a reason to write. Either way the peer notice **owns** no state, evidence, or authority — it carries only locators and bounded, non-authoritative summaries pointing back to that owner. It separates the durable pull (what is true now) from the ephemeral push (go re-read it), so neither substitutes for the other.
+
 ## Why The Rules Exist
 
 Most rules make reasoning inspectable across ASK, the executor, and any configured advisor while preserving one write authority. In the standard paired path they make the advisor/executor boundary productive; in direct execution they give ASK the same reviewable objects before mutation:
