@@ -303,7 +303,8 @@
    "status": "active",
    "amended_by": [
     "#157 / 400ba43 (measurement-target-at-point-of-execution bullet)",
-    "#185 / 2c4cb7065042d686c0e7a5eb917cd64e3b96a05c (throughput discipline: named-failure-mode blocking criterion; materiality-sensitive frozen-record correction threshold; correction-loop termination)"
+    "#185 / 2c4cb7065042d686c0e7a5eb917cd64e3b96a05c (throughput discipline: named-failure-mode blocking criterion; materiality-sensitive frozen-record correction threshold; correction-loop termination)",
+    "#197 / 7fe8c45fd7ef33485d97bc88a8c7a15c1e42fd66 (runtime-capacity claims are not verified state)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
