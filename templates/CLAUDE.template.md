@@ -19,7 +19,7 @@ Before any further action after compaction, **affirmatively re-establish** the p
 - the current ASK authorization and approved scope;
 - explicit non-actions;
 - the current gate and intended terminal state;
-- exact durable-owner, review-object, PR, and artifact locators, each carrying the load-bearing state identity that makes it reviewable — PR base and head SHA, commit, version, or hash, as applicable;
+- exact durable-owner, review-object, PR, and artifact locators, each carrying the load-bearing state identity that makes it reviewable — PR base and head SHA, commit, version, or hash, as applicable. Read mutable owners live at use, reconcile them against that pin, and classify the movement before proceeding; see `AGENTS.md` §Source-of-Truth Boundaries / Aging-Rate Principle;
 - unresolved blockers and write-aperture state.
 
 Recovery differs by limb. **ASK authority:** preserve the exact ASK relay or envelope; if it cannot be independently established after compaction, stop and obtain a fresh ASK relay — **never reconstruct authority** from a program row, plan, recap, PR, review object, artifact, or the compaction summary. **State and evidence:** re-read their durable owners. **Mutable objects:** re-verify the load-bearing state identity, since a PR URL without its approved base and head SHA does not preserve the reviewed state. **The compaction summary is continuation context, not an authoritative replacement for those owners.**
