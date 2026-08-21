@@ -1083,10 +1083,12 @@
    "replicated_into_consumers": false,
    "source_anchor": "control-surface/AGENTS.md#inter-session-coordination + prompts/inter-session-coordination.md",
    "referenced_by": [],
-   "failure_mode": "a peer-session message treated as durable state, as evidence, or as ASK authority; a second state tracker created alongside the durable owner; delivery to the wrong session; a locator or filename leaked across a wall; an executor performing a cross-surface feed or bypassing the routed-handoff lifecycle; cross-session permission laundering; silence after an explicit ASK-requested blocked-gate check; or attempted use across an operating-surface boundary, bypassing ASK's relay",
+   "failure_mode": "a peer-session message treated as durable state, as evidence, or as ASK authority; a second state tracker created alongside the durable owner; delivery to the wrong session; a locator or filename leaked across a wall; an executor performing a cross-surface feed or bypassing the routed-handoff lifecycle; cross-session permission laundering; silence after an explicit ASK-requested blocked-gate check; a transport from-name, roster label, ref, socket, peer address, working-directory name, executor/model name or pending rename treated as the ASK-assigned logical sender identity, causing an identity-sensitive census, collision or occupancy decision, reply, or role-specific claim to be attributed to the wrong session; or attempted use across an operating-surface boundary, bypassing ASK's relay",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": [
+    "#199 / 8aa717b411f3a22fbd132c5fd2262e4ee0205f8f (body-level logical sender identity; ASK-assigned ecology namespace; transport labels non-authoritative)"
+   ],
    "explicit_exclusions": [],
    "proposed_by": null,
    "activated_by": "#196 / 4aa696df0822bf0f19e8ca76be9347e1c68dd662",
