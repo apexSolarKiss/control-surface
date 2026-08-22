@@ -315,7 +315,7 @@
     "#185 / 2c4cb7065042d686c0e7a5eb917cd64e3b96a05c (throughput discipline: named-failure-mode blocking criterion; materiality-sensitive frozen-record correction threshold; correction-loop termination)",
     "#197 / 7fe8c45fd7ef33485d97bc88a8c7a15c1e42fd66 (runtime-capacity claims are not verified state)",
     "#198 / a8798d7b59eaf553f4319f32c5d990bcb35b3690 (durable-owner pin retained; read live at use; reconcile and classify movement)",
-    "PRG-005/C2.3 (v3 Stage-1 split disposition, 2026-08-22 \u2014 pre-landing revision: a bounded-region or inverse-transform proof establishes only the transformation it directly checks, and is not evidence that no intervening write was overwritten; superseded by the PR#/SHA form at activation)"
+    "#200 / 861a0b4067857ae4b4588033b66e1c91694b332e (bounded-region / inverse-transform proof establishes only the transformation it directly checks; not evidence that no intervening write was overwritten)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -1284,7 +1284,7 @@
   },
   {
    "rule_id": "write-guarantee-level-declaration",
-   "scope_class": "candidate",
+   "scope_class": "shared-core",
    "authority_owner": "control-surface",
    "operational_carrier_owner": "control-surface",
    "applies_to": [
@@ -1302,16 +1302,16 @@
    "source_anchor": "### Write Guarantee Levels",
    "failure_mode": "cooperative exclusion, or a careful read-compare-then-write sequence, reported as compare-and-swap; a caller's required guarantee level silently served at a lower level so the operation reports success while the uncovered interval remains open, manufacturing confidence that no update was lost; a level-2 claim asserted from the existence of a revision token rather than from an implemented and exercised conditional write; writers presumed to exclude one another while resolving the target to different canonical identities, different exclusion primitives, or different lock planes",
    "active_holds": [],
-   "status": "candidate",
+   "status": "active",
    "amended_by": [],
-   "note": "CANDIDATE in the pre-PR content commit only. The shared text lands in the same commit under ### Write Guarantee Levels; the row MUST be flipped to scope_class shared-core / status active with activated_by '#<PR> / <content SHA>' before merge, per the repo's two-commit activation convention — a candidate row must never merge beside an operative AGENTS rule. The rule fixes the portable semantics only; the PRG-005 v3 reference implementation is NOT the normative definition and is held under hold-write-transaction-mechanism.",
+   "note": "The rule fixes the portable semantics only; the PRG-005 v3 reference implementation is NOT the normative definition and is held under hold-write-transaction-mechanism.",
    "explicit_exclusions": [],
-   "proposed_by": "PRG-005/C2.1 (v3 Stage-1 split disposition, 2026-08-22)",
-   "activated_by": null
+   "proposed_by": null,
+   "activated_by": "#200 / 861a0b4067857ae4b4588033b66e1c91694b332e"
   },
   {
    "rule_id": "bounded-region-byte-contract",
-   "scope_class": "candidate",
+   "scope_class": "shared-core",
    "authority_owner": "control-surface",
    "operational_carrier_owner": "control-surface",
    "applies_to": [
@@ -1329,12 +1329,12 @@
    "source_anchor": "### Bounded-Region Byte Contract",
    "failure_mode": "a bounded write or a partial-file identity claim whose boundary, occurrence selection, anchor inclusion, separator ownership, trailing bytes, encoding, or structural handling is left implicit, so the operation silently captures or drops adjacent bytes; an anchor scan that runs on to end-of-file instead of failing closed; two declaration fields contradicting one another over the same bytes; a structure-bearing source edited by raw anchor match inside a fenced or quoted payload; or an instrument that shares the operation's unstated assumption and therefore cannot detect any of these",
    "active_holds": [],
-   "status": "candidate",
+   "status": "active",
    "amended_by": [],
-   "note": "CANDIDATE in the pre-PR content commit only; same two-commit activation as write-guarantee-level-declaration. The rule names the required declaration CATEGORIES. It does not adopt the PRG-005 v3 RegionSpec dataclass, its field count, or any API as shared protocol — that is an implementation schema, and the v3 resolver is held under hold-write-transaction-mechanism.",
+   "note": "The rule names the required declaration CATEGORIES. It does not adopt the PRG-005 v3 RegionSpec dataclass, its field count, or any API as shared protocol — that is an implementation schema, and the v3 resolver is held under hold-write-transaction-mechanism.",
    "explicit_exclusions": [],
-   "proposed_by": "PRG-005/C2.2 (v3 Stage-1 split disposition, 2026-08-22)",
-   "activated_by": null
+   "proposed_by": null,
+   "activated_by": "#200 / 861a0b4067857ae4b4588033b66e1c91694b332e"
   },
   {
    "rule_id": "write-transaction-mechanism",
