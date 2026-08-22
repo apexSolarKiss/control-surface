@@ -41,6 +41,13 @@
    "blocks": [
     "domain-authority-review-profile"
    ]
+  },
+  {
+   "hold_id": "hold-write-transaction-mechanism",
+   "description": "the shared mutable-state write-transaction MECHANISM held pending one bounded reviewed unit resolving all of: post-unlink state semantics (exclusion has ENDED once the lock is gone, terminal evidence may be durability-uncertain, and no false lock-retained claim is made); exact supported-level validation with a genuinely exclusion-free level 0; journal-failure reporting that surfaces the operational failure AND the durable-evidence failure separately; region cross-field invariants so separator ownership cannot be contradicted by trailing bytes; a structural resolver for the actual structure-bearing target class, or an explicit decision not to support that class; conditional-write feasibility on the candidate backend established by exercise rather than inferred from a revision token; a comparison of the candidate same-host exclusion primitives across crash release, stale visibility and audit evidence; and one later ASK-authorized operator pressure test with one holder and one cooperating contender. ASK has additionally ruled that reference-implementation landing, adapter installation, and production exclusion-primitive selection remain prohibited while this hold stands - a ruling recorded here, NOT a registry-enforced consequence of active_holds, which governs graduation and retirement only. Named surfaces, primitives and vendor identities are deliberately excluded from this registry per the shared Tool-Dependent Workflow Rules and live in the governing ASK disposition record. The semantic rules write-guarantee-level-declaration and bounded-region-byte-contract are NOT blocked by this hold and proceed independently.",
+   "blocks": [
+    "write-transaction-mechanism"
+   ]
   }
  ],
  "rules": [
@@ -300,14 +307,15 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Verification Claims and Evidence Boundaries",
-   "failure_mode": "a bounded check reported as broader evidence than it supports; wrong measurement target; a non-material discrepancy in evidence about an operation blocking an otherwise verified result without a named credible failure mode; a non-material imperfection in a frozen working, receipt, audit, or provenance artifact triggering an append, seal, or successor despite no decision-relevant failure mode; a correction round opened that names no decision it can change and no genuinely new evidence; carry-forward regeneration continued after correction-introduced defects predominate; an executor's unverifiable estimate of its own remaining context capacity presented as runtime state and used to manufacture a stop condition, thread-transfer recommendation, recap obligation, or ASK decision; a genuine runtime capacity readout — including one under a declared fixed limit with no reduction path — used to manufacture a thread transfer rather than an orderly stop at an already-authorized checkpoint; conversely, an explicit runtime blocking or reduction failure, or an exact post-reduction material loss, reported as a capacity estimate rather than as the named signal or the named missing material; a context-reduction path that silently drops the portable continuity set — current authorization and approved scope, explicit non-actions, current gate and terminal state, exact durable locators, unresolved blockers and write apertures — so the executor proceeds without knowing anything is missing, or treats a generated summary as an authoritative replacement for those owners; lost ASK authority reconstructed from a program row, plan, recap, PR, review object, artifact, durable-state owner, or generated summary rather than obtained as a fresh relay; or work resumed against a mutable locator after its approved state identity — PR base and head SHA, commit, version, or hash — was lost or drifted, without re-verifying both the current ASK envelope and the applicable review window; a context-reduction path that de-pins a durable owner instead of retaining the gate-required pin, reading the owner live at use and reconciling the movement, so a third-party mutation across the reduction is undetectable",
+   "failure_mode": "a bounded check reported as broader evidence than it supports; wrong measurement target; a non-material discrepancy in evidence about an operation blocking an otherwise verified result without a named credible failure mode; a non-material imperfection in a frozen working, receipt, audit, or provenance artifact triggering an append, seal, or successor despite no decision-relevant failure mode; a correction round opened that names no decision it can change and no genuinely new evidence; carry-forward regeneration continued after correction-introduced defects predominate; an executor's unverifiable estimate of its own remaining context capacity presented as runtime state and used to manufacture a stop condition, thread-transfer recommendation, recap obligation, or ASK decision; a genuine runtime capacity readout — including one under a declared fixed limit with no reduction path — used to manufacture a thread transfer rather than an orderly stop at an already-authorized checkpoint; conversely, an explicit runtime blocking or reduction failure, or an exact post-reduction material loss, reported as a capacity estimate rather than as the named signal or the named missing material; a context-reduction path that silently drops the portable continuity set — current authorization and approved scope, explicit non-actions, current gate and terminal state, exact durable locators, unresolved blockers and write apertures — so the executor proceeds without knowing anything is missing, or treats a generated summary as an authoritative replacement for those owners; lost ASK authority reconstructed from a program row, plan, recap, PR, review object, artifact, durable-state owner, or generated summary rather than obtained as a fresh relay; or work resumed against a mutable locator after its approved state identity — PR base and head SHA, commit, version, or hash — was lost or drifted, without re-verifying both the current ASK envelope and the applicable review window; a context-reduction path that de-pins a durable owner instead of retaining the gate-required pin, reading the owner live at use and reconciling the movement, so a third-party mutation across the reduction is undetectable; a bounded-region or inverse-transform proof cited as evidence that no intervening write was overwritten, when it is evaluated against the operation's recorded preimage and resulting bytes and can therefore pass even where a different state existed immediately before replacement",
    "active_holds": [],
    "status": "active",
    "amended_by": [
     "#157 / 400ba43 (measurement-target-at-point-of-execution bullet)",
     "#185 / 2c4cb7065042d686c0e7a5eb917cd64e3b96a05c (throughput discipline: named-failure-mode blocking criterion; materiality-sensitive frozen-record correction threshold; correction-loop termination)",
     "#197 / 7fe8c45fd7ef33485d97bc88a8c7a15c1e42fd66 (runtime-capacity claims are not verified state)",
-    "#198 / a8798d7b59eaf553f4319f32c5d990bcb35b3690 (durable-owner pin retained; read live at use; reconcile and classify movement)"
+    "#198 / a8798d7b59eaf553f4319f32c5d990bcb35b3690 (durable-owner pin retained; read live at use; reconcile and classify movement)",
+    "PRG-005/C2.3 (v3 Stage-1 split disposition, 2026-08-22 \u2014 pre-landing revision: a bounded-region or inverse-transform proof establishes only the transformation it directly checks, and is not evidence that no intervening write was overwritten; superseded by the PR#/SHA form at activation)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -1272,6 +1280,80 @@
    "note": "HELD \u2014 concerns PROMOTION of the instrument-scoped method bundle, NOT ownership/maintenance of the already-active verification-claims rule. C1 (verification-execution-completion) is a separate active rule and is NOT suppressed by this hold.",
    "explicit_exclusions": [],
    "proposed_by": "held",
+   "activated_by": null
+  },
+  {
+   "rule_id": "write-guarantee-level-declaration",
+   "scope_class": "candidate",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [
+    "control-surface",
+    "method-ASK",
+    "design-system-ASK",
+    "personal-context-system",
+    "ASK",
+    "asset-pipeline-ASK",
+    "urban-observatory",
+    "food-science-engine"
+   ],
+   "carrier_mode": "resolved-local",
+   "profile": null,
+   "source_anchor": "### Write Guarantee Levels",
+   "failure_mode": "cooperative exclusion, or a careful read-compare-then-write sequence, reported as compare-and-swap; a caller's required guarantee level silently served at a lower level so the operation reports success while the uncovered interval remains open, manufacturing confidence that no update was lost; a level-2 claim asserted from the existence of a revision token rather than from an implemented and exercised conditional write; writers presumed to exclude one another while resolving the target to different canonical identities, different exclusion primitives, or different lock planes",
+   "active_holds": [],
+   "status": "candidate",
+   "amended_by": [],
+   "note": "CANDIDATE in the pre-PR content commit only. The shared text lands in the same commit under ### Write Guarantee Levels; the row MUST be flipped to scope_class shared-core / status active with activated_by '#<PR> / <content SHA>' before merge, per the repo's two-commit activation convention — a candidate row must never merge beside an operative AGENTS rule. The rule fixes the portable semantics only; the PRG-005 v3 reference implementation is NOT the normative definition and is held under hold-write-transaction-mechanism.",
+   "explicit_exclusions": [],
+   "proposed_by": "PRG-005/C2.1 (v3 Stage-1 split disposition, 2026-08-22)",
+   "activated_by": null
+  },
+  {
+   "rule_id": "bounded-region-byte-contract",
+   "scope_class": "candidate",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [
+    "control-surface",
+    "method-ASK",
+    "design-system-ASK",
+    "personal-context-system",
+    "ASK",
+    "asset-pipeline-ASK",
+    "urban-observatory",
+    "food-science-engine"
+   ],
+   "carrier_mode": "resolved-local",
+   "profile": null,
+   "source_anchor": "### Bounded-Region Byte Contract",
+   "failure_mode": "a bounded write or a partial-file identity claim whose boundary, occurrence selection, anchor inclusion, separator ownership, trailing bytes, encoding, or structural handling is left implicit, so the operation silently captures or drops adjacent bytes; an anchor scan that runs on to end-of-file instead of failing closed; two declaration fields contradicting one another over the same bytes; a structure-bearing source edited by raw anchor match inside a fenced or quoted payload; or an instrument that shares the operation's unstated assumption and therefore cannot detect any of these",
+   "active_holds": [],
+   "status": "candidate",
+   "amended_by": [],
+   "note": "CANDIDATE in the pre-PR content commit only; same two-commit activation as write-guarantee-level-declaration. The rule names the required declaration CATEGORIES. It does not adopt the PRG-005 v3 RegionSpec dataclass, its field count, or any API as shared protocol — that is an implementation schema, and the v3 resolver is held under hold-write-transaction-mechanism.",
+   "explicit_exclusions": [],
+   "proposed_by": "PRG-005/C2.2 (v3 Stage-1 split disposition, 2026-08-22)",
+   "activated_by": null
+  },
+  {
+   "rule_id": "write-transaction-mechanism",
+   "scope_class": "candidate",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [],
+   "carrier_mode": "resolved-local",
+   "profile": null,
+   "source_anchor": null,
+   "failure_mode": "a shared mutable-state write-transaction MECHANISM adopted before its post-unlink durability semantics, exact level validation, journal-failure visibility, region cross-field invariants, structural resolver, backend conditional-write feasibility, primitive comparison, and operator pressure test are resolved — binding consumers to an exclusion implementation whose recovery model has been shown to misreport its own guarantee",
+   "active_holds": [
+    "hold-write-transaction-mechanism"
+   ],
+   "status": "held",
+   "amended_by": [],
+   "note": "HELD — concerns ADOPTION of the write-transaction MECHANISM (lock plane, journal, reclaim policy, region resolver), NOT the portable semantics. write-guarantee-level-declaration and bounded-region-byte-contract are separate rows and are NOT suppressed by this hold. The PRG-005 v3 reference implementation is a proof of implementability, explicitly NOT a landing source; Stage-1 recorded seven exact mechanism defects. Reopen conditions are enumerated in hold-write-transaction-mechanism and in ecology-ASK-EXTERNAL/scratch/2026-08-22_PRG-005_v3-stage1-split-disposition.md.",
+   "explicit_exclusions": [],
+   "proposed_by": "PRG-005 v3 Stage-1 split disposition, 2026-08-22 (held on introduction)",
    "activated_by": null
   }
  ],
