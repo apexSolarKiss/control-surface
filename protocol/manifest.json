@@ -1304,7 +1304,7 @@
    "active_holds": [],
    "status": "active",
    "amended_by": [
-    "PRG-005 Stage-2 correction, 2026-08-22 — pre-landing revision: Level-1 non-participant detection and mismatched-identity / lock-plane evidence bounds corrected; superseded by the PR#/SHA form in the following provenance commit"
+    "#200 / 5524b766ab0d3e714edd993309d9273c3aeb6fde (Level-1 non-participant detection and mismatched-identity / lock-plane evidence bounds corrected)"
    ],
    "note": "The rule fixes the portable semantics only; the PRG-005 v3 reference implementation is NOT the normative definition and is held under hold-write-transaction-mechanism.",
    "explicit_exclusions": [],
