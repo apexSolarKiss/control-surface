@@ -691,9 +691,9 @@ LEVEL 2   backend-enforced conditional mutation — the backend itself
 
 **No silent downgrade.** Where a caller requires a level the backend cannot provide, the operation **fails**. It never proceeds at a lower level and reports success — a downgrade that reports success is worse than no protection, because it manufactures confidence.
 
-**Level 1 is not compare-and-swap** and is never labeled as such. It makes the read-to-write interval irrelevant *for participants*; a non-participant writing inside that interval is still overwritten and still undetected. Only Level 2 closes the interval.
+**Level 1 is not compare-and-swap** and is never labeled as such. It makes the read-to-write interval irrelevant *for participants*. A non-participant is outside that exclusion guarantee: movement is detected only at the operation's named observation points, and a write after the final observation and before replacement may be overwritten without detection. Within this model, only an implemented Level 2 conditional write closes that interval against non-participants on the supported backend.
 
-Writers cooperate only where all three Level-1 identities match. Two writers resolving the same file to different canonical identities, or using different planes, are not excluding each other — and neither will observe that.
+Writers cooperate only where all three Level-1 identities match. Two writers resolving the same file to different canonical identities, or using different exclusion primitives or lock planes, do not exclude each other. The Level-1 primitive itself supplies no evidence that they are coordinating.
 
 ### Bounded-Region Byte Contract
 <!-- rule-id: bounded-region-byte-contract -->

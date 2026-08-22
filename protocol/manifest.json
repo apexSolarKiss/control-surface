@@ -1303,7 +1303,9 @@
    "failure_mode": "cooperative exclusion, or a careful read-compare-then-write sequence, reported as compare-and-swap; a caller's required guarantee level silently served at a lower level so the operation reports success while the uncovered interval remains open, manufacturing confidence that no update was lost; a level-2 claim asserted from the existence of a revision token rather than from an implemented and exercised conditional write; writers presumed to exclude one another while resolving the target to different canonical identities, different exclusion primitives, or different lock planes",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": [
+    "PRG-005 Stage-2 correction, 2026-08-22 — pre-landing revision: Level-1 non-participant detection and mismatched-identity / lock-plane evidence bounds corrected; superseded by the PR#/SHA form in the following provenance commit"
+   ],
    "note": "The rule fixes the portable semantics only; the PRG-005 v3 reference implementation is NOT the normative definition and is held under hold-write-transaction-mechanism.",
    "explicit_exclusions": [],
    "proposed_by": null,
