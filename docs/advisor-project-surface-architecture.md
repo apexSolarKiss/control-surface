@@ -311,6 +311,7 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | LIFE-4i | **Whose read satisfies the obligation.** The current feed obligation is satisfied **only** when the marked payload is read into the **intended active recipient surface under ASK's feed**. A source-side inspection, byte verification, governing-record read, or inspection-copy read may supply identification or verification evidence but does **not** satisfy the feed. The read and the filename mutation are distinct events. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | separable: a carrier can state the branch table while leaving the satisfying actor unnamed, which lets a preflight inspection be misread as the feed |
 | LIFE-4j | **Already-read recovery.** If an unidentified `-TBI` artifact was nevertheless read into the intended recipient surface, record the successful read and the unresolved-role/state exception. Demote **terminal `-TBI` only** — the underlying artifact identity and any truthful durable-state marker remain authoritative — and resolve the overlay immediately once role and prior state are established. Bounded error recovery, not a second normal path. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | separable: the normal-path stop condition can be carried without the failure path, leaving a satisfied obligation asserted as outstanding |
 | LIFE-4k | **Canceled feed obligation.** ASK may remove terminal `-TBI` without a content read, **only where the underlying artifact already has an independently complete identity or durable state**. Cancellation is not ingestion, not a `decline`, and not a disposition. **A fresh routed handoff may not become bare through cancellation** — it still requires an explicit pre-ingestion disposition, `-supersededA` being the named-successor case. | shared protocol | BOOTSTRAP | PRESERVE | n/a (new) | separable: the state machine reads as complete without the non-feed exit, which then gets improvised as a decline or a silent bare rename |
+| LIFE-4l | **One obligation, one marked payload — artifact-instance identity.** `-TBI` attaches only to the exact artifact instance ASK intends to feed; in a two-copy handoff the retained origin or provenance copy stays unsuffixed and only the recipient-bound copy carries the overlay. Byte-identical files at two paths are **two artifact instances**; location alone never creates queue membership, and one outstanding feed obligation is represented by exactly one live marked instance. **Move is not copy** — a byte-preserving move or rename of the designated payload preserves the same marked instance and is not a lifecycle event, while copying creates another instance and neither transfers nor duplicates designation by itself. Transferring designation leaves exactly one marked instance in the same bounded operation: an independently complete retained origin or provenance copy stays or becomes unsuffixed, and any former temporary transport instance is removed or resolved by its underlying role and prior state — **a fresh routed handoff is never left bare merely to transfer designation**. A file in origin scratch may carry `-TBI` only where that exact file is itself the designated payload, or is a distinct temporary recipient-bound transport instance. **Recipient lifecycle does not mirror onto provenance:** `-ingested`, `-supersededA`, `-supersededP`, and terminal routed-handoff dispositions belong to the recipient routed instance and are never copied onto a retained origin or provenance copy. | shared protocol | BOOTSTRAP | NEW | n/a (new) | the artifact-instance identity axis, and the one the lifecycle rows never stated: LIFE-4 says what the marker *means*, LIFE-4d which transitions are legal, LIFE-4h how the tokens are ordered — none of them says how many marked instances one obligation may have, which is what let retained sender copies acquire and keep `-TBI` and let recipient suffixes mirror back onto provenance |
 | LIFE-5 | `-PTX` is an artifact-role marker; `_vN` indexes the transcript artifact; neither confers lifecycle state or authority; PTX progression is ASK-owned. | shared protocol | BOOTSTRAP | PRESERVE | FULL | |
 | LIFE-5a | The `-PTX` role marker is **retained** throughout any version lineage. The PTX files are themselves the lineage; they receive no separate canonical-plus-snapshot chain. | shared protocol | BOOTSTRAP | RESTORE | ABSENT | |
 | LIFE-5b | A PTX is **not** a handoff, approval, execution instruction, or ingestion-state marker. Do not absorb one as project truth without classification. | shared protocol | BOOTSTRAP | RESTORE | ABSENT | |
@@ -550,12 +551,12 @@ Every requirement has a home or a recorded disposition. **Unowned count is zero*
 ## Coverage report — this revision
 
 ```text
-registry IDs                      102   = 79 shared + 22 surface overlays + 1 retired shared requirement
+registry IDs                      103   = 80 shared + 22 surface overlays + 1 retired shared requirement
 
 home presence — NOT a disjoint partition. Each line counts the IDs PRESENT in that home; a co-homed ID is
-counted once in EACH of its declared homes, so these lines are not mutually exclusive and do not sum to 102.
+counted once in EACH of its declared homes, so these lines are not mutually exclusive and do not sum to 103.
   PI-FLOOR                         10   shared IDs
-  BOOTSTRAP                        76   shared IDs
+  BOOTSTRAP                        77   shared IDs
   INDEX                             5   shared IDs
   PROJECT-CONFIG                    1   shared ID — HOST-1, the hosted-Project configuration decision.
                                         Recorded outside the pasted fence; never mounted, and its
@@ -589,12 +590,13 @@ ruling (shared IDs)
                                         scoping, the withdrawn PTX no-stacking clause, the
                                         2026-07-29 review-window regression repair, and the
                                         2026-07-30 mounted-source identity limb (READ-2)
-  NEW                               1   HOST-1 — the hosted-Project memory-scope decision, created by
-                                        this revision rather than recovered from a prior carrier
+  NEW                               2   HOST-1 — the hosted-Project memory-scope decision · LIFE-4l —
+                                        the artifact-instance identity invariant. Both created by their
+                                        own revision rather than recovered from a prior carrier
   ----                            ---
-  active shared rulings            79   58 + 9 + 11 + 1 — must equal the shared-ID total above.
+  active shared rulings            80   58 + 9 + 11 + 2 — must equal the shared-ID total above.
                                         `restored as surface overlay` below is NOT one of these
-                                        categories: it counts OVERLAY IDs, which are outside the 79
+                                        categories: it counts OVERLAY IDs, which are outside the 80
   restored as surface overlay       2   OVL-AP-1 · OVL-ECO-2 (revised 2026-07-31 — per-hosted-
                                         Project topology corrected, R1; rewritten 2026-08-02 as a
                                         timeless invariant, R5 — current deployed topology now
@@ -615,14 +617,14 @@ deployed presence at the 2026-07-25 audit (shared IDs)
                                         2026-07-30 with the display-label identity limb, so its
                                         2026-07-25 FULL reading no longer describes the
                                         requirement now in force
-  n/a (new)                        18   START-1 · FAIL-1 — created by this architecture ·
+  n/a (new)                        19   START-1 · FAIL-1 — created by this architecture ·
                                         REVIEW-9 · REVIEW-10 · REVIEW-11 · REVIEW-12 · REVIEW-13 ·
                                         LIFE-4b · LIFE-4c · LIFE-4d · LIFE-4e · LIFE-4f · LIFE-4g ·
-                                        LIFE-4h · LIFE-4i · LIFE-4j · LIFE-4k · HOST-1 —
+                                        LIFE-4h · LIFE-4i · LIFE-4j · LIFE-4k · LIFE-4l · HOST-1 —
                                         created after the 2026-07-25 audit, so no deployment
                                         was observed for them
   ----                            ---
-  deployed-presence total          79   38 + 5 + 9 + 7 + 2 + 18 — must equal the shared-ID total
+  deployed-presence total          80   38 + 5 + 9 + 7 + 2 + 19 — must equal the shared-ID total
                                         above. Every shared ID carries exactly one deployed reading
 
 unresolved                          0

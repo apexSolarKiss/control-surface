@@ -277,8 +277,27 @@ handoff awaiting first ingestion**; such a handoff may instead exit before inges
 four-event path is what a fresh handoff traverses when it *is* ingested, not an inevitability of routing.
 Anything not currently in that state never enters the path — its overlay is simply removed. Feeding and ingestion are paired but **not atomic** — queue exit occurs on
 recipient-side ingestion, never on the feed attempt, and intent to ingest is not evidence of completed
-ingestion. The feed queue is **logical**: it may span an ASK-side staging area, an origin scratch, a transit
-surface, and the intake path, and relocation within the queue is not a lifecycle event.
+ingestion. The feed queue is **logical**: the one designated payload may sit in an ASK-side staging area, an
+origin scratch, a transit surface, or the intake path, and relocation within the queue is not a lifecycle
+event. That describes where the designated payload may be located; it does not place a retained sender or
+provenance copy in the queue.
+
+**One obligation, one marked payload.** `-TBI` attaches only to the exact artifact instance ASK intends to
+feed. In a two-copy handoff the retained origin or provenance copy stays **unsuffixed**; only the
+recipient-bound copy carries the overlay. Byte-identical files at two paths are **two artifact instances**;
+location alone never creates queue membership, and one outstanding feed obligation is represented by exactly
+one live marked artifact instance. **Move is not copy** — a byte-preserving move or rename of the designated
+payload preserves the same marked instance and is not a lifecycle event, while copying creates another
+instance and neither transfers nor duplicates designation by itself. If ASK designates the new copy as the
+payload, the same bounded operation leaves exactly one marked instance: a retained origin or provenance copy
+stays or becomes unsuffixed, and any former temporary transport instance is removed or resolved by its
+underlying role and prior state — **a fresh routed handoff is never left bare merely to transfer
+designation**. A file in origin scratch may carry `-TBI` only where that exact file is itself the designated
+payload — a PTX, report, or other independently complete artifact ASK intends to feed — or is a distinct
+temporary recipient-bound transport instance. **Recipient lifecycle does not mirror onto provenance:**
+`-ingested`, `-supersededA`, `-supersededP`, and the terminal routed-handoff dispositions belong to the
+recipient routed instance; a retained origin or provenance copy is never renamed to match them, and the
+recipient outcome is recorded through the recipient artifact and any separate lineage or disposition record.
 
 **Feeding is by value or by reference.** ASK feeds by attaching or pasting content, or by supplying the exact
 path the surface then resolves. Both are feeds; a bare exact path addressed to an active surface is a feed.
