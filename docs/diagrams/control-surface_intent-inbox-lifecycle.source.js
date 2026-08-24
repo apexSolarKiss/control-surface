@@ -2,7 +2,7 @@
    Source data for the routed-instance lifecycle diagram.
    Renderable by diagrams-static-H-engine.js.
 
-   D08 // intent-INbox routed-instance lifecycle // source-v1 // 2026-07-28
+   D08 // intent-INbox routed-instance lifecycle // source-v2 // 2026-08-23
 
    Subject: the executable state machine that AGENTS.shared.md §Inbound Handoff TBI
    Marker owns, drawn as a standalone figure. TREE_D01 carries an intent-inbox GROUP
@@ -14,6 +14,7 @@
      the resolution branch keys on STATE (fresh-awaiting-first-ingestion), not artifact CLASS
      -supersededA (never ingested) and -supersededP (ingested, then displaced) are different histories
      absorption is ONE disposition, not the name for all of them
+     one obligation is carried by exactly ONE marked artifact INSTANCE — location is not membership
 
    The grammar is prospective. Historical filenames retain the conventions in force when
    they were created; legacy tokens do not acquire these meanings.
@@ -102,6 +103,17 @@ window.TREE_D08 = {
         { label: 'relocation WITHIN the queue is not a lifecycle event', note: 'arriving in the intake folder is a move within the queue, not an entry into it and not an exit from it' },
         { label: 'a re-feed is a genuine new ingestion event', note: 'it does not reopen, reclassify, erase, or advance the underlying durable disposition' },
         { label: 'the grammar is PROSPECTIVE', note: 'historical filenames retain the conventions in force when they were created; legacy tokens do not acquire these meanings' },
+      ],
+    },
+    {
+      kind: 'section', label: 'artifact-instance identity', tag: 'one obligation · one marked payload',
+      children: [
+        { label: '-TBI marks the exact INSTANCE ASK intends to feed', note: 'in a two-copy handoff the retained origin or provenance copy stays UNSUFFIXED; only the recipient-bound copy carries the overlay' },
+        { label: 'byte-identical files at two paths are TWO instances', note: 'location alone never creates queue membership, and one outstanding obligation is represented by exactly one live marked instance' },
+        { label: 'MOVE is not COPY', note: 'a byte-preserving move or rename of the designated payload preserves the same marked instance and is not a lifecycle event; copying creates another instance and neither transfers nor duplicates designation' },
+        { label: 'transferring designation leaves exactly ONE marked instance', note: 'a retained origin/provenance copy stays or becomes unsuffixed; a former temporary transport instance is removed or resolved by its underlying role and prior state. A fresh routed handoff is NEVER left bare merely to transfer designation' },
+        { label: 'origin scratch may carry -TBI — but only for the payload itself', note: 'a PTX, report, or other independently complete artifact ASK intends to feed, or a distinct temporary recipient-bound transport instance' },
+        { label: 'recipient lifecycle does NOT mirror onto provenance', note: '-ingested, -supersededA, -supersededP and terminal dispositions belong to the recipient routed instance; the retained origin copy is never renamed to match them' },
       ],
     },
   ],

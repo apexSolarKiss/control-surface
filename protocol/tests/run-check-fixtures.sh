@@ -152,7 +152,7 @@ d=$(owner_copy L3w); perl -0pi -e 's/LIFE-4b/LIFE-4z/g' "$d/docs/advisor-project
 # obligation is removed independently rather than proven by the presence of a heading.
 d=$(owner_copy L3x); perl -0pi -e 's/Route on approval; feed\/ingest later\.//g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses route-on-approval timing" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
 d=$(owner_copy L3y); perl -0pi -e 's/never on the feed attempt//g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses the recipient-side-evidence clause" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
-d=$(owner_copy L3z); perl -0pi -e 's/relocation within the queue is not a lifecycle event//g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses the logical-queue relocation clause" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
+d=$(owner_copy L3z); perl -0pi -e 's/relocation within the queue is not a lifecycle\s+event//g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses the logical-queue relocation clause" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
 d=$(owner_copy L3aa); perl -0pi -e 's/grants no new write\s+authority/grants broad authority/g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses the no-new-write-authority boundary" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
 d=$(owner_copy L3ab); perl -0pi -e 's/ASK separately controls when to feed the routed artifact//g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses ASK's separate feed-timing control" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
 d=$(owner_copy L3ac); perl -0pi -e 's/LIFE-4c/LIFE-4y/g' "$d/docs/advisor-project-surface-architecture.md"; record "NEG registry loses the LIFE-4c route-on-approval row" 1 "advisor-surface recovery clause(s) missing" runlocal "$d"
@@ -544,8 +544,18 @@ d=$(owner_copy H2t); printf '\nThis requirement includes personal-context Projec
 # in the v3 object, where the registry gained a 79th shared requirement while the ruling and deployed-presence
 # axes still classified 78. Both fail on recomputed ARITHMETIC, not on a missing token, so a future edit that
 # renames a category but stops balancing is still rejected.
-d=$(owner_copy H3a); perl -0pi -e 's/^  NEW +1 .*\n +this revision rather than recovered.*\n//m; s/^(  active shared rulings +)79/${1}78/m' "$d/docs/advisor-project-surface-architecture.md"; record "NEG ruling axis loses HOST-1 (sums to 78)" 1 "ruling axis sums to 78, shared IDs 79" runlocal "$d"
-d=$(owner_copy H3b); perl -0pi -e 's/^(  n\/a \(new\) +)18/${1}17/m; s/LIFE-4k · HOST-1 —/LIFE-4k —/' "$d/docs/advisor-project-surface-architecture.md"; record "NEG deployed axis loses HOST-1 (sums to 78)" 1 "deployed axis sums to 78, shared IDs 79" runlocal "$d"
+d=$(owner_copy H3a); perl -0pi -e 's/^  NEW +2 .*\n.*\n +own revision rather than recovered.*\n//m; s/^(  active shared rulings +)80/${1}78/m' "$d/docs/advisor-project-surface-architecture.md"; record "NEG ruling axis loses the NEW row (sums to 78)" 1 "ruling axis sums to 78, shared IDs 80" runlocal "$d"
+d=$(owner_copy H3b); perl -0pi -e 's/^(  n\/a \(new\) +)19/${1}18/m; s/LIFE-4k · LIFE-4l · HOST-1 —/LIFE-4k · LIFE-4l —/' "$d/docs/advisor-project-surface-architecture.md"; record "NEG deployed axis loses HOST-1 (sums to 79)" 1 "deployed axis sums to 79, shared IDs 80" runlocal "$d"
+
+# ---- LIFE-4l // one obligation, one marked payload ----
+# The invariant is registered in the owner registry, stated in the shared owner + resolved root, and carried by
+# the generated advisor bootstrap. Each carrier is guarded separately, because each is independently droppable:
+# a registry row with no carrier claims coverage nothing provides, and a carrier with no row is the
+# unregistered template-only addition this architecture exists to prevent.
+d=$(owner_copy L3ej); perl -0pi -e 's/\*\*One obligation, one marked payload\.\*\*//g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses the one-obligation/one-marked-payload invariant" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
+d=$(owner_copy L3ek); perl -0pi -e 's/\*\*Move is not copy\*\*/A copy is a move/g' "$d/templates/advisor-project-bootstrap.template.md"; record "NEG advisor-bootstrap loses the move-is-not-copy distinction" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
+d=$(owner_copy L3el); perl -0pi -e 's/\*\*Recipient lifecycle does not mirror onto provenance\.\*\*//g' "$d/protocol/AGENTS.shared.md"; record "NEG shared owner loses the no-mirroring-onto-provenance rule" 1 "routed-instance lifecycle clause(s) missing or stale" runlocal "$d"
+d=$(owner_copy L3em); perl -0pi -e 's/LIFE-4l/LIFE-4x/g' "$d/docs/advisor-project-surface-architecture.md"; record "NEG registry loses the LIFE-4l artifact-instance row" 1 "advisor-surface recovery clause(s) missing" runlocal "$d"
 
 # ---- READ-2 // mount-receipt expected-surface identity ----
 # The failure these reproduce actually happened: another surface's CURRENT, VALID bootstrap was mounted on a

@@ -383,7 +383,7 @@ assert_local(){
   local recmiss="" t
   for t in 'routing-time historical evidence' 'Do not restore a receipt annotation' 'role marker is retained' 'route a separate handoff'; do
     grep -qF -- "$t" "$APBOOT" || recmiss="$recmiss bootstrap:{$t}"; done
-  for t in 'LIFE-4a' 'LIFE-4b' 'LIFE-4c' 'LIFE-5a' 'LIFE-5b' 'LIFE-5c' 'PROTO-3' 'Surface-overlay completion gate'; do
+  for t in 'LIFE-4a' 'LIFE-4b' 'LIFE-4c' 'LIFE-4l' 'LIFE-5a' 'LIFE-5b' 'LIFE-5c' 'PROTO-3' 'Surface-overlay completion gate'; do
     grep -qF -- "$t" "$APARCH" || recmiss="$recmiss architecture:{$t}"; done
   # PROTO-3 executor-carrier delivery — the registry row and the generated carrier must BOTH hold it. This was a
   # real owner-registry omission: the clause shipped in a deployed field, was absent from PROTO-1, and was
@@ -500,11 +500,12 @@ assert_local(){
   [ -n "$shid" ] && [ "$dsum" = "$shid" ] || covmiss="$covmiss {deployed axis sums to $dsum, shared IDs $shid}"
   [ "$(covnum 'active shared rulings')" = "$rsum" ] || covmiss="$covmiss {declared active-shared-rulings total disagrees with the recomputed $rsum}"
   [ "$(covnum 'deployed-presence total')" = "$dsum" ] || covmiss="$covmiss {declared deployed-presence total disagrees with the recomputed $dsum}"
-  [ "$(covnum NEW)" = "1" ] || covmiss="$covmiss {NEW ruling count is not 1}"
-  grep -qF -- 'NEW 1 HOST-1' <<<"$hnA" || covmiss="$covmiss {NEW ruling row does not name HOST-1}"
-  grep -qF -- 'LIFE-4k · HOST-1' <<<"$hnA" || covmiss="$covmiss {n/a (new) ID list does not name HOST-1}"
-  [ "$(covnum 'n/a (new)')" = "18" ] || covmiss="$covmiss {n/a (new) count is not 18}"
-  [ -z "$covmiss" ] && OKAY "coverage accounting balances (ruling $rsum + deployed $dsum both = $shid shared IDs; HOST-1 carried as NEW and n/a (new))" || FAIL "coverage accounting defect(s):$covmiss"
+  [ "$(covnum NEW)" = "2" ] || covmiss="$covmiss {NEW ruling count is not 2}"
+  grep -qF -- 'NEW 2 HOST-1' <<<"$hnA" || covmiss="$covmiss {NEW ruling row does not name HOST-1}"
+  grep -qF -- 'LIFE-4l —' <<<"$hnA" || covmiss="$covmiss {NEW ruling row does not name LIFE-4l}"
+  grep -qF -- 'LIFE-4k · LIFE-4l · HOST-1' <<<"$hnA" || covmiss="$covmiss {n/a (new) ID list does not name LIFE-4l and HOST-1}"
+  [ "$(covnum 'n/a (new)')" = "19" ] || covmiss="$covmiss {n/a (new) count is not 19}"
+  [ -z "$covmiss" ] && OKAY "coverage accounting balances (ruling $rsum + deployed $dsum both = $shid shared IDs; HOST-1 and LIFE-4l carried as NEW and n/a (new))" || FAIL "coverage accounting defect(s):$covmiss"
   # 14f READ-2 mount-receipt identity — a mount receipt proves THREE independent facts, and the failure this
   #     guards is specifically the one that occurred: another surface's CURRENT, VALID bootstrap was mounted on
   #     a live Project, passed standing-source cardinality AND in-body version, and was caught only from the
@@ -732,7 +733,12 @@ assert_local(){
                 'cross-surface handoff boundary   crossed when material moves between separately' \
                 'ordinary active-context ingestion occurs' \
                 'It does not create a separate cross-surface handoff boundary' \
-                '**This lifecycle grammar is prospective.**')
+                '**This lifecycle grammar is prospective.**' \
+                '**One obligation, one marked payload.**' \
+                'Byte-identical files at two paths are **two artifact instances**.' \
+                '**Move is not copy.**' \
+                'A fresh routed handoff is never left bare merely to transfer designation.' \
+                '**Recipient lifecycle does not mirror onto provenance.**')
   for ph in "${fevphr[@]}"; do
     grep -qF -- "$ph" "$SHARED"     || fevmiss="$fevmiss shared:{$ph}"
     grep -qF -- "$ph" "$ROOTAGENTS" || fevmiss="$fevmiss root-carrier:{$ph}"
@@ -740,6 +746,12 @@ assert_local(){
   # the GENERATED advisor carrier must carry the operative sentences, not merely the headings — a bootstrap that
   # keeps "Four events, not two." while losing the obligations under it is the silent-weakening failure mode.
   local bootphr=('Four events, not two.' 'Route on approval; feed/ingest later.' \
+                 'One obligation, one marked payload' \
+                 'Byte-identical files at two paths are **two artifact instances**' \
+                 '**Move is not copy**' \
+                 'never left bare merely to transfer designation' \
+                 'is itself the designated payload' \
+                 'Recipient lifecycle does not mirror onto provenance' \
                  'queue exit occurs on recipient-side ingestion, never on the feed attempt' \
                  'intent to ingest is not evidence of completed ingestion' \
                  'relocation within the queue is not a lifecycle event' \
