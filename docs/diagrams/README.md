@@ -54,6 +54,11 @@ export-png.js                                   3840×2880 PNG export
 _dsa-tokens/                                    vendored Tier 1 + Tier 2 token mirror
 ```
 
+### Live navigation surface
+
+- `index.html` — ASK-branded live navigation surface for this folder's two diagram pages. It consumes the local Tier 1 + Tier 2 mirror and vendored `_dsa-surface/` carriers; its locally assigned Tier 3 does not propagate into either diagram.
+- `_dsa-surface/` — pinned, byte-identical `surface-shell`, `surface-panel`, and `surface-action` carriers plus the mode-aware ASK wordmark pair used only by `index.html`.
+
 ## How to use
 
 - Open `control-surface_architecture-tree.html` directly in a browser, or via GitHub Pages if configured.
@@ -74,5 +79,5 @@ The operator-side package and historical render iterations remain in `ecology-AS
 - `TREE_D02` (method-ASK topology) — lives in `apexSolarKiss/method-ASK/docs/diagrams/` (landed)
 - `TREE_D03` (system-ASK topology) — operator-side only; not authorized for any repo absorption
 - Operator-side context architecture substrate (private; conform by reference, do not absorb)
-- `design-system-ASK` Tier 3 instance identity (logo, wordmark, ASK chrome) — excluded by Tier model
+- Tier 3 identity inside the diagram artifacts — excluded by the Tier model; both figures remain Tier 1 + Tier 2. `index.html` is a separate ASK-branded live navigation surface and carries an ASK-assigned Tier-3 value for that surface only: the assignment does not propagate into either diagram, does not make `control-surface` ASK-the-entity, and does not come from `surface-shell`, which ships a slot and no mark.
 - Runtime dynamic import from `design-system-ASK` CSS (no; conform at generation time)

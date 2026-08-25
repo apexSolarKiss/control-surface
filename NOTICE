@@ -1,9 +1,26 @@
 control-surface
 Copyright 2026 Andrew S Klug // ASK
 
-This product includes original workflow documentation, execution-protocol rules,
-templates, prompts, and reusable control-surface workflow assets developed for
-control-surface.
+This product includes original workflow documentation, execution-protocol
+rules, architecture, templates, prompts, and reusable control-surface
+workflow assets developed for control-surface.
+
+This product also includes unmodified components from design-system-ASK
+(github.com/apexSolarKiss/design-system-ASK), including the vendored Tier 1 +
+Tier 2 foundations and design-system-owned diagram render support under
+docs/diagrams/, the surface-shell pattern, the surface-panel and
+surface-action visual rules, and the ASK wordmark pair used by
+docs/diagrams/index.html.
+
+design-system-ASK
+Copyright 2026 Andrew S Klug // ASK
+
+This product includes original design-system documentation, visual
+foundations, tokens, patterns, and assets developed for design-system-ASK.
 
 Licensed under the Apache License, Version 2.0.
 See the LICENSE file for the full license text.
+
+The Inter and JetBrains Mono fonts are licensed under the SIL Open Font
+License 1.1; see docs/diagrams/_dsa-tokens/fonts/Inter-OFL.txt and
+docs/diagrams/_dsa-tokens/fonts/JetBrainsMono-OFL.txt.
