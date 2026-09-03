@@ -61,7 +61,9 @@ _dsa-tokens/                                    vendored Tier 1 + Tier 2 token m
 ### Live navigation surface
 
 - `index.html` — ASK-branded live navigation surface for this folder's two diagram pages. It consumes the local Tier 1 + Tier 2 mirror and vendored `_dsa-surface/` carriers; its locally assigned Tier 3 does not propagate into either diagram.
-- `_dsa-surface/` — pinned, byte-identical `surface-shell`, `surface-panel`, and `surface-action` carriers plus the mode-aware ASK wordmark pair used only by `index.html`.
+- `_dsa-surface/` — pinned, byte-identical `surface-shell` (CSS + navigation runtime), `surface-panel`, `surface-action` and `surface-text-link` carriers plus the mode-aware ASK wordmark pair, used only by `index.html`.
+  `surface-shell.js` is the responsive-navigation runtime: `index.html` adopts navigation, so it loads the runtime and authors one `<template class="surface-nav-source">`. The identity mark is the disclosure — the runtime upgrades the authored anchor in place, so with JavaScript unavailable the mark stays an ordinary home link and no panel, trigger or dead control appears. The panel's current path is derived from the visible breadcrumb and is never authored twice; `data-nav-root-*` is legacy runtime compatibility and is deliberately not authored here.
+  `surface-text-link.css` is the opt-in unboxed-text-link module, vendored for pin parity with the rest of the set. `index.html` does not link it: the module is opt-in by the `.surface-text-link` class and this surface has no unboxed inline prose link to carry it — its breadcrumb underline is the shell's own, and every other operable object here is a panel or a compact action.
 
 ## How to use
 
