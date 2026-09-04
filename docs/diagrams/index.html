@@ -6,6 +6,9 @@
 <title>control-surface // diagrams</title>
 <meta name="description" content="control-surface // the execution-protocol repo's two illustrative figures — the architecture tree and the routed-instance lifecycle.">
 <meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <!-- ============================================================
      DIAGRAM FRONT DOOR — control-surface/docs/diagrams/index.html
 
@@ -98,7 +101,21 @@
         <img class="surface-mark-light" src="_dsa-surface/assets/logo-ASK-white.png" alt="" aria-hidden="true" width="2160" height="974">
         <img class="surface-mark-dark" src="_dsa-surface/assets/logo-ASK-lavender-ASK.png" alt="" aria-hidden="true" width="2160" height="974">
       </a>
-      <h1 class="surface-title"><span class="org">apexSolarKiss</span> <span class="sep" aria-hidden="true">//</span> control-surface <span class="sep" aria-hidden="true">//</span> diagrams</h1>
+      <!-- BREADCRUMB, not a plain title. The pattern's test is ANCESTRY rather
+           than local rootedness: this surface is the root of its own family and
+           still has real, public, navigable ancestors above it, so every one of
+           them appears. The human-facing brand name is the label — `apex solar
+           kiss`, not the `apexSolarKiss` GitHub handle — because a breadcrumb
+           names a place a reader goes, not a repository namespace; the code host
+           is a utility destination and sits in the navigation panel instead.
+           Segment classes grade depth inside the path: `.org` on the outermost
+           ancestor, `.page` on the inert current leaf, nothing on the segment
+           between. The chain is authored here ONCE and the panel derives its
+           current path from it, which is why no `data-nav-root-*` attribute is
+           authored below. -->
+      <nav class="surface-breadcrumb" aria-label="Breadcrumb">
+        <h1 class="surface-title"><a class="org" href="https://a-s-k.studio/">ASK</a> <span class="sep" aria-hidden="true">//</span> <a href="https://a-s-k.studio/apex-solar-kiss">apex solar kiss</a> <span class="sep" aria-hidden="true">//</span> control-surface <span class="sep" aria-hidden="true">//</span> <span class="page" aria-current="page">diagrams</span></h1>
+      </nav>
       <p class="surface-lede">Two structural snapshots of the execution-protocol repo at a point in time. Diagrams
         are illustrative and age; the repo prose is source of truth, and each figure below links the document
         that owns what it draws.</p>
@@ -168,13 +185,46 @@
 
   </main>
 
+  <!-- Terminal destinations, as compact actions. The row declares nothing but
+       layout, so a destination that forgot its classes fails visibly instead of
+       inheriting an approximation of the retired footer treatment. They stay
+       anchors: two of these leave the surface and two leave the origin, and a
+       button would keep the look while losing the destination. -->
   <footer class="surface-footer">
-    <a href="README.md">README</a>
-    <a href="../architecture.md">architecture</a>
-    <a href="https://github.com/apexSolarKiss/control-surface" target="_blank" rel="noopener">repository</a>
-    <a href="https://a-s-k.studio/" target="_blank" rel="noopener">A-S-K.studio</a>
+    <a class="surface-action surface-action--secondary" href="README.md">README</a>
+    <a class="surface-action surface-action--secondary" href="../architecture.md">architecture</a>
+    <a class="surface-action surface-action--secondary" href="https://github.com/apexSolarKiss/control-surface" target="_blank" rel="noopener">repository</a>
+    <a class="surface-action surface-action--secondary" href="https://a-s-k.studio/" target="_blank" rel="noopener">A-S-K.studio</a>
   </footer>
 
+  <!-- Responsive navigation. The identity mark above discloses the panel; the
+       runtime upgrades that authored anchor in place, so without JavaScript it
+       stays an ordinary home link and no dead control is exposed.
+
+       PARENT FORM. This surface IS the diagram front door, so its local
+       destinations are its CHILDREN rather than its siblings and the current
+       position carries a nested list. The current row is a position marker
+       only: its label and its aria-current are derived from the visible
+       breadcrumb above, never authored a second time here. The two figures are
+       listed by their reading names; `index.html` is deliberately not repeated
+       as an "overview" child, because two rows reaching one destination is the
+       defect this IA removes. -->
+  <template class="surface-nav-source">
+    <ul class="surface-nav-local">
+      <li data-surface-nav-current>
+        <ul>
+          <li><a href="control-surface_architecture-tree.html">architecture tree</a></li>
+          <li><a href="control-surface_intent-inbox-lifecycle.html">intent-INbox routed-instance lifecycle</a></li>
+        </ul>
+      </li>
+    </ul>
+    <p class="surface-nav-utilities">
+      <a class="surface-action surface-action--secondary" href="https://github.com/apexSolarKiss/control-surface" target="_blank" rel="noopener">repository</a>
+    </p>
+  </template>
+
 </div>
+
+<script src="_dsa-surface/surface-shell.js"></script>
 </body>
 </html>
