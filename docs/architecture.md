@@ -75,7 +75,7 @@ This is the load-bearing rationale for keeping these durable and non-durable sur
 - `templates/` — reusable starters for downstream repo-local files and the external grounding note
 - `protocol/` — the distributable execution-protocol layer: the shared `AGENTS` core (`AGENTS.shared.md`, resolved verbatim into each consumer's own `AGENTS.md` between the shared markers), the normative `manifest.json` registry, downstream `profiles/`, the opt-in standing-upstream-conformance-grant `fragments/` entry, and `check.sh` (a deterministic local validator, not CI); consumers resolve the shared block locally rather than holding an independent copy
 - `protocol/adapters/` — typed, executor-specific artifacts providing runtime enforcement for a supported write path of an agent-agnostic shared rule on a given runtime, **not** OS-level enforcement over arbitrary subprocess writes (the shared protocol prohibits that circumvention semantically; sandbox hardening is a separate out-of-scope question); **not shared-protocol text and never inherited into a consumer's `AGENTS.md`**. `adapters/claude-code/` carries the native permission fragment for the private-persistent write gate, a static owner-repo check, a machine-local verifier, and their fixtures, run separately so the portable checker stays agent-agnostic
-- `prompts/project-instantiation-initial-prompt.md` — agent-agnostic startup prompt for the pre-repo phase
+- `prompts/` — reusable prompts and coordinator runbooks. `project-instantiation-initial-prompt.md` carries the agent-agnostic pre-repo instantiation phase; `AGENTS.md` invokes others by path as operative instruments — the cross-repo propagation wave and inter-session coordination. [`README.md`](../README.md) §Prompts is the current inventory
 - `examples/` — concise mappings from real ASK projects to this structure
 
 ## Session Topology
@@ -106,7 +106,7 @@ This repo is intentionally small:
 
 - one set of live operating files for this repo
 - the `protocol/` layer: the shared `AGENTS` core resolved locally into each consumer's own `AGENTS.md`, a normative `manifest.json` registry, downstream `profiles/`, an opt-in standing-upstream-conformance-grant fragment, `check.sh` (a deterministic local validator, not CI), and typed `adapters/` for the executor-specific enforcement of an agent-agnostic rule
-- a small downstream template set (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`) — starters adopted alongside, not instead of, the locally resolved shared protocol
+- a small downstream template set — the repo-local and external-context starters (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`) plus the executor adapter and the further carriers the resolved profiles call for; starters adopted alongside, not instead of, the locally resolved shared protocol. [`README.md`](../README.md) §Reusable templates for downstream ASK repos carries the current set
 - one agent-agnostic instantiation prompt
 - a minimal example set
 
