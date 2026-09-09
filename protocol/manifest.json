@@ -101,7 +101,8 @@
    "active_holds": [],
    "status": "active",
    "amended_by": [
-    "#198 / a8798d7b59eaf553f4319f32c5d990bcb35b3690 (pointer + state discipline; conditional prior-state pin; gate-defined minimum identity; specialized-contract precedence; two-axis movement classification)"
+    "#198 / a8798d7b59eaf553f4319f32c5d990bcb35b3690 (pointer + state discipline; conditional prior-state pin; gate-defined minimum identity; specialized-contract precedence; two-axis movement classification)",
+    "81ba2c6e67567c79c2970e1fabdaaadc8c467efa (evidence localization + pointer economy; minimum sufficient identity by pointer function; repetition is not corroboration)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -316,7 +317,8 @@
     "#185 / 2c4cb7065042d686c0e7a5eb917cd64e3b96a05c (throughput discipline: named-failure-mode blocking criterion; materiality-sensitive frozen-record correction threshold; correction-loop termination)",
     "#197 / 7fe8c45fd7ef33485d97bc88a8c7a15c1e42fd66 (runtime-capacity claims are not verified state)",
     "#198 / a8798d7b59eaf553f4319f32c5d990bcb35b3690 (durable-owner pin retained; read live at use; reconcile and classify movement)",
-    "#200 / 861a0b4067857ae4b4588033b66e1c91694b332e (bounded-region / inverse-transform proof establishes only the transformation it directly checks; not evidence that no intervening write was overwritten)"
+    "#200 / 861a0b4067857ae4b4588033b66e1c91694b332e (bounded-region / inverse-transform proof establishes only the transformation it directly checks; not evidence that no intervening write was overwritten)",
+    "81ba2c6e67567c79c2970e1fabdaaadc8c467efa (artifact-function correction threshold; corpus quality distinguished from frozen process-residue proportionality)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -661,7 +663,7 @@
    "failure_mode": "exact-byte advisor review forced through manual operator upload because the review object stayed in unreadable session-local scratch; an extracted or normalized inspection representation truncated or transformed and mistaken for the underlying object, or used to diagnose a byte defect without raw-byte retrieval; a review object overwritten in place after its hash was reported; a wall-bound or secret payload copied into shared scratch or a manual upload; a proposal-only transport write inferred authority over the canonical, a snapshot, or a companion artifact; an unqualified ASK relay of Stage-1-ready material treated as insufficient to open advisor review, or an advisor returning a relayed Stage-1 review to ASK to demand an explicit request phrase; ASK treated as the routine first-line Stage-1 reviewer in the configured paired path; a paired-path unit reported Stage-1-ready while its minimum exact object remains session-local; direct execution inferred from silence, omission, or non-relay rather than an explicit ASK authorization; a FYI or HOLD relay envelope treated as direct-execution or write authorization; an operator or deployed execution carrier retaining ASK-as-first-line Stage-1 review after the owner repair; transport or packet work constructed beyond what an opened review needs; connector text extraction mistaken for raw-file retrieval; a lossy representation mistaken for path unreachability; ASK used as a file courier while exact bytes remain retrievable through the authorized mapped route; serial repackaging around a representation defect; or a multi-object review package without an operative/preserve-only partition, or a preserve-only historical object regenerated to force parity with the current proposal",
    "active_holds": [],
    "status": "active",
-   "amended_by": ["#176 / bdece1091940637459bf856910a1d1d46275ee2a (pre-PR publication condition; raw-bytes-vs-representation retrieval ladder; no-courier boundary)", "#184 / b9a3410cac502312d1ef1bf72f0aaf00065ecbba (review-window regression repair: restore pre-#172 two-stage advisor semantics — the relay is the request; paired-path Stage-1 readiness includes the minimum exact object; direct execution requires an explicit ASK authorization, FYI/HOLD authorize nothing)", "#185 / 2c4cb7065042d686c0e7a5eb917cd64e3b96a05c (throughput discipline: operative vs preserve-only package partition)"],
+   "amended_by": ["#176 / bdece1091940637459bf856910a1d1d46275ee2a (pre-PR publication condition; raw-bytes-vs-representation retrieval ladder; no-courier boundary)", "#184 / b9a3410cac502312d1ef1bf72f0aaf00065ecbba (review-window regression repair: restore pre-#172 two-stage advisor semantics — the relay is the request; paired-path Stage-1 readiness includes the minimum exact object; direct execution requires an explicit ASK authorization, FYI/HOLD authorize nothing)", "#185 / 2c4cb7065042d686c0e7a5eb917cd64e3b96a05c (throughput discipline: operative vs preserve-only package partition)", "81ba2c6e67567c79c2970e1fabdaaadc8c467efa (review-evidence localization; one declared review identity; conditional baseline + byte size; minimum retrieval identity in the readiness handoff)"],
    "explicit_exclusions": [],
    "proposed_by": null,
    "activated_by": "#168 / 256c9253e10f0cd32b30656b2a7f84615ca0b6ca"
