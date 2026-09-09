@@ -461,6 +461,18 @@ waives a configured review window or ASK's authorization. Do not require preserv
 be regenerated into parity with a current proposal, and open a further correction round only when its
 changeable decision, its genuinely new evidence, and its exact operative object set are all named.
 
+**Apply proportionality by artifact function.** The frozen-record threshold does not lower the quality
+standard for the live corpus. Repositories, canonicals, operator-side references, maintained diagrams,
+current instructions, and durable product surfaces remain quality-controlled. Correct their aesthetic,
+metadata, wording, and coherence defects within the authorized scope, or route them to the owner.
+Proportionality prevents polishing process residue; it does not prevent polishing the work.
+
+**Localize evidence.** Require each load-bearing review-object identity, baseline, target set, and proof
+once, at the point where it gates the decision, then use a stable local label. Do not demand or reproduce
+duplicate hash blocks, byte counts, or unchanged-surface inventories unless each occurrence performs
+independent decision, failure-detection, contract, boundary, or recovery work. Duplicated proof narration
+is another claim surface, not corroboration.
+
 **Conditional approval does not auto-convert.** Five steps, never four:
 
 1. you return notes;

@@ -236,6 +236,23 @@ assert_local(){
     grep -qF -- "$tp" "$APBOOT" || tdmiss="$tdmiss advisor-bootstrap:{$tp}"; done
   grep -qF -- 'REVIEW-13' "$APARCH" || tdmiss="$tdmiss architecture:{REVIEW-13}"
   grep -qF -- 'does not reopen, append to, or generate a successor for a frozen object' "$APARCH" || tdmiss="$tdmiss architecture:{frozen-record-threshold}"
+  # 11c-bis evidence-localization + artifact-function correction threshold. Three obligation groups, each
+  #         anchored in the shared body AND the resolved root carrier, plus the advisor conduct surface.
+  local elshared=('**Evidence localization and pointer economy.**' \
+                  'Repetition is not corroboration' \
+                  'A hash is not the default companion to every path' \
+                  '**Artifact function sets the correction threshold.**' \
+                  'must not be used to excuse a known defect in a live corpus surface' \
+                  '**Localize review evidence.**' \
+                  'it does not mirror the object'"'"'s full internal evidence account')
+  for tp in "${elshared[@]}"; do
+    grep -qF -- "$tp" "$SHARED"     || tdmiss="$tdmiss shared:{$tp}"
+    grep -qF -- "$tp" "$ROOTAGENTS" || tdmiss="$tdmiss root-carrier:{$tp}"
+  done
+  for tp in '**Apply proportionality by artifact function.**' '**Localize evidence.**' 'not corroboration'; do
+    grep -qF -- "$tp" "$APBOOT" || tdmiss="$tdmiss advisor-bootstrap:{$tp}"; done
+  grep -qF -- 'Proportionality applies by artifact function:' "$APARCH" || tdmiss="$tdmiss architecture:{artifact-function}"
+  grep -qF -- 'Localize evidence:' "$APARCH" || tdmiss="$tdmiss architecture:{localize-evidence}"
   [ -z "$tdmiss" ] && OKAY "throughput-discipline clauses present (shared + root + advisor-bootstrap + registry)" || FAIL "throughput-discipline clause(s) missing:$tdmiss"
   # 11d TBI-amendment clauses — the P2-2 denial-scope (Private-Memory Write Gate) and retrieval-obligation
   #     (Required Reading) amendments. Same two-grain discipline as 11c: headline anchors plus the operative

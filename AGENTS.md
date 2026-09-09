@@ -46,6 +46,22 @@ If a statement would become stale when a PR lands, a chain closes, or a next pat
 6. Freeze mutable state only where comparability requires it — blind parallel reconstruction, for example — and freeze only the bounded state needed.
 7. Do not add metadata unless it changes a decision, detects a named failure mode, or supports recovery from a named failure.
 
+**Evidence localization and pointer economy.** Declare each load-bearing identity once, in the nearest block that owns the gate, and use a stable local label afterward. As applicable, that block names the review object, the prior-state base, the operative target set, the authoritative representation of the change, and the proof result.
+
+Do not recopy full paths, hashes, byte sizes, baselines, target inventories, or unchanged-surface inventories merely to make later sections appear self-contained. Repeat an evidentiary field only where that occurrence independently changes a decision, detects a named failure mode, supports recovery, crosses a separate consumer or transport boundary that cannot resolve the original declaration, or is required by a specialized contract.
+
+Use the minimum identity sufficient for the pointer's function:
+
+```text
+discovery reference        exact locator + role + owner
+exact review identity      locator + full SHA-256, declared once
+stale-base gate            owner/ref + exact state identity
+truncation-risk transport  byte size + full SHA-256
+later narrative reference  stable local label
+```
+
+A hash is not the default companion to every path. Byte size is not the default companion to every hash. **Repetition is not corroboration**: every duplicated evidentiary fact is another claim that can drift, and localizing evidence reduces the number of independent surfaces on which the same fact can be wrong.
+
 **Specialized contracts keep their own field sets.** This rule governs what a pointer carries in general. §PR Creation, §Advisor-Readable Review Objects, the inter-session coordination runbook, a registry's structural contract, and a package's own manifest each define the fields they require, and those govern where they apply.
 
 **Movement of a mutable source is classified on two axes — never from net growth, shrinkage, mtime, or actor attribution alone:**
@@ -386,6 +402,7 @@ A verification statement is bounded by the evidence actually gathered.
 - **A bounded-region or inverse-transform proof establishes only the transformation it directly checks.** It is not evidence that no intervening write was overwritten: the proof is evaluated against the operation's recorded preimage and resulting bytes, so it can pass even when a different state existed immediately before replacement.
 - Pattern lists are hypotheses about how a defect may appear, not exhaustive evidence. An exhaustive claim requires enumerating and dispositioning the actual occurrence or carrier set.
 - Where coverage is partial, state the result as: `no unexplained findings in <exact set tested>`.
+- **Artifact function sets the correction threshold.** A live corpus artifact — repository content, a canonical, an operator-side reference, a maintained diagram, a current instruction, or another durable product surface — remains subject to ordinary quality correction. Aesthetic defects, redundant metadata, harmless but inferior wording, and internal inconsistency may be non-blocking for the current operation while still warranting correction in the owning corpus. Correct them when they are inside the authorized scope; otherwise route or schedule them under ordinary scope discipline. The frozen-record threshold below governs adversarial process artifacts and historical evidence — proposals, review packets, receipts, temporary matrices, audits, closures, provenance records, and prior generations. It prevents process residue from being repeatedly polished after it has served its function, and must not be used to excuse a known defect in a live corpus surface. Never "correct" the corpus by rewriting historical evidence, and never polish historical evidence as a substitute for correcting the corpus.
 - **Frozen-record correction threshold.** If a **completed audit, closure, provenance record, or other frozen record** overstates its evidence in a way that can affect a future decision about action, authority, safety, recovery, or durable interpretation, preserve the original statement and append a correction — do not silently tidy the audit trail. A non-material imperfection — one below that threshold — is dispositioned in the current review or closure record as `NON-BLOCKING / NO ACTION` and does not reopen, append to, or generate a successor for the frozen object. A `MATERIAL NON-BLOCKING` finding is recorded once in the current record; append to the frozen object only where future readers materially depend on the corrected interpretation, not merely because the discrepancy exists.
 - If a **live canonical or current instruction** overstates its evidence, correct the operative statement under that carrier's version and snapshot discipline, preserving the prior state in its lineage — rather than leaving a false current instruction in force.
 
@@ -575,6 +592,8 @@ The review object carries its proposal status in its **scratch path, filename, a
 **ASK is the authority relay, not the byte courier.** Do not ask ASK to download, attach, re-upload, or otherwise manually shuttle an object **while its exact bytes remain retrievable through the authorized mapped route**. Metadata-only reachability, or a lossy inspection representation, does not establish exact-byte availability — the prohibition binds on retrievable bytes, not on a resolving path. ASK relays authority and adjudicates; moving bytes that the mapped route already carries is not that role.
 
 **Bounded fallback.** If raw-byte retrieval is technically unavailable, publish **one** connector-bounded alternate representation in the same mapped shared scratch. If that representation also cannot be retrieved exactly, **stop and report both failures** — the exact locator, the retrieval modes attempted, and the failure of each. ASK may then elect manual upload **even where the original path still resolves** to metadata or a lossy view; a resolving path is not a reason to withhold that election. Manual upload occurs only on that explicit election. Do not create a serial repackaging cascade, and do not treat a lossy view as the trigger for the next package.
+
+**Localize review evidence.** An exact review object concentrates its evidence; it does not reproduce the same evidence throughout its own narration. Declare the load-bearing review identity once — exact locator, role and lifecycle, full SHA-256 — then refer to that declaration by a stable local label. Carry a baseline identity only where the review depends on detecting movement from a prior state, and byte size only where truncation or incomplete transport is a named risk. A cross-surface readiness handoff repeats only the minimum identity needed to locate and verify the object; it does not mirror the object's full internal evidence account. An unchanged-surface inventory names only surfaces whose non-movement is a real scope, collision, authority, or recovery condition.
 
 **Once its path and hash have been reported for review, a review object or bundle is immutable.** Never overwrite it in place. A revision receives a new unique dated or `_vN` `-PROPOSED` name, identifies its predecessor, and reports new hashes; the superseded object remains scratch provenance unless ASK separately authorizes retirement.
 
