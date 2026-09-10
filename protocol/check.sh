@@ -236,6 +236,42 @@ assert_local(){
     grep -qF -- "$tp" "$APBOOT" || tdmiss="$tdmiss advisor-bootstrap:{$tp}"; done
   grep -qF -- 'REVIEW-13' "$APARCH" || tdmiss="$tdmiss architecture:{REVIEW-13}"
   grep -qF -- 'does not reopen, append to, or generate a successor for a frozen object' "$APARCH" || tdmiss="$tdmiss architecture:{frozen-record-threshold}"
+  # 11c-bis evidence-localization + artifact-function correction threshold. Three obligation groups, each
+  #         anchored in the shared body AND the resolved root carrier, plus the advisor conduct surface.
+  local elshared=('**Evidence localization and pointer economy.**' \
+                  'Repetition is not corroboration' \
+                  'A hash is not the default companion to every path' \
+                  '**Artifact function sets the correction threshold.**' \
+                  'must not be used to excuse a known defect in a live corpus surface' \
+                  'concentrates its evidence and does not reproduce it throughout its own narration')
+  for tp in "${elshared[@]}"; do
+    grep -qF -- "$tp" "$SHARED"     || tdmiss="$tdmiss shared:{$tp}"
+    grep -qF -- "$tp" "$ROOTAGENTS" || tdmiss="$tdmiss root-carrier:{$tp}"
+  done
+  for tp in '**Apply proportionality by artifact function.**' '**Localize evidence.**' 'not corroboration'; do
+    grep -qF -- "$tp" "$APBOOT" || tdmiss="$tdmiss advisor-bootstrap:{$tp}"; done
+  # the declared-review-identity contract must EXIST and the retired unconditional recitals must be GONE.
+  # Presence alone let a self-contradicting carrier pass: the localization rule was added beside the very
+  # field lists it retires. Both halves are required.
+  for tp in '**The declared review identity.**' 'the declared review identity' \
+            'Do not require a SHA-256 for a pushed PR'; do
+    grep -qF -- "$tp" "$SHARED"     || tdmiss="$tdmiss shared:{$tp}"
+    grep -qF -- "$tp" "$ROOTAGENTS" || tdmiss="$tdmiss root-carrier:{$tp}"
+  done
+  for rp in 'exact locator, baseline, byte size, and SHA-256' \
+            'exact path or locator, baseline, byte size, and SHA-256' \
+            'Report the target path(s), baseline ref/hash, and proposed hash in the handoff' \
+            'exact locator, baseline, byte size, SHA-256'; do
+    grep -qF -- "$rp" "$SHARED"     && tdmiss="$tdmiss shared-STALE-RECITAL:{$rp}"
+    grep -qF -- "$rp" "$ROOTAGENTS" && tdmiss="$tdmiss root-STALE-RECITAL:{$rp}"
+  done
+  grep -qF -- 'with its exact path, baseline, byte' "$APBOOT" && tdmiss="$tdmiss advisor-STALE-RECITAL:{missing-object all-fields}"
+  grep -qF -- 'with its declared review identity' "$APBOOT" || tdmiss="$tdmiss advisor-bootstrap:{declared-review-identity}"
+  # the bundle manifest's per-part fields are NOT garnish and must survive
+  grep -qF -- 'the target path or set, byte size, SHA-256, a baseline ref/hash where applicable' "$SHARED" \
+    || tdmiss="$tdmiss shared:{bundle-manifest-member-fields}"
+  grep -qF -- 'Proportionality applies by artifact function:' "$APARCH" || tdmiss="$tdmiss architecture:{artifact-function}"
+  grep -qF -- 'Localize evidence:' "$APARCH" || tdmiss="$tdmiss architecture:{localize-evidence}"
   [ -z "$tdmiss" ] && OKAY "throughput-discipline clauses present (shared + root + advisor-bootstrap + registry)" || FAIL "throughput-discipline clause(s) missing:$tdmiss"
   # 11d TBI-amendment clauses — the P2-2 denial-scope (Private-Memory Write Gate) and retrieval-obligation
   #     (Required Reading) amendments. Same two-grain discipline as 11c: headline anchors plus the operative
