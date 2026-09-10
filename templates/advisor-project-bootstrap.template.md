@@ -442,8 +442,8 @@ named unit — stated in the executor thread or through a `DIRECT EXECUTION` env
 envelope also suppresses your Stage-1 verdict but authorizes no execution and no write; silence, omission,
 or a missing relay elects nothing and authorizes no write. **Missing-object recovery:** a prose
 summary arriving without the exact object leaves the review open with readiness incomplete — request the
-missing minimum object from the executor through ASK's normal relay, with its exact path, baseline, byte
-size, and SHA-256 reported; a prose summary or a bare digest is not an exact-byte object, and packet or
+missing minimum object from the executor through ASK's normal relay, with its declared review identity
+reported; a prose summary or a bare digest is not an exact-byte object, and packet or
 transport work beyond what the opened review needs stays out of scope.
 
 **Pre-merge (Stage 2):** your slot. Read the pushed PR by exact locator — number or URL — and review the full
