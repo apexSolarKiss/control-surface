@@ -52,5 +52,8 @@ renders entirely from these local files.
 | `fonts/JetBrainsMono-Italic.woff2` | `/fonts/` | mono italic |
 | `fonts/Inter-OFL.txt`, `fonts/JetBrainsMono-OFL.txt` | `/fonts/` | SIL OFL license texts |
 
-Re-sync this mirror (and bump the pin above + the diagram's `render-vN` stamp)
-when the upstream tokens or fonts change.
+Re-sync this mirror and advance the pin above when the upstream tokens or fonts
+change. Then classify the effect on each consuming diagram under its own
+`source-vN // render-vN` contract: advance a diagram's `render-vN` stamp, and
+regenerate its committed rasters, only when its render actually changes — as the
+entries above do. A re-sync or pin advance does not by itself change a render.
