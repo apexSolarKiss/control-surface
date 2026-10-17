@@ -980,7 +980,7 @@ The structural role is *a transport that delivers plain text to a named live ses
 
 ### Defaults (control-surface-local)
 
-- Prefer updating root docs and a small set of templates over adding systems around them (this repo's intentionally small, no-automation architecture).
+- Prefer updating root docs and a small set of templates over adding systems around them. The site build in `tools/read/` is a bounded exception for rendering repository sources; it does not change the execution protocol.
 - Tailor docs to this repo's job as an execution-protocol repo. Do not write as if this repo were an application repo.
 
 ### Refresh Cadences (control-surface-local)
