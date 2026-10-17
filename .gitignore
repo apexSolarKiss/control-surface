@@ -2,6 +2,9 @@
 .DS_Store
 **/.DS_Store
 
+# site build output (tools/read/vercel-build.sh)
+/_site/
+
 # Claude Code local project settings
 .claude/settings.local.json
 

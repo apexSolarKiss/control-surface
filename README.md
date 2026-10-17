@@ -215,6 +215,10 @@ Templates in `templates/` are copyable starters. They are not live for this repo
 - [`examples/asset-pipeline-ASK/notes.md`](examples/asset-pipeline-ASK/notes.md) — primary pressure surface (mature working example)
 - [`examples/urban-observatory/notes.md`](examples/urban-observatory/notes.md) — second working example (instantiation / source-of-intent recovery pressure surface)
 
+### Site build
+
+- [`tools/read/`](tools/read/) — the site build: when the site is built it renders the site's home page, and reading pages for the workflow docs, protocol notes, templates, prompts and examples and the diagram sources, from their Markdown and source files; the generated pages are build output and are not committed
+
 ## Which File Do I Use?
 
 | If you need to... | Use |
