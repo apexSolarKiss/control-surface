@@ -110,6 +110,6 @@ This repo is intentionally small:
 - a small downstream template set — the repo-local and external-context starters (`AGENTS.template.md`, `grounding-note.template.md`, `architecture.template.md`) plus the executor adapter and the further carriers the resolved profiles call for; starters adopted alongside, not instead of, the locally resolved shared protocol. [`README.md`](../README.md) §Reusable templates for downstream ASK repos carries the current set
 - one agent-agnostic instantiation prompt
 - a minimal example set
-- the hosted site's build (`tools/read/`), which generates the site's reading pages from the Markdown at deployment and writes nothing into the repository
+- the hosted site's build (`tools/read/`), which generates the site's reading pages from the Markdown at deployment and commits nothing: its output, `_site/`, is gitignored build output
 
 Beyond the bounded `protocol/` resolution-and-validation layer — a distributable shared execution-protocol core resolved locally into each consumer's own `AGENTS.md`, a normative manifest, downstream profiles, an opt-in standing-grant fragment, and `check.sh` (a deterministic validator run locally, by hand) — and that site build, it does not include automation, sync tooling, CI, other generators, or a larger framework system. `check.sh` is a local validator, not continuous integration; the `protocol/` layer resolves and checks existing rules, it does not generate artifacts or constitute a product build framework.

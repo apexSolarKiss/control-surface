@@ -93,7 +93,7 @@
   "redirects": [],
   "held": [
     {"path": "README.md", "reason": "the repository front page; its banner image sits outside the deployed site"},
-    {"path": "AGENTS.md", "reason": "the repository's workflow rules for executors, not reading material for this site"},
+    {"path": "AGENTS.md", "reason": "the repository's workflow rules for executors; the resolved shared block's marker comments are part of its format"},
     {"path": "CLAUDE.md", "reason": "a runtime adapter that imports AGENTS.md"},
     {"path": "control-surface.md", "reason": "the retired Model-A artifact, kept as frozen historical provenance"},
     {"path": "docs/workflow-boundary.md", "reason": "the legacy workflow-boundary doc, kept as frozen historical provenance"},
@@ -106,7 +106,7 @@
     {"path": "protocol/profiles/core-ecology.md", "reason": "a profile body resolved into consumers' AGENTS.md between marker comments"},
     {"path": "templates/AGENTS.template.md", "reason": "a starter carrying the shared block's marker comments"},
     {"path": "templates/grounding-note.template.md", "reason": "a starter whose second title belongs to the note it produces"},
-    {"path": "templates/overlays/architecture-uncertain-rules.template.md", "reason": "an overlay starter, kept byte-identical with its profile and carrying its marker comments"},
+    {"path": "templates/overlays/architecture-uncertain-rules.template.md", "reason": "an overlay starter whose profile body, between marker comments, is kept byte-identical with protocol/profiles/architecture-uncertain.md"},
     {"path": "templates/domain-authority-review-profile.template.md", "reason": "a starter whose title carries a placeholder written as an HTML tag"}
   ],
   "passages": {
