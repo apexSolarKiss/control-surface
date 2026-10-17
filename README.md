@@ -157,6 +157,7 @@ This is the load-bearing rationale for the source-of-truth split. Each source is
 - [`AGENTS.md`](AGENTS.md) — repo-local workflow rules that govern execution inside this repo
 - [`CLAUDE.md`](CLAUDE.md) — the Claude Code adapter: Claude Code reads `CLAUDE.md`, not `AGENTS.md`, so its `@AGENTS.md` import is what delivers the resolved carrier into context. Required for a Claude-operated repo, not a convenience pointer
 - [`docs/architecture.md`](docs/architecture.md) — execution-protocol architecture of this repo and the role model behind it
+- [`tools/read/`](tools/read/) — the site build: when the site is built it renders the site's home page, and reading pages for the workflow docs, protocol notes, templates, prompts and examples and the diagram sources, from their Markdown and source files; the generated pages are build output and are not committed
 
 ### Shared protocol carriers
 
