@@ -33,7 +33,7 @@
       {"label": "diagrams", "href": "diagrams/index.html", "support": "Two structural snapshots of the execution-protocol repo: the architecture tree and the routed-instance lifecycle. Illustrative, not source of truth."},
       {"label": "repository", "href": "https://github.com/apexSolarKiss/control-surface", "support": "github.com/apexSolarKiss/control-surface"},
       {"label": "method-ASK", "href": "https://method.a-s-k.studio/", "support": "The upstream methodology layer this repo operationalizes per session."},
-      {"label": "design-system-ASK", "href": "https://github.com/apexSolarKiss/design-system-ASK", "support": "The visual authority. This surface vendors its carriers; it defines none of them."},
+      {"label": "design-system-ASK", "href": "https://design-system.a-s-k.studio/", "support": "The visual authority. This surface vendors its carriers; it defines none of them."},
       {"label": "A-S-K.studio", "href": "https://a-s-k.studio/", "support": "The ASK meta-brand front door."}
     ]
   },
