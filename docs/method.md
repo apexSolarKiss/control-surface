@@ -14,7 +14,7 @@ The methodology repo carries:
 - the method topology
 - the absorption discipline that governs when n=1 patterns earn promotion to method-level doctrine
 
-The methodology repo's `docs/method.md` is the primary articulation. Standalone doctrine docs have split out as substrate accumulated — see *Where to read further* below.
+The methodology repo's [`docs/method.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/method.md) is the primary articulation. Standalone doctrine docs have split out as substrate accumulated — see *Where to read further* below.
 
 ## What stays in this repo
 

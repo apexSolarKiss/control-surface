@@ -2,9 +2,9 @@
 
 Use this as a session-start prompt when attaching Claude Code to an ASK project repo as its **execution surface** under the adversarial-collaboration operating model — the ASK-apexed advisor–executor topology ASK projects run.
 
-This prompt assumes the target repo already exists. For pre-repo instantiation, use `prompts/project-instantiation-initial-prompt.md` first.
+This prompt assumes the target repo already exists. For pre-repo instantiation, use [`prompts/project-instantiation-initial-prompt.md`](https://github.com/apexSolarKiss/control-surface/blob/main/prompts/project-instantiation-initial-prompt.md) first.
 
-This is a **working-session bootstrap** — orient on one repo and await direction. It is **not** critique instantiation: a fresh-context critique takes a critique prompt directly and is not stacked on top of this prompt (doing so mis-scopes a critique to one repo and stalls it on "await direction"). See `docs/critique-protocol.md`.
+This is a **working-session bootstrap** — orient on one repo and await direction. It is **not** critique instantiation: a fresh-context critique takes a critique prompt directly and is not stacked on top of this prompt (doing so mis-scopes a critique to one repo and stalls it on "await direction"). See [`docs/critique-protocol.md`](https://github.com/apexSolarKiss/control-surface/blob/main/docs/critique-protocol.md).
 
 ## Operating Posture
 
@@ -57,7 +57,7 @@ The full rule set lives in repo-local `AGENTS.md`. The essentials:
 - **Single-writer per branch.** Treat repo and remote as the audit trail when sessions disagree. Stop on suspected concurrent mutation.
 - **Scope discipline.** Smallest honest unit for implementation; largest tractable structural question for architecture work. Don't bundle unrelated work.
 - **Repo + grounding note are the durable sources.** Per-conversation state (this thread, task lists, in-flight context) is ephemeral. Do not promote it into the durable sources.
-- **Claude Code auto memory (`MEMORY.md` and its topic files) is persistent, not ephemeral** — a non-authoritative, read-mostly operator cache, never a durable owner. Route every reusable learning to its visible owner first, and treat any memory write as a separate approval unit per `AGENTS.md` §Learning Disposition and §Private-Memory Write Gate.
+- **Claude Code auto memory (`MEMORY.md` and its topic files) is persistent, not ephemeral** — a non-authoritative, read-mostly operator cache, never a durable owner. Route every reusable learning to its visible owner first, and treat any memory write as a separate approval unit per [`AGENTS.md` §Learning Disposition](https://github.com/apexSolarKiss/control-surface/blob/main/AGENTS.md#learning-disposition) and [§Private-Memory Write Gate](https://github.com/apexSolarKiss/control-surface/blob/main/AGENTS.md#private-memory-write-gate).
 
 ## When To Stop And Ask
 

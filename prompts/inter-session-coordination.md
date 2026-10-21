@@ -386,7 +386,7 @@ Nine evidence lines became one `evidence:` locator, and the thread number became
 
 ## Current runtime binding — Claude Code
 
-**Non-normative and dated.** This section records how the portable contract above is currently carried. It is the substitutable half: the structural role is *a transport that delivers plain text to a named live session without conferring authority*. Any runtime meeting that description can occupy the role. **Verify these details against the vendor's current documentation at execution time rather than trusting this section** — it is a snapshot, not an authority. Observed 2026-08-15 against `code.claude.com/docs/en/cross-session-messaging`.
+**Non-normative and dated.** This section records how the portable contract above is currently carried. It is the substitutable half: the structural role is *a transport that delivers plain text to a named live session without conferring authority*. Any runtime meeting that description can occupy the role. **Verify these details against the vendor's current documentation at execution time rather than trusting this section** — it is a snapshot, not an authority. Observed 2026-08-15 against [`code.claude.com/docs/en/cross-session-messaging`](https://code.claude.com/docs/en/cross-session-messaging).
 
 ```text
 identity     OBSERVED 2026-08-21: the message envelope's `from-name` and the

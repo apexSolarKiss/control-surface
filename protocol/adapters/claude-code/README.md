@@ -1,6 +1,6 @@
 # protocol/adapters/claude-code/ — Claude Code adapter artifacts
 
-The shared execution protocol in `../../AGENTS.shared.md` is **agent-agnostic**: it names structural roles and required dispositions, never a vendor. This namespace holds the **Claude-Code-specific artifacts** that provide runtime enforcement for the supported built-in file-edit and auto-memory write path of one of those rules — §Private-Memory Write Gate — on a machine running Claude Code.
+The shared execution protocol in [`../../AGENTS.shared.md`](../../AGENTS.shared.md) is **agent-agnostic**: it names structural roles and required dispositions, never a vendor. This namespace holds the **Claude-Code-specific artifacts** that provide runtime enforcement for the supported built-in file-edit and auto-memory write path of one of those rules — [§Private-Memory Write Gate](../../AGENTS.shared.md#private-memory-write-gate) — on a machine running Claude Code.
 
 It does **not** claim OS-level enforcement over arbitrary Bash, Python, Node, or other subprocess writes. The shared protocol prohibits that circumvention semantically; subprocess sandbox hardening remains a separate, out-of-scope capability question unless a demonstrated bypass reopens it.
 
@@ -15,7 +15,7 @@ tests/run-adapter-fixtures.sh                    negative fixtures for check-cla
 
 ## The settings fragment is merge-only
 
-`native-memory-write-gate.settings.fragment.json` is **never** copied over a settings file. It is semantically merged into `~/.claude/settings.json`, preserving every pre-existing key. Overwriting a live settings file would silently drop hooks, model selection, and status-line configuration that the fragment says nothing about.
+[`native-memory-write-gate.settings.fragment.json`](native-memory-write-gate.settings.fragment.json) is **never** copied over a settings file. It is semantically merged into `~/.claude/settings.json`, preserving every pre-existing key. Overwriting a live settings file would silently drop hooks, model selection, and status-line configuration that the fragment says nothing about.
 
 Eight `Edit(...)` ask rules cover the private persistent surfaces the shared gate governs:
 
@@ -45,9 +45,9 @@ Verified against the Claude Code documentation and a live 2.1.212 build:
 
 ## Three evidence classes — keep them separate
 
-**1. Static owner-repo checks — `check-claude-adapter.sh`.** Runs against this repository. Proves the fragment parses, carries all eight exact rules and the bypass setting, and that both `CLAUDE.md` adapters import `AGENTS.md` exactly once. No machine state, no session.
+**1. Static owner-repo checks — [`check-claude-adapter.sh`](check-claude-adapter.sh).** Runs against this repository. Proves the fragment parses, carries all eight exact rules and the bypass setting, and that both `CLAUDE.md` adapters import `AGENTS.md` exactly once. No machine state, no session.
 
-**2. Static machine checks — `check-native-memory-gate.py`.** Runs against an installed `settings.json`. Its terminal outcomes are:
+**2. Static machine checks — [`check-native-memory-gate.py`](check-native-memory-gate.py).** Runs against an installed `settings.json`. Its terminal outcomes are:
 
 ```text
 STATIC-CONFORMANT / ACTIVE-SESSION-UNVERIFIED
