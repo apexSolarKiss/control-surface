@@ -1,6 +1,6 @@
 # Cross-repo-propagation-wave runbook
 
-Reusable execution instrument for propagating a merged upstream owner change across multiple consumers. Referenced by `AGENTS.md` §Cross-Repo Propagation Waves. This is **execution protocol**, not design-system visual doctrine.
+Reusable execution instrument for propagating a merged upstream owner change across multiple consumers. Referenced by [`AGENTS.md` §Cross-Repo Propagation Waves](https://github.com/apexSolarKiss/control-surface/blob/main/AGENTS.md#cross-repo-propagation-waves). This is **execution protocol**, not design-system visual doctrine.
 
 **Principle:** parallelize measurement and consumer staging; serialize authority, visual judgment, canonical writes, and closure. The parent coordinator is the single writer of every shared surface.
 
@@ -63,7 +63,7 @@ ASK_exception               required for parent-direct-exception (exact relay te
 
 **AMBER resolution.** The parent may resolve an AMBER question by issuing an **exact bounded disposition**. After that ruling, the remaining deterministic implementation may be **reclassified GREEN and staged in parallel**. The evidence packet records both the original AMBER condition and the parent ruling — so a deterministic operation (e.g. a raster regeneration) does not remain permanently outside the lane once its only ambiguity is resolved.
 
-The at-rest gate (`AGENTS.md` §Cross-Repo Propagation Waves) must pass before any granted consumer is written.
+The at-rest gate ([`AGENTS.md` §Cross-Repo Propagation Waves](https://github.com/apexSolarKiss/control-surface/blob/main/AGENTS.md#cross-repo-propagation-waves)) must pass before any granted consumer is written.
 
 ---
 
@@ -113,7 +113,7 @@ Only the parent performs: exact-head merge; branch retirement (remove the worktr
 
 ## At-rest gate — classifying branch and local state
 
-The gate (human + machine) is defined in `AGENTS.md`. Two clarifications the first dogfood run required:
+The gate (human + machine) is defined in [`AGENTS.md`](https://github.com/apexSolarKiss/control-surface/blob/main/AGENTS.md#at-rest-gate). Two clarifications the first dogfood run required:
 
 **Branch-name presence is not itself active work.** A branch blocks the gate only when it carries related **unique work that is open, unmerged, unresolved, or actively checked out**. A closed-and-merged PR head whose change is already represented on current `origin/main` is **cleanup residue** (squash-merge leaves the ref; its commits are not `main` ancestors, so a diff against a later `main` can look like a revert). Classify it from the PR lifecycle and patch disposition — do **not** require branch deletion merely to make the gate pass. Such refs may be retired later as hygiene, after the parent verifies each maps to a merged or deliberately abandoned PR, but that cleanup is never a prerequisite and is not bundled into the wave PR.
 

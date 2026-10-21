@@ -143,14 +143,14 @@ rather than by this document's length.
 
 **Applicability follows the Project, not the tier.** A repo is in `applies_to` because it is registered for a
 hosted ASK-facing repo-advisor Project role — not because it is important, upstream, or directly operated.
-`method-ASK`, `design-system-ASK`, `ASK`, and `personal-context-system` are excluded on that test alone; a
+[`method-ASK`](https://github.com/apexSolarKiss/method-ASK), [`design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK), [`ASK`](https://github.com/apexSolarKiss/ASK), and [`personal-context-system`](https://github.com/apexSolarKiss/personal-context-system) are excluded on that test alone; a
 repo that later registers for one adopts the profile then. The exclusion is a statement about deployment,
 never about whether the invariant is correct. **Registration may precede Project configuration**, and
 `food-science-engine` is the worked case: its census, its overlay rows, and its resolved carrier land first,
 while whether its Project is yet configured or active is operator state, not owner metadata.
 
 **One repo may home more than one hosted Project, and applicability attaches to the Project's role.**
-`urban-observatory` homes two: an ASK-facing repo-advisor Project, and a separate TMK-facing
+[`urban-observatory`](https://github.com/apexSolarKiss/urban-observatory) homes two: an ASK-facing repo-advisor Project, and a separate TMK-facing
 domain-authority review Project. `applies_to` naming the repo binds its **ASK-facing repo-advisor** Project to
 the `advisor-project-surface` profile; it does not assign that role to every hosted Project associated with the
 repo — a second Project remains governed by this semantic owner document without becoming an
@@ -159,7 +159,7 @@ different audience and a different authority topology is governed by its own ove
 owns its review class — see §Hosted domain-authority review variant. **Audit each hosted Project
 independently**; a requirement absent from one because its role does not carry it is not a gap in the other.
 
-Because `check.sh` derives required profiles from `applies_to`, a repo added to that list **fails its carrier
+Because [`check.sh`](../protocol/check.sh) derives required profiles from `applies_to`, a repo added to that list **fails its carrier
 check until it resolves the profile.** That gap is the intended fail-closed signal, not a defect: the interval
 between registering applicability and resolving the carrier is exactly the interval in which a consumer
 believes it is covered and is not.
@@ -182,8 +182,8 @@ A hosted Project may exist to carry a **domain authority's** judgment rather tha
 uses the same deployment shape as a repo-advisor Project — thin Instructions floor, one mounted bootstrap,
 live-fetched scoped index, standing canonicals plus an operator-fed review packet — and **not** the repo-advisor
 role. Its authority topology is owned by [`docs/domain-authority-review-protocol.md`](domain-authority-review-protocol.md),
-which operationalizes method-ASK's `docs/governance.md` (domain authority as a bounded instance of delegated
-discretion) and `docs/source-of-intent.md` (stage-aware, claim-level classification of domain-authority
+which operationalizes [method-ASK](https://github.com/apexSolarKiss/method-ASK)'s [`docs/governance.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/governance.md) (domain authority as a bounded instance of delegated
+discretion) and [`docs/source-of-intent.md`](https://github.com/apexSolarKiss/method-ASK/blob/main/docs/source-of-intent.md) (stage-aware, claim-level classification of domain-authority
 handoffs).
 
 The distinction is who is in the thread and whose judgment the surface carries:
@@ -243,14 +243,14 @@ Columns: **ID** · **requirement** · **owner** (where the rule is authored) · 
 | ROLE-1 | This Project advises exactly one named surface; state which. | this doc | PI-FLOOR + BOOTSTRAP | PRESERVE | FULL | co-homed: the bootstrap is self-contained |
 | ROLE-2 | Non-writing: do not mutate repos, connector storage, Project settings, or canonicals. | this doc | PI-FLOOR + BOOTSTRAP | PRESERVE | FULL | co-homed |
 | ROLE-3 | Every write routes through the executor on ASK's relay; advisor output is not operative before relay. | shared protocol | PI-FLOOR + BOOTSTRAP | PRESERVE | FULL | co-homed |
-| ROLE-4 | The advisor is not a substitute for the source-of-intent nudge path or the fresh-context critique cycle. | `critique-protocol.md` | BOOTSTRAP | PRESERVE | TEMPLATE-ONLY | |
+| ROLE-4 | The advisor is not a substitute for the source-of-intent nudge path or the fresh-context critique cycle. | [`critique-protocol.md`](critique-protocol.md) | BOOTSTRAP | PRESERVE | TEMPLATE-ONLY | |
 | ROLE-5 | Useful-for conditions: differently situated pressure · ceremony challenge · grounding-note premise pressure · source-of-intent boundary checks · drift detection. | this doc | BOOTSTRAP | PRESERVE | PARTIAL | compressed to four verbs in deployment |
 
 ### MODEL — operating model
 
 | ID | Requirement | Owner | Home | Ruling | Deployed | Notes |
 |---|---|---|---|---|---|---|
-| MODEL-1 | Adversarial collaboration — an ASK-apexed advisor–executor topology: ASK is authorization apex and relay; a non-writing advisor surface; a repo-attached execution surface. | `docs/architecture.md` | PI-FLOOR (identity) + BOOTSTRAP (detail) | PRESERVE | FULL | landed 2026-07-25 |
+| MODEL-1 | Adversarial collaboration — an ASK-apexed advisor–executor topology: ASK is authorization apex and relay; a non-writing advisor surface; a repo-attached execution surface. | [`docs/architecture.md`](architecture.md) | PI-FLOOR (identity) + BOOTSTRAP (detail) | PRESERVE | FULL | landed 2026-07-25 |
 | MODEL-2 | Direct execution is a bounded task-level path, not a separate model and not the absence of a configured advisor. | `docs/architecture.md` | BOOTSTRAP | PRESERVE | FULL | |
 | MODEL-3 | The surfaces are **differently situated**, not independent: the advisor supplies adversarial pressure from outside execution momentum. They are correlated; named canonicals and exact repo state arbitrate factual disagreement, ASK adjudicates authority. | this doc | BOOTSTRAP | REVISE | TEMPLATE-ONLY | revises T1 "outside the executor's context bias" — that phrasing overstated independence |
 
@@ -503,7 +503,7 @@ independently: an overlay absent from one because its role does not carry it is 
 | OVL-AP-2 | asset-pipeline-ASK | Unconditional per-thread probe of live-prototype connectivity at startup. | **RETIRED** — it reduces no decision-relevant uncertainty on a thread that never discusses prototype state (POSTURE-3 applied to itself). The behavior survives task-triggered in OVL-AP-1. |
 | OVL-UO-TMK-1 | urban-observatory · TMK-facing Project | **Role and authority.** TMK is the human in the thread and the planning-domain authority — a first-class source-of-intent input within that domain, not ASK and not an ASK proxy. ASK is project architect, operator, relay, and the final adoption / authorization / publication / closure authority. | NEW — the surface exists and was never censused; §Surface-overlay completion gate applies |
 | OVL-UO-TMK-2 | urban-observatory · TMK-facing Project | **Packet feed and orchestration.** ASK assembles and feeds self-contained `-4TMK` packets; each carries its own cover/bootstrap, questions, order, and return format, and *that* drives the review. Packet files are per-review inputs, never standing index entries. Do not improvise a decision interview from an un-orchestrated flat memo. | NEW |
-| OVL-UO-TMK-3 | urban-observatory · TMK-facing Project | **Intent and stage guardrails.** Every review declares the current stage, the decisions open, and the commitments held out of scope. Returned material is classified claim by claim; no review advances project stage by implication; out-of-stage material is preserved as roadmap / scratch / held architecture rather than adopted or discarded. Domain expertise confers no implementation, execution, publication, or closure authority. | NEW — owned by `docs/domain-authority-review-protocol.md`; recorded here as the surface's binding form |
+| OVL-UO-TMK-3 | urban-observatory · TMK-facing Project | **Intent and stage guardrails.** Every review declares the current stage, the decisions open, and the commitments held out of scope. Returned material is classified claim by claim; no review advances project stage by implication; out-of-stage material is preserved as roadmap / scratch / held architecture rather than adopted or discarded. Domain expertise confers no implementation, execution, publication, or closure authority. | NEW — owned by [`docs/domain-authority-review-protocol.md`](domain-authority-review-protocol.md); recorded here as the surface's binding form |
 | OVL-UO-TMK-4 | urban-observatory · TMK-facing Project | **Return and execution boundary.** The surface returns handoff memos to ASK and cannot promote, publish, authorize, close, or write the repo. Her words are the payload; synthesis supports and never substitutes. One bounded **create-only** return-transport grant exists, governed solely by the mounted bootstrap — available only under the loaded bootstrap, only after TMK confirms exact body, filename, and destination; it ends at file creation plus receipt, and human ASK controls onward routing. | NEW |
 | OVL-UO-TMK-5 | urban-observatory · TMK-facing Project | **Wall and evidence access.** A narrow read surface: the mounted bootstrap, the three standing canonicals its scoped index names, the active packet's files, or a path ASK names for a task. No brand / identity / voice, no source-of-intent masters, no trackers or publishing context, no `personal-ASK` path. The ADR is read from TMK's own `personal-TMK/inheritable/` twin, never Andrew's copy. Prefer fetch-by-exact-path; a broad connector search can leak a private filename manifest. | NEW — preserves the existing v12/v13 fence |
 | OVL-UO-TMK-6 | urban-observatory · TMK-facing Project | **Relation to the ASK-facing UO Project.** Two hosted Projects, different audiences, different authority, separate carriers and indexes. Do not configure, operate, or reason across them. This is the reciprocal of OVL-UO-2. | NEW |

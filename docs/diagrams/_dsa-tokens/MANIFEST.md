@@ -5,7 +5,7 @@ diagram bundle in this directory. There is **no runtime fetch** from the
 design-system-ASK repo and **no Google Fonts CDN dependency** — the diagram
 renders entirely from these local files.
 
-**Synced from:** `apexSolarKiss/design-system-ASK`
+**Synced from:** [`apexSolarKiss/design-system-ASK`](https://github.com/apexSolarKiss/design-system-ASK)
 **Pinned commit:** `067691a2fb6ca979cb6a5b0c9ca1d97790134b3f`
 **Synced:** 2026-09-17
 **`colors_and_type.css` sha256:** `4fed9d796a0d51072802f430b9528459a5cbb9c709fa1964bf5b13f18464122a`

@@ -1,6 +1,6 @@
 # templates/ — AGENTS carrier authoring
 
-`AGENTS.template.md` is a **payload-free bootstrap shell** for a downstream ASK repo. It does not contain the shared protocol bodies; those live once in `../protocol/AGENTS.shared.md` and are resolved into a consumer carrier by the propagation wave.
+[`AGENTS.template.md`](AGENTS.template.md) is a **payload-free bootstrap shell** for a downstream ASK repo. It does not contain the shared protocol bodies; those live once in [`../protocol/AGENTS.shared.md`](../protocol/AGENTS.shared.md) and are resolved into a consumer carrier by the propagation wave.
 
 ## The one resolution model (identical to protocol/README.md)
 
@@ -11,11 +11,11 @@ consumer AGENTS.md  =  resolved shared block   (from protocol/AGENTS.shared.md, 
                     +  repo-local delta         (between BEGIN/END local-delta markers)
 ```
 
-All four parts are present in the template as marker pairs so the wave can fill them and `check.sh` can verify each.
+All four parts are present in the template as marker pairs so the wave can fill them and [`check.sh`](../protocol/check.sh) can verify each.
 
 ## The `CLAUDE.md` adapter
 
-`CLAUDE.template.md` is **required**, not optional, for a Claude-operated repo. Claude Code reads `CLAUDE.md`, not `AGENTS.md`, so its `@AGENTS.md` import is what actually delivers the resolved carrier into an executor's context. Exactly one `@AGENTS.md` import; repo-specific prose may follow it. `../protocol/adapters/claude-code/check-claude-adapter.sh` asserts that for **this template and control-surface's own adapter**; a downstream repo's adapter is verified at bootstrap and propagation instead.
+[`CLAUDE.template.md`](CLAUDE.template.md) is **required**, not optional, for a Claude-operated repo. Claude Code reads `CLAUDE.md`, not `AGENTS.md`, so its `@AGENTS.md` import is what actually delivers the resolved carrier into an executor's context. Exactly one `@AGENTS.md` import; repo-specific prose may follow it. [`../protocol/adapters/claude-code/check-claude-adapter.sh`](../protocol/adapters/claude-code/check-claude-adapter.sh) asserts that for **this template and control-surface's own adapter**; a downstream repo's adapter is verified at bootstrap and propagation instead.
 
 ## Why payload-free
 
@@ -23,4 +23,4 @@ A full protocol copy in the template would be a second independently-maintained 
 
 ## Overlays
 
-`overlays/architecture-uncertain-rules.template.md` is the downstream-authoring twin of `protocol/profiles/architecture-uncertain.md`; both carry a `<!-- BEGIN/END profile-body: architecture-uncertain -->` fence and `check.sh` byte-compares the fenced bodies. Keep them in sync (edit together).
+[`overlays/architecture-uncertain-rules.template.md`](overlays/architecture-uncertain-rules.template.md) is the downstream-authoring twin of [`protocol/profiles/architecture-uncertain.md`](../protocol/profiles/architecture-uncertain.md); both carry a `<!-- BEGIN/END profile-body: architecture-uncertain -->` fence and [`check.sh`](../protocol/check.sh) byte-compares the fenced bodies. Keep them in sync (edit together).
