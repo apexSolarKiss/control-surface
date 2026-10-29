@@ -1,6 +1,6 @@
 # Profile — advisor-project-surface
 
-**Applies to:** `control-surface · asset-pipeline-ASK · urban-observatory · food-science-engine` (the repos registered for a hosted ASK-facing repo-advisor Project role).
+**Applies to:** `control-surface · asset-pipeline-ASK · urban-observatory` (the repos registered for a hosted ASK-facing repo-advisor Project role).
 **Explicit exclusions:** `method-ASK · design-system-ASK · ASK · personal-context-system` — not because the invariant is wrong for them, but because they are not registered for an ASK-facing repo-advisor Project role. A repo adopts this profile when that role is registered; whether its hosted Project is configured or active is operator state, not owner metadata.
 **Not covered:** personal-context Projects and role-specific `-TMK` advisor surfaces. Personal-context Projects implement the same bootstrap-only invariant under the personal ADR and PCS scaffold, on the other side of the wall. Role-specific `-TMK` surfaces are separately owned; no bootstrap-only conformance or migration is inferred by symmetry.
 
