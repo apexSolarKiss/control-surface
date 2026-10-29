@@ -59,26 +59,21 @@ entry(){ # name surface — control-surface routes to the REAL owner root (dogfo
   local p; if [ "$1" = "control-surface" ]; then p="$OWNER"; else p="$WORK/consumers/$1"; fi
   printf '"%s": {"path":"%s","ref":"origin/main","operating_surface":"%s"}' "$1" "$p" "$2"
 }
-surf_of(){ case "$1" in asset-pipeline-ASK|urban-observatory|food-science-engine) echo separately-operated;; *) echo direct-core;; esac; }
+surf_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo separately-operated;; *) echo direct-core;; esac; }
 pin_of(){ case "$1" in control-surface) echo self-resolving-owner-root;; *) echo "$OWNER_PIN";; esac; }
-# FSE-2A registers food-science-engine for one hosted ASK-facing repo-advisor Project ROLE, so the manifest
-# amendment moves it out of advisor-project-surface's explicit_exclusions and into its applies_to. Registration,
-# not Project configuration, is the entry trigger. From that commit forward a RESOLVED FSE carries BOTH its
-# opt-in architecture-uncertain overlay and the now-required advisor-project-surface. The whole-ecology positives
-# above model the CONFORMANT state; the interval state is asserted by B5c below, not here.
-profs_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo "advisor-project-surface";; food-science-engine) echo "architecture-uncertain advisor-project-surface";; *) echo "core-ecology";; esac; }
-grant_of(){ case "$1" in asset-pipeline-ASK|urban-observatory|food-science-engine) echo y;; *) echo n;; esac; }
+profs_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo "advisor-project-surface";; *) echo "core-ecology";; esac; }
+grant_of(){ case "$1" in asset-pipeline-ASK|urban-observatory) echo y;; *) echo n;; esac; }
 
 # ---- build the ecology: control-surface = the REAL owner root (validated below); synthetic consumers for the rest ----
-for n in method-ASK design-system-ASK personal-context-system ASK asset-pipeline-ASK urban-observatory food-science-engine; do
+for n in method-ASK design-system-ASK personal-context-system ASK asset-pipeline-ASK urban-observatory; do
   build_consumer "$n" "$(profs_of "$n")" "$(grant_of "$n")" "$(surf_of "$n")" "$(pin_of "$n")"
 done
 
 # maps
-allc=$(for n in $CORE asset-pipeline-ASK urban-observatory food-science-engine; do entry "$n" "$(surf_of "$n")"; echo ,; done | sed '$s/,$//')
+allc=$(for n in $CORE asset-pipeline-ASK urban-observatory; do entry "$n" "$(surf_of "$n")"; echo ,; done | sed '$s/,$//')
 printf '{ "consumers": { %s } }\n' "$allc" > "$WORK/map-all.json"
-wavec=$(for n in asset-pipeline-ASK urban-observatory food-science-engine; do entry "$n" separately-operated; echo ,; done | sed '$s/,$//')
-printf '{ "wave_consumers":["asset-pipeline-ASK","urban-observatory","food-science-engine"], "excluded": { %s }, "consumers": { %s } }\n' \
+wavec=$(for n in asset-pipeline-ASK urban-observatory; do entry "$n" separately-operated; echo ,; done | sed '$s/,$//')
+printf '{ "wave_consumers":["asset-pipeline-ASK","urban-observatory"], "excluded": { %s }, "consumers": { %s } }\n' \
   "$(for n in $CORE; do printf '"%s":{"reason":"direct-core reset in a later wave"},' "$n"; done | sed 's/,$//')" "$wavec" > "$WORK/map-wave.json"
 
 # ---- record harness ----
@@ -102,13 +97,13 @@ owner_copy(){ local d="$WORK/$1"; rm -rf "$d"; cp -R "$OWNER" "$d"; echo "$d"; }
 mutate_consumer(){ local name="$1" expr="$2"; local d="$WORK/consumers/$name"; ( cd "$d" && perl -0pi -e "$expr" AGENTS.md && git commit -qam mut && git push -q -f origin main ); }
 one_wave_map(){ # named surface — complete wave: named in wave, ALL other applicable consumers excluded-with-reason
   local named="$1" surf="$2" excl=""
-  for n in $CORE asset-pipeline-ASK urban-observatory food-science-engine; do [ "$n" = "$named" ] && continue; excl="$excl\"$n\":{\"reason\":\"out of scope for this single-consumer fixture\"},"; done
+  for n in $CORE asset-pipeline-ASK urban-observatory; do [ "$n" = "$named" ] && continue; excl="$excl\"$n\":{\"reason\":\"out of scope for this single-consumer fixture\"},"; done
   excl="${excl%,}"
   printf '{ "wave_consumers":["%s"], "excluded":{ %s }, "consumers": { %s } }\n' "$named" "$excl" "$(entry "$named" "$surf")"; }
 
 # ---- POSITIVE CONTROLS (every mode) ----
 record "POS --local (owner)"                         0 "ALL CHECKS PASSED" runlocal "$OWNER"
-record "POS --wave (AP+UO+FSE resolved, core excluded)" 0 "ALL CHECKS PASSED" runmode --wave "$WORK/map-wave.json"
+record "POS --wave (AP+UO resolved, core excluded)"     0 "ALL CHECKS PASSED" runmode --wave "$WORK/map-wave.json"
 record "POS --all (whole ecology resolved)"          0 "ALL CHECKS PASSED" runmode --all "$WORK/map-all.json"
 
 # ---- LOCAL NEGATIVES (mutate an owner copy, run --local) ----
@@ -467,16 +462,13 @@ build_consumer asset-pipeline-ASK - y separately-operated "$OWNER_PIN"
 record "NEG separately-operated omits required advisor-project-surface" 1 "missing required profile advisor-project-surface" mkwave asset-pipeline-ASK separately-operated
 build_consumer asset-pipeline-ASK advisor-project-surface y separately-operated "$OWNER_PIN"
 record "POS separately-operated carries advisor-project-surface" 0 "ALL CHECKS PASSED" mkwave asset-pipeline-ASK separately-operated
-# B5c: food-science-engine is the THIRD consumer bound by advisor-project-surface — FSE-2A registers it for one
-# hosted ASK-facing repo-advisor Project ROLE, so the manifest amendment moves FSE out of that profile's
-# explicit_exclusions and into its applies_to; whether a Project is ever configured is operator state and does
-# not affect this. The negative deliberately models the REAL interval carrier rather than a bare shell:
-# FSE installs architecture-uncertain, whose applies_to is EMPTY, so it is opt-in and satisfies no requirement.
+# B5c: the same requirement on urban-observatory, where the negative installs only an opt-in profile.
+# architecture-uncertain's applies_to is EMPTY, so it is opt-in and satisfies no requirement.
 # Same idiom as "NEG opt-in-only omits required core-ecology" — installing SOME profile is not installing THE one.
-build_consumer food-science-engine architecture-uncertain y separately-operated "$OWNER_PIN"
-record "NEG FSE opt-in-only omits required advisor-project-surface" 1 "missing required profile advisor-project-surface" mkwave food-science-engine separately-operated
-build_consumer food-science-engine "architecture-uncertain advisor-project-surface" y separately-operated "$OWNER_PIN"
-record "POS FSE carries architecture-uncertain + advisor-project-surface" 0 "ALL CHECKS PASSED" mkwave food-science-engine separately-operated
+build_consumer urban-observatory architecture-uncertain y separately-operated "$OWNER_PIN"
+record "NEG UO opt-in-only omits required advisor-project-surface" 1 "missing required profile advisor-project-surface" mkwave urban-observatory separately-operated
+build_consumer urban-observatory "architecture-uncertain advisor-project-surface" y separately-operated "$OWNER_PIN"
+record "POS UO carries architecture-uncertain + advisor-project-surface" 0 "ALL CHECKS PASSED" mkwave urban-observatory separately-operated
 
 # ---- HOST-1 // hosted-Project configuration (PROJECT-CONFIG home + A13 timing branches) ----
 # One negative per INDEPENDENT failure mode, not per synonym. Wrap-prone clauses use \s+ anchors:
