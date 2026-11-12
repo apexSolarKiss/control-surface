@@ -79,6 +79,15 @@ git -C <repo> worktree add -b <unique-branch> <unique-path> origin/main
 test "$(git -C <path> rev-parse HEAD)" = "$(git -C <repo> rev-parse origin/main)"   # confirm clean base
 ```
 
+**Branch upstream.** Depending on the repository's Git configuration, a branch created from `origin/main` this way can take `origin/main` as its upstream; one wave's worktrees did. Before the first push, the parent reads the task branch's actual upstream, pushes to the task branch by name, and confirms the result:
+
+```bash
+git -C <path> rev-parse --abbrev-ref --symbolic-full-name '@{u}'   # prints the upstream, or fails when there is none
+git -C <path> push -u origin <unique-branch>:refs/heads/<unique-branch>
+test "$(git -C <path> rev-parse --abbrev-ref --symbolic-full-name '@{u}')" = "origin/<unique-branch>"
+test "$(git -C <path> ls-remote origin refs/heads/<unique-branch> | cut -f1)" = "<reviewed commit>"
+```
+
 **Operator packages (D03/D04-style)** — byte-parity copy, live canonical untouched:
 
 ```text
@@ -96,6 +105,8 @@ parent:     inspect the final diff · push · open/update the PR · write the na
 A staging subagent prepares a local commit in its exclusive area but **does not push or open a PR** — the parent alone does, avoiding branch-parent contamination, duplicate PRs, and competing narratives. Give every browser worker a unique port and serving root; do not share one mutable `launch.json`.
 
 The evidence packet is the profile's schema (below) plus, where a render change is claimed, before/after PNGs, a console log, and the exact viewport matrix.
+
+**Print evidence.** Where a print change is claimed, establish print media before each PDF. A screen-media emulation left on from screen captures can carry into the PDF, so base and head print alike and the comparison proves nothing about print. Clear any media emulation before printing (in Chrome's DevTools protocol, `Emulation.setEmulatedMedia` with `media: ''`, or use a fresh page), then set print media where the tool requires it. Include a control that fails if screen media is still in effect: for example, a control print with an injected print-only rule whose marker text must appear in the PDF. Record the control's result with the prints.
 
 ---
 
