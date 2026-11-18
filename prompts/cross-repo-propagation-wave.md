@@ -120,6 +120,8 @@ Do **not** delegate terminal visual/semantic acceptance to N independent agents.
 
 Only the parent performs: exact-head merge; branch retirement (remove the worktree **before** `--delete-branch`); live operator-canonical revision; frozen snapshot creation; companion placement; canonical/snapshot byte-parity check; consumer-ledger update advanced from the **live** current version (never a forecast number). **Never give the shared ledger to a propagation subagent** — one shared state surface, single-writer. Preserve the ownership division: the owner repo owns shared engines/CSS/support/exporters (or the baseline protocol); each consumer owns its source data, realization, stamps, rasters, sealed artifacts, and local protocol deltas.
 
+**Profile A ledger closure.** Reconcile every current record affected by the wave within the authorized ledger surface, including applicable render-obligation registry and notify-roster entries. Use accepted landing and production evidence to update render, stamp and companion state, shared-owner dependencies, completed checks and remaining obligations; supersede stale current claims while preserving historical records. Preserve excluded or protected sections exactly, and state the resulting coverage limit without treating preservation as conformance. Follow the existing ledger authorization, checkout and single-writer procedure. Do not rerun accepted checks solely for accounting.
+
 ---
 
 ## At-rest gate — classifying branch and local state
