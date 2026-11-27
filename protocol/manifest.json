@@ -155,7 +155,7 @@
     "#166 / 612fc8c",
     "#166 / dee8d89",
     "#186 / cf539e35df0c0d9a218bf8096075ac2e3bd92e25 (TBI amendment: denial stops the mutation, not unrelated work — bounded continuation, dependency-only stop, pre-flight stops preserved)",
-    "ecology-68 v4 §5 (2026-11-27 — pre-landing revision: scope bridge — a record registered with a scheduling or triggering mechanism and kept in its store, delegating only a specified task bounded in purpose and permitted actions to a later execution, is governed by §Delegated Later Executions and is not, by that role alone, a governed private persistent surface; future work written anywhere else, and private memory or a standing cross-session instruction a task record creates, changes, deletes or imports, stay governed; superseded by the PR#/SHA form at activation)"
+    "#231 / 4c1b9c5837c58eef6f78b8ffda13c9cb45b85e8f (scope bridge: a record registered with a scheduling or triggering mechanism and kept in its store, delegating only a specified task bounded in purpose and permitted actions, is governed by §Delegated Later Executions, not by this gate by that role alone; future work written anywhere else, and private memory or a standing cross-session instruction a task record carries, stay governed)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -1323,7 +1323,7 @@
   },
   {
    "rule_id": "delegated-later-executions",
-   "scope_class": "candidate",
+   "scope_class": "shared-core",
    "authority_owner": "control-surface",
    "operational_carrier_owner": "control-surface",
    "applies_to": [
@@ -1340,12 +1340,12 @@
    "source_anchor": "## Delegated Later Executions",
    "failure_mode": "a schedule or trigger record created or changed for a later execution without an ASK instruction covering it, or originated as incidental retention or cleanup; its payload, destination, timing or trigger, recurrence or stopping condition, or material permissions and connectors hidden from ASK; a task activated without an established route, through its launch path or its payload, that delivers its exact ASK authorization and governing instructions to the later execution; a later execution acting without confirming that it received them; a stored record, trigger event or runtime permission read by the later execution as fresh ASK authority; or a standing private instruction packaged inside a task record and so escaping the private-persistent gate",
    "active_holds": [],
-   "status": "candidate",
+   "status": "active",
    "amended_by": [],
-   "note": "CANDIDATE in the pre-PR content commit only. The shared text lands in the same commit under ## Delegated Later Executions; the row MUST be flipped to scope_class shared-core / status active with activated_by '#<PR> / <content SHA>' before merge, per the repo's two-commit activation convention \u2014 a candidate row must never merge beside an operative AGENTS rule. The rule fixes semantic authorization only: it does not establish that any scheduler delivers the governing instructions to a later run, and no runtime enforcement is claimed for it.",
+   "note": "The rule fixes semantic authorization only: it does not establish that any scheduler delivers the governing instructions to a later run, and no runtime enforcement is claimed for it.",
    "explicit_exclusions": [],
-   "proposed_by": "ecology-68 v4 \u00a75 refined option A (2026-11-27)",
-   "activated_by": null
+   "proposed_by": null,
+   "activated_by": "#231 / 4c1b9c5837c58eef6f78b8ffda13c9cb45b85e8f"
   }
  ],
  "consumers": {
