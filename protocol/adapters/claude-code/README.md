@@ -34,6 +34,32 @@ A **checked-in** repo `CLAUDE.md` is deliberately absent from that list: it is a
 
 The list is a floor, not a ceiling. A `CLAUDE.md` may import an instruction file from an arbitrary absolute or home-relative path, and imports may recurse; such a path is governed by the shared gate and needs its own `Edit(...)` rule before use. Coverage of the actually-loaded set is an **active-session** fact (see below), not something these eight fixed rules can guarantee.
 
+## Delegated later executions
+
+The shared [§Delegated Later Executions](../../AGENTS.shared.md#delegated-later-executions) governs a record registered with a scheduling or triggering mechanism to carry ASK-authorized work to a later execution. The executor read the definitions of four built-in scheduling tools on 2026-11-27, and they describe them as follows. No job was listed, created or inspected, and the list is not exhaustive: a shell can reach other schedulers.
+
+```text
+CronCreate        session-only; nothing is written to disk, and the job is gone when the session
+                  exits. Current task state.
+ScheduleWakeup    resumes the same session inside a /loop the user invoked. Current task state.
+scheduled tasks   stored as <taskId>/SKILL.md under ~/.claude/scheduled-tasks/ and run by the
+                  desktop app, each run in a fresh session with no memory of the creating
+                  conversation. The task may be saved in that session's Auto or Bypass mode.
+                  A delegated task record.
+remote routines   an account-side record managed through RemoteTrigger, each run a cloud session.
+                  Created without a connector list, it normally receives the user's connected
+                  connectors, and connectors an organization admin set up can still reach its
+                  runs after that list is cleared. A delegated task record.
+```
+
+Under the shared rule, the saved permission mode and the effective connector set are material permissions and connectors to show ASK. The effective set includes runtime defaults and connectors an admin set up, so an empty connector list in a request does not mean a run receives none.
+
+A delegated task record is not among the surfaces the eight rules cover, and the fragment adds no rule for it: the shared rule governs it, not an `Edit(...)` rule. An instruction file the record imports keeps the coverage requirement above. No `Edit(...)` rule is established to cover a standing or other-work instruction embedded in a record: the local record is written through the scheduling tool rather than a file-edit tool, and the remote record has no path. Under the gate's coverage pre-flight, embedding one is therefore a stop condition.
+
+**Not established here:** whether a local or remote run loads `AGENTS.md` and the repository's `CLAUDE.md`, and whether the runtime prompts before a record is created or changed. The scheduled-task tool's own description says an approval prompt may or may not appear, depending on the user's permission settings. No applicable runtime enforcement has been established for either record. A task that relies on launch-path delivery or on enforcement needs evidence for its exact launch path first.
+
+Until that evidence exists, the shared rule's payload route is the delivery route available. The scheduled-task definition says each run starts fresh and that the prompt must be self-contained, and it offers no working-folder setting. The creating session therefore puts the authorization, the direction to read the governing owners, and the stop condition in the payload, and checks the task's saved configuration as the scheduling tool reports it. That check does not require a test run.
+
 ## Path and matching facts
 
 Verified against the Claude Code documentation and a live 2.1.212 build:
@@ -64,10 +90,13 @@ It **never** emits `ACTIVE-CONFORMANT`. It cannot: `autoMemoryDirectory` is read
 /permissions          every required rule present, with its source scope
 /context              every loaded instruction file and recursive import, each classified as
                         checked-in reviewed carrier | managed policy | private path covered by an ask rule
+                        | delegated task record
                       no unclassified private instruction path
 effective memory root observed, canonicalized, and covered by an ask rule
 active mode           acceptable for private persistent-context maintenance
 ```
+
+`delegated task record` is available only for the record of a task registered through the scheduling tool, in that tool's store at `~/.claude/scheduled-tasks/<taskId>/`, and only when the receipt names the task id, the locator of its ASK authorization, and the result of reading the record's payload: that it carries no standing or other-work instruction. A label alone, or a file placed in that folder by any other route, does not qualify. Anything else is classified as a private path, covered or uncovered on its own terms. The class is never reported as covered by an ask rule, and each file the record imports is classified on its own. Whether a run's record appears in `/context` at all has not been established.
 
 An uncovered nondefault memory root or an uncovered private instruction import yields `BLOCKED-UNCOVERED-PRIVATE-PATH`, and the receipt names the exact additional rule required:
 

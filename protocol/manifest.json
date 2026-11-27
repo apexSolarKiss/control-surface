@@ -148,13 +148,14 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "## Private-Memory Write Gate",
-   "failure_mode": "an executor mutates a private persistent surface \u2014 auto memory, subagent memory, or a private instruction file \u2014 as an unannounced side effect of an approved task, so durable protocol enters an unreviewed surface; a denied or unauthorized optional private-persistent mutation treated as a stop condition for otherwise independent authorized work",
+   "failure_mode": "an executor mutates a private persistent surface \u2014 auto memory, subagent memory, or a private instruction file \u2014 as an unannounced side effect of an approved task, so durable protocol enters an unreviewed surface; a denied or unauthorized optional private-persistent mutation treated as a stop condition for otherwise independent authorized work; future work written into auto memory, subagent memory or a private instruction file and claimed as a task record to escape this gate; or, conversely, an ASK-authorized task record registered with a scheduling or triggering mechanism treated as a governed private persistent surface, so the retention ceremony and coverage stop apply to delegated work they were not written for",
    "active_holds": [],
    "status": "active",
    "amended_by": [
     "#166 / 612fc8c",
     "#166 / dee8d89",
-    "#186 / cf539e35df0c0d9a218bf8096075ac2e3bd92e25 (TBI amendment: denial stops the mutation, not unrelated work — bounded continuation, dependency-only stop, pre-flight stops preserved)"
+    "#186 / cf539e35df0c0d9a218bf8096075ac2e3bd92e25 (TBI amendment: denial stops the mutation, not unrelated work — bounded continuation, dependency-only stop, pre-flight stops preserved)",
+    "#231 / 4c1b9c5837c58eef6f78b8ffda13c9cb45b85e8f (scope bridge: a record registered with a scheduling or triggering mechanism and kept in its store, delegating only a specified task bounded in purpose and permitted actions, is governed by §Delegated Later Executions, not by this gate by that role alone; future work written anywhere else, and private memory or a standing cross-session instruction a task record carries, stay governed)"
    ],
    "explicit_exclusions": [],
    "proposed_by": null,
@@ -1319,6 +1320,32 @@
    "explicit_exclusions": [],
    "proposed_by": "PRG-005 v3 Stage-1 split disposition, 2026-08-22 (held on introduction)",
    "activated_by": null
+  },
+  {
+   "rule_id": "delegated-later-executions",
+   "scope_class": "shared-core",
+   "authority_owner": "control-surface",
+   "operational_carrier_owner": "control-surface",
+   "applies_to": [
+    "control-surface",
+    "method-ASK",
+    "design-system-ASK",
+    "personal-context-system",
+    "ASK",
+    "asset-pipeline-ASK",
+    "urban-observatory"
+   ],
+   "carrier_mode": "resolved-local",
+   "profile": null,
+   "source_anchor": "## Delegated Later Executions",
+   "failure_mode": "a schedule or trigger record created or changed for a later execution without an ASK instruction covering it, or originated as incidental retention or cleanup; its payload, destination, timing or trigger, recurrence or stopping condition, or material permissions and connectors hidden from ASK; a task activated without an established route, through its launch path or its payload, that delivers its exact ASK authorization and governing instructions to the later execution; a later execution acting without confirming that it received them; a stored record, trigger event or runtime permission read by the later execution as fresh ASK authority; or a standing private instruction packaged inside a task record and so escaping the private-persistent gate",
+   "active_holds": [],
+   "status": "active",
+   "amended_by": [],
+   "note": "The rule fixes semantic authorization only: it does not establish that any scheduler delivers the governing instructions to a later run, and no runtime enforcement is claimed for it.",
+   "explicit_exclusions": [],
+   "proposed_by": null,
+   "activated_by": "#231 / 4c1b9c5837c58eef6f78b8ffda13c9cb45b85e8f"
   }
  ],
  "consumers": {
