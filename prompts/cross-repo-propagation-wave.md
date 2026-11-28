@@ -178,6 +178,10 @@ declared downstream carrier classes   (AGENTS.md · templates · prompts)
 
 **Census adds:** recipient carrier census; local exception / delta inventory; whether the clause is an intentional local divergence; substantive-equivalence comparison (the mapping is exact or substantively deterministic, not a blind string replace); authority / review / release / sealing boundaries checked; confirmation the grant text itself is unchanged unless *this* wave explicitly installs it; unrelated carrier text unchanged.
 
+**Current explanatory companions.** When an owner delta changes workflow meaning, include in the Profile B census the index-authorized live grounding-note, bootstrap, index or other current sections that state the changed clause. Check their substance, including materially equivalent wording within the declared affected sections. Prefer a concise owner pointer over a competing procedural copy; retain useful accurate summaries and legitimately owned local context. Correct only within the applicable authorization and ownership boundary; otherwise identify the exact outstanding path and needed disposition. A standing upstream-conformance grant covers declared carriers only: a companion correction on a separately operated surface needs ASK's explicit grant, follows that surface's review lane, and is a parent-only canonical write. Preserve historical records. Report carrier parity and current explanatory conformance separately: `check.sh` does not establish the latter. A pin-only re-sync with unchanged rule substance does not trigger a fresh corpus-wide scan.
+
+**Instantiated advisor carriers.** A bootstrap intentionally carries an advisor contract. Check the affected contract against its declared template basis, approved overlay dispositions and applicable owner changes; do not remove required text merely because it repeats an owner or force unrelated template updates. Canonical text conformance and deployed Project state are separate facts. This census grants no authority to change an overlay, write a canonical or remount a Project.
+
 **Evidence packet:**
 
 ```text
@@ -186,6 +190,7 @@ ownerClausePath · ownerSha
 recipientCarriers
 localExceptionsPreserved
 canonicalSubstanceMatched
+explanatoryCompanions        (path · CONFORMS | CORRECTED | OUTSTANDING + needed disposition)
 authorityBoundariesUnchanged
 reviewMergeReleaseRulesUnchanged
 unexpectedDiff
