@@ -719,7 +719,7 @@
    "carrier_mode": "resolved-local",
    "profile": null,
    "source_anchor": "### Default: Hold or Carry Through Per Adversarial-Collaboration Preconditions",
-   "failure_mode": "merge before advisor review where AC preconditions hold; or needless hold where they don't",
+   "failure_mode": "merge without the configured advisor review or an applicable ASK-authorized direct-execution or declared carry-through path; an executor treating apparent quiet, critique completion, advisor inactivity or silence as authority to waive review; or a duplicate hold after an applicable ASK decision already authorizes the named path",
    "active_holds": [],
    "status": "active",
    "amended_by": [],
