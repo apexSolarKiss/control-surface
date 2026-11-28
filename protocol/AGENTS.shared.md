@@ -858,7 +858,7 @@ If a proposed update says "the project currently should do X," it does not belon
 
 - Verify repo state before meaningful work.
 - Read repo-local truth and grounding note before responding.
-- Stop at exact scoped diff before commit; carry through to merged + cleanup once approved.
+- Stop at exact scoped diff before commit; follow §Advisor-Readable Review Objects and §Default: Hold or Carry Through Per Adversarial-Collaboration Preconditions for the applicable review windows and authorized carry-through.
 - State the plan before executing.
 - Single-writer per branch. Treat repo as audit trail.
 - Match the unit of work to the level of the question.
