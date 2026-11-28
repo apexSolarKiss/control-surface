@@ -722,7 +722,9 @@
    "failure_mode": "merge without the configured advisor review or an applicable ASK-authorized direct-execution or declared carry-through path; an executor treating apparent quiet, critique completion, advisor inactivity or silence as authority to waive review; or a duplicate hold after an applicable ASK decision already authorizes the named path",
    "active_holds": [],
    "status": "active",
-   "amended_by": [],
+   "amended_by": [
+    "#232 / 2253a9458f505c38685eec388e48533c27c43798 (configured-advisor quiet-period assessments: ASK decides the review path for the named unit; a critique, advisor inactivity, silence or the executor's assessment supplies no authorization; declared local exceptions keep their own scope)"
+   ],
    "note": "self-conditional shared rule; NOT the architecture-uncertain profile",
    "explicit_exclusions": [],
    "proposed_by": null,
